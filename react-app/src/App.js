@@ -1,12 +1,12 @@
 
-import './App.css';
+import './App.scss';
 import { Container, Row, Col } from "react-bootstrap";
 import PostCode from './PostCode.js'
 
 function App() {
   return (
     <div className="App">
-      <PostCode />
+
       <Container>
         <Row>
           <Col>
@@ -25,7 +25,11 @@ function App() {
           </Col>
         </Row>
         <Row>
-          <Col>{/* Form elements go here */}</Col>
+          <Col>
+          <div className="text-center">
+          <PostCode />
+          </div>
+          </Col>
         </Row>
       </Container>
     </div>
