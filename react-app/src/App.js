@@ -2,6 +2,8 @@
 import './App.scss';
 import { Container, Row, Col } from "react-bootstrap";
 import PostCode from './PostCode.js'
+import TextBox from './TextBox.js'
+
 
 function App() {
   return (
@@ -26,11 +28,19 @@ function App() {
         </Row>
         <Row>
           <Col>
+            <div className="text-center">
+              <TextBox />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
           <div className="text-center">
-          <PostCode />
+            <PostCode />
           </div>
           </Col>
         </Row>
+
       </Container>
     </div>
     // Cookie banner here
