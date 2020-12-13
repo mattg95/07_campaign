@@ -6,3 +6,18 @@ body,
 html {
   margin: 20px 0 20px 0;
 }
+
+.my-custom-view-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-custom-view-wrapper div:last-child {
+  /* Here we are styling the button container. */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
