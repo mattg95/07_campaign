@@ -1,9 +1,12 @@
-import "./App.scss";
+
+import './App.css';
 import { Container, Row, Col } from "react-bootstrap";
+import PostCode from './PostCode.js'
 
 function App() {
   return (
     <div className="App">
+      <PostCode />
       <Container>
         <Row>
           <Col>
