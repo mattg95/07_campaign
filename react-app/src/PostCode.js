@@ -40,6 +40,7 @@ class PostcodeForm extends React.Component {
       mp: " ",
       party: " ",
       email: " ",
+      error: " ",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,8 +54,11 @@ class PostcodeForm extends React.Component {
         this.setState({ mp: response.data.full_name });
         this.setState({ party: response.data.party });
       })
-      .then(() => console.log(this.state.constituency))
-      .catch((error) => console.error("On get constituency error", error));
+      .catch((error) => {
+        return (
+          console.log(error), this.setState({ error: "Could not find MP" })
+        );
+      });
   }
 
   render() {
@@ -77,17 +81,18 @@ class PostcodeForm extends React.Component {
           return errors;
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, isValid }) => (
           <Form>
             <ErrorMessage name="postcode" component="div" />
             <label htmlFor="postcode">Postcode:</label>
             <Field type="text" name="postcode" />
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={!isValid || isSubmitting}>
               Submit
             </button>
             <div>{this.state.constituency}</div>
             <div>{this.state.mp}</div>
             <div>{this.state.party}</div>
+            <div>{this.state.error}</div>
             <DisplayEmail mp={this.state.mp} />
           </Form>
         )}
