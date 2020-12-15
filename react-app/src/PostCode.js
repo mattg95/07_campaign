@@ -4,13 +4,8 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import axios from 'axios';
 
 
-
-
-// AsqfuyBMKiVdAaKkUAEw7pBx
-
 // Constant URL value for JAAS API
 const TWFY_API = 'https://www.theyworkforyou.com/api/';
-const API = 'getConstituency?key=AsqfuyBMKiVdAaKkUAEw7pBx&postcode=CH60+4SQ&output=js';
 const KEY = process.env.REACT_APP_TWFY_KEY;
 function postcodeToConstituencyAPIReq(postcode){
   postcode.replace(/\s/g, '+')
