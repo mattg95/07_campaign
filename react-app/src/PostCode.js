@@ -6,14 +6,13 @@ import axios from "axios";
 // Constant URL value for JAAS API
 const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
-function postcodeToConstituencyAPIReq(postcode) {
+
+const postcodeToConstituencyAPIReq = (postcode) => {
   postcode.replace(/\s/g, "+");
   return TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js";
-}
+};
 
-function DisplayEmail(props) {
-  const mp = props.mp;
-  console.log("MP= " + mp);
+const DisplayEmail = ({ mp }) => {
   if (mp !== " ") {
     return (
       <div>
@@ -30,7 +29,7 @@ function DisplayEmail(props) {
     );
   }
   return <div></div>;
-}
+};
 
 class PostcodeForm extends React.Component {
   constructor(props) {
@@ -43,25 +42,16 @@ class PostcodeForm extends React.Component {
       email: " ",
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value.toUpperCase() });
-  }
-
-  handleSubmit(event) {
-    console.log(this.state.value);
-    event.preventDefault();
-    console.log(postcodeToConstituencyAPIReq(this.state.value));
+  handleSubmit(values) {
     axios
-      .get(postcodeToConstituencyAPIReq(this.state.value))
+      .get(postcodeToConstituencyAPIReq(values.postcode))
       .then((response) => {
         this.setState({ constituency: response.data.constituency });
         this.setState({ mp: response.data.full_name });
         this.setState({ party: response.data.party });
-        console.log(response);
       })
       .then(() => console.log(this.state.constituency))
       .catch((error) => console.error("On get constituency error", error));
@@ -69,22 +59,39 @@ class PostcodeForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Postcode:
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-        <div>{this.state.constituency}</div>
-        <div>{this.state.mp}</div>
-        <div>{this.state.party}</div>
-
-        <DisplayEmail mp={this.state.mp} />
-      </form>
+      <Formik
+        onSubmit={(values, { setSubmitting }) => {
+          return this.handleSubmit(values), setSubmitting(false);
+        }}
+        initialValues={{ postcode: "" }}
+        validate={(values) => {
+          const errors = {};
+          const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
+          console.log(values);
+          if (!values.postcode) {
+            errors.postcode = "Required";
+          } else if (!postCodeRegex.test(values.postcode)) {
+            errors.postcode = "Invalid postcode";
+          }
+          console.log(errors);
+          return errors;
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <ErrorMessage name="postcode" component="div" />
+            <label htmlFor="postcode">Postcode:</label>
+            <Field type="text" name="postcode" />
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+            <div>{this.state.constituency}</div>
+            <div>{this.state.mp}</div>
+            <div>{this.state.party}</div>
+            <DisplayEmail mp={this.state.mp} />
+          </Form>
+        )}
+      </Formik>
     );
   }
 }
