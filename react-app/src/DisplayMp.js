@@ -2,30 +2,34 @@ import React from "react";
 
 const DisplayMp = ({
   state: {
-    data: { constituency, full_name, party },
-    mpEmail,
-    error,
+    data: { constituency, full_name, party, name },
   },
   body,
   subject,
-}) => (
-  <div>
-    <div>{constituency}</div>
-    <div>{full_name}</div>
-    <div>{party}</div>
-    {error && <div>{error}</div>}
-    <a
-      href={
-        "mailto:" +
-        mpEmail +
-        "?Subject=" +
-        encodeURIComponent(subject) +
-        "&Body=" +
-        encodeURIComponent(Object.values(body).join(" "))
-      }
-    >
-      {mpEmail}
-    </a>
-  </div>
-);
+}) => {
+  const createMpEmail = () => {
+    const mpName = full_name ? full_name : name;
+    return mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk";
+  };
+  return (
+    <div className="mpCard">
+      <div>{constituency}</div>
+      <div>{name}</div>
+      <div>{full_name}</div>
+      <div>{party}</div>
+      <a
+        href={
+          "mailto:" +
+          createMpEmail() +
+          "?Subject=" +
+          encodeURIComponent(subject) +
+          "&Body=" +
+          encodeURIComponent(Object.values(body).join(" "))
+        }
+      >
+        {createMpEmail()}
+      </a>
+    </div>
+  );
+};
 export default DisplayMp;
