@@ -4,7 +4,6 @@ const DisplayMp = ({
   state: {
     data: { constituency, full_name, party },
     mpEmail,
-    error,
   },
   body,
   subject,
@@ -13,7 +12,6 @@ const DisplayMp = ({
     <div>{constituency}</div>
     <div>{full_name}</div>
     <div>{party}</div>
-    {error && <div>{error}</div>}
     <a
       href={
         "mailto:" +

@@ -21,37 +21,43 @@ const PostcodeForm = ({ body, subject }) => {
   const handleValidation = (values) => {
     const errors = {};
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
-    if (!values.postcode) {
-      errors.postcode = "Required";
-    } else if (!postCodeRegex.test(values.postcode.toUpperCase())) {
-      errors.postcode = "Invalid postcode";
-      console.log(errors);
-      return errors;
-    } else {
+    if (postCodeRegex.test(values.postcode.toUpperCase())) {
       axios
         .get(postcodeToConstituencyAPIReq(values.postcode))
         .then(({ data }) => {
-          setState({
-            data,
-            mpEmail:
-              data.full_name.toLowerCase().replace(" ", ".") +
-              ".mp@parliament.uk",
-          });
+          if (data.error) {
+            errors.postcode = "Invalid postcode";
+            return errors;
+          } else {
+            setState({
+              data,
+              mpEmail:
+                data.full_name.toLowerCase().replace(" ", ".") +
+                ".mp@parliament.uk",
+            });
+          }
         })
         .catch((error) => {
-          console.log(error);
-          setState({ error: "Could not find MP" });
+          console.error(error);
+          errors.postcode = "Could not retrieve MP";
         });
     }
+    return errors;
   };
 
   return (
     <div>
-      <Formik initialValues={{ postcode: "" }} validate={handleValidation}>
+      <Formik
+        initialValues={{ postcode: "", mpName: " " }}
+        validate={handleValidation}
+      >
         <Form>
           <ErrorMessage name="postcode" component="div" />
           <label htmlFor="postcode">Postcode:</label>
           <Field type="text" name="postcode" />
+          <ErrorMessage name="mpName" component="div" />
+          <label htmlFor="mpName">MP name:</label>
+          <Field type="text" name="mpName" />
         </Form>
       </Formik>
       {state.data && <DisplayMp state={state} body={body} subject={subject} />}
