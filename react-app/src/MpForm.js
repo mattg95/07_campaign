@@ -8,7 +8,7 @@ import DisplayMp from "./DisplayMp";
 const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
 
-const PostcodeForm = ({ body, subject }) => {
+const MpForm = ({ body, subject }) => {
   const [state, setState] = useState({});
   const [usePostcode, setUsePostcode] = useState(false);
 
@@ -18,7 +18,6 @@ const PostcodeForm = ({ body, subject }) => {
       TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js"
     );
   };
-  console.log(usePostcode);
 
   const searchMpsAPIReq = (searchStr) => {
     return (
@@ -29,7 +28,6 @@ const PostcodeForm = ({ body, subject }) => {
   const handleValidation = (values) => {
     const errors = {};
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
-    console.log(values);
     if (usePostcode & postCodeRegex.test(values.postcode.toUpperCase())) {
       axios
         .get(postcodeToConstituencyAPIReq(values.postcode))
@@ -38,11 +36,8 @@ const PostcodeForm = ({ body, subject }) => {
             errors.postcode = "Invalid postcode";
             return errors;
           } else {
-            setState({
-              data,
-              mpEmail:
-                data.full_name.toLowerCase().replace(" ", ".") +
-                ".mp@parliament.uk",
+            setState(() => {
+              return { data: [data] };
             });
           }
         })
@@ -92,8 +87,20 @@ const PostcodeForm = ({ body, subject }) => {
           </Form>
         )}
       </Formik>
-      {state.data && <DisplayMp state={state} body={body} subject={subject} />}
+
+      {state.data &&
+        Array.isArray(state.data) &&
+        state.data.slice(0, 6).map((mp, i) => {
+          return (
+            <DisplayMp
+              key={i}
+              state={{ data: mp }}
+              body={body}
+              subject={subject}
+            />
+          );
+        })}
     </div>
   );
 };
-export default PostcodeForm;
+export default MpForm;

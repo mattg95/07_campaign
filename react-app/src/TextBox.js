@@ -3,7 +3,7 @@ import EdiText from "react-editext";
 import { Formik, Form } from "formik";
 import Select from "react-select";
 
-import PostCode from "./PostCode.js";
+import PostCode from "./MpForm.js";
 
 const TextBox = () => {
   const [state, setState] = useState({
