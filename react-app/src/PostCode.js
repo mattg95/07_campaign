@@ -18,52 +18,41 @@ const PostcodeForm = ({ body, subject }) => {
     );
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    axios
-      .get(postcodeToConstituencyAPIReq(values.postcode))
-      .then(({ data }) => {
-        setState({
-          data,
-          mpEmail:
-            data.full_name.toLowerCase().replace(" ", ".") +
-            ".mp@parliament.uk",
-        });
-      })
-      .catch((error) => {
-        return console.log(error), setState({ error: "Could not find MP" });
-      });
-    setSubmitting(false);
-  };
-
   const handleValidation = (values) => {
     const errors = {};
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
     if (!values.postcode) {
       errors.postcode = "Required";
-    } else if (!postCodeRegex.test(values.postcode)) {
+    } else if (!postCodeRegex.test(values.postcode.toUpperCase())) {
       errors.postcode = "Invalid postcode";
+      console.log(errors);
+      return errors;
+    } else {
+      axios
+        .get(postcodeToConstituencyAPIReq(values.postcode))
+        .then(({ data }) => {
+          setState({
+            data,
+            mpEmail:
+              data.full_name.toLowerCase().replace(" ", ".") +
+              ".mp@parliament.uk",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          setState({ error: "Could not find MP" });
+        });
     }
-    console.log(errors);
-    return errors;
   };
 
   return (
     <div>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={{ postcode: "" }}
-        validate={handleValidation}
-      >
-        {({ isSubmitting, isValid }) => (
-          <Form>
-            <ErrorMessage name="postcode" component="div" />
-            <label htmlFor="postcode">Postcode:</label>
-            <Field type="text" name="postcode" />
-            <button type="submit" disabled={!isValid || isSubmitting}>
-              Submit
-            </button>
-          </Form>
-        )}
+      <Formik initialValues={{ postcode: "" }} validate={handleValidation}>
+        <Form>
+          <ErrorMessage name="postcode" component="div" />
+          <label htmlFor="postcode">Postcode:</label>
+          <Field type="text" name="postcode" />
+        </Form>
       </Formik>
       {state.data && <DisplayMp state={state} body={body} subject={subject} />}
     </div>
