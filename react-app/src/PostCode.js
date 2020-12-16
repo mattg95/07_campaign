@@ -69,7 +69,7 @@ const PostcodeForm = ({ body, subject }) => {
               href={
                 "mailto:" +
                 state.mpEmail +
-                ".mp@parliament.uk?Subject=" +
+                "?Subject=" +
                 encodeURIComponent(subject) +
                 "&Body=" +
                 encodeURIComponent(Object.values(body).join(" "))
