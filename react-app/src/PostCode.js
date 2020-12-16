@@ -30,7 +30,7 @@ const DisplayEmail = ({ mp, subject, body }) => {
             ".mp@parliament.uk?Subject=" +
             textToUrl(subject) +
             "&Body=" +
-            textToUrl(body)
+            textToUrl(Object.values(body))
           }
         >
           {mp.replace(" ", ".") + ".mp@parliament.uk"}
@@ -106,7 +106,7 @@ class PostcodeForm extends React.Component {
             <DisplayEmail
               mp={this.state.mp}
               subject={this.props.subject}
-              body={this.props.body}
+              body={Object.values(this.props.body)}
             />
           </Form>
         )}
