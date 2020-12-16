@@ -98,7 +98,7 @@ const TextBox = () => {
           setState({ editedResponse: val }); //if the user edits the text box, a new property called editedResponse is set in state
         }}
       />
-      <PostCode body={state} subject={"subject"} />
+      <PostCode body={Object.values(state).join(" ")} subject={"subject"} />
     </div>
   );
 };

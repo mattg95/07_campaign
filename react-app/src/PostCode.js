@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
+import DisplayMp from "./DisplayMp";
 
 // Constant URL value for JAAS API
 const TWFY_API = "https://www.theyworkforyou.com/api/";
@@ -47,40 +48,25 @@ const PostcodeForm = ({ body, subject }) => {
   };
 
   return (
-    <Formik
-      onSubmit={handleSubmit}
-      initialValues={{ postcode: "" }}
-      validate={handleValidation}
-    >
-      {({ isSubmitting, isValid }) => (
-        <Form>
-          <ErrorMessage name="postcode" component="div" />
-          <label htmlFor="postcode">Postcode:</label>
-          <Field type="text" name="postcode" />
-          <button type="submit" disabled={!isValid || isSubmitting}>
-            Submit
-          </button>
-          {state.data?.constituency && <div>{state.data.constituency}</div>}
-          {state.data?.full_name && <div>{state.data.full_name}</div>}
-          {state.data?.party && <div>{state.data.party}</div>}
-          {state.error && <div>{state.error}</div>}
-          {state.mpEmail && (
-            <a
-              href={
-                "mailto:" +
-                state.mpEmail +
-                "?Subject=" +
-                encodeURIComponent(subject) +
-                "&Body=" +
-                encodeURIComponent(Object.values(body).join(" "))
-              }
-            >
-              {state.mpEmail}
-            </a>
-          )}
-        </Form>
-      )}
-    </Formik>
+    <div>
+      <Formik
+        onSubmit={handleSubmit}
+        initialValues={{ postcode: "" }}
+        validate={handleValidation}
+      >
+        {({ isSubmitting, isValid }) => (
+          <Form>
+            <ErrorMessage name="postcode" component="div" />
+            <label htmlFor="postcode">Postcode:</label>
+            <Field type="text" name="postcode" />
+            <button type="submit" disabled={!isValid || isSubmitting}>
+              Submit
+            </button>
+          </Form>
+        )}
+      </Formik>
+      {state.data && <DisplayMp state={state} body={body} subject={subject} />}
+    </div>
   );
 };
 export default PostcodeForm;
