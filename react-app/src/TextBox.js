@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EdiText from "react-editext";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import Select from "react-select";
 
 import PostCode from "./PostCode.js";
