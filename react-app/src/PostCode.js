@@ -12,15 +12,25 @@ const postcodeToConstituencyAPIReq = (postcode) => {
   return TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js";
 };
 
-const DisplayEmail = ({ mp }) => {
+function textToUrl(text) {
+  //function to covert text to url format for mailto:
+  return text.replaceAll(" ", "%20");
+}
+
+const DisplayEmail = ({ mp, subject, body }) => {
   if (mp !== " ") {
+    // const subject = "Sample Subject";
+    // const body = "Sample Body";
     return (
       <div>
         <a
           href={
             "mailto:" +
             mp.replace(" ", ".") +
-            ".mp@parliament.uk?Subject=stop%20taking%20away%20poor%20people%27s%20money&Body=please%20please%20please%20be%20a%20reasonable%20person"
+            ".mp@parliament.uk?Subject=" +
+            textToUrl(subject) +
+            "&Body=" +
+            textToUrl(body)
           }
         >
           {mp.replace(" ", ".") + ".mp@parliament.uk"}
@@ -93,7 +103,11 @@ class PostcodeForm extends React.Component {
             <div>{this.state.mp}</div>
             <div>{this.state.party}</div>
             <div>{this.state.error}</div>
-            <DisplayEmail mp={this.state.mp} />
+            <DisplayEmail
+              mp={this.state.mp}
+              subject={this.props.subject}
+              body={this.props.body}
+            />
           </Form>
         )}
       </Formik>

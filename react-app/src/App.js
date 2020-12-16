@@ -1,14 +1,10 @@
-
-import './App.scss';
+import "./App.scss";
 import { Container, Row, Col } from "react-bootstrap";
-import PostCode from './PostCode.js'
-import TextBox from './TextBox.js'
-
+import TextBox from "./TextBox.js";
 
 function App() {
   return (
     <div className="App">
-
       <Container>
         <Row>
           <Col>
@@ -33,14 +29,6 @@ function App() {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col>
-          <div className="text-center">
-            <PostCode />
-          </div>
-          </Col>
-        </Row>
-
       </Container>
     </div>
     // Cookie banner here
