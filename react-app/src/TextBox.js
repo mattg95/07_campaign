@@ -6,7 +6,12 @@ import Select from "react-select";
 import PostCode from "./PostCode.js";
 
 const TextBox = () => {
-  const [email, setEmail] = useState("");
+  const [state, setState] = useState({
+    q1Response: "",
+    q2Response: "",
+    q3Response: "",
+    editedResponse: "",
+  });
 
   const q1options = [
     { value: "International development is good. ", label: "good" },
@@ -41,6 +46,7 @@ const TextBox = () => {
       label: "not angry, just dissapointed",
     },
   ];
+  console.log(state);
 
   return (
     <div>
@@ -53,7 +59,7 @@ const TextBox = () => {
             options={q1options}
             name="q1"
             onChange={({ value }) => {
-              setEmail(email + value);
+              setState({ ...state, q1Response: value });
             }}
           />
           <label htmlFor="q2">
@@ -63,7 +69,7 @@ const TextBox = () => {
             options={q2options}
             name="q2"
             onChange={({ value }) => {
-              setEmail(email + value);
+              setState({ ...state, q2Response: value });
             }}
           />
           <label htmlFor="q3">
@@ -74,7 +80,7 @@ const TextBox = () => {
             options={q3options}
             name="q3"
             onChange={({ value }) => {
-              setEmail(email + value);
+              setState({ ...state, q3Response: value });
             }}
           />
         </Form>
@@ -88,12 +94,12 @@ const TextBox = () => {
         saveButtonContent="Apply"
         cancelButtonContent={<strong>Cancel</strong>}
         editButtonContent="Edit Your Email"
-        value={email}
+        value={Object.values(state).toString()}
         onSave={(val) => {
-          setEmail(val);
+          setState({ editedResponse: val });
         }}
       />
-      <PostCode body={email} subject={"subject"} />
+      <PostCode body={state} subject={"subject"} />
     </div>
   );
 };
