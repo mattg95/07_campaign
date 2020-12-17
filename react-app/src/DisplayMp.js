@@ -1,9 +1,7 @@
 import React from "react";
 
 const DisplayMp = ({
-  state: {
-    data: { constituency, full_name, party, name },
-  },
+  mpData: { constituency, full_name, party, name },
   body,
   subject,
 }) => {

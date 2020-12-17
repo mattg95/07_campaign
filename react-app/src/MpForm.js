@@ -1,5 +1,5 @@
 // Render Prop
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
@@ -19,10 +19,39 @@ const MpForm = ({ body, subject }) => {
     );
   };
 
-  const searchMpsAPIReq = (searchStr) => {
-    return (
-      TWFY_API + "getMps?key=" + KEY + "&search=" + searchStr + "&output=js"
-    );
+  const errors = {};
+
+  useEffect(() => {
+    axios
+      .get(TWFY_API + "getMps?key=" + KEY + "&output=js")
+      .then(({ data }) => {
+        if (data.error) {
+          errors.postcode = "Invalid postcode";
+          return errors;
+        } else {
+          setState(() => {
+            return { data: [data] };
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        errors.postcode = "Could not retrieve MP";
+      });
+  }, []);
+
+  const getMpByName = (name) => {
+    if (state.data) {
+      if (!state.data.errors) {
+        const filteredMps = state.data[0].filter((mp) => {
+          return mp.name.toLowerCase().includes(name.toLowerCase());
+        });
+        setState({
+          ...state,
+          filteredMps: filteredMps,
+        });
+      }
+    }
   };
 
   const handleValidation = (values) => {
@@ -37,7 +66,7 @@ const MpForm = ({ body, subject }) => {
             return errors;
           } else {
             setState(() => {
-              return { data: [data] };
+              return { ...state, mpByPostcode: data };
             });
           }
         })
@@ -47,19 +76,11 @@ const MpForm = ({ body, subject }) => {
         });
     }
     if (!usePostcode) {
-      axios
-        .get(searchMpsAPIReq(values.mpName))
-        .then(({ data }) => {
-          setState({ data });
-        })
-        .catch((error) => {
-          console.error(error);
-          errors.postcode = "Could not retrieve MP";
-        });
+      getMpByName(values.mpName);
     }
-    return errors;
   };
   console.log(state);
+
   return (
     <div>
       <Formik
@@ -88,18 +109,15 @@ const MpForm = ({ body, subject }) => {
         )}
       </Formik>
 
-      {state.data &&
-        Array.isArray(state.data) &&
-        state.data.slice(0, 6).map((mp, i) => {
+      {state.filteredMps &&
+        state.filteredMps.slice(0, 6).map((mp, i) => {
           return (
-            <DisplayMp
-              key={i}
-              state={{ data: mp }}
-              body={body}
-              subject={subject}
-            />
+            <DisplayMp key={i} mpData={mp} body={body} subject={subject} />
           );
         })}
+      {state.mpByPostcode && (
+        <DisplayMp mpData={state.mpByPostcode} body={body} subject={subject} />
+      )}
     </div>
   );
 };
