@@ -1,6 +1,8 @@
 // Render Prop
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import Search from "react-search";
+
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
 
@@ -11,6 +13,7 @@ const KEY = process.env.REACT_APP_TWFY_KEY;
 const MpForm = ({ body, subject }) => {
   const [state, setState] = useState({});
   const [usePostcode, setUsePostcode] = useState(false);
+  const [mps, setMps] = useState({});
 
   const postcodeToConstituencyAPIReq = (postcode) => {
     postcode.replace(/\s/g, "+");
@@ -24,6 +27,20 @@ const MpForm = ({ body, subject }) => {
       TWFY_API + "getMps?key=" + KEY + "&search=" + searchStr + "&output=js"
     );
   };
+  useEffect(() => {
+    axios.get(searchMpsAPIReq("")).then((items) => {
+      const newMps = items.data.map(({ member_id: id, ...rest }) => ({
+        id,
+        ...rest,
+      }));
+      let newNewMps = newMps.map(({ name: value, ...rest }) => ({
+        value,
+        ...rest,
+      }));
+      let mpSelection = newNewMps.slice(10, 20);
+      setMps(newNewMps);
+    });
+  }, []);
 
   const handleValidation = (values) => {
     const errors = {};
@@ -46,7 +63,7 @@ const MpForm = ({ body, subject }) => {
           errors.postcode = "Could not retrieve MP";
         });
     }
-    if (!usePostcode) {
+    if (!usePostcode && values.mpName.length > 3) {
       axios
         .get(searchMpsAPIReq(values.mpName))
         .then(({ data }) => {
@@ -60,6 +77,10 @@ const MpForm = ({ body, subject }) => {
     return errors;
   };
   console.log(state);
+
+  // search
+  let items = mps;
+
   return (
     <div>
       <Formik
@@ -100,6 +121,10 @@ const MpForm = ({ body, subject }) => {
             />
           );
         })}
+
+      <div>
+        <Search items={mps} placeholder="mp" multiple={true} />
+      </div>
     </div>
   );
 };
