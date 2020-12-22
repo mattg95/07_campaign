@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
+import Select from "react-select";
 
-// Constant URL value for JAAS API
 const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
 
@@ -25,6 +25,13 @@ const MpForm = ({ body, subject }) => {
     );
   };
 
+  const displayMpList = (state) => {
+    const Arr = [];
+    state.data.forEach((mp) => {
+      Arr.push({ value: mp.name, label: mp.name });
+    });
+    return Arr;
+  };
   const handleValidation = (values) => {
     const errors = {};
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
@@ -84,6 +91,7 @@ const MpForm = ({ body, subject }) => {
               value={usePostcode ? "" : values.mpName}
               onClick={() => setUsePostcode(false)}
             />
+            <Select options={displayMpList(state)}></Select>
           </Form>
         )}
       </Formik>
