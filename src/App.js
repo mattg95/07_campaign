@@ -2,6 +2,8 @@ import "./App.scss";
 import { Container, Row, Col } from "react-bootstrap";
 import TextBox from "./TextBox.js";
 
+require('dotenv').config({ path: '../.env' })
+
 function App() {
   return (
     <div className="App">
