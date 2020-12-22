@@ -1,5 +1,5 @@
 // Render Prop
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
@@ -18,26 +18,39 @@ const MpForm = ({ body, subject }) => {
       TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js"
     );
   };
+  const errors = {};
 
-  const searchMpsAPIReq = (searchStr) => {
-    return (
-      TWFY_API + "getMps?key=" + KEY + "&search=" + searchStr + "&output=js"
-    );
-  };
+  useEffect(() => {
+    axios
+      .get(TWFY_API + "getMps?key=" + KEY + "&output=js")
+      .then(({ data }) => {
+        if (data.error) {
+          errors.postcode = "Invalid postcode";
+          return errors;
+        } else {
+          setState(() => {
+            return { data: [data] };
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        errors.postcode = "Could not retrieve MP";
+      });
+  }, []);
+
   const filterMps = (inputValue) => {
-    const filteredMps = state.data.filter((mp) =>
-      mp.name.toLowerCase().includes(inputValue.toLowerCase())
-    );
     const Arr = [];
-    filteredMps.forEach((mp) => {
-      Arr.push({ value: mp.name, label: mp.name });
+    state.data[0].forEach((mp) => {
+      mp.name.toLowerCase().includes(inputValue.toLowerCase()) &&
+        Arr.push({ value: mp.name, label: mp.name });
     });
     console.log(Arr);
     return Arr;
   };
 
   const promiseOptions = (inputValue) => {
-    new Promise((resolve) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(filterMps(inputValue));
       }, 1000);
@@ -73,17 +86,17 @@ const MpForm = ({ body, subject }) => {
           errors.postcode = "Could not retrieve MP";
         });
     }
-    if (!usePostcode) {
-      axios
-        .get(searchMpsAPIReq(values.mpName))
-        .then(({ data }) => {
-          setState({ data });
-        })
-        .catch((error) => {
-          console.error(error);
-          errors.postcode = "Could not retrieve MP";
-        });
-    }
+    // if (!usePostcode) {
+    //   axios
+    //     .get(searchMpsAPIReq(values.mpName))
+    //     .then(({ data }) => {
+    //       setState({ data });
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //       errors.postcode = "Could not retrieve MP";
+    //     });
+    // }
     return errors;
   };
   console.log(state);
@@ -111,15 +124,11 @@ const MpForm = ({ body, subject }) => {
               value={usePostcode ? "" : values.mpName}
               onClick={() => setUsePostcode(false)}
             />
-            <AsyncSelect
-              cacheOptions
-              defaultOptions
-              loadOptions={promiseOptions}
-            />
           </Form>
         )}
       </Formik>
-
+      <AsyncSelect cacheOptions defaultOptions loadOptions={promiseOptions} />
+      {/* 
       {state.data &&
         Array.isArray(state.data) &&
         state.data.slice(0, 6).map((mp, i) => {
@@ -131,7 +140,7 @@ const MpForm = ({ body, subject }) => {
               subject={subject}
             />
           );
-        })}
+        })} */}
     </div>
   );
 };
