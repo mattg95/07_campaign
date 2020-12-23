@@ -9,19 +9,13 @@ const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
 
 const MpForm = ({ body, subject }) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ data: "" });
   const [usePostcode, setUsePostcode] = useState(false);
 
   const postcodeToConstituencyAPIReq = (postcode) => {
     postcode.replace(/\s/g, "+");
     return (
       TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js"
-    );
-  };
-
-  const searchMpsAPIReq = (searchStr) => {
-    return (
-      TWFY_API + "getMps?key=" + KEY + "&search=" + searchStr + "&output=js"
     );
   };
 
@@ -47,19 +41,11 @@ const MpForm = ({ body, subject }) => {
         });
     }
     if (!usePostcode) {
-      axios
-        .get(searchMpsAPIReq(values.mpName))
-        .then(({ data }) => {
-          setState({ data });
-        })
-        .catch((error) => {
-          console.error(error);
-          errors.postcode = "Could not retrieve MP";
-        });
+      //if we are not using the postcode to find MP, we trigger some other function that displays or filters MPs by name
     }
     return errors;
   };
-  console.log(state);
+
   return (
     <div>
       <Formik
@@ -67,7 +53,7 @@ const MpForm = ({ body, subject }) => {
         validate={handleValidation}
       >
         {(values) => (
-          <Form>
+          <Form className="getMpForm">
             <ErrorMessage name="postcode" component="div" />
             <label htmlFor="postcode">Postcode:</label>
             <Field
@@ -76,30 +62,25 @@ const MpForm = ({ body, subject }) => {
               value={usePostcode ? values.postcode : ""}
               onClick={() => setUsePostcode(true)}
             />
-            <ErrorMessage name="mpName" component="div" />
-            <label htmlFor="mpName">MP name:</label>
+            {/*<ErrorMessage name="mpName" component="div" />
+             <label htmlFor="mpName">MP name:</label>
             <Field
               type="text"
               name="mpName"
               value={usePostcode ? "" : values.mpName}
               onClick={() => setUsePostcode(false)}
-            />
+            /> */}
           </Form>
         )}
       </Formik>
-
-      {state.data &&
-        Array.isArray(state.data) &&
-        state.data.slice(0, 6).map((mp, i) => {
-          return (
-            <DisplayMp
-              key={i}
-              state={{ data: mp }}
-              body={body}
-              subject={subject}
-            />
-          );
-        })}
+      {console.log(state)}
+      {state.data && Array.isArray(state.data) && (
+        <DisplayMp
+          state={{ data: state.data[0] }}
+          body={body}
+          subject={subject}
+        />
+      )}
     </div>
   );
 };
