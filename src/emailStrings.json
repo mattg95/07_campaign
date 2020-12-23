@@ -1,0 +1,57 @@
+{
+  "subject": [
+    "Re: Providing 0.7% of GNI as foreign aid",
+    "Re: Disappointing government decision around the 0.7%.",
+    "Re: Sad to see government breaking manifesto promise in spending review."
+  ],
+  "survey": [
+    [
+      {
+        "label": "I am a member of the Conservative Party",
+        "value": [
+          "I’m writing to you as a member of the Conservative Party.",
+          "I want to start by letting you know that I’m a member of the Conservative Party",
+          "I really hope it was worth my while becoming a member of the Conservative Party -- maybe it means you will hear me out on this."
+        ]
+      },
+      {
+        "label": "I am not currently a member, but have been a member of the Conservative Party",
+        "value": [
+          "I’m writing to you as someone who has been a member of the Conservative Party.",
+          "I want to start by letting you know that I’ve been a member of the Conservative Party."
+        ]
+      }
+    ],
+    [
+      {
+        "label": "I'm angry",
+        "value": [
+          "I’m angry about the conservatives breaking their promises.",
+          "I’m not happy about the conservatives breaking their promises."
+        ]
+      },
+      {
+        "label": "I'm dissapointed",
+        "value": [
+          "The UK's decision to cut aid is dissapointing.",
+          "I'm dissapointed by the UK's decision to cut aid."
+        ]
+      }
+    ],
+    [
+      {
+        "label": "I have family in developing countries",
+        "value": [
+          "I have family in developing countries",
+          "Some of my family still live developing countries"
+        ]
+      },
+      {
+        "label": "I do not have family in developing countries",
+        "value": [
+          "I don't have family in developing countrie, but this is something deeply care about"
+        ]
+      }
+    ]
+  ]
+}

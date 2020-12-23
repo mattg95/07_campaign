@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
 
-// Constant URL value for JAAS API
 const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
 
@@ -73,7 +72,6 @@ const MpForm = ({ body, subject }) => {
           </Form>
         )}
       </Formik>
-      {console.log(state)}
       {state.data && Array.isArray(state.data) && (
         <DisplayMp
           state={{ data: state.data[0] }}
