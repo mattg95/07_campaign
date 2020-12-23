@@ -17,6 +17,7 @@ const DisplayMp = ({
       <div>{name}</div>
       <div>{full_name}</div>
       <div>{party}</div>
+      <div> {createMpEmail()}</div>
       <a
         href={
           "mailto:" +
@@ -24,10 +25,11 @@ const DisplayMp = ({
           "?Subject=" +
           encodeURIComponent(subject) +
           "&Body=" +
-          encodeURIComponent(Object.values(body).join(" "))
+          encodeURIComponent(Object.values(body).join(""))
         }
+        className="btn btn-primary"
       >
-        {createMpEmail()}
+        SEND EMAIL
       </a>
     </div>
   );
