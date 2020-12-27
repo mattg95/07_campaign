@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import EdiText from "react-editext";
-import { Formik, Form } from "formik";
-import Select from "react-select";
 
 import PostCode from "./MpForm.js";
 
@@ -22,37 +20,12 @@ const TextBox = () => {
 
   return (
     <div className="surveyQuestions">
-      <Formik>
-        <Form>
-          <label htmlFor="q1">
-            Which of the following describes your relationship with the
-            conservative government?
-          </label>
-          <Select
-            options={emailStrings.survey[0]}
-            name="q1"
-            onChange={({ value }) => {
-              setState({ ...state, q1Res: getRandomRes(value) });
-            }}
-          />
-          <label htmlFor="q2">How do you feel about the aid budget cut?</label>
-          <Select
-            options={emailStrings.survey[1]}
-            name="q2"
-            onChange={({ value }) => {
-              setState({ ...state, q2Res: getRandomRes(value) });
-            }}
-          />
-          <label htmlFor="q3">Do you have family in developing countries</label>
-          <Select
-            options={emailStrings.survey[2]}
-            name="q3"
-            onChange={({ value }) => {
-              setState({ ...state, q3Res: getRandomRes(value) });
-            }}
-          />
-        </Form>
-      </Formik>
+      <div
+        aria-live="polite"
+        className="guidedtrack program_container"
+        data-environment="production"
+        id="gtla8gt"
+      />
       <EdiText
         viewContainerClassName="emailBox"
         type="text"
@@ -68,7 +41,6 @@ const TextBox = () => {
           setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
         }}
       />
-      {console.log(state)}
       <PostCode
         body={
           state.editedRes.length
