@@ -1,12 +1,26 @@
 import "./App.scss";
 import { Container, Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import TextBox from "./TextBox.js";
+import Helmet from "react-helmet";
 
 require("dotenv").config({ path: "../.env" });
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <script src="https://www.guidedtrack.com/assets/jquery_gt.js"></script>
+
+        <script src="https://www.guidedtrack.com/assets/interpreter.js"></script>
+
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://www.guidedtrack.com/assets/guidedtrack.css"
+        />
+      </Helmet>
       <Container>
         <Row>
           <Col>
