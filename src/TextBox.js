@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EdiText from "react-editext";
 
 import PostCode from "./MpForm.js";
+import * as typeformEmbed from "@typeform/embed";
 
 const emailStrings = require("./emailStrings.json");
 
