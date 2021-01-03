@@ -1,52 +1,17 @@
 import "./App.scss";
-import React, { useState, useEffect, useRef } from "react";
-
 import { Container, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import TextBox from "./TextBox.js";
-import Helmet from "react-helmet";
-import * as typeformEmbed from "@typeform/embed";
 
 require("dotenv").config({ path: "../.env" });
 
 function App() {
-  const myRef = useRef(null);
-
-  useEffect(() => {
-    typeformEmbed.makeWidget(
-      myRef.current,
-      `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
-      {
-        hideFooter: true,
-        hideHeaders: true,
-        opacity: 50,
-      }
-    );
-  }, [myRef]);
-
   return (
     <div className="App">
-      <script src="https://www.guidedtrack.com/assets/jquery_gt.js"></script>
-
-      <script src="https://www.guidedtrack.com/assets/interpreter.js"></script>
-
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://www.guidedtrack.com/assets/guidedtrack.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://www.guidedtrack.com/assets/bootstrap.css"
-      />
-      <Helmet></Helmet>
       <Container>
         <Row>
           <Col>
             <h1 className="text-center">0.7% Campaign</h1>
-            <div ref={myRef} />
           </Col>
         </Row>
         <Row>
