@@ -7,12 +7,24 @@ import * as typeformEmbed from "@typeform/embed";
 const emailStrings = require("./emailStrings.json");
 
 const TextBox = () => {
+  const myRef = useRef(null);
   const [state, setState] = useState({
     q1Res: "",
     q2Res: "",
     q3Res: "",
     editedRes: "",
   });
+  useEffect(() => {
+    typeformEmbed.makeWidget(
+      myRef.current,
+      `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
+      {
+        hideFooter: true,
+        hideHeaders: true,
+        opacity: 50,
+      }
+    );
+  }, [myRef]);
 
   const getRandomRes = (inputArr) => {
     const randomNum = Math.floor(Math.random() * inputArr.length);
@@ -21,12 +33,7 @@ const TextBox = () => {
 
   return (
     <div className="surveyQuestions">
-      <div
-        aria-live="polite"
-        className="guidedtrack program_container"
-        data-environment="production"
-        id="gtla8gt"
-      />
+      <div ref={myRef} />
       <EdiText
         viewContainerClassName="emailBox"
         type="text"
