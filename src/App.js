@@ -7,19 +7,41 @@ import Helmet from "react-helmet";
 
 require("dotenv").config({ path: "../.env" });
 
-function App() {
+function App({ context }) {
+  const guidedTrackScript = document.createElement("script");
+  guidedTrackScript.src = "https://www.guidedtrack.com/assets/jquery_gt.js";
+  guidedTrackScript.async = true;
+  document.body.appendChild(guidedTrackScript);
+
+  const interpreterScript = document.createElement("script");
+  interpreterScript.src="https://www.guidedtrack.com/assets/interpreter.js";
+  interpreterScript.async = true
+  document.body.appendChild(interpreterScript);
+
+  // const onStartScript = document.createElement("script");
+  // onStartScript.innerHTML=`$(window).on("start", function (event, data) {console.log(data)});`;
+  // onStartScript.type="text/javascript"
+  // onStartScript.async = true
+  // document.body.appendChild(onStartScript);
+  // console.log(document.body)
+
+  console.log(window)
+
+
+  // const cssScript = document.createElement("script");
+  // cssScript.src="https://www.guidedtrack.com/assets/guidedtrack.css";
+  // cssScript.async = true
+  // cssScript.type="text/css"
+  // document.body.appendChild(cssScript);
+
+  console.log(document.body)
+
+
+
   return (
     <div className="App">
       <Helmet>
-        <script src="https://www.guidedtrack.com/assets/jquery_gt.js"></script>
-
-        <script src="https://www.guidedtrack.com/assets/interpreter.js"></script>
-
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://www.guidedtrack.com/assets/guidedtrack.css"
-        />
+  
       </Helmet>
       <Container>
         <Row>
