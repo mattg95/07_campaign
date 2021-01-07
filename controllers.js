@@ -1,15 +1,16 @@
 require("dotenv").config();
-
-const TWFY_API = "https://www.theyworkforyou.com/api/";
 const KEY = process.env.REACT_APP_TWFY_KEY;
 const axios = require("axios");
-
-const postcodeToConstituencyAPIReq = (postcode) => {
-  postcode.replace(/\s/g, "+");
-  return TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js";
-};
+const TWFY_API = "https://www.theyworkforyou.com/api/";
 
 exports.getMpByPostcode = (postcode) => {
+  const postcodeToConstituencyAPIReq = (postcode) => {
+    postcode.replace(/\s/g, "+");
+    return (
+      TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js"
+    );
+  };
+
   const errors = {};
   return axios
     .get(postcodeToConstituencyAPIReq(postcode))
