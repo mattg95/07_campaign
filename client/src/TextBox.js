@@ -13,9 +13,9 @@ const TextBox = () => {
     q2Res: "",
     q3Res: "",
     editedRes: "",
-    response: '',
-    post: '',
-    responseToPost: '',
+    response: "",
+    post: "",
+    responseToPost: "",
   });
   useEffect(() => {
     // typeformEmbed.makeWidget(
@@ -28,29 +28,28 @@ const TextBox = () => {
     //   }
     // );
     const callApi = async () => {
-      const response = await fetch('/api/hello');
+      const response = await fetch("/api/hello");
       const body = await response.json();
       if (response.status !== 200) throw Error(body.message);
-      
+
       return body;
     };
     callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+      .then((res) => this.setState({ response: res.express }))
+      .catch((err) => console.log(err));
   }, [myRef]);
 
-
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/api/world', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5000/api/world", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ post: state.post }),
     });
     const body = await response.text();
-    
+
     setState({ responseToPost: body });
   };
 
@@ -77,27 +76,14 @@ const TextBox = () => {
           setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
         }}
       /> */}
-      {/* <PostCode
+      <PostCode
         body={
           state.editedRes.length
             ? state.editedRes
             : Object.values(state).join(" ") //if the user has edited the email, use the edited email. else join the responses
         }
         subject={getRandomRes(emailStrings.subject)} //subject is randomised
-      /> */}
-        <form onSubmit={handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={state.post}
-            onChange={e => setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{state.response}</p>
-        <p>{state.responseToPost}</p>
+      />
     </div>
   );
 };
