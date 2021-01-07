@@ -1,53 +1,16 @@
 {
-  "name": "react-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "example-create-react-app-express",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
-    "@typeform/embed": "^0.31.1",
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "formik": "^2.2.6",
-    "jquery": "^3.5.1",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "^17.0.1",
-    "react-editext": "^3.17.1",
-    "react-helmet": "^6.1.0",
-    "react-scripts": "4.0.1",
-    "react-select": "^3.1.1",
-    "react-typeform-embed": "^0.2.1",
-    "reset-css": "^5.0.1",
-    "sass": "^1.30.0",
-    "web-vitals": "^0.2.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  // "proxy": "http://localhost:5000/",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "concurrently": "^4.0.1"
   }
 }
