@@ -4,45 +4,29 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import DisplayMp from "./DisplayMp";
 
-const TWFY_API = "https://www.theyworkforyou.com/api/";
-const KEY = process.env.REACT_APP_TWFY_KEY;
-
 const MpForm = ({ body, subject }) => {
   const [state, setState] = useState({ data: "" });
   const [usePostcode, setUsePostcode] = useState(false);
+  console.log(state);
 
-  const postcodeToConstituencyAPIReq = (postcode) => {
-    postcode.replace(/\s/g, "+");
-    return (
-      TWFY_API + "getMp?key=" + KEY + "&postcode=" + postcode + "&output=js"
-    );
+  const postToApi = async (postcode) => {
+    const response = await fetch(`http://localhost:5000/api/${postcode}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setState({ data: data }));
+
+    return response;
   };
-
-  const handleValidation = (values) => {
+  const handleValidation = ({ postcode }) => {
     const errors = {};
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
-    if (usePostcode & postCodeRegex.test(values.postcode.toUpperCase())) {
-      axios
-        .get(postcodeToConstituencyAPIReq(values.postcode))
-        .then(({ data }) => {
-          if (data.error) {
-            errors.postcode = "Invalid postcode";
-            return errors;
-          } else {
-            setState(() => {
-              return { data: [data] };
-            });
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          errors.postcode = "Could not retrieve MP";
-        });
+    if (postCodeRegex.test(postcode.toUpperCase())) {
+      postToApi(postcode);
     }
-    if (!usePostcode) {
-      //if we are not using the postcode to find MP, we trigger some other function that displays or filters MPs by name
-    }
-    return errors;
   };
 
   return (
@@ -72,12 +56,8 @@ const MpForm = ({ body, subject }) => {
           </Form>
         )}
       </Formik>
-      {state.data && Array.isArray(state.data) && (
-        <DisplayMp
-          state={{ data: state.data[0] }}
-          body={body}
-          subject={subject}
-        />
+      {state.data && (
+        <DisplayMp state={{ data: state.data }} body={body} subject={subject} />
       )}
     </div>
   );
