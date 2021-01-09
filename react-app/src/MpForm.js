@@ -8,15 +8,12 @@ const MpForm = ({ body, subject }) => {
   console.log(state);
 
   const postToApi = async (postcode) => {
-    const response = await fetch(
-      `http://localhost:5000/api/postcode/${postcode}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    const response = await fetch(`/api/postcode/${postcode}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setState({ data: data }));
 
