@@ -11,12 +11,12 @@ const TypeForm = () => {
       {
         hideFooter: true,
         hideHeaders: true,
-        opacity: 50,
+        opacity: 0,
       }
     );
   }, [myRef]);
 
-  return <div ref={myRef} />;
+  return <div ref={myRef} className="typeform-widget" />;
 };
 
 export default TypeForm;
