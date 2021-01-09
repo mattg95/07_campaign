@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
-const { getMpByPostcode } = require("./controllers");
+const { getMpByPostcode } = require("./api-functions");
 
 const app = express();
 const port = process.env.PORT || 5000;
