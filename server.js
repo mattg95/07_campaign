@@ -21,7 +21,11 @@ app.get("/api/typeform/:webhook", (req, res) => {
   console.log(req.params);
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () =>
+  console.log(
+    `Listening on port ${port}, process env = ${process.env.NODE_ENV}`
+  )
+);
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
