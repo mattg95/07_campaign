@@ -1,3 +1,3 @@
 {
-  "root": "react-app/public/index.html"
+  "root": "react-app/build/index.html"
 }
