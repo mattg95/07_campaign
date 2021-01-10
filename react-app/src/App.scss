@@ -1,0 +1,41 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+body,
+html {
+  margin: 20px 0 20px 0;
+}
+.surveyQuestions {
+  label {
+    margin: 20px 0;
+  }
+}
+.mpCard {
+  border: 2px solid grey;
+  margin: 15px;
+  padding: 15px;
+  // background-color: lightgrey;
+}
+
+.getMpForm {
+  margin: 15px;
+  padding: 15px;
+}
+
+.emailBox {
+  margin: 30px 0;
+  textarea,
+  div[editext="view"] {
+    border: 1px solid grey;
+    margin: 15px 0;
+    padding: 15px;
+  }
+  button {
+    margin: auto;
+  }
+}
+
+.typeform-widget {
+  height: 500px;
+}

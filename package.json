@@ -1,46 +1,24 @@
 {
-  "name": "react-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "formik": "^2.2.6",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "^17.0.1",
-    "react-editext": "^3.17.1",
-    "react-scripts": "4.0.1",
-    "react-select": "^3.1.1",
-    "reset-css": "^5.0.1",
-    "sass": "^1.30.0",
-    "web-vitals": "^0.2.4"
-  },
+  "name": "example-create-react-app-express",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "install-react": "cd react-app && npm install",
+    "react-start": "cd react-app && npm start",
+    "react-build": "cd react-app && npm run build",
+    "react-test": "cd react-app && npm run test",
+    "react-eject": "cd react-app && npm run eject",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "concurrently": "^4.0.1"
   }
 }
