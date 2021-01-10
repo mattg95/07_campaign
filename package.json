@@ -1,6 +1,7 @@
 {
   "name": "example-create-react-app-express",
   "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "install-react": "cd react-app && npm install",
     "react-start": "cd react-app && npm start",
