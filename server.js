@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const app = express();
 const path = require("path");
+
 const { getMpByPostcode } = require("./api-functions");
 
+//initialise express and define a port
+const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
@@ -19,6 +21,11 @@ app.get("/api/postcode/:postcodeInput", (req, res) => {
 
 app.get("/api/typeform/:webhook", (req, res) => {
   console.log(req.params);
+});
+
+app.post("/hook", (req, res) => {
+  console.log(req.body); // Call your action on the request here
+  res.status(200).end(); // Responding is important
 });
 
 app.listen(port, () =>
