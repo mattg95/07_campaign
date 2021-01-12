@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
-import EdiText from "react-editext";
+import socketIOClient from "socket.io-client";
 
+import EdiText from "react-editext";
 const emailStrings = require("./emailStrings.json");
 
+const socket = socketIOClient();
+
+socket.on("connect", function () {
+  console.log("client socket connected");
+});
 const TextBox = () => {
   const [state, setState] = useState({
     response: "",
     post: "",
     responseToPost: "",
   });
-  useEffect(() => {
-    const callApi = async () => {
-      const response = await fetch("/api/webhook");
-      const body = await response.json();
-      if (response.status !== 200) throw Error(body.message);
-
-      return body;
-    };
-    callApi()
-      .then((res) => setState({ response: res.express }))
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(() => {}, []);
 
   console.log(state);
 
