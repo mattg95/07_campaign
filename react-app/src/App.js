@@ -1,8 +1,9 @@
 import "./App.scss";
 import { Container, Row, Col } from "react-bootstrap";
 
-import MpForm from "./MpForm";
+import MpForm from "./FindMp";
 import TypeForm from "./TypeForm";
+import TextBox from "./TextBox";
 
 require("dotenv").config({ path: "../.env" });
 
@@ -36,6 +37,13 @@ function App() {
           <Col>
             <div className="text-center">
               <TypeForm />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="text-center">
+              <TextBox />
             </div>
           </Col>
         </Row>

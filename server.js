@@ -19,8 +19,8 @@ app.get("/api/postcode/:postcodeInput", (req, res) => {
   );
 });
 
-app.get("/api/typeform/:webhook", (req, res) => {
-  console.log(req.params);
+app.get("/api/webhook", (req, res) => {
+  res.send({ express: "Hello From Express" });
 });
 
 app.post("/hook", (req, res) => {
