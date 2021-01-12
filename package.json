@@ -19,7 +19,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
-    "socket.io": "^3.0.5"
+    "socket.io": "^3.0.5",
+    "socket.io-client": "^3.0.5"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"

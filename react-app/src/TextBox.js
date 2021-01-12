@@ -6,8 +6,8 @@ const emailStrings = require("./emailStrings.json");
 
 const socket = socketIOClient();
 
-socket.on("connect", function () {
-  console.log("client socket connected");
+socket.on("typeform-incoming", function ({ data }) {
+  console.log(data);
 });
 const TextBox = () => {
   const [state, setState] = useState({
