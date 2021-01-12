@@ -11,6 +11,7 @@ const { getMpByPostcode } = require("./api-functions");
 
 //initialise express and define a port
 const port = process.env.PORT || 5000;
+const client = require("socket.io-client")("http://localhost:" + port);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,20 +27,17 @@ app.get("/api/webhook", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
 
-let storage = {};
-
 io.on("connection", (socket) => {
-  console.log("New client connected" + socket.id);
-  socket.send("Hello!");
-  socket.on("initial_data", () => {
-    console.log("initial data");
+  // this will be triggered by client sides emitting 'create'
+  socket.on("create", (data) => {
+    io.emit("typeform-incoming", data);
   });
 });
 
 app.post("/hook", (req, res) => {
-  storage = req.body; // Call your action on the request here
   res.status(200).end(); // Responding is important
-  console.log(storage);
+  console.log(req.body);
+  client.emit("create", { data: req.body });
 });
 
 http.listen(port, () =>
