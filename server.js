@@ -2,11 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const app = express();
+var http = require("http").createServer(app);
+
+const io = require("socket.io")(http);
 
 const { getMpByPostcode } = require("./api-functions");
 
 //initialise express and define a port
-const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
@@ -23,12 +26,23 @@ app.get("/api/webhook", (req, res) => {
   res.send({ express: "Hello From Express" });
 });
 
-app.post("/hook", (req, res) => {
-  console.log(req.body); // Call your action on the request here
-  res.status(200).end(); // Responding is important
+let storage = {};
+
+io.on("connection", (socket) => {
+  console.log("New client connected" + socket.id);
+  socket.send("Hello!");
+  socket.on("initial_data", () => {
+    console.log("initial data");
+  });
 });
 
-app.listen(port, () =>
+app.post("/hook", (req, res) => {
+  storage = req.body; // Call your action on the request here
+  res.status(200).end(); // Responding is important
+  console.log(storage);
+});
+
+http.listen(port, () =>
   console.log(
     `Listening on port ${port}, process env = ${process.env.NODE_ENV}`
   )
