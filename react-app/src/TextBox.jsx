@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 
 import EdiText from "react-editext";
-import responseRandomizer from "./responseRamdomiser";
 
 const socket = socketIOClient();
 
@@ -15,7 +14,6 @@ const TextBox = ({ responseId }) => {
   useEffect(() => {
     let isMounted = true;
     socket.on("typeform-incoming", ({ data: { form_response } }) => {
-      responseRandomizer(form_response);
       if (isMounted) setState({ formToken: form_response.token });
     });
     return () => {
