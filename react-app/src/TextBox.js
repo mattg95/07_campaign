@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 
 import EdiText from "react-editext";
-const emailStrings = require("./emailStrings.json");
+import responseRandomizer from "./responseRamdomiser";
 
 const socket = socketIOClient();
 
@@ -12,18 +12,16 @@ const TextBox = ({ responseId }) => {
     formToken: "", //the form token comes from the webhook response
   });
 
-  console.log(state.formToken, responseId);
-
   useEffect(() => {
-    socket.on("typeform-incoming", function ({ data }) {
-      setState({ formToken: data.form_response.token });
+    let isMounted = true;
+    socket.on("typeform-incoming", ({ data: { form_response } }) => {
+      responseRandomizer(form_response);
+      if (isMounted) setState({ formToken: form_response.token });
     });
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
-  const getRandomRes = (inputArr) => {
-    const randomNum = Math.floor(Math.random() * inputArr.length);
-    return inputArr[randomNum];
-  };
 
   return (
     <EdiText
