@@ -5,7 +5,6 @@ import DisplayMp from "./DisplayMp";
 
 const MpForm = ({ body, subject }) => {
   const [state, setState] = useState({ data: "" });
-  console.log(state);
 
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {

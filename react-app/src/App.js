@@ -43,13 +43,6 @@ function App() {
         <Row>
           <Col>
             <div className="text-center">
-              <TextBox />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="text-center">
               <MpForm body="" subject="" />
             </div>
           </Col>
