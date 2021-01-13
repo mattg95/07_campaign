@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   // this will be triggered by client sides emitting 'create'
   socket.on("create", (data) => {
     fs.writeFile(
-      `./exampleResponses/example${i}.txt`,
+      `./exampleResponses/example${i}.json`,
       JSON.stringify(data),
       () => {
         console.log(data);
