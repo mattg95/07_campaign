@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 var http = require("http").createServer(app);
+const fs = require("fs");
 
 const io = require("socket.io")(http);
 
@@ -23,13 +24,19 @@ app.get("/api/postcode/:postcodeInput", (req, res) => {
   );
 });
 
-app.get("/api/webhook", (req, res) => {
-  res.send({ express: "Hello From Express" });
-});
+let i = 0;
 
 io.on("connection", (socket) => {
   // this will be triggered by client sides emitting 'create'
   socket.on("create", (data) => {
+    fs.writeFile(
+      `./exampleResponses/example${i}.txt`,
+      JSON.stringify(data),
+      () => {
+        console.log(data);
+      }
+    );
+    i++;
     io.emit("typeform-incoming", data);
   });
 });
