@@ -9,6 +9,7 @@ const fs = require("fs");
 const io = require("socket.io")(http);
 
 const { getMpByPostcode } = require("./api-functions");
+const { generateEmail } = require("./formResponseHandler");
 
 //initialise express and define a port
 const port = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ io.on("connection", (socket) => {
         console.log(data);
       }
     );
+    generateEmail(data.form_response);
     i++;
     io.emit("typeform-incoming", data);
   });
@@ -44,7 +46,7 @@ io.on("connection", (socket) => {
 app.post("/hook", (req, res) => {
   res.status(200).end(); // Responding is important
   console.log(req.body);
-  client.emit("create", { data: req.body });
+  client.emit("create", req.body);
 });
 
 http.listen(port, () =>
