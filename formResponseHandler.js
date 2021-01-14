@@ -1,7 +1,7 @@
 const e = require("express");
 const { subject, survey, standard } = require("./emailStrings.json");
 
-const generateEmail = ({ answers, definition: { fields } }) => {
+exports.generateEmail = ({ answers, definition: { fields } }) => {
   //this could be replaced with an object to help order the email
   const emailArr = [];
 
@@ -23,7 +23,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     return inputArr[Math.floor(Math.random() * inputArr.length)];
   };
 
-  const getAnswerSynoymns = (idProp) => {
+  const getAnswerSynonyms = (idProp) => {
     const thisField = fields.find(({ id }) => id === idProp);
     const thisAnswers = answers.find(({ field: { id } }) => id === idProp);
     let choiceIndex = 0;
@@ -44,7 +44,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
   answers.forEach(({ text, field, choice }) => {
     //conservatives hanlder
     if (field.id === "EejpFBEzP9wK") {
-      emailArr.push(getRandomResponse(getAnswerSynoymns("EejpFBEzP9wK")));
+      emailArr.push(getRandomResponse(getAnswerSynonyms("EejpFBEzP9wK")));
     }
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
@@ -54,7 +54,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     }
     //countryLinksHandler
     if (field.id === "Z4awe4sDljLR") {
-      const sentence = getRandomResponse(getAnswerSynoymns("Z4awe4sDljLR"));
+      const sentence = getRandomResponse(getAnswerSynonyms("Z4awe4sDljLR"));
       const counryNameData = answers.find(
         ({ field: { id } }) => id === "MRPxTl6j1QAw"
       );
@@ -66,9 +66,9 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     }
     //moivations handler
     if (field.id === "wKGNjgRDml1H") {
-      const id = "wKGNjgRDml1H";
-      const thisField = fields.find(({ id }) => id === idProp);
-      const thisAnswers = answers.find(({ field: { id } }) => id === idProp);
+      const thisId = "wKGNjgRDml1H";
+      const thisField = fields.find(({ id }) => id === thisId);
+      const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
       let choiceIndex = [];
       //this gets the synomys array based on the index of the survey multiple choice-
       thisField.choices.forEach((choice, i) => {
@@ -77,7 +77,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
         }
       });
       const synoynms = choiceIndex.map((ele) => {
-        return survey[questionKeys[idProp]][ele];
+        return survey[questionKeys[thisId]][ele];
       });
       const sentenceArr = synoynms.map((ele) => {
         ele && getRandomResponse(ele);
@@ -106,5 +106,3 @@ const generateEmail = ({ answers, definition: { fields } }) => {
   console.log(responseData);
   return responseData;
 };
-
-exports.generateEmail = generateEmail;

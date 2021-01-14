@@ -6,8 +6,6 @@ const app = express();
 var http = require("http").createServer(app);
 const fs = require("fs");
 
-const emailRes = require("./exampleResponses/example6.json");
-
 const io = require("socket.io")(http);
 
 const { getMpByPostcode } = require("./api-functions");
@@ -32,19 +30,18 @@ let i = 0;
 io.on("connection", (socket) => {
   // this will be triggered by client sides emitting 'create'
   socket.on("create", (data) => {
-    fs.writeFile(
-      `./exampleResponses/example${i}.json`,
-      JSON.stringify(data),
-      () => {
-        console.log(data);
-      }
+    fs.writeFileSync(
+      `./exampleResponses/example20${i}.json`,
+      JSON.stringify(data)
     );
-    generateEmail(data.form_response);
+
     i++;
-    io.emit("typeform-incoming", data);
+    io.emit("typeform-incoming", {
+      formToken: data.form_response.token,
+      generatedEmail: generateEmail(data.form_response),
+    });
   });
 });
-generateEmail(emailRes.data.form_response);
 
 app.post("/hook", (req, res) => {
   res.status(200).end(); // Responding is important
