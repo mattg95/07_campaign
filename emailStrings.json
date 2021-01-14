@@ -21,8 +21,8 @@
       ]
     ],
     "religion": [
-      "I want to add that I am a RELIGIOUS_DEMONYM_NOUN, and according to my religion it’s not right to forsake the poor. I don’t know about your religious beliefs, but I hope you will reassure me that you will respect that people in your constituency don’t think the government’s decision on this is acceptable",
-      "For RELIGIOUS_DEMONYM_ADJ people like me, it feels wrong to let the poor down in their hour of need. I hope you will recognise and respect that there are people of faith in your constituency and let that guide you to make the right decision; I’m hoping you will vote not to let the poor people in this world down. Please vote against the government on this."
+      "I want to add that I am a [RELIGION], and according to my religion it’s not right to forsake the poor. I don’t know about your religious beliefs, but I hope you will reassure me that you will respect that people in your constituency don’t think the government’s decision on this is acceptable",
+      "For [RELIGION] people like me, it feels wrong to let the poor down in their hour of need. I hope you will recognise and respect that there are people of faith in your constituency and let that guide you to make the right decision; I’m hoping you will vote not to let the poor people in this world down. Please vote against the government on this."
     ],
     "motivation": [
       [
