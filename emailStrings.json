@@ -36,10 +36,20 @@
       [
         "We have to maintain our aid budget for our political and strategic interests, aligned with the “Global Britain” agenda"
       ]
+    ],
+    "countryLinks": [
+      [
+        "I was born in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? That’s where I was born and I would like to ensure that support for COUNTRY_NAME is not reduced.",
+        "Can you please make sure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as that’s where I was born."
+      ],
+      [
+        "I have lived in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? I’ve spent part of my life there and I would like to ensure that support for COUNTRY_NAME is not reduced",
+        "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I’ve spent quite a bit of my life there"
+      ]
     ]
   },
 
-  "main": {
+  "standard": {
     "sentence1": [
       "I’m disappointed that the government has decided to break its manifesto pledge and decided to no longer provide 0.7% of GNI as foreign aid.",
       "I think it’s sad that the government has decided to go back on its manifesto pledge and is no longer providing 0.7% of GNI as foreign aid."
