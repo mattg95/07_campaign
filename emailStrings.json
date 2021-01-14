@@ -1,0 +1,39 @@
+{
+  "subject": [
+    "Re: Providing 0.7% of GNI as foreign aid",
+    "Re: Disappointing government decision around the 0.7%.",
+    "Re: Sad to see government breaking manifesto promise in spending review."
+  ],
+  "survey": {
+    "conservative": [
+      [
+        "I’m writing to you as a member of the Conservative Party.",
+        "I want to start by letting you know that I’m a member of the Conservative Party",
+        "I really hope it was worth my while becoming a member of the Conservative Party -- maybe it means you will hear me out on this."
+      ],
+      [
+        "I'm writing to you as someone who has been a member of the Conservative Party.",
+        "I want to start by letting you know that I’ve been a member of the Conservative Party."
+      ],
+      [
+        "I’m writing to you as someone who voted for you in the most recent election.",
+        " want to start by letting you know that I voted for you in the most recent election."
+      ]
+    ]
+  },
+
+  "main": {
+    "sentence1": [
+      "I’m disappointed that the government has decided to break its manifesto pledge and decided to no longer provide 0.7% of GNI as foreign aid.",
+      "I think it’s sad that the government has decided to go back on its manifesto pledge and is no longer providing 0.7% of GNI as foreign aid."
+    ],
+    "sentence2": [
+      "The government is arguing that we need to provide less aid because we have less money ourselves, but this doesn’t make sense -- it’s a percentage of GNI, so it will go down automatically anyway.",
+      "I know the government thinks we need to provide less aid because the UK has less money ourselves, but this doesn’t stack up -- it’s a percentage of GDP, so it will go down anyway."
+    ],
+    "sentence3": [
+      "I’m writing to ask you to ensure the government reverses this decision, or at least make absolutely sure it’s temporary.",
+      "Will you please agree to vote for this not to happen? Or at least make absolutely sure that the law is clear that this will be for one year only?"
+    ]
+  }
+}
