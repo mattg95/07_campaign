@@ -6,6 +6,8 @@ const app = express();
 var http = require("http").createServer(app);
 const fs = require("fs");
 
+const emailRes = require("./exampleResponses/example6.json");
+
 const io = require("socket.io")(http);
 
 const { getMpByPostcode } = require("./api-functions");
@@ -42,6 +44,7 @@ io.on("connection", (socket) => {
     io.emit("typeform-incoming", data);
   });
 });
+generateEmail(emailRes.data.form_response);
 
 app.post("/hook", (req, res) => {
   res.status(200).end(); // Responding is important

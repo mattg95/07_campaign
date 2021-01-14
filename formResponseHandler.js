@@ -22,7 +22,6 @@ const generateEmail = (formResponseData) => {
   const getRandomResponse = (inputArr) => {
     return inputArr[Math.floor(Math.random() * inputArr.length)];
   };
-
   const getAnswerSynoymns = (idProp) => {
     const thisField = fields.find(({ id }) => id === idProp);
     const thisAnswers = answers.find(({ field: { id } }) => id === idProp);
@@ -32,17 +31,22 @@ const generateEmail = (formResponseData) => {
         choiceIndex = i;
       }
     });
-    console.log(questionKeys[idProp]);
     return emailStrings.survey[questionKeys[idProp]] ? [choiceIndex] : [];
   };
 
-  console.log(formResponseData);
   answers.forEach((answer) => {
     if (answer.field.id === "EejpFBEzP9wK") {
+      //conservatives
       emailArr.push(getRandomResponse(getAnswerSynoymns("EejpFBEzP9wK")));
     }
     if (answer.field.id === "IdqRPd6SUMVh") {
-      // emailArr.push(getRandomResponse(getAnswerSynoymns(5)));
+      //religion
+      const sentence = getRandomResponse(emailStrings.survey.religion);
+      const sentenceWithReligion = sentence.replace(
+        "[RELIGION]",
+        answer.choice.label
+      );
+      emailArr.push(sentenceWithReligion);
     }
     if (answer.field.id === "MRPxTl6j1QAw") {
       //countryNameHandler
@@ -51,7 +55,8 @@ const generateEmail = (formResponseData) => {
       //countryLinksHandler
     }
     if (answer.field.id === "wKGNjgRDml1H") {
-      //motivation Hanlder
+      //moivations
+      // emailArr.push(getRandomResponse(getAnswerSynoymns("wKGNjgRDml1H")));
     }
     if (answer.field.id === "daZZA6TwyMP5") {
       //nameHanlder
