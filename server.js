@@ -30,10 +30,7 @@ let i = 0;
 io.on("connection", (socket) => {
   // this will be triggered by client sides emitting 'create'
   socket.on("create", (data) => {
-    fs.writeFileSync(
-      `./exampleResponses/example20${i}.json`,
-      JSON.stringify(data)
-    );
+    fs.writeFileSync(`./temp/example${i}.json`, JSON.stringify(data));
 
     i++;
     io.emit("typeform-incoming", {
