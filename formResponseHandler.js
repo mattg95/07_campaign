@@ -49,7 +49,10 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
       const sentence = getRandomResponse(survey.religion);
-      const sentenceWithReligion = sentence.replace("[RELIGION]", choice.label);
+      const sentenceWithReligion = sentence.replace(
+        /[RELIGION]/g,
+        choice.label
+      );
       emailArr.push(sentenceWithReligion);
     }
     //countryLinksHandler
@@ -59,7 +62,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         ({ field: { id } }) => id === "MRPxTl6j1QAw"
       );
       const sentenceWithCountry = sentence.replace(
-        "COUNTRY_NAME",
+        /COUNTRY_NAME/g,
         counryNameData.text
       );
       emailArr.push(sentenceWithCountry);
@@ -103,6 +106,5 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     subject: getRandomResponse(subject),
     body: emailArr.join(" "),
   };
-  console.log(responseData);
   return responseData;
 };
