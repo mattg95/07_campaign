@@ -59,7 +59,6 @@ describe("generateEmail", () => {
   });
   it("should not include a response for 'no religion' choice", () => {
     allExampleRes.forEach((res) => {
-      console.log(res);
       expect(res.body.search(/Not religious/)).to.equal(-1);
       expect(res.body.search(/agnostic/)).to.equal(-1);
       expect(res.body.search(/athiest/)).to.equal(-1);
@@ -70,6 +69,11 @@ describe("generateEmail", () => {
       expect(res.body.search(/Not religious/)).to.equal(-1);
       expect(res.body.search(/agnostic/)).to.equal(-1);
       expect(res.body.search(/athiest/)).to.equal(-1);
+    });
+  });
+  it("should not include the 'newline' character", () => {
+    allExampleRes.forEach((res) => {
+      expect(res.body.search(/\n/)).to.equal(-1);
     });
   });
 });
