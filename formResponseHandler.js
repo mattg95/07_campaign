@@ -50,9 +50,10 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     if (field.id === "IdqRPd6SUMVh") {
       const sentence = getRandomResponse(survey.religion);
       const sentenceWithReligion = sentence.replace(
-        /[RELIGION]/g,
+        /\[RELIGION\]/g,
         choice.label
       );
+      console.log(sentenceWithReligion);
       emailArr.push(sentenceWithReligion);
     }
     //countryLinksHandler

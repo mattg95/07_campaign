@@ -7,7 +7,12 @@ const example2 = require("./exampleResponses/example2.json");
 const example3 = require("./exampleResponses/example3.json");
 const example4 = require("./exampleResponses/example4.json");
 
-const allExamples = [example1, example2, example3, example4];
+const example1Res = generateEmail(example1.form_response);
+const example2Res = generateEmail(example2.form_response);
+const example3Res = generateEmail(example3.form_response);
+const example4Res = generateEmail(example4.form_response);
+
+const allExampleRes = [example1Res, example2Res, example3Res, example4Res];
 
 describe("/api/postcode", () => {
   //tests for api route
@@ -17,9 +22,31 @@ describe("/api/postcode", () => {
 
 describe("generateEmail", () => {
   it("should return an object with keys 'body' and 'subject'", () => {
-    expect(generateEmail(example1.form_response)).to.have.keys(
-      "body",
-      "subject"
-    );
+    allExampleRes.forEach((res) => {
+      expect(res).to.have.keys("body", "subject");
+    });
+  });
+  it("response.body should be a string", () => {
+    allExampleRes.forEach((res) => {
+      expect(typeof res.body).to.equal("string");
+    });
+    allExampleRes.forEach((res) => {
+      expect(typeof res.subject).to.equal("string");
+    });
+  });
+  it("response.subject should be a string", () => {
+    allExampleRes.forEach((res) => {
+      expect(typeof res.subject).to.equal("string");
+    });
+  });
+  it("should not include 'COUNTRY_NAME' template variable", () => {
+    allExampleRes.forEach((res) => {
+      expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
+    });
+  });
+  it("should not include '[RELIGION]' template variable", () => {
+    allExampleRes.forEach((res) => {
+      expect(res.body.search(/\[RELIGION\]/)).to.equal(-1);
+    });
   });
 });
