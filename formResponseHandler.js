@@ -4,6 +4,17 @@ const { subject, survey, standard } = require("./emailStrings.json");
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   //this could be replaced with an object to help order the email
   const emailArr = [];
+  const emailObj = {
+    conservative: "",
+    main: "",
+    countryLinks: "",
+    religion: "",
+    motivation: "",
+    meetMp: "",
+    signoff: "",
+    name: "",
+    address: "",
+  };
 
   //these map the question ids from the form onto our json object
   const questionKeys = {
@@ -43,7 +54,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     if (field.id === "EejpFBEzP9wK") {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      synonyms && emailArr.push(getRandomResponse(synonyms));
+      synonyms && (emailObj.conservative = getRandomResponse(synonyms));
     }
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
@@ -55,7 +66,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
           /\[RELIGION\]/g,
           choice.label
         );
-        emailArr.push(sentenceWithReligion);
+        emailObj.religion = sentenceWithReligion;
       }
     }
     //countryLinksHandler
@@ -72,7 +83,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
           /COUNTRY_NAME/g,
           counryNameData.text
         );
-        emailArr.push(sentenceWithCountry);
+        emailObj.countryLinks = sentenceWithCountry;
       }
     }
     //moivations handler
@@ -93,26 +104,26 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const sentenceArr = synoynms.map((ele) => {
         ele && getRandomResponse(ele);
       });
-      emailArr.push(sentenceArr.join(" "));
+      sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
     }
     //name handler
     if (field.id === "daZZA6TwyMP5") {
-      emailArr.push(`Yours sincerely, ${text}`);
+      emailObj.name = `Yours sincerely,\n${text}`;
     }
     //address handler
     if (field.id === "uLPPjjg5B0Bn") {
-      emailArr.push(text);
+      emailObj.address = text;
     }
   });
 
   //adds 'main' content from emailString.Json
-  emailArr.push(getRandomResponse(standard.sentence1));
-  emailArr.push(getRandomResponse(standard.sentence2));
-  emailArr.push(getRandomResponse(standard.sentence3));
+  emailObj.main += getRandomResponse(standard.sentence1);
+  emailObj.main += getRandomResponse(standard.sentence2);
+  emailObj.main += getRandomResponse(standard.sentence3);
 
   const responseData = {
     subject: getRandomResponse(subject),
-    body: emailArr.join(" "),
+    body: Object.values(emailObj).join("\n"),
   };
   return responseData;
 };
