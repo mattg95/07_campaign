@@ -23,50 +23,57 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return inputArr[Math.floor(Math.random() * inputArr.length)];
   };
 
-  const getAnswerSynonyms = (idProp) => {
+  //this gets the index of the answer e.g. in a multiple choice, the first choice is index 0
+  const getAnswerIndex = (idProp) => {
+    let choiceIndex = 0;
     const thisField = fields.find(({ id }) => id === idProp);
     const thisAnswers = answers.find(({ field: { id } }) => id === idProp);
-    let choiceIndex = 0;
     //this gets the synomys array based on the index of the survey multiple choice options-
     thisField.choices.forEach((choice, i) => {
       if (thisAnswers.choice.label === choice.label) {
         choiceIndex = i;
       }
     });
-    if (survey[questionKeys[idProp]][choiceIndex] !== undefined) {
-      return survey[questionKeys[idProp]][choiceIndex];
-    } else {
-      return [];
-    }
+    return choiceIndex;
   };
 
   //this is the 'router' that handles all question responses based on their id
   answers.forEach(({ text, field, choice }) => {
     //conservatives hanlder
     if (field.id === "EejpFBEzP9wK") {
-      emailArr.push(getRandomResponse(getAnswerSynonyms("EejpFBEzP9wK")));
+      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+      synonyms && emailArr.push(getRandomResponse(synonyms));
     }
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
-      const sentence = getRandomResponse(survey.religion);
-      const sentenceWithReligion = sentence.replace(
-        /\[RELIGION\]/g,
-        choice.label
-      );
-      console.log(sentenceWithReligion);
-      emailArr.push(sentenceWithReligion);
+      const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
+      if ([6, 7, 8].includes(choiceIndex)) return;
+      else {
+        const sentence = getRandomResponse(survey.religion);
+        const sentenceWithReligion = sentence.replace(
+          /\[RELIGION\]/g,
+          choice.label
+        );
+        emailArr.push(sentenceWithReligion);
+      }
     }
     //countryLinksHandler
     if (field.id === "Z4awe4sDljLR") {
-      const sentence = getRandomResponse(getAnswerSynonyms("Z4awe4sDljLR"));
-      const counryNameData = answers.find(
-        ({ field: { id } }) => id === "MRPxTl6j1QAw"
-      );
-      const sentenceWithCountry = sentence.replace(
-        /COUNTRY_NAME/g,
-        counryNameData.text
-      );
-      emailArr.push(sentenceWithCountry);
+      const choiceIndex = getAnswerIndex("Z4awe4sDljLR");
+      const synonyms = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
+      if (synonyms === undefined) return;
+      else {
+        const sentence = getRandomResponse(synonyms);
+        const counryNameData = answers.find(
+          ({ field: { id } }) => id === "MRPxTl6j1QAw"
+        );
+        const sentenceWithCountry = sentence.replace(
+          /COUNTRY_NAME/g,
+          counryNameData.text
+        );
+        emailArr.push(sentenceWithCountry);
+      }
     }
     //moivations handler
     if (field.id === "wKGNjgRDml1H") {
