@@ -19,31 +19,41 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+const makeFileName = () => {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < 6; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 app.get("/api/postcode/:postcodeInput", (req, res) => {
   getMpByPostcode(req.params.postcodeInput).then((response) =>
     res.send(response)
   );
 });
 
-let i = 0;
+app.post("/hook", (req, res) => {
+  res.status(200).end(); // Responding is important
+  console.log(req.body);
+  client.emit("create", req.body);
+});
 
+//our webhook is triggered by the post request above
 io.on("connection", (socket) => {
-  // this will be triggered by client sides emitting 'create'
   socket.on("create", (data) => {
-    fs.writeFileSync(`./temp/example${i}.json`, JSON.stringify(data));
-
-    i++;
+    fs.writeFileSync(
+      `./tests/exampleResponses/${makeFileName()}.json`,
+      JSON.stringify(data)
+    );
     io.emit("typeform-incoming", {
       formToken: data.form_response.token,
       generatedEmail: generateEmail(data.form_response),
     });
   });
-});
-
-app.post("/hook", (req, res) => {
-  res.status(200).end(); // Responding is important
-  console.log(req.body);
-  client.emit("create", req.body);
 });
 
 http.listen(port, () =>
