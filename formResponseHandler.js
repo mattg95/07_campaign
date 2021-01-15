@@ -1,5 +1,4 @@
-const e = require("express");
-const { subject, survey, standard } = require("./emailStrings.json");
+const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   //this could be replaced with an object to help order the email
@@ -117,9 +116,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   });
 
   //adds 'main' content from emailString.Json
-  emailObj.main += getRandomResponse(standard.sentence1);
-  emailObj.main += getRandomResponse(standard.sentence2);
-  emailObj.main += getRandomResponse(standard.sentence3);
+  emailObj.main += getRandomResponse(main.sentence1);
+  emailObj.main += getRandomResponse(main.sentence2);
+  emailObj.main += getRandomResponse(main.sentence3);
 
   const responseData = {
     subject: getRandomResponse(subject),
