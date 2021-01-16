@@ -1,0 +1,66 @@
+{
+  "subject": [
+    "Re: Providing 0.7% of GNI as foreign aid",
+    "Re: Disappointing government decision around the 0.7%.",
+    "Re: Sad to see government breaking manifesto promise in spending review."
+  ],
+  "survey": {
+    "conservative": [
+      [
+        "I’m writing to you as a member of the Conservative Party.",
+        "I want to start by letting you know that I’m a member of the Conservative Party",
+        "I really hope it was worth my while becoming a member of the Conservative Party -- maybe it means you will hear me out on this."
+      ],
+      [
+        "I'm writing to you as someone who has been a member of the Conservative Party.",
+        "I want to start by letting you know that I’ve been a member of the Conservative Party."
+      ],
+      [
+        "I’m writing to you as someone who voted for you in the most recent election.",
+        " want to start by letting you know that I voted for you in the most recent election."
+      ]
+    ],
+    "religion": [
+      "I want to add that I am a [RELIGION], and according to my religion it’s not right to forsake the poor. I don’t know about your religious beliefs, but I hope you will reassure me that you will respect that people in your constituency don’t think the government’s decision on this is acceptable",
+      "For [RELIGION] people like me, it feels wrong to let the poor down in their hour of need. I hope you will recognise and respect that there are people of faith in your constituency and let that guide you to make the right decision; I’m hoping you will vote not to let the poor people in this world down. Please vote against the government on this."
+    ],
+    "motivation": [
+      [
+        "As long as any people in the world have COVID, all of us are unsafe.",
+        "n light of the current COVID crisis, it seems really shortsighted to let people anywhere in the world harbour the virus. We need everyone everywhere to have a robust health system if we are all to stay safe."
+      ],
+      [
+        "Both the UN and the World Bank estimate that more than 100 million people will be pushed into extreme poverty -- at this time we need to be giving *more* aid, not less",
+        "Hundreds of millions of people across the world will be pushed into extreme poverty. Now is not the time to let them down"
+      ],
+      [
+        "We have to maintain our aid budget for our political and strategic interests, aligned with the “Global Britain” agenda"
+      ]
+    ],
+    "countryLinks": [
+      [
+        "I was born in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? That’s where I was born and I would like to ensure that support for COUNTRY_NAME is not reduced.",
+        "Can you please make sure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as that’s where I was born."
+      ],
+      [
+        "I have lived in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? I’ve spent part of my life there and I would like to ensure that support for COUNTRY_NAME is not reduced",
+        "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I’ve spent quite a bit of my life there"
+      ]
+    ]
+  },
+
+  "main": {
+    "sentence1": [
+      "I’m disappointed that the government has decided to break its manifesto pledge and decided to no longer provide 0.7% of GNI as foreign aid.",
+      "I think it’s sad that the government has decided to go back on its manifesto pledge and is no longer providing 0.7% of GNI as foreign aid."
+    ],
+    "sentence2": [
+      "The government is arguing that we need to provide less aid because we have less money ourselves, but this doesn’t make sense -- it’s a percentage of GNI, so it will go down automatically anyway.",
+      "I know the government thinks we need to provide less aid because the UK has less money ourselves, but this doesn’t stack up -- it’s a percentage of GDP, so it will go down anyway."
+    ],
+    "sentence3": [
+      "I’m writing to ask you to ensure the government reverses this decision, or at least make absolutely sure it’s temporary.",
+      "Will you please agree to vote for this not to happen? Or at least make absolutely sure that the law is clear that this will be for one year only?"
+    ]
+  }
+}
