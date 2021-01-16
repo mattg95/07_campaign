@@ -8,5 +8,5 @@
 - Run `npm i` (installs server's node modules)
 - Run `npm run install-react` (installs react's node modules)
 - For development, run `npm run dev`. The express server will be avalialble at localhost:5000. The React app will start at localhost:3000.
-- To build, run `npm run build`. This is neccesary before pushing to the heroku hosted demo site
+- To build, run `npm run build`. This is neccesary before pushing to the heroku hosted demo site. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on
 - The demo site can be found at `https://uk-foreign-aid-campaign.herokuapp.com/`
