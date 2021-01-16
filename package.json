@@ -11,14 +11,20 @@
     "react-test": "cd react-app && npm run test",
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "test": "mocha tests/spec.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^1.0.6",
+    "mocha": "^8.2.1",
+    "socket.io": "^3.0.5",
+    "socket.io-client": "^3.0.5"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
