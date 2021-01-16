@@ -12,6 +12,7 @@
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
+    "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-build\"",
     "test": "mocha tests/spec.js"
   },
   "dependencies": {
