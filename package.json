@@ -11,7 +11,7 @@
     "react-test": "cd react-app && npm run test",
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\""
   },
   "dependencies": {
     "axios": "^0.21.1",
