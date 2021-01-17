@@ -31,10 +31,10 @@ const TextBox = ({ responseId }) => {
   return (
     <EdiText
       viewContainerClassName="emailBox"
-      type="text"
+      type="textarea"
       inputProps={{
         placeholder: "your email will appear here", //placeholder isn't working
-        rows: 5,
+        rows: 10,
       }}
       saveButtonContent="Apply"
       cancelButtonContent={<strong>Cancel</strong>}
