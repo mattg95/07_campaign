@@ -27,23 +27,34 @@ const TextBox = ({ responseId }) => {
     };
   }, []);
   console.log(state);
+  function copyToClipboard(text) {
+    const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  }
 
   return (
-    <EdiText
-      viewContainerClassName="emailBox"
-      type="textarea"
-      inputProps={{
-        placeholder: "your email will appear here", //placeholder isn't working
-        rows: 10,
-      }}
-      saveButtonContent="Apply"
-      cancelButtonContent={<strong>Cancel</strong>}
-      editButtonContent="Edit Your Email"
-      value={state.editedRes ? state.editedRes : state.generatedEmail.body} // validates the webhook response token against the response id from the embedded tyeform widget
-      onSave={(val) => {
-        setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
-      }}
-    />
+    <div>
+      <EdiText
+        viewContainerClassName="emailBox"
+        type="textarea"
+        inputProps={{
+          placeholder: "your email will appear here", //placeholder isn't working
+          rows: 10,
+        }}
+        saveButtonContent="Apply"
+        cancelButtonContent={<strong>Cancel</strong>}
+        editButtonContent="Edit Your Email"
+        value={state.editedRes ? state.editedRes : state.generatedEmail.body} // validates the webhook response token against the response id from the embedded tyeform widget
+        onSave={(val) => {
+          setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
+        }}
+      />
+      <button onClick={copyToClipboard(state.editedRes)}>Copy Email</button>
+    </div>
   );
 };
 
