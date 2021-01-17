@@ -1,7 +1,6 @@
 import "./App.scss";
 import { Container, Row, Col } from "react-bootstrap";
 
-import MpForm from "./FindMp";
 import TypeForm from "./TypeForm";
 import TextBox from "./TextBox";
 
@@ -37,13 +36,6 @@ function App() {
           <Col>
             <div className="text-center">
               <TypeForm />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="text-center">
-              <MpForm body="" subject="" />
             </div>
           </Col>
         </Row>
