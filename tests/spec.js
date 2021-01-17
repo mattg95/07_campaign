@@ -1,6 +1,7 @@
 process.env.NODE_ENV = "test";
 const { expect } = require("chai");
 const { generateEmail } = require("../formResponseHandler");
+const { getMpByPostcode } = require("../api-functions");
 const fs = require("fs");
 
 const exampleResponses = [];
@@ -15,7 +16,12 @@ const allGeneratedEmails = exampleResponses.map(({ form_response }) => {
 });
 
 describe("/api/postcode", () => {
-  //tests for api route
+  it("should return expected MP details for DL6 2NJ", async () => {
+    result = await getMpByPostcode("DL6 2NJ");
+    expect(result.full_name).to.equal("Rishi Sunak");
+    expect(result.constituency).to.equal("Richmond (Yorks)");
+    expect(result.party).to.equal('Conservative');
+  });
 });
 
 //how to test webhooks?
