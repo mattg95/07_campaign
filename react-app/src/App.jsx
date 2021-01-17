@@ -40,13 +40,6 @@ function App() {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <div className="text-center">
-              <MpForm body="" subject="" />
-            </div>
-          </Col>
-        </Row>
       </Container>
     </div>
     // Cookie banner here
