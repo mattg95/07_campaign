@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 var http = require("http").createServer(app);
+const crypto = require('crypto');
 const fs = require("fs");
 
 const io = require("socket.io")(http);
@@ -19,16 +20,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const makeFileName = () => {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < 6; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
+const writeDataToExampleResponsesFile = (data) => {
+  // Use hashed answers as filename to avoid generating multiple files containing the same responses.
+  const answersJson = JSON.stringify(data.form_response.answers);
+  const answersHashCode = crypto.createHash('md5').update(answersJson).digest('hex');
+  fs.writeFileSync(`./tests/exampleResponses/${answersHashCode}.json`, JSON.stringify(data));
+}
 
 app.get("/api/postcode/:postcodeInput", (req, res) => {
   getMpByPostcode(req.params.postcodeInput).then((response) =>
@@ -45,10 +42,7 @@ app.post("/hook", (req, res) => {
 //our webhook is triggered by the post request above
 io.on("connection", (socket) => {
   socket.on("create", (data) => {
-    fs.writeFileSync(
-      `./tests/exampleResponses/${makeFileName()}.json`,
-      JSON.stringify(data)
-    );
+    writeDataToExampleResponsesFile(data);
     io.emit("typeform-incoming", {
       formToken: data.form_response.token,
       generatedEmail: generateEmail(data.form_response),
