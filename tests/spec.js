@@ -8,12 +8,14 @@ const exampleResponses = [];
 var normalizedPath = require("path").join(__dirname, "exampleResponses");
 
 fs.readdirSync(normalizedPath).forEach(function (file) {
-  exampleResponses.push(require("./exampleResponses/" + file));
+  exampleResponses.push({ filename: file, json: require("./exampleResponses/" + file) });
 });
 
-const allGeneratedEmails = exampleResponses.map(({ form_response }) => {
-  return generateEmail(form_response);
+const allGeneratedResults = exampleResponses.map(({ filename: file, json: { form_response }}) => {
+  return { filename: file, email: generateEmail(form_response) };
 });
+
+const allGeneratedEmails = allGeneratedResults.map(result => result.email);
 
 describe("/api/postcode", () => {
   it("should return expected MP details for DL6 2NJ", async () => {
@@ -69,9 +71,9 @@ describe("generateEmail", () => {
       expect(res.body.search(/athiest/)).to.equal(-1);
     });
   });
-  it("should not include the 'newline' character", () => {
-    allGeneratedEmails.forEach((res) => {
-      expect(res.body.search(/\n/)).to.equal(-1);
+  it("should not include escaped 'newline' characters", () => {
+    allGeneratedResults.forEach((res) => {
+      expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
     });
   });
 });
