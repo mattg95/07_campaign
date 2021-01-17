@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "start": "node server.js",
-  "heroku-postbuild": "cd react-app && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+  "heroku-postbuild": "cd react-app && npm install --only=dev --no-shrinkwrap && npm run react-build",
   "scripts": {
     "install-react": "cd react-app && npm install",
     "react-start": "cd react-app && npm start",
@@ -12,7 +12,6 @@
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
-    "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-build\"",
     "test": "mocha tests/spec.js"
   },
   "dependencies": {
