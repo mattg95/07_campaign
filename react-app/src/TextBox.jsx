@@ -3,6 +3,8 @@ import socketIOClient from "socket.io-client";
 
 import EdiText from "react-editext";
 
+import MpForm from "./FindMp";
+
 const socket = socketIOClient();
 
 const TextBox = ({ responseId }) => {
@@ -53,7 +55,16 @@ const TextBox = ({ responseId }) => {
           setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
         }}
       />
-      <button onClick={copyToClipboard(state.editedRes)}>Copy Email</button>
+      <button onClick={copyToClipboard(state.generatedEmail.body)}>
+        Copy Email
+      </button>
+
+      <div className="text-center">
+        <MpForm
+          body={state.generatedEmail.body}
+          subject={state.generatedEmail.subject}
+        />
+      </div>
     </div>
   );
 };
