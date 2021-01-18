@@ -2,8 +2,8 @@ import React from "react";
 
 const DisplayMp = ({
   data: { constituency, full_name, party, name },
-  body,
-  subject,
+  body = "",
+  subject = "",
 }) => {
   const createMpEmail = () => {
     const mpName = full_name ? full_name : name;
