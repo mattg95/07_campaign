@@ -24,7 +24,9 @@ const writeDataToExampleResponsesFile = (data) => {
   // Use hashed answers as filename to avoid generating multiple files containing the same responses.
   const answersJson = JSON.stringify(data.form_response.answers);
   const answersHashCode = crypto.createHash('md5').update(answersJson).digest('hex');
-  fs.writeFileSync(`./tests/exampleResponses/${answersHashCode}.json`, JSON.stringify(data));
+  const filePath = `./tests/exampleResponses/${answersHashCode}.json`;
+  fs.writeFileSync(filePath, JSON.stringify(data));
+  console.log('Wrote form data to', filePath);
 }
 
 app.get("/api/postcode/:postcodeInput", (req, res) => {
@@ -42,7 +44,9 @@ app.post("/hook", (req, res) => {
 //our webhook is triggered by the post request above
 io.on("connection", (socket) => {
   socket.on("create", (data) => {
-    writeDataToExampleResponsesFile(data);
+    if (app.settings.env === "development") {
+      writeDataToExampleResponsesFile(data);
+    }
     io.emit("typeform-incoming", {
       formToken: data.form_response.token,
       generatedEmail: generateEmail(data.form_response),
