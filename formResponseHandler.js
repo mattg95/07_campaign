@@ -2,8 +2,10 @@ const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   //this could be replaced with an object to help order the email
+  const supportsAid = true;
+
   const emailObj = {
-    supportsAid: true,
+    supportsAid: "",
     conservative: "",
     main: "",
     countryLinks: "",
@@ -51,7 +53,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
       if (choice.label === "No") {
-        emailObj.supportsAid = false;
+        supportsAid = false;
       }
     }
     if (field.id === "EejpFBEzP9wK") {
@@ -125,8 +127,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   emailObj.main += getRandomResponse(main.sentence2);
   emailObj.main += getRandomResponse(main.sentence3);
   const responseData = {
-    subject: emailObj.supportsAid ? getRandomResponse(subject) : "",
-    body: emailObj.supportsAid ? Object.values(emailObj).join("\n") : "",
+    subject: supportsAid ? getRandomResponse(subject) : "",
+    body: supportsAid ? Object.values(emailObj).join("\n") : "",
   };
   return responseData;
 };
