@@ -1,8 +1,7 @@
 const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
-  //this could be replaced with an object to help order the email
-  const supportsAid = true;
+  let supportsAid = true;
 
   const emailObj = {
     supportsAid: "",
