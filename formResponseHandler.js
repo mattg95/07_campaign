@@ -50,7 +50,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   //this is the 'router' that handles all question responses based on their id
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
-      emailObj.supportsAid = false;
+      if (choice.label === "No") {
+        emailObj.supportsAid = false;
+      }
     }
     if (field.id === "EejpFBEzP9wK") {
       //conservatives hanlder
@@ -122,7 +124,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   emailObj.main += getRandomResponse(main.sentence1);
   emailObj.main += getRandomResponse(main.sentence2);
   emailObj.main += getRandomResponse(main.sentence3);
-
   const responseData = {
     subject: emailObj.supportsAid ? getRandomResponse(subject) : "",
     body: emailObj.supportsAid ? Object.values(emailObj).join("\n") : "",
