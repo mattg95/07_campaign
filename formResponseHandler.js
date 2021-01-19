@@ -47,72 +47,81 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return choiceIndex;
   };
 
+  const conservativeHandler = (id) => {
+    const choiceIndex = getAnswerIndex(id);
+    const synonyms = survey[questionKeys[id]][choiceIndex];
+    return synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+  };
+
+  const religionHandler = (id, choice) => {
+    const choiceIndex = getAnswerIndex(id);
+    if ([6, 7, 8].includes(choiceIndex)) return;
+    else {
+      const sentence = getRandomResponse(survey.religion);
+      const sentenceWithReligion = sentence.replace(
+        /\[RELIGION\]/g,
+        choice.label
+      );
+      return (emailObj.religion = sentenceWithReligion);
+    }
+  };
+
+  const countryLinksHandler = (id) => {
+    const choiceIndex = getAnswerIndex(id);
+    const synonyms = survey[questionKeys[id]][choiceIndex];
+    if (synonyms === undefined) return;
+    else {
+      const sentence = getRandomResponse(synonyms);
+      const counryNameData = answers.find(
+        ({ field: { id } }) => id === "MRPxTl6j1QAw"
+      );
+      const sentenceWithCountry = sentence.replace(
+        /COUNTRY_NAME/g,
+        counryNameData.text
+      );
+      return (emailObj.countryLinks = sentenceWithCountry);
+    }
+  };
+
+  const motivationsHandler = (thisId) => {
+    const thisField = fields.find(({ id }) => id === thisId);
+    const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
+    let choiceIndex = [];
+    //this gets the synomys array based on the index of the survey multiple choice-
+    thisField.choices.forEach((choice, i) => {
+      if (thisAnswers.choices.labels.includes(choice.label)) {
+        choiceIndex.push(i);
+      }
+    });
+    const synoynms = choiceIndex.map((ele) => {
+      return survey[questionKeys[thisId]][ele];
+    });
+    const sentenceArr = synoynms.map((ele) => {
+      ele && getRandomResponse(ele);
+    });
+    return sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
+  };
+
   //this is the 'router' that handles all question responses based on their id
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
       emailObj.supportsAid = false;
     }
     if (field.id === "EejpFBEzP9wK") {
-      //conservatives hanlder
-      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+      conservativeHandler("EejpFBEzP9wK");
     }
-    //religion handler
     if (field.id === "IdqRPd6SUMVh") {
-      const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
-      if ([6, 7, 8].includes(choiceIndex)) return;
-      else {
-        const sentence = getRandomResponse(survey.religion);
-        const sentenceWithReligion = sentence.replace(
-          /\[RELIGION\]/g,
-          choice.label
-        );
-        emailObj.religion = sentenceWithReligion;
-      }
+      religionHandler("IdqRPd6SUMVh", choice);
     }
-    //countryLinksHandler
     if (field.id === "Z4awe4sDljLR") {
-      const choiceIndex = getAnswerIndex("Z4awe4sDljLR");
-      const synonyms = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
-      if (synonyms === undefined) return;
-      else {
-        const sentence = getRandomResponse(synonyms);
-        const counryNameData = answers.find(
-          ({ field: { id } }) => id === "MRPxTl6j1QAw"
-        );
-        const sentenceWithCountry = sentence.replace(
-          /COUNTRY_NAME/g,
-          counryNameData.text
-        );
-        emailObj.countryLinks = sentenceWithCountry;
-      }
+      countryLinksHandler("Z4awe4sDljLR");
     }
-    //moivations handler
     if (field.id === "wKGNjgRDml1H") {
-      const thisId = "wKGNjgRDml1H";
-      const thisField = fields.find(({ id }) => id === thisId);
-      const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
-      let choiceIndex = [];
-      //this gets the synomys array based on the index of the survey multiple choice-
-      thisField.choices.forEach((choice, i) => {
-        if (thisAnswers.choices.labels.includes(choice.label)) {
-          choiceIndex.push(i);
-        }
-      });
-      const synoynms = choiceIndex.map((ele) => {
-        return survey[questionKeys[thisId]][ele];
-      });
-      const sentenceArr = synoynms.map((ele) => {
-        ele && getRandomResponse(ele);
-      });
-      sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
+      motivationsHandler("wKGNjgRDml1H");
     }
-    //name handler
     if (field.id === "daZZA6TwyMP5") {
       emailObj.name = `Yours sincerely,\n${text}`;
     }
-    //address handler
     if (field.id === "uLPPjjg5B0Bn") {
       emailObj.address = text;
     }
