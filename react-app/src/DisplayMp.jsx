@@ -9,6 +9,10 @@ const DisplayMp = ({
     const mpName = full_name ? full_name : name;
     return mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk";
   };
+  const createEmailBody = () => {
+    const mpName = full_name ? full_name : name;
+    return `Dear ${mpName},\n${Object.values(body).join("")}`;
+  };
   return (
     <div className="mpCard">
       <div>{constituency}</div>
@@ -23,7 +27,7 @@ const DisplayMp = ({
           "?Subject=" +
           encodeURIComponent(subject) +
           "&Body=" +
-          encodeURIComponent(Object.values(body).join(""))
+          encodeURIComponent(createEmailBody())
         }
         className="btn btn-primary"
       >
