@@ -23,6 +23,8 @@ const allGeneratedResults = exampleResponses.map(
   }
 );
 
+const allGeneratedEmails = allGeneratedResults.map((result) => result.email);
+
 const allPositiveResponses = exampleResponses.filter(
   ({ json: { form_response } }) => {
     let supportsAid = true;
@@ -43,14 +45,24 @@ const allPositiveEmails = allPositiveResponses.map(
   }
 );
 
-const allGeneratedEmails = allGeneratedResults.map((result) => result.email);
-
 describe("/api/postcode", () => {
   it("should return expected MP details for DL6 2NJ", async () => {
     result = await getMpByPostcode("DL6 2NJ");
     expect(result.full_name).to.equal("Rishi Sunak");
     expect(result.constituency).to.equal("Richmond (Yorks)");
     expect(result.party).to.equal("Conservative");
+  });
+  it("should return expected MP details for s6 2PN", async () => {
+    result = await getMpByPostcode("s6 2pn");
+    expect(result.full_name).to.equal("Paul Blomfield");
+    expect(result.constituency).to.equal("Sheffield Central");
+    expect(result.party).to.equal("Labour");
+  });
+  it("should correctly handle errors for an invalid postcode", async () => {
+    result = await getMpByPostcode("marmite");
+    expect(result.error).to.equal("invalid postcode");
+    secondResult = await getMpByPostcode("S62 2PB");
+    expect(secondResult.error).to.equal("invalid postcode");
   });
 });
 
