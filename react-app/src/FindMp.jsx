@@ -35,6 +35,7 @@ const MpForm = ({ body, subject }) => {
 
   return (
     <div>
+      <h2 className="secondary-header">3. Find Your Mp</h2>
       <Formik
         initialValues={{ postcode: "" }}
         validate={handleValidation}
