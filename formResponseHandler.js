@@ -30,6 +30,16 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     daZZA6TwyMP5: "name",
   };
 
+  const religions = [
+    { adj: "Christian", noun: "Christian" },
+    { adj: "Muslim", noun: "Muslim" },
+    { adj: "Hindu", noun: "Hindu" },
+    { adj: "Sikh", noun: "Sikh" },
+    { adj: "Jewish", noun: "Jew" },
+    { adj: "Buddhist", noun: "Buddhist" },
+    { adj: "religious", noun: "person of faith" },
+  ];
+
   const getRandomResponse = (inputArr) => {
     return inputArr[Math.floor(Math.random() * inputArr.length)];
   };
@@ -64,14 +74,14 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
-      if ([6, 7, 8].includes(choiceIndex)) return;
+      if ([7, 8].includes(choiceIndex)) return;
       else {
-        const sentence = getRandomResponse(survey.religion);
-        const sentenceWithReligion = sentence.replace(
-          /\[RELIGION\]/g,
-          choice.label
-        );
-        emailObj.religion = sentenceWithReligion;
+        const { adj, noun } = religions[choiceIndex];
+        let sentence = getRandomResponse(survey.religion);
+        sentence = sentence
+          .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, noun)
+          .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, adj);
+        emailObj.religion = sentence;
       }
     }
     //countryLinksHandler
