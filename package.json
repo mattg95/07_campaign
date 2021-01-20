@@ -12,7 +12,9 @@
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
-    "test": "mocha tests/spec.js"
+    "test": "mocha tests/spec.js",
+    "test-email": "npm test -- --grep generateEmail",
+    "test-postcode": "npm test -- --grep /api/postcode"
   },
   "dependencies": {
     "axios": "^0.21.1",
