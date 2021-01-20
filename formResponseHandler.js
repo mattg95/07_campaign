@@ -1,3 +1,4 @@
+const { getMpByPostcode } = require("./api-functions");
 const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
@@ -27,6 +28,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     vdZgYVyiLE13: "meetMp",
     ghzBmQTQ2npF: "emailAddress",
     uLPPjjg5B0Bn: "homeAddress",
+    hgdzZ05GxSAs: "postcode",
     daZZA6TwyMP5: "name",
   };
 
@@ -67,10 +69,17 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     if (field.id === "EejpFBEzP9wK") {
       //conservatives hanlder
-      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+      const postcode = answers.find(
+        ({ field: { id } }) => id === "hgdzZ05GxSAs"
+      );
+      const mp = getMpByPostcode(postcode.text);
+      if (mp.party === "Convservative") {
+        const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+        const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+        synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+      }
     }
+
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
