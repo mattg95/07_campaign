@@ -23,6 +23,6 @@ exports.getMpByPostcode = (postcode) => {
       }
     })
     .catch(() => {
-      return { error: "invalid postcode" };
+      return { error: "Could not retrieve MP" };
     });
 };
