@@ -40,31 +40,35 @@ const TextBox = ({ responseId }) => {
 
   return (
     <div>
-      <EdiText
-        viewContainerClassName="emailBox"
-        type="textarea"
-        inputProps={{
-          placeholder: "your email will appear here", //placeholder isn't working
-          rows: 10,
-        }}
-        saveButtonContent="Apply"
-        cancelButtonContent={<strong>Cancel</strong>}
-        editButtonContent="Edit Your Email"
-        value={state.editedRes ? state.editedRes : state.generatedEmail.body} // validates the webhook response token against the response id from the embedded tyeform widget
-        onSave={(val) => {
-          setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
-        }}
-      />
-      <button onClick={copyToClipboard(state.generatedEmail.body)}>
-        Copy Email
-      </button>
-
-      <div className="text-center">
-        <MpForm
-          body={state.generatedEmail.body}
-          subject={state.generatedEmail.subject}
+      {/* {Object.keys(state.generatedEmail).length !== 0 && ( */}
+      <div>
+        <h2 className="secondary-header">2.Edit your email</h2>
+        <EdiText
+          viewContainerClassName="emailBox"
+          type="textarea"
+          inputProps={{
+            placeholder: "your email will appear here", //placeholder isn't working
+            rows: 10,
+          }}
+          saveButtonContent="Apply"
+          cancelButtonContent={<strong>Cancel</strong>}
+          editButtonContent="Edit Your Email"
+          value={state.editedRes ? state.editedRes : state.generatedEmail.body} // validates the webhook response token against the response id from the embedded tyeform widget
+          onSave={(val) => {
+            setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
+          }}
         />
+        <button onClick={copyToClipboard(state.generatedEmail.body)}>
+          Copy Email
+        </button>
+        <div className="text-center">
+          <MpForm
+            body={state.generatedEmail.body}
+            subject={state.generatedEmail.subject}
+          />
+        </div>
       </div>
+      {/* )} */}
     </div>
   );
 };
