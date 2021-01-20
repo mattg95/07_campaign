@@ -7,6 +7,14 @@ const fs = require("fs");
 const exampleNegativeResult = require("./exampleResponses/8266dd221cf80375e6716f715ab41db2.json");
 const exampleNegativeEmail = generateEmail(exampleNegativeResult.form_response);
 
+const exampleJewishResponse = require("./exampleResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
+const exampleJewishEmail = generateEmail(exampleJewishResponse.form_response);
+
+const exampleOtherReligionResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
+const exampleOtherReligionEmail = generateEmail(
+  exampleOtherReligionResponse.form_response
+);
+
 const exampleResponses = [];
 var normalizedPath = require("path").join(__dirname, "exampleResponses");
 
@@ -95,10 +103,26 @@ describe("generateEmail", () => {
       expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
     });
   });
-  it("should not include '[RELIGION]' template variable", () => {
+  it("should not include the string 'undefined' anywhere in the email", () => {
     allGeneratedEmails.forEach((res) => {
-      expect(res.body.search(/\[RELIGION\]/)).to.equal(-1);
+      expect(res.body.search("undefined")).to.equal(-1);
     });
+  });
+  it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
+    allGeneratedEmails.forEach((res) => {
+      expect(res.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(-1);
+      expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
+    });
+  });
+  it("should include references to a user's religion when a user has one", () => {
+    expect([
+      exampleJewishEmail.body.search(/Jew/),
+      exampleJewishEmail.body.search(/Jewish/),
+    ]).to.not.eql([-1, -1]);
+    expect([
+      exampleOtherReligionEmail.body.search(/religious/),
+      exampleOtherReligionEmail.body.search(/person of faith/),
+    ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
     allGeneratedEmails.forEach((res) => {
