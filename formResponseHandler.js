@@ -1,9 +1,10 @@
 const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
-  //this could be replaced with an object to help order the email
-  const emailArr = [];
+  let supportsAid = true;
+
   const emailObj = {
+    supportsAid: "",
     conservative: "",
     main: "",
     countryLinks: "",
@@ -29,6 +30,16 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     daZZA6TwyMP5: "name",
   };
 
+  const religions = [
+    { adj: "Christian", noun: "Christian" },
+    { adj: "Muslim", noun: "Muslim" },
+    { adj: "Hindu", noun: "Hindu" },
+    { adj: "Sikh", noun: "Sikh" },
+    { adj: "Jewish", noun: "Jew" },
+    { adj: "Buddhist", noun: "Buddhist" },
+    { adj: "religious", noun: "person of faith" },
+  ];
+
   const getRandomResponse = (inputArr) => {
     return inputArr[Math.floor(Math.random() * inputArr.length)];
   };
@@ -49,8 +60,13 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
 
   //this is the 'router' that handles all question responses based on their id
   answers.forEach(({ text, field, choice }) => {
-    //conservatives hanlder
+    if (field.id === "gil6UCe4dG9T") {
+      if (choice.label === "No") {
+        supportsAid = false;
+      }
+    }
     if (field.id === "EejpFBEzP9wK") {
+      //conservatives hanlder
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
       synonyms && (emailObj.conservative = getRandomResponse(synonyms));
@@ -58,14 +74,14 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
-      if ([6, 7, 8].includes(choiceIndex)) return;
+      if ([7, 8].includes(choiceIndex)) return;
       else {
-        const sentence = getRandomResponse(survey.religion);
-        const sentenceWithReligion = sentence.replace(
-          /\[RELIGION\]/g,
-          choice.label
-        );
-        emailObj.religion = sentenceWithReligion;
+        const { adj, noun } = religions[choiceIndex];
+        let sentence = getRandomResponse(survey.religion);
+        sentence = sentence
+          .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, noun)
+          .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, adj);
+        emailObj.religion = sentence;
       }
     }
     //countryLinksHandler
@@ -119,10 +135,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   emailObj.main += getRandomResponse(main.sentence1);
   emailObj.main += getRandomResponse(main.sentence2);
   emailObj.main += getRandomResponse(main.sentence3);
-
   const responseData = {
-    subject: getRandomResponse(subject),
-    body: Object.values(emailObj).join("\n"),
+    subject: supportsAid ? getRandomResponse(subject) : "",
+    body: supportsAid ? Object.values(emailObj).join("\n") : "",
   };
   return responseData;
 };
