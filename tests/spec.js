@@ -109,13 +109,15 @@ describe("generateEmail", () => {
       expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
     });
   });
-  it("should not include references to a user's religion when a user has one", () => {
-    expect(exampleJewishEmail.body.search(/Jew/)).to.not.equal(-1);
-    expect(exampleJewishEmail.body.search(/Jewish/)).to.not.equal(-1);
-    expect(exampleOtherReligionEmail.body.search(/religious/)).to.not.equal(-1);
-    expect(
-      exampleOtherReligionEmail.body.search(/person of faith/)
-    ).to.not.equal(-1);
+  it("should include references to a user's religion when a user has one", () => {
+    expect([
+      exampleJewishEmail.body.search(/Jew/),
+      exampleJewishEmail.body.search(/Jewish/),
+    ]).to.not.equal([-1, -1]);
+    expect([
+      exampleOtherReligionEmail.body.search(/religious/),
+      exampleOtherReligionEmail.body.search(/person of faith/),
+    ]).to.not.equal([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
     allGeneratedEmails.forEach((res) => {
