@@ -14,12 +14,18 @@ const DisplayMp = ({
     return `Dear ${mpName},\n${Object.values(body).join("")}`;
   };
   return (
-    <div className="mpCard">
-      <div>{constituency}</div>
-      <div>{name}</div>
-      <div>{full_name}</div>
-      <div>{party}</div>
-      <div> {createMpEmail()}</div>
+    <div>
+      <div className="mpCard">
+        <div>{constituency}</div>
+        <div>{name}</div>
+        <div>{full_name}</div>
+        <div>{party}</div>
+        <div> {createMpEmail()}</div>
+      </div>
+      <h2 className="secondary-header">4. Send your email</h2>
+      <p className="explanation">
+        This will open your email service in a different tab
+      </p>
       <a
         href={
           "mailto:" +
@@ -29,7 +35,8 @@ const DisplayMp = ({
           "&Body=" +
           encodeURIComponent(createEmailBody())
         }
-        className="btn btn-primary"
+        className="btn btn-primary send-email-button"
+        target="_blank"
       >
         SEND EMAIL
       </a>
