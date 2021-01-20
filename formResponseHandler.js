@@ -76,11 +76,11 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
       if ([7, 8].includes(choiceIndex)) return;
       else {
-        const { religionAdj, religionNoun } = religions[choiceIndex];
+        const { adj, noun } = religions[choiceIndex];
         let sentence = getRandomResponse(survey.religion);
         sentence = sentence
-          .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, religionNoun)
-          .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, religionAdj);
+          .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, noun)
+          .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, adj);
         emailObj.religion = sentence;
       }
     }
