@@ -1,10 +1,56 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-body,
-html {
-  margin: 20px 0 20px 0;
+.App {
+  scroll-behavior: smooth;
+  background-color: rgb(236, 127, 114, 0.1);
+}
+
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+.arrow-down {
+  margin-top: 20px;
+  width: 30px;
+  length: 30px;
+}
+h1,
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  color: #121482;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  color: #484848;
+}
+h1.title {
+  font-size: 5rem;
+  line-height: 10rem;
+}
+
+h2.secondary-header {
+  font-size: 3rem;
+  line-height: 6rem;
+}
+
+p.intro-para,
+p.explanation {
+  font-size: 1.5rem;
+  line-height: 3rem;
+  margin-bottom: 40px;
 }
 .surveyQuestions {
   label {
@@ -24,12 +70,11 @@ html {
 }
 
 .emailBox {
-  margin: 30px 0;
   textarea,
   div[editext="view"] {
     border: 1px solid grey;
     margin: 15px 0;
-    padding: 15px;
+    padding: 20px;
   }
   button {
     margin: auto;
@@ -37,7 +82,11 @@ html {
 }
 
 .typeform-widget {
-  height: 500px;
+  height: 100vh;
+  margin-bottom: 40px;
+  &.closed {
+    height: 0vh;
+  }
 }
 
 //for pop ups
