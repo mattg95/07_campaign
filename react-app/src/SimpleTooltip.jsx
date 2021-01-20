@@ -6,14 +6,19 @@ import "reactjs-popup/dist/index.css";
 //
 
 const SimpleTooltip = ({ message }) => {
-  function copyToClipboard(text) {
-    const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-  }
+  const copyToClipboard = (message) => {
+    console.log(message);
+    // let text = "";
+    // text = message.editedRes ? message.editedRes : message.generatedEmail.body;
+    // const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
+    // el.value = text;
+    // document.body.appendChild(el);
+    // el.select();
+    // el.setSelectionRange(0, 99999); /* For mobile devices */
+    // document.execCommand("copy");
+    // document.body.removeChild(el);
+    // setState({ ...state, copied: true });
+  };
   return (
     {
       message,
