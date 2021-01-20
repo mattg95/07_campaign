@@ -29,7 +29,14 @@ const TextBox = ({ responseId }) => {
     };
   }, []);
   console.log(state);
-  function copyToClipboard(text) {
+  function copyToClipboard() {
+    var text = "";
+    if (typeof state.editedRes !== "undefined") {
+      text = state.editedRes;
+    } else {
+      text = state.generatedEmail.body;
+      console.log("edit undefined");
+    }
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = text;
     document.body.appendChild(el);
@@ -58,9 +65,7 @@ const TextBox = ({ responseId }) => {
             setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
-        <button onClick={copyToClipboard(state.generatedEmail.body)}>
-          Copy Email
-        </button>
+        <button onClick={copyToClipboard()}>Copy Email</button>
         <div className="text-center">
           <MpForm
             body={state.generatedEmail.body}
