@@ -35,7 +35,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     { adj: "Muslim", noun: "Muslim" },
     { adj: "Hindu", noun: "Hindu" },
     { adj: "Sikh", noun: "Sikh" },
-    { adj: "Jew", noun: "Jewish" },
+    { adj: "Jewish", noun: "Jew" },
     { adj: "Buddhist", noun: "Buddhist" },
     { adj: "religious", noun: "person of faith" },
   ];
@@ -76,14 +76,12 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
       if ([7, 8].includes(choiceIndex)) return;
       else {
-        const religionAdj = religions[choiceIndex].adj;
-        const religionNoun = religions[choiceIndex].noun;
-        console.log(religionNoun);
-        const sentence = getRandomResponse(survey.religion);
-        const sentenceWithReligion = sentence
+        const { religionAdj, religionNoun } = religions[choiceIndex];
+        let sentence = getRandomResponse(survey.religion);
+        sentence = sentence
           .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, religionNoun)
           .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, religionAdj);
-        emailObj.religion = sentenceWithReligion;
+        emailObj.religion = sentence;
       }
     }
     //countryLinksHandler
