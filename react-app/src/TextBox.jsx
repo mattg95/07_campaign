@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-
 import EdiText from "react-editext";
 
 import MpForm from "./FindMp";
+import SimpleTooltip from "./SimpleTooltip";
 
 const socket = socketIOClient();
 
@@ -29,11 +29,14 @@ const TextBox = ({ responseId }) => {
     };
   }, []);
   console.log(state);
+  // console.log(state.editedRes);
   function copyToClipboard(text) {
+    console.log(text, "----");
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = text;
     document.body.appendChild(el);
     el.select();
+    el.setSelectionRange(0, 99999); /* For mobile devices */
     document.execCommand("copy");
     document.body.removeChild(el);
   }
@@ -55,9 +58,9 @@ const TextBox = ({ responseId }) => {
           setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
         }}
       />
-      <button onClick={copyToClipboard(state.generatedEmail.body)}>
-        Copy Email
-      </button>
+      {console.log(state.editedRes, "+++")}
+      <button onClick={copyToClipboard(state.editedRes)}>Copy Email</button>
+      <SimpleTooltip message={state.editedRes} />
 
       <div className="text-center">
         <MpForm
