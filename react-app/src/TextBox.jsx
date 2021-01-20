@@ -12,6 +12,7 @@ const TextBox = ({ responseId }) => {
   const [state, setState] = useState({
     formToken: "", //the form token comes from the webhook response
     editedRes: "",
+    copied: false,
     generatedEmail: {},
   });
 
@@ -28,22 +29,18 @@ const TextBox = ({ responseId }) => {
       isMounted = false;
     };
   }, []);
-  console.log(state);
-  function copyToClipboard() {
-    var text = "";
-    if (typeof state.editedRes !== "undefined") {
-      text = state.editedRes;
-    } else {
-      text = state.generatedEmail.body;
-      console.log("edit undefined");
-    }
+
+  const copyToClipboard = () => {
+    let text = "";
+    text = state.editedRes ? state.editedRes : state.generatedEmail.body;
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = text;
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
-  }
+    setState({ ...state, copied: true });
+  };
 
   return (
     <div>
@@ -65,7 +62,10 @@ const TextBox = ({ responseId }) => {
             setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
-        <button onClick={copyToClipboard()}>Copy Email</button>
+        <button onClick={() => copyToClipboard()}>
+          Copy Email to Clipboard
+        </button>
+        <span>{state.copied && "Copied to clipboard"}</span>
         <div className="text-center">
           <MpForm
             body={state.generatedEmail.body}
