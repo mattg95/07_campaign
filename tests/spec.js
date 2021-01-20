@@ -103,6 +103,11 @@ describe("generateEmail", () => {
       expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
     });
   });
+  it("should not include the string 'undefined' anywhere in the email", () => {
+    allGeneratedEmails.forEach((res) => {
+      expect(res.body.search("undefined")).to.equal(-1);
+    });
+  });
   it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
     allGeneratedEmails.forEach((res) => {
       expect(res.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(-1);
@@ -113,11 +118,11 @@ describe("generateEmail", () => {
     expect([
       exampleJewishEmail.body.search(/Jew/),
       exampleJewishEmail.body.search(/Jewish/),
-    ]).to.not.equal([-1, -1]);
+    ]).to.not.eql([-1, -1]);
     expect([
       exampleOtherReligionEmail.body.search(/religious/),
       exampleOtherReligionEmail.body.search(/person of faith/),
-    ]).to.not.equal([-1, -1]);
+    ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
     allGeneratedEmails.forEach((res) => {
