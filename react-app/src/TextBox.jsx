@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-
 import EdiText from "react-editext";
+
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 import MpForm from "./FindMp";
 
@@ -30,17 +32,19 @@ const TextBox = ({ responseId }) => {
     };
   }, []);
 
-  const copyToClipboard = () => {
+  function copyToClipboard() {
+    console.log("ran");
     let text = "";
     text = state.editedRes ? state.editedRes : state.generatedEmail.body;
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = text;
     document.body.appendChild(el);
     el.select();
+    el.setSelectionRange(0, 99999); /* For mobile devices */
     document.execCommand("copy");
     document.body.removeChild(el);
     setState({ ...state, copied: true });
-  };
+  }
 
   return (
     <div>
@@ -62,10 +66,16 @@ const TextBox = ({ responseId }) => {
             setState({ ...state, editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
-        <button onClick={() => copyToClipboard()}>
-          Copy Email to Clipboard
-        </button>
-        <span>{state.copied && "Copied to clipboard"}</span>
+
+        <Popup
+          trigger={(open) => <button className="button">Copy</button>}
+          position="right center"
+          closeOnDocumentClick
+          onOpen={copyToClipboard}
+        >
+          <span> Copied to clipboard </span>
+        </Popup>
+
         <div className="text-center">
           <MpForm
             body={state.generatedEmail.body}
