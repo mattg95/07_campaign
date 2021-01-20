@@ -68,9 +68,9 @@ describe("/api/postcode", () => {
   });
   it("should correctly handle errors for an invalid postcode", async () => {
     result = await getMpByPostcode("marmite");
-    expect(result.error).to.equal("invalid postcode");
+    expect(result.error).to.equal("Could not retrieve MP");
     secondResult = await getMpByPostcode("S62 2PB");
-    expect(secondResult.error).to.equal("invalid postcode");
+    expect(secondResult.error).to.equal("Could not retrieve MP");
   });
 });
 
