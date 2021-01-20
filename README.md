@@ -32,7 +32,7 @@ Your terminal should present you with two urls in the form:
 
 # Tests
 
-The back-end features tests made using Mocha and Chai. To run the tests, run `npm run test`
+The back-end features tests made using Mocha and Chai. To run all the tests, run `npm run test`. This calls any APIs used in the project, which can use API call limits quickly. To run tests specifically on the random email generator, run `npm run test-email`. To run tests specifically on the They Work for You API, run `npm run test-postcode`
 
 # Build
 
