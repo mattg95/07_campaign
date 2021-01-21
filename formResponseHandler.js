@@ -59,8 +59,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     });
     return choiceIndex;
   };
-
   //this is the 'router' that handles all question responses based on their id
+
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
       if (choice.label === "No") {
@@ -72,13 +72,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const postcode = answers.find(
         ({ field: { id } }) => id === "hgdzZ05GxSAs"
       );
-      console.log(postcode);
-      // const mp = getMpByPostcode(postcode.text);
-      // if (mp.party === "Convservative") {
-      //   const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      //   const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      //   synonyms && (emailObj.conservative = getRandomResponse(synonyms));
-      //}
+      return getMpByPostcode(postcode.text).then((mp) => {
+        if (mp.party === "Conservative") {
+          const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+          const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+          if (synonyms.length > 0) {
+            emailObj.conservative = getRandomResponse(synonyms);
+          }
+        }
+      });
     }
 
     //religion handler
@@ -101,12 +103,12 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       if (synonyms === undefined) return;
       else {
         const sentence = getRandomResponse(synonyms);
-        const counryNameData = answers.find(
+        const countryNameData = answers.find(
           ({ field: { id } }) => id === "MRPxTl6j1QAw"
         );
         const sentenceWithCountry = sentence.replace(
           /COUNTRY_NAME/g,
-          counryNameData.text
+          countryNameData.text
         );
         emailObj.countryLinks = sentenceWithCountry;
       }
@@ -140,7 +142,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailObj.address = text;
     }
   });
-
+  console.log(emailObj);
   //adds 'main' content from emailString.Json
   emailObj.main += getRandomResponse(main.sentence1);
   emailObj.main += getRandomResponse(main.sentence2);

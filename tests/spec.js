@@ -26,14 +26,16 @@ fs.readdirSync(normalizedPath).forEach(function (file) {
   });
 });
 
-const getAllEmails = () => {
-  const allGeneratedResults = exampleResponses.map(
-    ({ filename: file, json: { form_response } }) => {
-      return { filename: file, email: generateEmail(form_response) };
-    }
-  );
-  return allGeneratedResults.map((result) => result.email);
+const getAllResults = () => {
+  return exampleResponses.map(({ filename: file, json: { form_response } }) => {
+    return { filename: file, email: generateEmail(form_response) };
+  });
 };
+
+const getAllEmails = () => {
+  return getAllResults().map((result) => result.email);
+};
+
 const getAllPostiveEmails = () => {
   const allPositiveResponses = exampleResponses.filter(
     ({ json: { form_response } }) => {
@@ -144,12 +146,11 @@ describe("generateEmail", () => {
       expect(res.body.search(/athiest/)).to.equal(-1);
     });
   });
-  // it("should not include escaped 'newline' characters", () => {
-  //   allGeneratedResults.forEach((res) => {
-  //     console.log(res.email.body);
-  //     expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
-  //   });
-  // });
+  it("should not include escaped 'newline' characters", () => {
+    getAllResults().forEach((res) => {
+      expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
+    });
+  });
   it("negative responses to question 1 (supporting aid) should return a blank", () => {
     const negativeEmail = generateEmail(negativeResult.form_response);
     expect(negativeEmail.body).to.equal("");
