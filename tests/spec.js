@@ -4,7 +4,7 @@ const { generateEmail } = require("../formResponseHandler");
 const { getMpByPostcode } = require("../api-functions");
 const fs = require("fs");
 
-const exampleNegativeResult = require("./exampleResponses/8266dd221cf80375e6716f715ab41db2.json");
+const exampleNegativeResult = require("./exampleResponses/30a17721e14334bdb6baba8c8cdb0480.json");
 const exampleNegativeEmail = generateEmail(exampleNegativeResult.form_response);
 
 const exampleJewishResponse = require("./exampleResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
