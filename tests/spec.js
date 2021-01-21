@@ -4,29 +4,23 @@ const { generateEmail } = require("../formResponseHandler");
 const { getMpByPostcode } = require("../api-functions");
 const fs = require("fs");
 
-const exampleNegativeResult = require("./exampleResponses/8266dd221cf80375e6716f715ab41db2.json");
-const exampleNegativeEmail = generateEmail(exampleNegativeResult.form_response);
+const negativeResult = require("./exampleResponses/8266dd221cf80375e6716f715ab41db2.json");
+const negativeEmail = generateEmail(negativeResult.form_response);
 
-const exampleJewishResponse = require("./exampleResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
-const exampleJewishEmail = generateEmail(exampleJewishResponse.form_response);
+const jewishResponse = require("./exampleResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
+const jewishEmail = generateEmail(jewishResponse.form_response);
 
-const exampleOtherReligionResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
-const exampleOtherReligionEmail = generateEmail(
-  exampleOtherReligionResponse.form_response
-);
+const otherReligionResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
+const otherReligionEmail = generateEmail(otherReligionResponse.form_response);
 
-const exampleNonConResponse = require("./exampleResponses/47dc774ed2492222f7ed29fc74b16732.json");
-const exampleNonConEmail = generateEmail(exampleNonConResponse.form_response);
+const nonToryResponse = require("./exampleResponses/47dc774ed2492222f7ed29fc74b16732.json");
+const nonToryEmail = generateEmail(nonToryResponse.form_response);
 
-const exampleNonConMPResponse = require("./exampleResponses/bfedb30c6203ed71bd65a126dae816c7.json");
-const exampleNonConMpEmail = generateEmail(
-  exampleNonConMPResponse.form_response
-);
+const nonToryMpResponse = require("./exampleResponses/bfedb30c6203ed71bd65a126dae816c7.json");
+const nonToryMpEmail = generateEmail(nonToryMpResponse.form_response);
 
-const allConservativeResponsive = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
-const allConservativeEmail = generateEmail(
-  allConservativeResponsive.form_response
-);
+const allToryResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
+const allToryEmail = generateEmail(allToryResponse.form_response);
 
 const exampleResponses = [];
 var normalizedPath = require("path").join(__dirname, "exampleResponses");
@@ -129,12 +123,12 @@ describe("generateEmail", () => {
   });
   it("should include references to a user's religion when a user has one", () => {
     expect([
-      exampleJewishEmail.body.search(/Jew/),
-      exampleJewishEmail.body.search(/Jewish/),
+      jewishEmail.body.search(/Jew/),
+      jewishEmail.body.search(/Jewish/),
     ]).to.not.eql([-1, -1]);
     expect([
-      exampleOtherReligionEmail.body.search(/religious/),
-      exampleOtherReligionEmail.body.search(/person of faith/),
+      otherReligionEmail.body.search(/religious/),
+      otherReligionEmail.body.search(/person of faith/),
     ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
@@ -158,17 +152,17 @@ describe("generateEmail", () => {
     });
   });
   it("negative responses to question 1 (supporting aid) should return a blank", () => {
-    expect(exampleNegativeEmail.body).to.equal("");
-    expect(exampleNegativeEmail.subject).to.equal("");
+    expect(negativeEmail.body).to.equal("");
+    expect(negativeEmail.subject).to.equal("");
   });
   it("non-conservative responses should not reference that in the email", () => {
-    expect(exampleNonConEmail.body.search(/conservative/gi)).to.equal(-1);
+    expect(nonToryEmail.body.search(/conservative/gi)).to.equal(-1);
   });
   it.only("conservative responses to Conservative MPs should reference that in the email", () => {
-    console.log(allConservativeEmail);
-    expect(allConservativeEmail.body.search(/conservative/gi)).to.not.equal(-1);
+    console.log(allToryEmail);
+    expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
   it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
-    expect(exampleNonConMpEmail.body.search(/conservative/gi)).to.equal(-1);
+    expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
   });
 });
