@@ -5,7 +5,7 @@
 
 .App {
   scroll-behavior: smooth;
-  background-color: rgb(236, 127, 114, 0.1);
+  background-color: rgb(236, 127, 114, 0.05);
 }
 
 @media only screen and (max-width: 767px) {
@@ -72,6 +72,7 @@ p.explanation {
 .emailBox {
   textarea,
   div[editext="view"] {
+    background-color: white;
     border: 1px solid grey;
     margin: 15px 0;
     padding: 20px;
