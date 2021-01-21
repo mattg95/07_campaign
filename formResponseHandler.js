@@ -72,12 +72,13 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const postcode = answers.find(
         ({ field: { id } }) => id === "hgdzZ05GxSAs"
       );
-      const mp = getMpByPostcode(postcode.text);
-      if (mp.party === "Convservative") {
-        const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-        const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-        synonyms && (emailObj.conservative = getRandomResponse(synonyms));
-      }
+      console.log(postcode);
+      // const mp = getMpByPostcode(postcode.text);
+      // if (mp.party === "Convservative") {
+      //   const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+      //   const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+      //   synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+      //}
     }
 
     //religion handler
