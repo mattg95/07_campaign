@@ -15,7 +15,7 @@ const TextBox = ({ responseId }) => {
     formToken: "", //the form token comes from the webhook response
     editedRes: "",
     copied: false,
-    generatedEmail: {},
+    generatedEmail: {body: "your email will appear here"},
   });
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const TextBox = ({ responseId }) => {
           viewContainerClassName="emailBox"
           type="textarea"
           inputProps={{
-            placeholder: "your email will appear here", //placeholder isn't working
+            placeholder: "your email will appear here",
             rows: 10,
           }}
           saveButtonContent="Apply"
