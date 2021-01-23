@@ -15,7 +15,7 @@ const TextBox = ({ responseId }) => {
     formToken: "", //the form token comes from the webhook response
     editedRes: "",
     copied: false,
-    generatedEmail: {body: "your email will appear here"},
+    generatedEmail: { body: "your email will appear here" },
   });
 
   useEffect(() => {
@@ -33,7 +33,6 @@ const TextBox = ({ responseId }) => {
   }, []);
 
   function copyToClipboard() {
-    console.log("ran");
     let text = "";
     text = state.editedRes ? state.editedRes : state.generatedEmail.body;
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
