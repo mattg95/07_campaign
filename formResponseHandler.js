@@ -1,7 +1,11 @@
+const { getMpByPostcode } = require("./api-functions");
 const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
+  let memberOfConservatives = false;
+  let postcode;
+
 
   const emailObj = {
     supportsAid: "",
@@ -27,6 +31,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     vdZgYVyiLE13: "meetMp",
     ghzBmQTQ2npF: "emailAddress",
     uLPPjjg5B0Bn: "homeAddress",
+    hgdzZ05GxSAs: "postcode",
     daZZA6TwyMP5: "name",
   };
 
@@ -58,7 +63,21 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return choiceIndex;
   };
 
+  const populateMainResponseData = (emailObj, supportsAid) => {
+    console.log(emailObj);
+    //adds 'main' content from emailString.Json
+    emailObj.main += getRandomResponse(main.sentence1);
+    emailObj.main += getRandomResponse(main.sentence2);
+    emailObj.main += getRandomResponse(main.sentence3);
+    const responseData = {
+      subject: supportsAid ? getRandomResponse(subject) : "",
+      body: supportsAid ? Object.values(emailObj).join("\n") : "",
+    };
+    return responseData;
+  };
+
   //this is the 'router' that handles all question responses based on their id
+
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
       if (choice.label === "No") {
@@ -66,11 +85,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       }
     }
     if (field.id === "EejpFBEzP9wK") {
-      //conservatives hanlder
+      //conservatives handler
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      synonyms && (emailObj.conservative = getRandomResponse(synonyms));
+      // The first 3 choices for survey.conservative have sentences in emailStrings.json about being a conservative
+      memberOfConservatives = choiceIndex < 3;
+      postcode = answers.find(
+        ({ field: { id } }) => id === "hgdzZ05GxSAs"
+      );
     }
+
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
       const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
@@ -91,12 +114,12 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       if (synonyms === undefined) return;
       else {
         const sentence = getRandomResponse(synonyms);
-        const counryNameData = answers.find(
+        const countryNameData = answers.find(
           ({ field: { id } }) => id === "MRPxTl6j1QAw"
         );
         const sentenceWithCountry = sentence.replace(
           /COUNTRY_NAME/g,
-          counryNameData.text
+          countryNameData.text
         );
         emailObj.countryLinks = sentenceWithCountry;
       }
@@ -130,14 +153,23 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailObj.address = text;
     }
   });
-
-  //adds 'main' content from emailString.Json
-  emailObj.main += getRandomResponse(main.sentence1);
-  emailObj.main += getRandomResponse(main.sentence2);
-  emailObj.main += getRandomResponse(main.sentence3);
-  const responseData = {
-    subject: supportsAid ? getRandomResponse(subject) : "",
-    body: supportsAid ? Object.values(emailObj).join("\n") : "",
-  };
-  return responseData;
+  if (memberOfConservatives) {
+    return getMpByPostcode(postcode.text).then(mp => {
+      if (mp.party === "Conservative") {
+          const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+          const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+          console.log("emailObj.conservative before changing:", emailObj.conservative);
+          if (synonyms.length > 0) {
+            emailObj.conservative = getRandomResponse(synonyms);
+            console.log("emailObj.conservative after changing:", emailObj.conservative);
+          }
+        }
+      return populateMainResponseData(emailObj, supportsAid);
+    });
+  } else {
+    const responseData = populateMainResponseData(emailObj, supportsAid);
+    // Need to return it as a promise to match the other branch
+    return Promise.resolve(responseData);
+  }
 };
+
