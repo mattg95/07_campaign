@@ -21,7 +21,6 @@ const TextBox = ({ responseId }) => {
   useEffect(() => {
     let isMounted = true;
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      // console.log(formToken, generatedEmail);
       if (isMounted) setState({ ...state, formToken: formToken });
       if (state.formToken === responseId) {
         setState({ ...state, generatedEmail: generatedEmail });
