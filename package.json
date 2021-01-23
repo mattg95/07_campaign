@@ -6,8 +6,8 @@
   "heroku-postbuild": "cd react-app && npm install --only=dev --no-shrinkwrap && npm run react-build",
   "scripts": {
     "install-react": "cd react-app && npm install",
-    "react-start": "cd react-app && npm start",
-    "react-build": "cd react-app && npm run build",
+    "start": "cd react-app && npm start",
+    "build": "cd react-app && npm run build",
     "react-test": "cd react-app && npm run test",
     "react-eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
