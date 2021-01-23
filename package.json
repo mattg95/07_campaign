@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "start": "node server.js",
-  "heroku-postbuild": "cd react-app && npm install --only=dev --no-shrinkwrap && npm run react-build",
+  "heroku-postbuild": "cd react-app && npm install --only=dev --no-shrinkwrap && npm run build",
   "scripts": {
     "install-react": "cd react-app && npm install",
     "start": "cd react-app && npm start",
