@@ -10,26 +10,16 @@ import MpForm from "./FindMp";
 const socket = socketIOClient();
 
 const TextBox = ({ responseId }) => {
-  //the responseId comes from the embeded typeform
   const [state, setState] = useState({
-    formToken: "initialtoken", //the form token comes from the webhook response
     editedRes: "",
     copied: false,
     generatedEmail: { body: "your email will appear here" },
   });
 
   useEffect(() => {
-    socket.on("open", () => {
-      console.log("opened");
-    });
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      console.log(formToken === responseId);
-      setState({ ...state, formToken: formToken });
       if (formToken === responseId) {
-        console.log("THE SAME");
         setState({ ...state, generatedEmail: generatedEmail });
-      } else {
-        console.log("NOT THE SAME");
       }
     });
   }, [responseId]);
