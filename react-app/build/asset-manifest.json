@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.02f27c20.chunk.css",
+    "main.js": "/static/js/main.0b7e42c4.chunk.js",
+    "main.js.map": "/static/js/main.0b7e42c4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9f3e01c3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9f3e01c3.js.map",
+    "static/css/2.0ec887ff.chunk.css": "/static/css/2.0ec887ff.chunk.css",
+    "static/js/2.dde7893f.chunk.js": "/static/js/2.dde7893f.chunk.js",
+    "static/js/2.dde7893f.chunk.js.map": "/static/js/2.dde7893f.chunk.js.map",
+    "static/js/3.5276936b.chunk.js": "/static/js/3.5276936b.chunk.js",
+    "static/js/3.5276936b.chunk.js.map": "/static/js/3.5276936b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0ec887ff.chunk.css.map": "/static/css/2.0ec887ff.chunk.css.map",
+    "static/css/main.02f27c20.chunk.css.map": "/static/css/main.02f27c20.chunk.css.map",
+    "static/js/2.dde7893f.chunk.js.LICENSE.txt": "/static/js/2.dde7893f.chunk.js.LICENSE.txt",
+    "static/media/arrow-down.edc17002.svg": "/static/media/arrow-down.edc17002.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9f3e01c3.js",
+    "static/css/2.0ec887ff.chunk.css",
+    "static/js/2.dde7893f.chunk.js",
+    "static/css/main.02f27c20.chunk.css",
+    "static/js/main.0b7e42c4.chunk.js"
+  ]
+}
