@@ -10,30 +10,21 @@ import MpForm from "./FindMp";
 const socket = socketIOClient();
 
 const TextBox = ({ responseId }) => {
-  //the responseId comes from the embeded typeform
   const [state, setState] = useState({
-    formToken: "", //the form token comes from the webhook response
     editedRes: "",
     copied: false,
-    generatedEmail: {body: "your email will appear here"},
+    generatedEmail: { body: "your email will appear here" },
   });
 
   useEffect(() => {
-    let isMounted = true;
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      // console.log(formToken, generatedEmail);
-      if (isMounted) setState({ ...state, formToken: formToken });
-      if (state.formToken === responseId) {
+      if (formToken === responseId) {
         setState({ ...state, generatedEmail: generatedEmail });
       }
     });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  }, [responseId]);
 
   function copyToClipboard() {
-    console.log("ran");
     let text = "";
     text = state.editedRes ? state.editedRes : state.generatedEmail.body;
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
