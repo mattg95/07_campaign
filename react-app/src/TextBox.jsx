@@ -17,26 +17,22 @@ const TextBox = ({ responseId }) => {
     copied: false,
     generatedEmail: { body: "your email will appear here" },
   });
-  console.log("RESPONSE ID", responseId);
 
   useEffect(() => {
-    let isMounted = true;
+    socket.on("open", () => {
+      console.log("opened");
+    });
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      console.log(("FORM TOKEN  = ", formToken));
-      if (isMounted) {
-        setState({ ...state, formToken: formToken });
-        console.log("IDs = ", state.formToken, responseId);
-      }
-      if (state.formToken === responseId) {
+      console.log(formToken === responseId);
+      setState({ ...state, formToken: formToken });
+      if (formToken === responseId) {
+        console.log("THE SAME");
         setState({ ...state, generatedEmail: generatedEmail });
       } else {
         console.log("NOT THE SAME");
       }
     });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  }, [responseId]);
 
   function copyToClipboard() {
     let text = "";
