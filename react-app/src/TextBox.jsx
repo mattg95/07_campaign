@@ -12,18 +12,25 @@ const socket = socketIOClient();
 const TextBox = ({ responseId }) => {
   //the responseId comes from the embeded typeform
   const [state, setState] = useState({
-    formToken: "", //the form token comes from the webhook response
+    formToken: "initialtoken", //the form token comes from the webhook response
     editedRes: "",
     copied: false,
     generatedEmail: { body: "your email will appear here" },
   });
+  console.log("RESPONSE ID", responseId);
 
   useEffect(() => {
     let isMounted = true;
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      if (isMounted) setState({ ...state, formToken: formToken });
+      console.log(("FORM TOKEN  = ", formToken));
+      if (isMounted) {
+        setState({ ...state, formToken: formToken });
+        console.log("IDs = ", state.formToken, responseId);
+      }
       if (state.formToken === responseId) {
         setState({ ...state, generatedEmail: generatedEmail });
+      } else {
+        console.log("NOT THE SAME");
       }
     });
     return () => {
