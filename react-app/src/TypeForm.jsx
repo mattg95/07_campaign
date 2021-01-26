@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import * as typeformEmbed from "@typeform/embed";
-import TextBox from "./TextBox";
 
-const TypeForm = () => {
+const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
-  const [state, setState] = useState({ isClosed: false, responseId: "" });
 
   useEffect(() => {
-    var element = document.getElementById("emailBox");
+    const textBox = document.getElementById("textBox");
     typeformEmbed.makeWidget(
       myRef.current,
       `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
@@ -16,10 +14,9 @@ const TypeForm = () => {
         hideHeaders: true,
         opacity: 0,
         onSubmit: ({ response_id }) => {
-          setState({ ...state, responseId: response_id });
+          passDataUpstream({ responseId: response_id });
           setTimeout(() => {
-            element.scrollIntoView();
-            // setState({ ...state, isClosed: true });
+            textBox.scrollIntoView();
           }, 3000);
         },
       }
@@ -28,14 +25,8 @@ const TypeForm = () => {
 
   return (
     <div>
-      <div
-        ref={myRef}
-        className={`typeform-widget ${state.isClosed ? "closed" : ""}`}
-        id="typeform"
-      />
-      <div id="emailBox">
-        <TextBox responseId={state.responseId} />
-      </div>
+      {/* potentially use state to close typform widget after completion */}
+      <div ref={myRef} className={`typeform-widget `} id="typeform" />
     </div>
   );
 };

@@ -1,11 +1,8 @@
 // Render Prop
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import DisplayMp from "./DisplayMp";
 
-const MpForm = ({ body, subject }) => {
-  const [state, setState] = useState({ data: "", error: "" });
-
+const MpForm = ({ passDataUpstream, error }) => {
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
@@ -16,8 +13,8 @@ const MpForm = ({ body, subject }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          setState({ ...state, error: data.error });
-        } else setState({ error: "", data: data });
+          passDataUpstream({ error: data.error });
+        } else passDataUpstream({ mpData: data });
       });
     return response;
   };
@@ -28,7 +25,7 @@ const MpForm = ({ body, subject }) => {
       postToApi(postcode);
     } else {
       if (postcode.length > 5) {
-        setState({ ...state, error: "Invalid postcode" });
+        passDataUpstream({ error: "Invalid postcode" });
       }
     }
   };
@@ -46,13 +43,10 @@ const MpForm = ({ body, subject }) => {
             <ErrorMessage name="postcode" component="div" />
             <label htmlFor="postcode">Postcode:</label>
             <Field type="text" name="postcode" />
-            {state.error && <div>{state.error}</div>}
+            {error && <div>{error}</div>}
           </Form>
         )}
       </Formik>
-      {state.data && (
-        <DisplayMp data={state.data} body={body} subject={subject} />
-      )}
     </div>
   );
 };
