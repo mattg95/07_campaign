@@ -164,11 +164,11 @@ describe("generateEmail", () => {
     const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  it.only("Conservative responses to Conservative MPs should reference that in the email", () => {
+  it("Conservative responses to Conservative MPs should reference that in the email", () => {
     const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
+  xit("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
     const nonToryMpEmail = generateEmail(nonToryMpResponse.form_response);
     expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
   });
