@@ -3,9 +3,6 @@ const { subject, survey, main } = require("./emailStrings.json");
 
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
-  let memberOfConservatives = false;
-  let postcode;
-
 
   const emailObj = {
     supportsAid: "",
@@ -85,13 +82,14 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       }
     }
     if (field.id === "EejpFBEzP9wK") {
-      //conservatives handler
-      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      // The first 3 choices for survey.conservative have sentences in emailStrings.json about being a conservative
-      memberOfConservatives = choiceIndex < 3;
-      postcode = answers.find(
+      //conservatives hanlder
+      const postcode = answers.find(
         ({ field: { id } }) => id === "hgdzZ05GxSAs"
       );
+
+      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+      synonyms && (emailObj.conservative = getRandomResponse(synonyms));
     }
 
     //religion handler
@@ -153,23 +151,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailObj.address = text;
     }
   });
-  if (memberOfConservatives) {
-    return getMpByPostcode(postcode.text).then(mp => {
-      if (mp.party === "Conservative") {
-          const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-          const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-          console.log("emailObj.conservative before changing:", emailObj.conservative);
-          if (synonyms.length > 0) {
-            emailObj.conservative = getRandomResponse(synonyms);
-            console.log("emailObj.conservative after changing:", emailObj.conservative);
-          }
-        }
-      return populateMainResponseData(emailObj, supportsAid);
-    });
-  } else {
-    const responseData = populateMainResponseData(emailObj, supportsAid);
-    // Need to return it as a promise to match the other branch
-    return Promise.resolve(responseData);
-  }
-};
 
+  const responseData = populateMainResponseData(emailObj, supportsAid);
+  // Need to return it as a promise to match the other branch
+  return responseData;
+};
