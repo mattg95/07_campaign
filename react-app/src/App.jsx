@@ -19,40 +19,66 @@ const App = () => {
   const [state, setState] = useState({
     responseId: "",
     mpData: {},
-    error: "",
-    generatedEmail: { body: "your email will appear here" },
-    editedResponse: "",
+    postcodeError: "",
+    generatedEmailBody: "Your email will appear here",
+    emailSubject: "",
     emailCopied: false,
     mpEmailAddress: "",
+    greeting: "",
+    emailWithGreeting: "",
   });
+
+  const {
+    responseId,
+    mpData,
+    postcodeError,
+    generatedEmailBody,
+    emailSubject,
+    emailCopied,
+    mpEmailAddress,
+    greeting,
+    emailWithGreeting,
+  } = state;
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === state.responseId) {
-        setState({ ...state, generatedEmail: generatedEmail });
+        setState({
+          ...state,
+          generatedEmailBody: generatedEmail.body,
+          subject: generatedEmail.subject,
+        });
       }
     });
   }, [state.responseId]);
 
   useEffect(() => {
-    if (state.mpData) {
-      const { name, full_name } = state.mpData;
+    setState({
+      ...state,
+      emailWithGreeting: greeting + generatedEmailBody,
+    });
+  }, [generatedEmailBody, greeting]);
+
+  useEffect(() => {
+    if (mpData) {
+      const { name, full_name } = mpData;
       const mpName = full_name ? full_name : name;
       if (mpName) {
         setState({
           ...state,
           mpEmailAddress:
             mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
+          greeting: `Dear ${mpName},\n`,
         });
       }
     }
-  }, [state.mpData]);
+  }, [mpData]);
 
   const passDataUpstream = (data) => {
     setState({ ...state, [Object.keys(data)]: data[Object.keys(data)] });
   };
 
-  console.log(state);
+  // console.log(state);
   return (
     <div className="App">
       <Container className="text-center">
@@ -71,17 +97,10 @@ const App = () => {
         <Row>
           <Col>
             <div id="mpForm" className="">
-              <MpForm passDataUpstream={passDataUpstream} error={state.error} />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {state.mpData && (
-                <DisplayMp
-                  mpData={state.mpData}
-                  mpEmailAddress={state.mpEmailAddress}
+              {emailSubject && (
+                <MpForm
+                  passDataUpstream={passDataUpstream}
+                  postcodeError={postcodeError}
                 />
               )}
             </div>
@@ -90,21 +109,32 @@ const App = () => {
         <Row>
           <Col>
             <div className="">
-              <TextBox
-                passDataUpstream={passDataUpstream}
-                generatedEmail={state.generatedEmail}
-                editedRes={state.editedResponse}
-              />
+              {Object.keys(mpData).length > 0 && (
+                <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
+              )}
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
             <div className="">
-              {state.mpData && state.generatedEmail && (
+              {emailSubject && (
+                <TextBox
+                  passDataUpstream={passDataUpstream}
+                  emailBody={emailWithGreeting}
+                  subject={emailSubject}
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="">
+              {emailSubject && (
                 <SendEmail
-                  mpData={state.mpData}
-                  generatedEmail={state.generatedEmail}
+                  mpEmailAddress={mpEmailAddress}
+                  generatedEmail={emailWithGreeting}
                 />
               )}
             </div>
