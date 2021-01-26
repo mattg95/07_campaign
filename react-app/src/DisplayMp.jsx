@@ -23,9 +23,6 @@ const DisplayMp = ({
         <div> {createMpEmail()}</div>
       </div>
       <h2 className="secondary-header">4. Send your email</h2>
-      <p className="explanation">
-        This will open your email service in a different tab
-      </p>
       <a
         href={
           "mailto:" +
@@ -40,6 +37,9 @@ const DisplayMp = ({
       >
         SEND EMAIL
       </a>
+      <p className="explanation">
+        This will open your email service in a different window
+      </p>
     </div>
   );
 };
