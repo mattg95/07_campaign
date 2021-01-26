@@ -3,17 +3,15 @@ import React from "react";
 const DisplayMp = ({
   mpData: { constituency, full_name, party, name },
   mpEmailAddress,
-}) => {
-  return (
-    <div>
-      <div className="mpCard">
-        <div>{constituency}</div>
-        <div>{name}</div>
-        <div>{full_name}</div>
-        <div>{party}</div>
-        <div>{mpEmailAddress}</div>
-      </div>
+}) => (
+  <div>
+    <div className="mpCard">
+      <div>{constituency}</div>
+      <div>{name}</div>
+      <div>{full_name}</div>
+      <div>{party}</div>
+      <div>{mpEmailAddress}</div>
     </div>
-  );
-};
+  </div>
+);
 export default DisplayMp;
