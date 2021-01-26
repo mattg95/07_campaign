@@ -5,7 +5,7 @@ const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
 
   useEffect(() => {
-    const textBox = document.getElementById("textBox");
+    const mpForm = document.getElementById("mpForm");
     typeformEmbed.makeWidget(
       myRef.current,
       `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
@@ -16,7 +16,7 @@ const TypeForm = ({ passDataUpstream }) => {
         onSubmit: ({ response_id }) => {
           passDataUpstream({ responseId: response_id });
           setTimeout(() => {
-            textBox.scrollIntoView();
+            mpForm.scrollIntoView();
           }, 3000);
         },
       }

@@ -70,7 +70,7 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-            <div className="">
+            <div id="mpForm" className="">
               <MpForm passDataUpstream={passDataUpstream} error={state.error} />
             </div>
           </Col>
@@ -89,7 +89,7 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-            <div id="textBox" className="">
+            <div className="">
               <TextBox
                 passDataUpstream={passDataUpstream}
                 generatedEmail={state.generatedEmail}
