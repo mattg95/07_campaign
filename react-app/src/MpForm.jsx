@@ -1,8 +1,7 @@
-// Render Prop
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const MpForm = ({ passDataUpstream, error }) => {
+const MpForm = ({ passDataUpstream, postcodeError }) => {
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
@@ -13,7 +12,7 @@ const MpForm = ({ passDataUpstream, error }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          passDataUpstream({ error: data.error });
+          passDataUpstream({ postcodeError: data.error });
         } else passDataUpstream({ mpData: data });
       });
     return response;
@@ -25,7 +24,7 @@ const MpForm = ({ passDataUpstream, error }) => {
       postToApi(postcode);
     } else {
       if (postcode.length > 5) {
-        passDataUpstream({ error: "Invalid postcode" });
+        passDataUpstream({ postcodeError: "Invalid postcode" });
       }
     }
   };
@@ -43,7 +42,7 @@ const MpForm = ({ passDataUpstream, error }) => {
             <ErrorMessage name="postcode" component="div" />
             <label htmlFor="postcode">Postcode:</label>
             <Field type="text" name="postcode" />
-            {error && <div>{error}</div>}
+            {postcodeError && <div>{postcodeError}</div>}
           </Form>
         )}
       </Formik>
