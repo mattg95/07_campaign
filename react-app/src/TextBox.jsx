@@ -41,7 +41,13 @@ const TextBox = ({ responseId }) => {
     <div>
       {/* {Object.keys(state.generatedEmail).length !== 0 && ( */}
       <div>
-        <h2 className="secondary-header">2.Edit your email</h2>
+        <div className="text-center">
+          <MpForm
+            body={state.generatedEmail.body}
+            subject={state.generatedEmail.subject}
+          />
+        </div>
+        <h2 className="secondary-header">3.Edit your email</h2>
         <EdiText
           viewContainerClassName="emailBox"
           type="textarea"
@@ -66,13 +72,6 @@ const TextBox = ({ responseId }) => {
         >
           <span> Copied to clipboard </span>
         </Popup>
-
-        <div className="text-center">
-          <MpForm
-            body={state.generatedEmail.body}
-            subject={state.generatedEmail.subject}
-          />
-        </div>
       </div>
       {/* )} */}
     </div>
