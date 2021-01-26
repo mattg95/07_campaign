@@ -46,7 +46,7 @@ const App = () => {
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
-          subject: generatedEmail.subject,
+          emailSubject: generatedEmail.subject,
         });
       }
     });
@@ -78,7 +78,7 @@ const App = () => {
     setState({ ...state, [Object.keys(data)]: data[Object.keys(data)] });
   };
 
-  // console.log(state);
+  console.log(state);
   return (
     <div className="App">
       <Container className="text-center">
@@ -118,7 +118,7 @@ const App = () => {
         <Row>
           <Col>
             <div className="">
-              {emailSubject && (
+              {Object.keys(mpData).length > 0 && (
                 <TextBox
                   passDataUpstream={passDataUpstream}
                   emailBody={emailWithGreeting}
@@ -131,10 +131,11 @@ const App = () => {
         <Row>
           <Col>
             <div className="">
-              {emailSubject && (
+              {Object.keys(mpData).length > 0 && (
                 <SendEmail
                   mpEmailAddress={mpEmailAddress}
-                  generatedEmail={emailWithGreeting}
+                  body={emailWithGreeting}
+                  subject={emailSubject}
                 />
               )}
             </div>
