@@ -4,12 +4,10 @@ import EdiText from "react-editext";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-const TextBox = ({ editedRes, generatedEmail, passDataUpstream }) => {
+const TextBox = ({ emailBody, passDataUpstream }) => {
   const copyToClipboard = () => {
-    let text = "";
-    text = editedRes ? editedRes : generatedEmail.body;
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
-    el.value = text;
+    el.value = emailBody;
     document.body.appendChild(el);
     el.select();
     el.setSelectionRange(0, 99999); /* For mobile devices */
@@ -32,9 +30,9 @@ const TextBox = ({ editedRes, generatedEmail, passDataUpstream }) => {
           saveButtonContent="Apply"
           cancelButtonContent={<strong>Cancel</strong>}
           editButtonContent="Edit Your Email"
-          value={editedRes ? editedRes : generatedEmail.body} // validates the webhook response token against the response id from the embedded tyeform widget
+          value={emailBody} // validates the webhook response token against the response id from the embedded tyeform widget
           onSave={(val) => {
-            passDataUpstream({ editedRes: val }); //if the user edits the text box, a new property called editedResponse is set in state
+            passDataUpstream({ generatedEmail: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
 

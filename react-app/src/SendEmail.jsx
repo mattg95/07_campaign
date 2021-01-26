@@ -1,14 +1,6 @@
 import React from "react";
 
-const sendEmail = ({
-  mpData: { full_name, name },
-  generatedEmail,
-  mpEmailAddress,
-}) => {
-  const createEmailBody = () => {
-    const mpName = full_name ? full_name : name;
-    return `Dear ${mpName},\n${Object.values(generatedEmail.body).join("")}`;
-  };
+const sendEmail = ({ generatedEmail, mpEmailAddress }) => {
   return (
     <div>
       <h2 className="secondary-header">4. Send your email</h2>
@@ -19,7 +11,7 @@ const sendEmail = ({
           "?Subject=" +
           encodeURIComponent(generatedEmail.subject) +
           "&Body=" +
-          encodeURIComponent(createEmailBody())
+          encodeURIComponent(generatedEmail.body)
         }
         className="btn btn-primary send-email-button"
         target="_blank"
