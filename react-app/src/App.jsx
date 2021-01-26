@@ -38,11 +38,13 @@ const App = () => {
     if (state.mpData) {
       const { name, full_name } = state.mpData;
       const mpName = full_name ? full_name : name;
-      setState({
-        ...state,
-        mpEmailAddress:
-          mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
-      });
+      if (mpName) {
+        setState({
+          ...state,
+          mpEmailAddress:
+            mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
+        });
+      }
     }
   }, [state.mpData]);
 
