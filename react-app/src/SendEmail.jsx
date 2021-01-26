@@ -1,6 +1,6 @@
 import React from "react";
 
-const sendEmail = ({ generatedEmail, mpEmailAddress }) => {
+const sendEmail = ({ subject, body, mpEmailAddress }) => {
   return (
     <div>
       <h2 className="secondary-header">4. Send your email</h2>
@@ -9,9 +9,9 @@ const sendEmail = ({ generatedEmail, mpEmailAddress }) => {
           "mailto:" +
           mpEmailAddress +
           "?Subject=" +
-          encodeURIComponent(generatedEmail.subject) +
+          encodeURIComponent(subject) +
           "&Body=" +
-          encodeURIComponent(generatedEmail.body)
+          encodeURIComponent(body)
         }
         className="btn btn-primary send-email-button"
         target="_blank"
