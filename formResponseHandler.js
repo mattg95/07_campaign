@@ -59,19 +59,25 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return choiceIndex;
   };
 
-  const populateMainResponseData = (emailMap, supportsAid) => {
+  const createGreeting = ({ name, full_name }) => {
+    salutation = getRandomResponse(main.greeting);
+    const mpName = full_name ? full_name : name;
+    return mpName ? `${salutation} ${mpName},\n` : "";
+  };
+
+  const populateMainResponseData = (emailMap, supportsAid, mp) => {
     //adds 'main' content from emailString.Json
     const mainContent =
       getRandomResponse(main.sentence1) +
       getRandomResponse(main.sentence2) +
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
-    console.log(emailMap);
     let emailbodyStr = "";
     for (const [k, v] of emailMap) {
       v.length && (emailbodyStr += v + `\n`);
     }
     const responseData = {
+      greeting: supportsAid ? createGreeting(mp) : "",
       subject: supportsAid ? getRandomResponse(subject) : "",
       body: supportsAid ? emailbodyStr : "",
     };
@@ -159,13 +165,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailMap.set("address", text);
     }
   });
-  const createGreeting = ({ name, full_name }) => {
-    salutation = getRandomResponse(main.greeting);
-    const mpName = full_name ? full_name : name;
-    return mpName ? (emailObj.greeting = `${salutation} ${mpName},\n`) : "";
-  };
+
   return getMpByPostcode(postcode.text).then((mp) => {
-    emailMap.set("greeting", createGreeting(mp));
     if (memberOfConservatives && mp.party === "Conservative") {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
@@ -173,6 +174,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         emailMap.set("conservative", getRandomResponse(synonyms));
       }
     }
-    return populateMainResponseData(emailMap, supportsAid);
+    return populateMainResponseData(emailMap, supportsAid, mp);
   });
 };
