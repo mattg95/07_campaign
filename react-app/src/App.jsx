@@ -26,6 +26,7 @@ const App = () => {
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
+    postcodeDropdownOpen: false,
   });
 
   const {
@@ -38,6 +39,7 @@ const App = () => {
     mpEmailAddress,
     greeting,
     emailWithGreeting,
+    postcodeDropdownOpen,
   } = state;
 
   useEffect(() => {
@@ -98,18 +100,6 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-            <div id="mpForm" className="">
-              {emailSubject && (
-                <MpForm
-                  passDataUpstream={passDataUpstream}
-                  postcodeError={postcodeError}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <div className="">
               {Object.keys(mpData).length > 0 && (
                 <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
@@ -119,7 +109,20 @@ const App = () => {
         </Row>
         <Row>
           <Col>
-            <div className="">
+            <div id="mpForm" className="">
+              {emailSubject && (
+                <MpForm
+                  passDataUpstream={passDataUpstream}
+                  postcodeError={postcodeError}
+                  postcodeDropdownOpen={postcodeDropdownOpen}
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div id="emailBox" className="">
               {Object.keys(mpData).length > 0 && (
                 <TextBox
                   passDataUpstream={passDataUpstream}
