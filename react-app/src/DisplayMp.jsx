@@ -5,6 +5,7 @@ const DisplayMp = ({
   mpEmailAddress,
 }) => (
   <div>
+    <h2 className="secondary-header">2. Find Your Mp</h2>
     <div className="mpCard">
       <div>{constituency}</div>
       <div>{name}</div>
