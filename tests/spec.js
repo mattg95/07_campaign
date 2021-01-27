@@ -118,7 +118,8 @@ describe("generateEmail", () => {
       expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
     });
   });
-  it("should include references to a user's religion when a user has one", () => {
+  //Very important to only run one test at a time, and currently not any of the tests that use multiple files, or we'll run out of API calls
+  it.only("should include references to a user's religion when a user has one", () => {
     const jewishEmail = generateEmail(jewishResponse.form_response);
     const otherReligionEmail = generateEmail(
       otherReligionResponse.form_response
