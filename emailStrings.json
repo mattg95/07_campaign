@@ -65,6 +65,30 @@
     "sentence3": [
       "I’m writing to ask you to ensure the government reverses this decision, or at least make absolutely sure it’s temporary.",
       "Will you please agree to vote for this not to happen? Or at least make absolutely sure that the law is clear that this will be for one year only?"
+    ],
+    "greeting": [
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Hi",
+      "Hi"
+    ],
+    "signoff": [
+      "Yours sincerely",
+      "Kind regards",
+      "Best regards",
+      "Regards",
+      "Best",
+      "Respectfully",
+      "Thank you",
+      "Yours faithfully",
+      "Sincerely",
+      "Many thanks"
     ]
   }
 }
