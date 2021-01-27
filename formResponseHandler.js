@@ -6,8 +6,16 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   let memberOfConservatives = false;
   const postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
 
-  const emailObj = {};
-
+  const emailMap = new Map([
+    ["conservative", ""],
+    ["mainContent", ""],
+    ["countryLinks", ""],
+    ["religion", ""],
+    ["motivation", ""],
+    ["meetMp", ""],
+    ["name", ""],
+    ["address", ""],
+  ]);
   //these map the question ids from the form onto our json object
   const questionKeys = {
     gil6UCe4dG9T: "supportAid",
@@ -51,16 +59,21 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return choiceIndex;
   };
 
-  const populateMainResponseData = (emailObj, supportsAid) => {
+  const populateMainResponseData = (emailMap, supportsAid) => {
     //adds 'main' content from emailString.Json
-    console.log(emailObj);
-    emailObj.main += getRandomResponse(main.sentence1);
-    emailObj.main += getRandomResponse(main.sentence2);
-    emailObj.main += getRandomResponse(main.sentence3);
-    const emailBody = emailObj?.conservative;
+    const mainContent =
+      getRandomResponse(main.sentence1) +
+      getRandomResponse(main.sentence2) +
+      getRandomResponse(main.sentence3);
+    emailMap.set("mainContent", mainContent);
+    console.log(emailMap);
+    let emailbodyStr = "";
+    for (const [k, v] of emailMap) {
+      v.length && (emailbodyStr += v + `\n`);
+    }
     const responseData = {
       subject: supportsAid ? getRandomResponse(subject) : "",
-      body: supportsAid ? Object.values(emailObj).join("\n") : "",
+      body: supportsAid ? emailbodyStr : "",
     };
 
     console.log(responseData);
@@ -92,7 +105,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         sentence = sentence
           .replace(/\[RELIGIOUS_DEMONYM_NOUN\]/g, noun)
           .replace(/\[RELIGIOUS_DEMONYM_ADJ\]/g, adj);
-        emailObj.religion = sentence;
+        emailMap.set("religion", sentence);
       }
     }
     //countryLinksHandler
@@ -109,7 +122,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
           /COUNTRY_NAME/g,
           countryNameData.text
         );
-        emailObj.countryLinks = sentenceWithCountry;
+        emailMap.set("countryLinks", sentenceWithCountry);
       }
     }
     //moivations handler
@@ -134,34 +147,32 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     // }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
-      emailObj.meetMp = getRandomResponse(survey.meetMp);
+      emailMap.set("meetMp", getRandomResponse(survey.meetMp));
     }
     //name handler
     if (field.id === "daZZA6TwyMP5") {
       const randomSignoff = getRandomResponse(main.signoff);
-      emailObj.name = `${randomSignoff},\n${text}`;
+      emailMap.set("name", `${randomSignoff},\n${text}`);
     }
     //address handler
     if (field.id === "uLPPjjg5B0Bn") {
-      emailObj.address = text;
+      emailMap.set("address", text);
     }
   });
   const createGreeting = ({ name, full_name }) => {
     salutation = getRandomResponse(main.greeting);
     const mpName = full_name ? full_name : name;
-    if (mpName) {
-      return (emailObj.greeting = `${salutation} ${mpName},\n`);
-    }
+    return mpName ? (emailObj.greeting = `${salutation} ${mpName},\n`) : "";
   };
   return getMpByPostcode(postcode.text).then((mp) => {
-    emailObj.greeting = createGreeting(mp);
+    emailMap.set("greeting", createGreeting(mp));
     if (memberOfConservatives && mp.party === "Conservative") {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
       if (synonyms.length > 0) {
-        emailObj.conservative = getRandomResponse(synonyms);
+        emailMap.set("conservative", getRandomResponse(synonyms));
       }
     }
-    return populateMainResponseData(emailObj, supportsAid);
+    return populateMainResponseData(emailMap, supportsAid);
   });
 };
