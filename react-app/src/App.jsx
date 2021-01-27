@@ -47,6 +47,8 @@ const App = () => {
           ...state,
           generatedEmailBody: generatedEmail.body,
           emailSubject: generatedEmail.subject,
+          mpData: generatedEmail.mpData,
+          greeting: generatedEmail.greeting,
         });
       }
     });
