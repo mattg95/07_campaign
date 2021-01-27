@@ -25,6 +25,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     EejpFBEzP9wK: "conservative",
     IdqRPd6SUMVh: "religion",
     vdZgYVyiLE13: "meetMp",
+    UhNb2Z5nqHtb: "meetMpDoubleCheck",
     ghzBmQTQ2npF: "emailAddress",
     uLPPjjg5B0Bn: "homeAddress",
     hgdzZ05GxSAs: "postcode",
@@ -161,8 +162,17 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     // }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
-      emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      if (getAnswerIndex("vdZgYVyiLE13") === 0) {
+        emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      }
     }
+    //meetMp double check hanlder
+    if (field.id === "UhNb2Z5nqHtb") {
+      if (getAnswerIndex("UhNb2Z5nqHtb") === 0) {
+        emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      }
+    }
+
     //name handler
     if (field.id === "daZZA6TwyMP5") {
       const randomSignoff = getRandomResponse(main.signoff);
