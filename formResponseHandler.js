@@ -73,8 +73,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
     let emailbodyStr = "";
+    console.log(emailMap);
     for (const [k, v] of emailMap) {
-      v.length && (emailbodyStr += v + `\n`);
+      if (k === "name") {
+        emailbodyStr += v + `\n`;
+      } else if (k === "address") {
+        emailbodyStr += v;
+      } else {
+        v.length && (emailbodyStr += v + `\n\n`);
+      }
     }
     const responseData = {
       mpData: mp,
