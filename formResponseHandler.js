@@ -4,7 +4,7 @@ const { subject, survey, main } = require("./emailStrings.json");
 exports.generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
   let memberOfConservatives = false;
-  let postcode;
+  const postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
 
   const emailObj = {
     supportsAid: "",
@@ -88,7 +88,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       // The first 3 choices for survey.conservative have sentences in emailStrings.json about being a conservative
       memberOfConservatives = choiceIndex < 3;
-      postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
     }
 
     //religion handler
