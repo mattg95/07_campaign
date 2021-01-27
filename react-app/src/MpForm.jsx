@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const MpForm = ({ passDataUpstream, postcodeError }) => {
+const MpForm = ({ passDataUpstream, postcodeError, postcodeDropdownOpen }) => {
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
@@ -31,21 +31,29 @@ const MpForm = ({ passDataUpstream, postcodeError }) => {
 
   return (
     <div>
-      <h2 className="secondary-header">2. Find Your Mp</h2>
-      <Formik
-        initialValues={{ postcode: "" }}
-        validate={handleValidation}
-        onSubmit={handleValidation}
-      >
-        {(values) => (
-          <Form className="getMpForm">
-            <ErrorMessage name="postcode" component="div" />
-            <label htmlFor="postcode">Postcode:</label>
-            <Field type="text" name="postcode" />
-            {postcodeError && <div>{postcodeError}</div>}
-          </Form>
-        )}
-      </Formik>
+      <button onClick={() => passDataUpstream({ postcodeDropdownOpen: true })}>
+        Don't see your MP?
+      </button>
+      <button onClick={() => passDataUpstream({ postcodeDropdownOpen: false })}>
+        Continue with this MP
+      </button>
+      {console.log(postcodeDropdownOpen)}
+      {postcodeDropdownOpen && (
+        <Formik
+          initialValues={{ postcode: "" }}
+          validate={handleValidation}
+          onSubmit={handleValidation}
+        >
+          {(values) => (
+            <Form className="getMpForm">
+              <ErrorMessage name="postcode" component="div" />
+              <label htmlFor="postcode">Postcode:</label>
+              <Field type="text" name="postcode" />
+              {postcodeError && <div>{postcodeError}</div>}
+            </Form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 };
