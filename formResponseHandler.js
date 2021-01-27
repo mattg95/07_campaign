@@ -53,13 +53,17 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
 
   const populateMainResponseData = (emailObj, supportsAid) => {
     //adds 'main' content from emailString.Json
+    console.log(emailObj);
     emailObj.main += getRandomResponse(main.sentence1);
     emailObj.main += getRandomResponse(main.sentence2);
     emailObj.main += getRandomResponse(main.sentence3);
+    const emailBody = emailObj?.conservative;
     const responseData = {
       subject: supportsAid ? getRandomResponse(subject) : "",
       body: supportsAid ? Object.values(emailObj).join("\n") : "",
     };
+
+    console.log(responseData);
     return responseData;
   };
 
@@ -109,60 +113,47 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       }
     }
     //moivations handler
-    if (field.id === "wKGNjgRDml1H") {
-      const thisId = "wKGNjgRDml1H";
-      const thisField = fields.find(({ id }) => id === thisId);
-      const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
-      let choiceIndex = [];
-      //this gets the synomys array based on the index of the survey multiple choice-
-      thisField.choices.forEach((choice, i) => {
-        if (thisAnswers.choices.labels.includes(choice.label)) {
-          choiceIndex.push(i);
-        }
-      });
-      const synoynms = choiceIndex.map((ele) => {
-        return survey[questionKeys[thisId]][ele];
-      });
-      const sentenceArr = synoynms.map((ele) => {
-        ele && getRandomResponse(ele);
-      });
-      sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
-    }
+    // if (field.id === "wKGNjgRDml1H") {
+    //   const thisId = "wKGNjgRDml1H";
+    //   const thisField = fields.find(({ id }) => id === thisId);
+    //   const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
+    //   let choiceIndex = [];
+    //   //this gets the synomys array based on the index of the survey multiple choice-
+    //   thisField.choices.forEach((choice, i) => {
+    //     if (thisAnswers.choices.labels.includes(choice.label)) {
+    //       choiceIndex.push(i);
+    //     }
+    //   });
+    //   const synoynms = choiceIndex.map((ele) => {
+    //     return survey[questionKeys[thisId]][ele];
+    //   });
+    //   const sentenceArr = synoynms.map((ele) => {
+    //     ele && getRandomResponse(ele);
+    //   });
+    //   sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
+    // }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
       emailObj.meetMp = getRandomResponse(survey.meetMp);
     }
     //name handler
     if (field.id === "daZZA6TwyMP5") {
-      emailObj.name = `Yours sincerely,\n${text}`;
+      const randomSignoff = getRandomResponse(main.signoff);
+      emailObj.name = `${randomSignoff},\n${text}`;
     }
     //address handler
     if (field.id === "uLPPjjg5B0Bn") {
       emailObj.address = text;
     }
   });
-  if (memberOfConservatives) {
-    return getMpByPostcode(postcode.text).then((mp) => {
-      if (mp.party === "Conservative") {
-        const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-        const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-        console.log(
-          "emailObj.conservative before changing:",
-          emailObj.conservative
-        );
-        if (synonyms.length > 0) {
-          emailObj.conservative = getRandomResponse(synonyms);
-          console.log(
-            "emailObj.conservative after changing:",
-            emailObj.conservative
-          );
-        }
+  return getMpByPostcode(postcode.text).then((mp) => {
+    if (memberOfConservatives && mp.party === "Conservative") {
+      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
+      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+      if (synonyms.length > 0) {
+        emailObj.conservative = getRandomResponse(synonyms);
       }
-      return populateMainResponseData(emailObj, supportsAid);
-    });
-  } else {
-    const responseData = populateMainResponseData(emailObj, supportsAid);
-    // Need to return it as a promise to match the other branch
-    return Promise.resolve(responseData);
-  }
+    }
+    return populateMainResponseData(emailObj, supportsAid);
+  });
 };
