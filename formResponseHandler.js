@@ -77,6 +77,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       v.length && (emailbodyStr += v + `\n`);
     }
     const responseData = {
+      mpData: mp,
       greeting: supportsAid ? createGreeting(mp) : "",
       subject: supportsAid ? getRandomResponse(subject) : "",
       body: supportsAid ? emailbodyStr : "",
