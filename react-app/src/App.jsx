@@ -18,7 +18,7 @@ const socket = socketIOClient();
 const App = () => {
   const [state, setState] = useState({
     responseId: "",
-    mpData: {},
+    mpData: { error: "Could not find MP" },
     postcodeError: "",
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
@@ -101,7 +101,7 @@ const App = () => {
         <Row>
           <Col>
             <div className="">
-              {Object.keys(mpData).length > 0 && (
+              {!"error" in mpData && (
                 <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
               )}
             </div>
@@ -123,7 +123,7 @@ const App = () => {
         <Row>
           <Col>
             <div id="emailBox" className="">
-              {Object.keys(mpData).length > 0 && (
+              {!"error" in mpData && (
                 <TextBox
                   passDataUpstream={passDataUpstream}
                   emailBody={emailWithGreeting}
@@ -136,7 +136,7 @@ const App = () => {
         <Row>
           <Col>
             <div className="">
-              {Object.keys(mpData).length > 0 && (
+              {!"error" in mpData && (
                 <SendEmail
                   mpEmailAddress={mpEmailAddress}
                   body={emailWithGreeting}
