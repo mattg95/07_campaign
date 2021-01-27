@@ -6,18 +6,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   let memberOfConservatives = false;
   const postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
 
-  const emailObj = {
-    supportsAid: "",
-    conservative: "",
-    main: "",
-    countryLinks: "",
-    religion: "",
-    motivation: "",
-    meetMp: "",
-    signoff: "",
-    name: "",
-    address: "",
-  };
+  const emailObj = {};
 
   //these map the question ids from the form onto our json object
   const questionKeys = {
@@ -63,7 +52,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   };
 
   const populateMainResponseData = (emailObj, supportsAid) => {
-    console.log(emailObj);
     //adds 'main' content from emailString.Json
     emailObj.main += getRandomResponse(main.sentence1);
     emailObj.main += getRandomResponse(main.sentence2);
@@ -139,6 +127,10 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         ele && getRandomResponse(ele);
       });
       sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
+    }
+    //meetMp handler
+    if (field.id === "vdZgYVyiLE13") {
+      emailObj.meetMp = getRandomResponse(survey.meetMp);
     }
     //name handler
     if (field.id === "daZZA6TwyMP5") {
