@@ -46,6 +46,10 @@
         "I have lived in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? I’ve spent part of my life there and I would like to ensure that support for COUNTRY_NAME is not reduced",
         "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I’ve spent quite a bit of my life there"
       ]
+    ],
+    "meetMp": [
+      "I would love to tell you more about my thoughts on this. Would we be able to have a call about this to discuss further? Happy for this to be as part of your advice surgery if that makes sense for you.",
+      "I would like to hear your thoughts on this and hope you vote against this bill to reduce our aid budget. I would appreciate a follow-up call or meeting or advice surgery session to discuss this further."
     ]
   },
 
@@ -61,6 +65,30 @@
     "sentence3": [
       "I’m writing to ask you to ensure the government reverses this decision, or at least make absolutely sure it’s temporary.",
       "Will you please agree to vote for this not to happen? Or at least make absolutely sure that the law is clear that this will be for one year only?"
+    ],
+    "greeting": [
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Dear",
+      "Hi",
+      "Hi"
+    ],
+    "signoff": [
+      "Yours sincerely",
+      "Kind regards",
+      "Best regards",
+      "Regards",
+      "Best",
+      "Respectfully",
+      "Thank you",
+      "Yours faithfully",
+      "Sincerely",
+      "Many thanks"
     ]
   }
 }
