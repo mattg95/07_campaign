@@ -118,7 +118,8 @@ describe("generateEmail", () => {
       expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
     });
   });
-  it("should include references to a user's religion when a user has one", () => {
+  //Very important to only run one test at a time, and currently not any of the tests that use multiple files, or we'll run out of API calls
+  it.only("should include references to a user's religion when a user has one", () => {
     const jewishEmail = generateEmail(jewishResponse.form_response);
     const otherReligionEmail = generateEmail(
       otherReligionResponse.form_response
@@ -164,11 +165,11 @@ describe("generateEmail", () => {
     const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  it.only("Conservative responses to Conservative MPs should reference that in the email", () => {
+  it("Conservative responses to Conservative MPs should reference that in the email", () => {
     const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
+  xit("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
     const nonToryMpEmail = generateEmail(nonToryMpResponse.form_response);
     expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
   });

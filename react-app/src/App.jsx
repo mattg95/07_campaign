@@ -1,51 +1,143 @@
-import "./App.scss";
+import React, { useEffect, useState } from "react";
+import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
 import TypeForm from "./TypeForm";
 import TextBox from "./TextBox";
-import ArrowDown from "./arrow-down.svg";
+import MpForm from "./MpForm";
+import DisplayMp from "./DisplayMp";
+import SendEmail from "./SendEmail";
+
+import "./App.scss";
+import IntroContent from "./IntroContent";
 
 require("dotenv").config({ path: "../.env" });
 
-function App() {
+const socket = socketIOClient();
+
+const App = () => {
+  const [state, setState] = useState({
+    responseId: "",
+    mpData: {},
+    postcodeError: "",
+    generatedEmailBody: "Your email will appear here",
+    emailSubject: "",
+    emailCopied: false,
+    mpEmailAddress: "",
+    greeting: "",
+    emailWithGreeting: "",
+  });
+
+  const {
+    responseId,
+    mpData,
+    postcodeError,
+    generatedEmailBody,
+    emailSubject,
+    emailCopied,
+    mpEmailAddress,
+    greeting,
+    emailWithGreeting,
+  } = state;
+
+  useEffect(() => {
+    socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
+      if (formToken === state.responseId) {
+        setState({
+          ...state,
+          generatedEmailBody: generatedEmail.body,
+          emailSubject: generatedEmail.subject,
+        });
+      }
+    });
+  }, [state.responseId]);
+
+  useEffect(() => {
+    setState({
+      ...state,
+      emailWithGreeting: greeting + generatedEmailBody,
+    });
+  }, [generatedEmailBody, greeting]);
+
+  useEffect(() => {
+    if (mpData) {
+      const { name, full_name } = mpData;
+      const mpName = full_name ? full_name : name;
+      if (mpName) {
+        setState({
+          ...state,
+          mpEmailAddress:
+            mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
+          greeting: `Dear ${mpName},\n`,
+        });
+      }
+    }
+  }, [mpData]);
+
+  const passDataUpstream = (data) => {
+    setState({ ...state, [Object.keys(data)]: data[Object.keys(data)] });
+  };
+
+  console.log(state);
   return (
     <div className="App">
-      <Container>
+      <Container className="text-center">
         <Row>
           <Col>
-            <h1 className="text-center title">0.7% Campaign</h1>
+            <IntroContent />
           </Col>
         </Row>
         <Row>
           <Col>
-            <p className="text-center intro-para">
-              Info about our campaign. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <div className="text-center">
-              <h2 className="secondary-header">1. Fill out the form</h2>
-              <p className="explanation">
-                This will generate an email to send to your MP
-              </p>
-              <a href="#typeform">
-                <img src={ArrowDown} className="arrow-down" />
-              </a>
+            <div className=" typeform">
+              <TypeForm passDataUpstream={passDataUpstream} />
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
-            <div className="text-center">
-              <TypeForm className="typeform" />
+            <div id="mpForm" className="">
+              {emailSubject && (
+                <MpForm
+                  passDataUpstream={passDataUpstream}
+                  postcodeError={postcodeError}
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="">
+              {Object.keys(mpData).length > 0 && (
+                <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="">
+              {Object.keys(mpData).length > 0 && (
+                <TextBox
+                  passDataUpstream={passDataUpstream}
+                  emailBody={emailWithGreeting}
+                  subject={emailSubject}
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="">
+              {Object.keys(mpData).length > 0 && (
+                <SendEmail
+                  mpEmailAddress={mpEmailAddress}
+                  body={emailWithGreeting}
+                  subject={emailSubject}
+                />
+              )}
             </div>
           </Col>
         </Row>
@@ -53,6 +145,6 @@ function App() {
     </div>
     // Cookie banner here
   );
-}
+};
 
 export default App;
