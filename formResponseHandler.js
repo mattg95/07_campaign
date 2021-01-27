@@ -146,7 +146,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailObj.address = text;
     }
   });
+  const createGreeting = ({ name, full_name }) => {
+    salutation = getRandomResponse(main.greeting);
+    const mpName = full_name ? full_name : name;
+    if (mpName) {
+      return (emailObj.greeting = `${salutation} ${mpName},\n`);
+    }
+  };
   return getMpByPostcode(postcode.text).then((mp) => {
+    emailObj.greeting = createGreeting(mp);
     if (memberOfConservatives && mp.party === "Conservative") {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
