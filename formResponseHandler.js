@@ -74,7 +74,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
     let emailbodyStr = "";
-    console.log(emailMap);
     for (const [k, v] of emailMap) {
       if (k === "name") {
         emailbodyStr += v + `\n`;
@@ -86,12 +85,11 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     const responseData = {
       mpData: mp,
-      greeting: supportsAid ? createGreeting(mp) : "",
-      subject: supportsAid ? getRandomResponse(subject) : "",
-      body: supportsAid ? emailbodyStr : "",
+      greeting: createGreeting(mp),
+      subject: getRandomResponse(subject),
+      body: emailbodyStr,
     };
 
-    console.log(responseData);
     return responseData;
   };
 
@@ -102,6 +100,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       if (choice.label === "No") {
         supportsAid = false;
       }
+      return;
     }
     if (field.id === "EejpFBEzP9wK") {
       //conservatives handler
@@ -183,6 +182,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailMap.set("address", text);
     }
   });
+
+  if (!supportsAid) {
+    return {
+      mpData: {},
+      greeting: "",
+      subject: "",
+      body: "",
+    };
+  }
 
   return getMpByPostcode(postcode.text).then((mp) => {
     if (memberOfConservatives && mp.party === "Conservative") {
