@@ -21,7 +21,7 @@ const TypeForm = ({ passDataUpstream }) => {
         },
       }
     );
-  }, [myRef, mpForm]);
+  }, [myRef, mpForm, passDataUpstream]);
 
   return (
     <div>

@@ -15,6 +15,7 @@ const sendEmail = ({ subject, body, mpEmailAddress }) => {
         }
         className="btn btn-primary send-email-button"
         target="_blank"
+        rel="noreferrer"
       >
         SEND EMAIL
       </a>
