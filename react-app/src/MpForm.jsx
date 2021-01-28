@@ -40,20 +40,24 @@ const MpForm = ({ passDataUpstream }) => {
 
   return (
     <div>
-      <button
-        type="submit"
-        onClick={() => setState({ ...state, dropDownOpen: true })}
-      >
-        Don't see your MP?
-      </button>
-      <a href="#emailBox">
+      <div className="button-container">
         <button
+          className="btn btn-lg cta btn-outline-primary"
           type="submit"
-          onClick={() => setState({ ...state, dropDownOpen: false })}
+          onClick={() => setState({ ...state, dropDownOpen: true })}
         >
-          Continue with this MP
+          Don't see your MP?
         </button>
-      </a>
+        <a href="#emailBox">
+          <button
+            className="btn btn-lg cta btn-primary"
+            type="submit"
+            onClick={() => setState({ ...state, dropDownOpen: false })}
+          >
+            Continue with this MP
+          </button>
+        </a>
+      </div>
       {dropDownOpen && (
         <Formik
           initialValues={{ postcode: "" }}
@@ -61,11 +65,10 @@ const MpForm = ({ passDataUpstream }) => {
           onSubmit={handleValidation}
         >
           {(values) => (
-            <Form className="getMpForm">
-              <ErrorMessage name="postcode" component="div" />
+            <Form className="get-MP-form">
               <label htmlFor="postcode">Postcode:</label>
               <Field type="text" name="postcode" />
-              {postcodeError && <div>{postcodeError}</div>}
+              {postcodeError && <div className="error">{postcodeError}</div>}
             </Form>
           )}
         </Formik>

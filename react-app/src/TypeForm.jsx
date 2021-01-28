@@ -3,7 +3,7 @@ import * as typeformEmbed from "@typeform/embed";
 
 const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
-  const mpForm = document.getElementById("mpForm");
+  const mpForm = document.getElementById("displayMP");
 
   useEffect(() => {
     typeformEmbed.makeWidget(

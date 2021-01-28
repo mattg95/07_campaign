@@ -4,10 +4,10 @@ const DisplayMp = ({
   mpData: { constituency, full_name, party, name, error },
   mpEmailAddress,
 }) => (
-  <div>
-    <h2 className="secondary-header">2. Find Your Mp</h2>
-    <div className="mpCard">
-      <div>{error}</div>
+  <div className="displayMP" id="displayMP">
+    <h2 className="secondary-header">2. Find Your MP</h2>
+    <div className="mpCard text-center">
+      <div className="error">{error}</div>
       <div>{constituency}</div>
       <div>{name}</div>
       <div>{full_name}</div>
