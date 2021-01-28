@@ -3,9 +3,9 @@ import * as typeformEmbed from "@typeform/embed";
 
 const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
+  const mpForm = document.getElementById("mpForm");
 
   useEffect(() => {
-    const mpForm = document.getElementById("mpForm");
     typeformEmbed.makeWidget(
       myRef.current,
       `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
@@ -16,12 +16,12 @@ const TypeForm = ({ passDataUpstream }) => {
         onSubmit: ({ response_id }) => {
           passDataUpstream({ responseId: response_id });
           setTimeout(() => {
-            mpForm.scrollIntoView();
+            mpForm && mpForm.scrollIntoView();
           }, 3000);
         },
       }
     );
-  }, [myRef]);
+  }, [myRef, mpForm]);
 
   return (
     <div>

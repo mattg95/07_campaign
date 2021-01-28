@@ -19,42 +19,39 @@ const App = () => {
   const [state, setState] = useState({
     responseId: "",
     mpData: { error: "Could not find MP" },
-    postcodeError: "",
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    emailCopied: false,
+    typeFormReturned: false,
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
-    postcodeDropdownOpen: false,
   });
 
   const {
     responseId,
     mpData,
-    postcodeError,
     generatedEmailBody,
     emailSubject,
-    emailCopied,
     mpEmailAddress,
     greeting,
     emailWithGreeting,
-    postcodeDropdownOpen,
+    typeFormReturned,
   } = state;
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      if (formToken === state.responseId) {
+      if (formToken === responseId) {
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
+          typeFormReturned: true,
         });
       }
     });
-  }, [state.responseId]);
+  }, [responseId]);
 
   useEffect(() => {
     setState({
@@ -79,10 +76,11 @@ const App = () => {
   }, [mpData]);
 
   const passDataUpstream = (data) => {
-    setState({ ...state, [Object.keys(data)]: data[Object.keys(data)] });
+    Object.keys(data).forEach((key) => {
+      setState({ ...state, [key]: data[key] });
+    });
   };
 
-  console.log(state);
   return (
     <div className="App">
       <Container className="text-center">
@@ -98,54 +96,46 @@ const App = () => {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {!"error" in mpData && (
-                <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div id="mpForm" className="">
-              {emailSubject && (
-                <MpForm
-                  passDataUpstream={passDataUpstream}
-                  postcodeError={postcodeError}
-                  postcodeDropdownOpen={postcodeDropdownOpen}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div id="emailBox" className="">
-              {!"error" in mpData && (
-                <TextBox
-                  passDataUpstream={passDataUpstream}
-                  emailBody={emailWithGreeting}
-                  subject={emailSubject}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {!"error" in mpData && (
-                <SendEmail
-                  mpEmailAddress={mpEmailAddress}
-                  body={emailWithGreeting}
-                  subject={emailSubject}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
+        {typeFormReturned && (
+          <>
+            <Row>
+              <Col>
+                <div className="">
+                  <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div id="mpForm" className="">
+                  <MpForm passDataUpstream={passDataUpstream} />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div id="emailBox" className="">
+                  <TextBox
+                    passDataUpstream={passDataUpstream}
+                    emailBody={emailWithGreeting}
+                    subject={emailSubject}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div className="">
+                  <SendEmail
+                    mpEmailAddress={mpEmailAddress}
+                    body={emailWithGreeting}
+                    subject={emailSubject}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
       </Container>
     </div>
     // Cookie banner here
