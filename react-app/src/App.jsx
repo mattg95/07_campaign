@@ -9,9 +9,9 @@ import TextBox from "./TextBox";
 import MpForm from "./MpForm";
 import DisplayMp from "./DisplayMp";
 import SendEmail from "./SendEmail";
+import IntroContent from "./IntroContent";
 
 import "./App.scss";
-import IntroContent from "./IntroContent";
 
 require("dotenv").config({ path: "../.env" });
 
@@ -85,15 +85,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <Container className="text-center">
+      <Container>
         <Row>
-          <Col>
+          <Col xs={12} lg={6}>
             <IntroContent />
           </Col>
         </Row>
         <Row>
           <Col>
-            <div className=" typeform">
+            <div className="typeform">
               <TypeForm passDataUpstream={passDataUpstream} />
             </div>
           </Col>
