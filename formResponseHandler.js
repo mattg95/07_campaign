@@ -25,6 +25,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     EejpFBEzP9wK: "conservative",
     IdqRPd6SUMVh: "religion",
     vdZgYVyiLE13: "meetMp",
+    UhNb2Z5nqHtb: "meetMpDoubleCheck",
     ghzBmQTQ2npF: "emailAddress",
     uLPPjjg5B0Bn: "homeAddress",
     hgdzZ05GxSAs: "postcode",
@@ -73,7 +74,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
     let emailbodyStr = "";
-    console.log(emailMap);
     for (const [k, v] of emailMap) {
       if (k === "name") {
         emailbodyStr += v + `\n`;
@@ -85,12 +85,11 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     const responseData = {
       mpData: mp,
-      greeting: supportsAid ? createGreeting(mp) : "",
-      subject: supportsAid ? getRandomResponse(subject) : "",
-      body: supportsAid ? emailbodyStr : "",
+      greeting: createGreeting(mp),
+      subject: getRandomResponse(subject),
+      body: emailbodyStr,
     };
 
-    console.log(responseData);
     return responseData;
   };
 
@@ -101,6 +100,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       if (choice.label === "No") {
         supportsAid = false;
       }
+      return;
     }
     if (field.id === "EejpFBEzP9wK") {
       //conservatives handler
@@ -161,8 +161,17 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     // }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
-      emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      if (getAnswerIndex("vdZgYVyiLE13") === 0) {
+        emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      }
     }
+    //meetMp double check hanlder
+    if (field.id === "UhNb2Z5nqHtb") {
+      if (getAnswerIndex("UhNb2Z5nqHtb") === 0) {
+        emailMap.set("meetMp", getRandomResponse(survey.meetMp));
+      }
+    }
+
     //name handler
     if (field.id === "daZZA6TwyMP5") {
       const randomSignoff = getRandomResponse(main.signoff);
@@ -173,6 +182,15 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       emailMap.set("address", text);
     }
   });
+
+  if (!supportsAid) {
+    return {
+      mpData: {},
+      greeting: "",
+      subject: "",
+      body: "",
+    };
+  }
 
   return getMpByPostcode(postcode.text).then((mp) => {
     if (memberOfConservatives && mp.party === "Conservative") {

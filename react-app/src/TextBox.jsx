@@ -1,3 +1,5 @@
+/* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
+
 import React from "react";
 import EdiText from "react-editext";
 
@@ -37,10 +39,14 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
         />
 
         <Popup
-          trigger={(open) => <button className="button">Copy</button>}
-          position="right center"
+          trigger={(open) => (
+            <button className="btn btn-outline-primary copy-button">
+              Copy
+            </button>
+          )}
           closeOnDocumentClick
           onOpen={copyToClipboard}
+          className="copy-popup"
         >
           <span> Copied to clipboard </span>
         </Popup>
