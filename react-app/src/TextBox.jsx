@@ -39,10 +39,14 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
         />
 
         <Popup
-          trigger={(open) => <button className="button">Copy</button>}
-          position="right center"
+          trigger={(open) => (
+            <button className="btn btn-outline-primary copy-button">
+              Copy
+            </button>
+          )}
           closeOnDocumentClick
           onOpen={copyToClipboard}
+          className="copy-popup"
         >
           <span> Copied to clipboard </span>
         </Popup>

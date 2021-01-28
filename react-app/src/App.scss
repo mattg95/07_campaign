@@ -1,5 +1,6 @@
 $primary: #da6846;
 $secondary: #4eb9be;
+
 //#DA6846
 //#DB6947
 //#D86746
@@ -19,6 +20,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-position: center bottom;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -36,21 +38,38 @@ body {
   }
 }
 
-.arrow-down {
-  margin-top: 20px;
-  width: 30px;
-  length: 30px;
-  color: white;
+.send-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  margin-top: 40px;
+  @media only screen and (min-width: 768px) {
+    margin-top: 80px;
+  }
 }
 h1,
 h2 {
   font-family: "Open Sans", sans-serif;
   color: $primary;
 }
-
+h1,
+h2,
+h3,
 p {
+  text-align: center;
+}
+.error {
+  color: red;
+}
+div {
+  font-family: "Poppins", sans-serif;
+}
+p,
+label {
   font-family: "Poppins", sans-serif;
   color: white;
+  margin-bottom: 0 !important;
 }
 h1.title {
   margin-top: 40px;
@@ -71,6 +90,15 @@ h2.secondary-header {
 p.intro-para {
   font-size: 3rem;
 }
+.intro-content {
+  h1,
+  h2,
+  p {
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+    }
+  }
+}
 p.explanation {
   font-size: 1.5rem;
   line-height: 3rem;
@@ -82,13 +110,67 @@ p.explanation {
   }
 }
 .mpCard {
-  border: 2px solid grey;
-  margin: 15px;
+  border: 2px solid white;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 15px;
-  // background-color: lightgrey;
+  margin-top: 20px;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+.copy-button {
+  position: absolute;
+  right: 15px;
+}
+.send-button {
+  margin-top: 40px;
+}
+.copy-popup {
+  cursor: pointer;
+  margin-bottom: 40px;
 }
 
-.getMpForm {
+.btn {
+  padding: 17px !important;
+}
+.btn-primary {
+  background-color: $primary !important;
+  border: 1px solid $primary !important;
+  color: white !important;
+  font-weight: 600 !important;
+  &:hover {
+    background-color: #db866e !important;
+  }
+}
+.btn-outline-primary {
+  color: white !important;
+  border: 1px solid white !important;
+  &:hover {
+    background-color: rgba(
+      78,
+      185,
+      190,
+      0.2
+    ) !important; //secondary colour at 0.2 opacity
+  }
+}
+.cta {
+  width: 100%;
+  @media only screen and (min-width: 768px) {
+    width: auto;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.get-MP-form {
   margin: 15px;
   padding: 15px;
 }
@@ -108,12 +190,34 @@ p.explanation {
 }
 
 .typeform-widget {
-  padding: 40px;
   height: 100vh;
   margin-bottom: 40px;
+  margin-top: 40px;
+  @media only screen and (min-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+
   &.closed {
     height: 0vh;
   }
+}
+.typeform-widget::after {
+  background-color: #4eb9be;
+  content: "";
+  top: 40px;
+  right: 20px;
+  bottom: 40px;
+  left: 20px;
+  @media only screen and (min-width: 768px) {
+    top: 80px;
+    bottom: 80px;
+  }
+  opacity: 0.4;
+  z-index: -1;
+  border-radius: 10px;
+  position: absolute;
+  display: inline-block;
 }
 
 //for pop ups
@@ -130,7 +234,6 @@ p.explanation {
   width: 160px;
   background-color: #555;
   color: #fff;
-  text-align: center;
   border-radius: 6px;
   padding: 8px 0;
   position: absolute;
