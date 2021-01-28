@@ -26,34 +26,10 @@ fs.readdirSync(normalizedPath).forEach(function (file) {
   });
 });
 
-const getAllResults = () => {
-  return exampleResponses.map(({ filename: file, json: { form_response } }) => {
-    return { filename: file, email: generateEmail(form_response) };
-  });
-};
-
-const getAllEmails = () => {
-  return getAllResults().map((result) => result.email);
-};
-
-const getAllPostiveEmails = () => {
-  const allPositiveResponses = exampleResponses.filter(
-    ({ json: { form_response } }) => {
-      let supportsAid = true;
-      form_response.answers.forEach(({ field, choice }) => {
-        if (field.id === "gil6UCe4dG9T") {
-          if (choice.label === "No") {
-            supportsAid = false;
-          }
-        }
-      });
-      return supportsAid && form_response;
-    }
-  );
-
-  return allPositiveResponses.map(({ json: { form_response } }) => {
-    return generateEmail(form_response);
-  });
+const getRandomEmail = () => {
+  const randomIndex = Math.floor(Math.random() * exampleResponses.length);
+  const randomResponse = exampleResponses[randomIndex];
+  return generateEmail(randomResponse.json.form_response);
 };
 
 describe("/api/postcode", () => {
@@ -80,50 +56,46 @@ describe("/api/postcode", () => {
 //how to test webhooks?
 
 describe("generateEmail", () => {
-  it("should return an object with keys 'body' and 'subject'", () => {
-    getAllEmails().forEach((res) => {
-      expect(res).to.have.keys("body", "subject");
-      expect(Object.keys(res).length).to.equal(2);
-    });
-  });
-  it("response.body should be a string", () => {
-    getAllEmails().forEach((res) => {
-      expect(typeof res.body).to.equal("string");
-    });
-  });
-  it("response.subject should be a string", () => {
-    getAllEmails().forEach((res) => {
-      expect(typeof res.subject).to.equal("string");
-    });
-  });
-  it("all positive responses that support aid should return a body and a subject", () => {
-    getAllPostiveEmails().forEach((res) => {
-      expect(res.body.length).to.be.above(0);
-      expect(res.subject.length).to.be.above(0);
-    });
-  });
-  it("should not include 'COUNTRY_NAME' template variable", () => {
-    getAllEmails().forEach((res) => {
-      expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
-    });
-  });
-  it("should not include the string 'undefined' anywhere in the email", () => {
-    getAllEmails().forEach((res) => {
-      expect(res.body.search("undefined")).to.equal(-1);
-    });
-  });
-  it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
-    getAllEmails().forEach((res) => {
-      expect(res.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(-1);
-      expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
-    });
-  });
-  //Very important to only run one test at a time, and currently not any of the tests that use multiple files, or we'll run out of API calls
-  it.only("should include references to a user's religion when a user has one", () => {
-    const jewishEmail = generateEmail(jewishResponse.form_response);
-    const otherReligionEmail = generateEmail(
+  let res;
+  let negativeEmail;
+  let allToryEmail;
+  let nonToryMpEmail;
+  let nonToryEmail;
+  let jewishEmail;
+  let otherReligionEmail;
+  before(async function () {
+    res = await getRandomEmail();
+    negativeEmail = await generateEmail(negativeResult.form_response);
+    allToryEmail = await generateEmail(allToryResponse.form_response);
+    nonToryMpEmail = await generateEmail(nonToryMpResponse.form_response);
+    allToryEmail = await generateEmail(allToryResponse.form_response);
+    nonToryEmail = await generateEmail(nonToryResponse.form_response);
+    jewishEmail = await generateEmail(jewishResponse.form_response);
+    otherReligionEmail = await generateEmail(
       otherReligionResponse.form_response
     );
+  });
+  it("should return an object with keys 'body' and 'subject'", () => {
+    expect(res).to.have.keys("body", "subject", "greeting", "mpData");
+    expect(Object.keys(res).length).to.equal(4);
+  });
+  it("response.body should be a string", () => {
+    expect(typeof res.body).to.equal("string");
+  });
+  it("response.subject should be a string", () => {
+    expect(typeof res.subject).to.equal("string");
+  });
+  it("should not include 'COUNTRY_NAME' template variable", () => {
+    expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
+  });
+  it("should not include the string 'undefined' anywhere in the email", () => {
+    expect(res.body.search("undefined")).to.equal(-1);
+  });
+  it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
+    expect(res.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(-1);
+    expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
+  });
+  it("should include references to a user's religion when a user has one", async () => {
     expect([
       jewishEmail.body.search(/Jew/),
       jewishEmail.body.search(/Jewish/),
@@ -134,43 +106,33 @@ describe("generateEmail", () => {
     ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
-    getAllEmails().forEach((res) => {
-      expect(res.body.search(/Not religious/)).to.equal(-1);
-      expect(res.body.search(/agnostic/)).to.equal(-1);
-      expect(res.body.search(/athiest/)).to.equal(-1);
-    });
+    expect(res.body.search(/Not religious/)).to.equal(-1);
+    expect(res.body.search(/agnostic/)).to.equal(-1);
+    expect(res.body.search(/athiest/)).to.equal(-1);
   });
   it("should not include a response for 'other religion' choice", () => {
-    getAllEmails().forEach((res) => {
-      expect(res.body.search(/Not religious/)).to.equal(-1);
-      expect(res.body.search(/agnostic/)).to.equal(-1);
-      expect(res.body.search(/athiest/)).to.equal(-1);
-    });
+    expect(res.body.search(/Not religious/)).to.equal(-1);
+    expect(res.body.search(/agnostic/)).to.equal(-1);
+    expect(res.body.search(/athiest/)).to.equal(-1);
   });
-  it("should not include escaped 'newline' characters", () => {
-    getAllResults().forEach((res) => {
-      expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
-    });
-  });
+  // it("should not include escaped 'newline' characters", () => {
+  //   const res = await getRandomEmail();
+  //     expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
+  // });
   it("negative responses to question 1 (supporting aid) should return a blank", () => {
-    const negativeEmail = generateEmail(negativeResult.form_response);
     expect(negativeEmail.body).to.equal("");
     expect(negativeEmail.subject).to.equal("");
   });
   it("non-conservative responses should not reference that in the email", () => {
-    const nonToryEmail = generateEmail(nonToryResponse.form_response);
     expect(nonToryEmail.body.search(/conservative/gi)).to.equal(-1);
   });
   it("Conservative responses to Conservative MPs should reference that in the email", () => {
-    const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
   it("Conservative responses to Conservative MPs should reference that in the email", () => {
-    const allToryEmail = generateEmail(allToryResponse.form_response);
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  xit("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
-    const nonToryMpEmail = generateEmail(nonToryMpResponse.form_response);
+  it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
     expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
   });
 });

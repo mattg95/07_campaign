@@ -1,3 +1,5 @@
+/* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
+
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
@@ -7,9 +9,9 @@ import TextBox from "./TextBox";
 import MpForm from "./MpForm";
 import DisplayMp from "./DisplayMp";
 import SendEmail from "./SendEmail";
+import IntroContent from "./IntroContent";
 
 import "./App.scss";
-import IntroContent from "./IntroContent";
 
 require("dotenv").config({ path: "../.env" });
 
@@ -18,11 +20,10 @@ const socket = socketIOClient();
 const App = () => {
   const [state, setState] = useState({
     responseId: "",
-    mpData: {},
-    postcodeError: "",
+    mpData: { error: "Could not find your MP" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    emailCopied: false,
+    typeFormReturned: false,
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
@@ -31,28 +32,28 @@ const App = () => {
   const {
     responseId,
     mpData,
-    postcodeError,
     generatedEmailBody,
     emailSubject,
-    emailCopied,
     mpEmailAddress,
     greeting,
     emailWithGreeting,
+    typeFormReturned,
   } = state;
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
-      if (formToken === state.responseId) {
+      if (formToken === responseId) {
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
+          typeFormReturned: true,
         });
       }
     });
-  }, [state.responseId]);
+  }, [responseId]);
 
   useEffect(() => {
     setState({
@@ -77,72 +78,66 @@ const App = () => {
   }, [mpData]);
 
   const passDataUpstream = (data) => {
-    setState({ ...state, [Object.keys(data)]: data[Object.keys(data)] });
+    Object.keys(data).forEach((key) => {
+      setState({ ...state, [key]: data[key] });
+    });
   };
 
-  console.log(state);
   return (
     <div className="App">
-      <Container className="text-center">
+      <Container>
         <Row>
-          <Col>
+          <Col xs={12} lg={6}>
             <IntroContent />
           </Col>
         </Row>
         <Row>
           <Col>
-            <div className=" typeform">
+            <div className="typeform">
               <TypeForm passDataUpstream={passDataUpstream} />
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <div id="mpForm" className="">
-              {emailSubject && (
-                <MpForm
-                  passDataUpstream={passDataUpstream}
-                  postcodeError={postcodeError}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {Object.keys(mpData).length > 0 && (
-                <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {Object.keys(mpData).length > 0 && (
-                <TextBox
-                  passDataUpstream={passDataUpstream}
-                  emailBody={emailWithGreeting}
-                  subject={emailSubject}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="">
-              {Object.keys(mpData).length > 0 && (
-                <SendEmail
-                  mpEmailAddress={mpEmailAddress}
-                  body={emailWithGreeting}
-                  subject={emailSubject}
-                />
-              )}
-            </div>
-          </Col>
-        </Row>
+        {typeFormReturned && (
+          <>
+            <Row>
+              <Col>
+                <div className="">
+                  <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div id="mpForm" className="">
+                  <MpForm passDataUpstream={passDataUpstream} />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div id="emailBox" className="">
+                  <TextBox
+                    passDataUpstream={passDataUpstream}
+                    emailBody={emailWithGreeting}
+                    subject={emailSubject}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <div className="">
+                  <SendEmail
+                    mpEmailAddress={mpEmailAddress}
+                    body={emailWithGreeting}
+                    subject={emailSubject}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
       </Container>
     </div>
     // Cookie banner here
