@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const MpForm = ({ passDataUpstream, postcodeError, postcodeDropdownOpen }) => {
+const MpForm = ({ passDataUpstream }) => {
+  const [state, setState] = useState({
+    dropDownOpen: false,
+    postcodeError: "",
+  });
+  const { dropDownOpen, postcodeError } = state;
+
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
@@ -12,8 +18,11 @@ const MpForm = ({ passDataUpstream, postcodeError, postcodeDropdownOpen }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          passDataUpstream({ postcodeError: data.error });
-        } else passDataUpstream({ mpData: data });
+          setState({ ...state, postcodeError: data.error });
+        } else {
+          passDataUpstream({ mpData: data });
+          setState({ ...state, postcodeError: "" });
+        }
       });
     return response;
   };
@@ -24,21 +33,28 @@ const MpForm = ({ passDataUpstream, postcodeError, postcodeDropdownOpen }) => {
       postToApi(postcode);
     } else {
       if (postcode.length > 5) {
-        passDataUpstream({ postcodeError: "Invalid postcode" });
+        setState({ ...state, postcodeError: "Invalid postcode" });
       }
     }
   };
 
   return (
     <div>
-      <button onClick={() => passDataUpstream({ postcodeDropdownOpen: true })}>
+      <button
+        type="submit"
+        onClick={() => setState({ ...state, dropDownOpen: true })}
+      >
         Don't see your MP?
       </button>
-      <button onClick={() => passDataUpstream({ postcodeDropdownOpen: false })}>
-        Continue with this MP
-      </button>
-      {console.log(postcodeDropdownOpen)}
-      {postcodeDropdownOpen && (
+      <a href="#emailBox">
+        <button
+          type="submit"
+          onClick={() => setState({ ...state, dropDownOpen: false })}
+        >
+          Continue with this MP
+        </button>
+      </a>
+      {dropDownOpen && (
         <Formik
           initialValues={{ postcode: "" }}
           validate={handleValidation}
