@@ -1,3 +1,9 @@
+$primary: #da6846;
+$secondary: #4eb9be;
+//#DA6846
+//#DB6947
+//#D86746
+//#C15D3F
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
@@ -6,6 +12,16 @@
 .App {
   scroll-behavior: smooth;
   background-color: rgb(236, 127, 114, 0.05);
+}
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./assets/Background Image.svg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 @media only screen and (max-width: 767px) {
@@ -24,21 +40,27 @@
   margin-top: 20px;
   width: 30px;
   length: 30px;
+  color: white;
 }
 h1,
 h2 {
   font-family: "Open Sans", sans-serif;
-  font-weight: 800;
-  color: #121482;
+  color: $primary;
 }
 
 p {
   font-family: "Poppins", sans-serif;
-  color: #484848;
+  color: white;
 }
 h1.title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  @media only screen and (min-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 40px;
+  }
   font-size: 5rem;
-  line-height: 10rem;
+  line-height: 8rem;
 }
 
 h2.secondary-header {
@@ -46,7 +68,9 @@ h2.secondary-header {
   line-height: 6rem;
 }
 
-p.intro-para,
+p.intro-para {
+  font-size: 3rem;
+}
 p.explanation {
   font-size: 1.5rem;
   line-height: 3rem;
@@ -84,6 +108,7 @@ p.explanation {
 }
 
 .typeform-widget {
+  padding: 40px;
   height: 100vh;
   margin-bottom: 40px;
   &.closed {
