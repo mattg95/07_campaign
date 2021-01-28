@@ -1,3 +1,5 @@
+/* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
+
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";

@@ -23,7 +23,11 @@ const IntroContent = () => (
         This will generate an email to send to your MP
       </p>
       <a href="#typeform">
-        <img src={ArrowDown} className="arrow-down" />
+        <img
+          src={ArrowDown}
+          alt="arrow pointing down the webpage"
+          className="arrow-down"
+        />
       </a>
     </div>
   </div>

@@ -1,3 +1,5 @@
+/* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
+
 import React from "react";
 import EdiText from "react-editext";
 
