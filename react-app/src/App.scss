@@ -173,6 +173,15 @@ p.explanation {
 .get-MP-form {
   margin: 15px;
   padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    margin: 0 15px;
+  }
+  .postcode-error {
+    min-width: 120px;
+  }
 }
 
 .emailBox {
