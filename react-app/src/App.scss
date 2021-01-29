@@ -10,9 +10,8 @@ $secondary: #4eb9be;
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-.App {
+html {
   scroll-behavior: smooth;
-  background-color: rgb(236, 127, 114, 0.05);
 }
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -43,10 +42,6 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 80px;
-  margin-top: 40px;
-  @media only screen and (min-width: 768px) {
-    margin-top: 80px;
-  }
 }
 h1,
 h2 {
@@ -121,6 +116,7 @@ p.explanation {
 }
 .copy-button {
   position: absolute;
+  bottom: 0px;
   right: 15px;
 }
 .send-button {
@@ -165,14 +161,25 @@ p.explanation {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 40px;
   @media only screen and (min-width: 768px) {
     flex-direction: row;
+    margin-bottom: 80px;
   }
 }
 
 .get-MP-form {
   margin: 15px;
   padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    margin: 0 15px;
+  }
+  .postcode-error {
+    min-width: 120px;
+  }
 }
 
 .emailBox {
@@ -186,6 +193,10 @@ p.explanation {
   }
   button {
     margin: auto;
+  }
+  margin-bottom: 40px;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 80px;
   }
 }
 

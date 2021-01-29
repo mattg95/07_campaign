@@ -16,6 +16,8 @@ const nonToryMpResponse = require("./exampleResponses/bfedb30c6203ed71bd65a126da
 
 const allToryResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
 
+const nonValidPostcodeResponse = require("./exampleResponses/fe72b4b7520c85f7c5590f35747d2618.json");
+
 const exampleResponses = [];
 var normalizedPath = require("path").join(__dirname, "exampleResponses");
 
@@ -56,15 +58,16 @@ describe("/api/postcode", () => {
 //how to test webhooks?
 
 describe("generateEmail", () => {
-  let res;
+  let randomResponse;
   let negativeEmail;
   let allToryEmail;
   let nonToryMpEmail;
   let nonToryEmail;
   let jewishEmail;
   let otherReligionEmail;
+  let nonValidPostcodeEmail;
   before(async function () {
-    res = await getRandomEmail();
+    randomResponse = await getRandomEmail();
     negativeEmail = await generateEmail(negativeResult.form_response);
     allToryEmail = await generateEmail(allToryResponse.form_response);
     nonToryMpEmail = await generateEmail(nonToryMpResponse.form_response);
@@ -74,26 +77,39 @@ describe("generateEmail", () => {
     otherReligionEmail = await generateEmail(
       otherReligionResponse.form_response
     );
+    nonValidPostcodeEmail = await generateEmail(
+      nonValidPostcodeResponse.form_response
+    );
+    console.log(nonValidPostcodeEmail);
   });
   it("should return an object with keys 'body' and 'subject'", () => {
-    expect(res).to.have.keys("body", "subject", "greeting", "mpData");
-    expect(Object.keys(res).length).to.equal(4);
+    expect(randomResponse).to.have.keys(
+      "body",
+      "subject",
+      "greeting",
+      "mpData"
+    );
+    expect(Object.keys(randomResponse).length).to.equal(4);
   });
   it("response.body should be a string", () => {
-    expect(typeof res.body).to.equal("string");
+    expect(typeof randomResponse.body).to.equal("string");
   });
   it("response.subject should be a string", () => {
-    expect(typeof res.subject).to.equal("string");
+    expect(typeof randomResponse.subject).to.equal("string");
   });
   it("should not include 'COUNTRY_NAME' template variable", () => {
-    expect(res.body.search("COUNTRY_NAME")).to.equal(-1);
+    expect(randomResponse.body.search("COUNTRY_NAME")).to.equal(-1);
   });
   it("should not include the string 'undefined' anywhere in the email", () => {
-    expect(res.body.search("undefined")).to.equal(-1);
+    expect(randomResponse.body.search("undefined")).to.equal(-1);
   });
   it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
-    expect(res.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(-1);
-    expect(res.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(-1);
+    expect(randomResponse.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(
+      -1
+    );
+    expect(randomResponse.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(
+      -1
+    );
   });
   it("should include references to a user's religion when a user has one", async () => {
     expect([
@@ -106,14 +122,14 @@ describe("generateEmail", () => {
     ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
-    expect(res.body.search(/Not religious/)).to.equal(-1);
-    expect(res.body.search(/agnostic/)).to.equal(-1);
-    expect(res.body.search(/athiest/)).to.equal(-1);
+    expect(randomResponse.body.search(/Not religious/)).to.equal(-1);
+    expect(randomResponse.body.search(/agnostic/)).to.equal(-1);
+    expect(randomResponse.body.search(/athiest/)).to.equal(-1);
   });
   it("should not include a response for 'other religion' choice", () => {
-    expect(res.body.search(/Not religious/)).to.equal(-1);
-    expect(res.body.search(/agnostic/)).to.equal(-1);
-    expect(res.body.search(/athiest/)).to.equal(-1);
+    expect(randomResponse.body.search(/Not religious/)).to.equal(-1);
+    expect(randomResponse.body.search(/agnostic/)).to.equal(-1);
+    expect(randomResponse.body.search(/athiest/)).to.equal(-1);
   });
   // it("should not include escaped 'newline' characters", () => {
   //   const res = await getRandomEmail();
@@ -134,5 +150,13 @@ describe("generateEmail", () => {
   });
   it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
     expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
+  });
+  it.only("works even if a user inputs an invalid postcode", () => {
+    expect(nonValidPostcodeEmail).to.have.keys(
+      "body",
+      "subject",
+      "greeting",
+      "mpData"
+    );
   });
 });
