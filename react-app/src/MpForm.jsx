@@ -68,7 +68,9 @@ const MpForm = ({ passDataUpstream }) => {
             <Form className="get-MP-form">
               <label htmlFor="postcode">Postcode:</label>
               <Field type="text" name="postcode" />
-              {postcodeError && <div className="error">{postcodeError}</div>}
+              <div className="error postcode-error">
+                {postcodeError ? postcodeError : ""}
+              </div>
             </Form>
           )}
         </Formik>
