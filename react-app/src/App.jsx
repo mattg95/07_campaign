@@ -20,7 +20,7 @@ const socket = socketIOClient();
 const App = () => {
   const [state, setState] = useState({
     responseId: "",
-    mpData: { error: "Could not find your MP" },
+    mpData: { error: "Could not find MP" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
     typeFormReturned: false,

@@ -52,6 +52,9 @@ io.on("connection", (socket) => {
         formToken: data.form_response.token,
         generatedEmail: generatedEmail,
       });
+      if (app.settings.env === "development") {
+        writeDataToExampleResponsesFile(data);
+      }
     });
   });
 });
