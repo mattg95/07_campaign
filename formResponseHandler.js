@@ -66,33 +66,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return mpName ? `${salutation} ${mpName},\n` : "";
   };
 
-  const populateMainResponseData = (emailMap, supportsAid, mp) => {
-    //adds 'main' content from emailString.Json
-    const mainContent =
-      getRandomResponse(main.sentence1) +
-      getRandomResponse(main.sentence2) +
-      getRandomResponse(main.sentence3);
-    emailMap.set("mainContent", mainContent);
-    let emailbodyStr = "";
-    for (const [k, v] of emailMap) {
-      if (k === "name") {
-        emailbodyStr += v + `\n`;
-      } else if (k === "address") {
-        emailbodyStr += v;
-      } else {
-        v.length && (emailbodyStr += v + `\n\n`);
-      }
-    }
-    const responseData = {
-      mpData: mp,
-      greeting: createGreeting(mp),
-      subject: getRandomResponse(subject),
-      body: emailbodyStr,
-    };
-
-    return responseData;
-  };
-
   //this is the 'router' that handles all question responses based on their id
 
   answers.forEach(({ text, field, choice }) => {
@@ -200,6 +173,30 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         emailMap.set("conservative", getRandomResponse(synonyms));
       }
     }
-    return populateMainResponseData(emailMap, supportsAid, mp);
+    //adds 'main' content from emailString.Json
+    const mainContent =
+      getRandomResponse(main.sentence1) +
+      getRandomResponse(main.sentence2) +
+      getRandomResponse(main.sentence3);
+    emailMap.set("mainContent", mainContent);
+
+    let emailbodyStr = "";
+    for (const [k, v] of emailMap) {
+      if (k === "name") {
+        emailbodyStr += v + `\n`;
+      } else if (k === "address") {
+        emailbodyStr += v;
+      } else {
+        v.length && (emailbodyStr += v + `\n\n`);
+      }
+    }
+    const responseData = {
+      mpData: mp,
+      greeting: createGreeting(mp),
+      subject: getRandomResponse(subject),
+      body: emailbodyStr,
+    };
+
+    return responseData;
   });
 };
