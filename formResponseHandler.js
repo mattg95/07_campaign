@@ -158,6 +158,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
 
   if (!supportsAid) {
     return Promise.resolve({
+      supportsAid:false,
       mpData: {},
       greeting: "",
       subject: "",
@@ -191,6 +192,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       }
     }
     const responseData = {
+      supportsAid: true,
       mpData: mp,
       greeting: createGreeting(mp),
       subject: getRandomResponse(subject),
