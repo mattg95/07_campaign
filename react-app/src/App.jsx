@@ -23,7 +23,7 @@ const App = () => {
     mpData: { error: "Could not find MP" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    typeFormReturned: false,
+    positiveTypeFormResponseReturned: false,
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
@@ -37,19 +37,20 @@ const App = () => {
     mpEmailAddress,
     greeting,
     emailWithGreeting,
-    typeFormReturned,
+    positiveTypeFormResponseReturned,
   } = state;
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
+        console.log(generatedEmail)
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
-          typeFormReturned: true,
+          positiveTypeFormResponseReturned: generatedEmail.supportsAid,
         });
       }
     });
@@ -98,7 +99,7 @@ const App = () => {
             </div>
           </Col>
         </Row>
-        {typeFormReturned && (
+        {positiveTypeFormResponseReturned && (
           <>
             <Row>
               <Col>
