@@ -157,12 +157,12 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   });
 
   if (!supportsAid) {
-    return {
+    return Promise.resolve({
       mpData: {},
       greeting: "",
       subject: "",
       body: "",
-    };
+    });
   }
 
   return getMpByPostcode(postcode.text).then((mp) => {
