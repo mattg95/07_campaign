@@ -40,7 +40,6 @@ app.get("/api/postcode/:postcodeInput", (req, res) => {
 
 app.post("/hook", (req, res) => {
   res.status(200).end(); // Responding is important
-  console.log(req.body);
   client.emit("create", req.body);
 });
 
