@@ -82,14 +82,15 @@ describe("generateEmail", () => {
     );
     console.log(nonValidPostcodeEmail);
   });
-  it("should return an object with keys 'body' and 'subject'", () => {
+  it.only("should return an object with keys 'body' and 'subject'", () => {
     expect(randomResponse).to.have.keys(
       "body",
       "subject",
       "greeting",
-      "mpData"
+      "mpData",
+      "supportsAid"
     );
-    expect(Object.keys(randomResponse).length).to.equal(4);
+    expect(Object.keys(randomResponse).length).to.equal(5);
   });
   it("response.body should be a string", () => {
     expect(typeof randomResponse.body).to.equal("string");
