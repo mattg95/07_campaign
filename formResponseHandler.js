@@ -79,7 +79,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       //conservatives handler
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
       // The first 3 choices for survey.conservative have sentences in emailStrings.json about being a conservative
-      memberOfConservatives = choiceIndex < 3;
+      memberOfConservatives = choiceIndex < 4;
     }
 
     //religion handler
