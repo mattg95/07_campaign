@@ -90,8 +90,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         const { adj, noun } = religions[choiceIndex];
         let sentence = getRandomResponse(survey.religion);
         sentence = sentence
-          .replace(/RELIGIOUS_DEMONYM_NOUN/g, noun)
-          .replace(/RELIGIOUS_DEMONYM_ADJ/g, adj);
+          .replace("RELIGIOUS_DENONYM_NOUN", noun)
+          .replace("RELIGIOUS_DENONYM_ADJ", adj);
         emailMap.set("religion", sentence);
       }
     }
