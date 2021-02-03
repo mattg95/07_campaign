@@ -112,26 +112,26 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         emailMap.set("countryLinks", sentenceWithCountry);
       }
     }
-    //moivations handler
-    // if (field.id === "wKGNjgRDml1H") {
-    //   const thisId = "wKGNjgRDml1H";
-    //   const thisField = fields.find(({ id }) => id === thisId);
-    //   const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
-    //   let choiceIndex = [];
-    //   //this gets the synomys array based on the index of the survey multiple choice-
-    //   thisField.choices.forEach((choice, i) => {
-    //     if (thisAnswers.choices.labels.includes(choice.label)) {
-    //       choiceIndex.push(i);
-    //     }
-    //   });
-    //   const synoynms = choiceIndex.map((ele) => {
-    //     return survey[questionKeys[thisId]][ele];
-    //   });
-    //   const sentenceArr = synoynms.map((ele) => {
-    //     ele && getRandomResponse(ele);
-    //   });
-    //   sentenceArr.length && (emailObj.motivation = sentenceArr.join(" "));
-    // }
+    // moivations handler
+    if (field.id === "wKGNjgRDml1H") {
+      const thisId = "wKGNjgRDml1H";
+      const thisField = fields.find(({ id }) => id === thisId);
+      const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
+      let choiceIndex = [];
+      //this gets the synomys array based on the index of the survey multiple choice-
+      thisField.choices.forEach((choice, i) => {
+        if (thisAnswers.choices.labels.includes(choice.label)) {
+          choiceIndex.push(i);
+        }
+      });
+      const synonymns = choiceIndex.map((ele) => {
+        return survey[questionKeys[thisId]][ele];
+      });
+      const sentenceArr = synonymns.map((ele) => {
+        return ele && getRandomResponse(ele);
+      });
+      sentenceArr.length && emailMap.set("motivation", sentenceArr.join(" "));
+    }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
       if (getAnswerIndex("vdZgYVyiLE13") === 0) {
@@ -140,7 +140,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     //meetMp double check hanlder
     if (field.id === "UhNb2Z5nqHtb") {
-      if (getAnswerIndex("UhNb2Z5nqHtb") === 0) {
+      if (getAnswerIndex("UhNb2Z5nqHtb") === 1) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
@@ -158,7 +158,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
 
   if (!supportsAid) {
     return Promise.resolve({
-      supportsAid:false,
+      supportsAid: false,
       mpData: {},
       greeting: "",
       subject: "",
@@ -198,7 +198,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       subject: getRandomResponse(subject),
       body: emailbodyStr,
     };
-
     return responseData;
   });
 };
