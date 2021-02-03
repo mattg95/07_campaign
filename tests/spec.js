@@ -109,12 +109,8 @@ describe("generateEmail", () => {
     expect(randomResponse.body.search("undefined")).to.equal(-1);
   });
   it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
-    expect(randomResponse.body.search(/\[RELIGIOUS_DEMONYM_NOUN\]/)).to.equal(
-      -1
-    );
-    expect(randomResponse.body.search(/\[RELIGIOUS_DEMONYM_ADJ\]/)).to.equal(
-      -1
-    );
+    expect(randomResponse.body.search(/RELIGIOUS_DEMONYM_NOUN/)).to.equal(-1);
+    expect(randomResponse.body.search(/RELIGIOUS_DEMONYM_ADJ/)).to.equal(-1);
   });
   it("should include references to a user's religion when a user has one", async () => {
     expect([
