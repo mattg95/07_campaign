@@ -82,7 +82,7 @@ describe("generateEmail", () => {
     );
     console.log(nonValidPostcodeEmail);
   });
-  it.only("should return an object with keys 'body' and 'subject'", () => {
+  it("should return an object with keys 'body' and 'subject'", () => {
     expect(randomResponse).to.have.keys(
       "body",
       "subject",
@@ -153,11 +153,13 @@ describe("generateEmail", () => {
     expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
   });
   it("works even if a user inputs an invalid postcode", () => {
+    console.log(nonValidPostcodeEmail);
     expect(nonValidPostcodeEmail).to.have.keys(
       "body",
       "subject",
       "greeting",
-      "mpData"
+      "mpData",
+      "supportsAid"
     );
   });
 });
