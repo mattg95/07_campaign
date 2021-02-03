@@ -108,18 +108,25 @@ describe("generateEmail", () => {
   it("should not include the string 'undefined' anywhere in the email", () => {
     expect(randomResponse.body.search("undefined")).to.equal(-1);
   });
-  it("should not include '[RELIGIOUS_DEMONYM_NOUN]' or '[RELIGIOUS_DEMONYM_ADJ]' template variable", () => {
-    expect(randomResponse.body.search(/RELIGIOUS_DEMONYM_NOUN/)).to.equal(-1);
-    expect(randomResponse.body.search(/RELIGIOUS_DEMONYM_ADJ/)).to.equal(-1);
+  it("should not include 'RELIGIOUS_DENONYM_NOUN' or 'RELIGIOUS_DENONYM_ADJ' template variable", () => {
+    console.log(jewishEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi));
+    expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(-1);
+    expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_ADJ/gi)).to.equal(-1);
+    expect(otherReligionEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(
+      -1
+    );
+    expect(otherReligionEmail.body.search(/RELIGIOUS_DENONYM_ADJ/gi)).to.equal(
+      -1
+    );
   });
-  it("should include references to a user's religion when a user has one", async () => {
+  it("should include references to a user's religion when a user has one", () => {
     expect([
-      jewishEmail.body.search(/Jew/),
-      jewishEmail.body.search(/Jewish/),
+      jewishEmail.body.search(/Jew/gi),
+      jewishEmail.body.search(/Jewish/gi),
     ]).to.not.eql([-1, -1]);
     expect([
-      otherReligionEmail.body.search(/religious/),
-      otherReligionEmail.body.search(/person of faith/),
+      otherReligionEmail.body.search(/religious/gi),
+      otherReligionEmail.body.search(/person of faith/gi),
     ]).to.not.eql([-1, -1]);
   });
   it("should not include a response for 'no religion' choice", () => {
