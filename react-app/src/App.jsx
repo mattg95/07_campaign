@@ -43,7 +43,7 @@ const App = () => {
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
-        console.log(generatedEmail)
+        console.log(generatedEmail);
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
