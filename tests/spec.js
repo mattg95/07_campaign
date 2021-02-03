@@ -18,6 +18,8 @@ const allToryResponse = require("./exampleResponses/38d468e36442fdeb2673c287d708
 
 const nonValidPostcodeResponse = require("./exampleResponses/fe72b4b7520c85f7c5590f35747d2618.json");
 
+const covidMotivationsRes = require("./exampleResponses/f53bb312523d0a911da1e347dc77edbc.json");
+
 const exampleResponses = [];
 var normalizedPath = require("path").join(__dirname, "exampleResponses");
 
@@ -66,6 +68,8 @@ describe("generateEmail", () => {
   let jewishEmail;
   let otherReligionEmail;
   let nonValidPostcodeEmail;
+  let motivationsEmail;
+
   before(async function () {
     randomResponse = await getRandomEmail();
     negativeEmail = await generateEmail(negativeResult.form_response);
@@ -80,9 +84,9 @@ describe("generateEmail", () => {
     nonValidPostcodeEmail = await generateEmail(
       nonValidPostcodeResponse.form_response
     );
-    console.log(nonValidPostcodeEmail);
+    motivationsEmail = await generateEmail(covidMotivationsRes.form_response);
   });
-  it.only("should return an object with keys 'body' and 'subject'", () => {
+  it("should return an object with keys 'body' and 'subject'", () => {
     expect(randomResponse).to.have.keys(
       "body",
       "subject",
@@ -157,7 +161,11 @@ describe("generateEmail", () => {
       "body",
       "subject",
       "greeting",
-      "mpData"
+      "mpData",
+      "supportsAid"
     );
+  });
+  it("should include reference to a user's motivation where they have put that in", () => {
+    expect(motivationsEmail.body.search(/covid/gi)).to.not.equal(-1);
   });
 });
