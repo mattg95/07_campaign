@@ -284,11 +284,79 @@
     "countryLinks": [
       [
         "I was born in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? That’s where I was born and I would like to ensure that support for COUNTRY_NAME is not reduced.",
-        "Can you please make sure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as that’s where I was born."
+        "Can you please make sure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as that’s where I was born.",
+        "Can you please make sure that the government respects its commitment to the global poor? As I was born in COUNTRY_NAME, I’d like to be reassured that support for this country won’t be reduced.",
+        "Can you please reassure me, that support for countries like COUNTRY_NAME, where I was born, won’t be reduced?",
+        "I’d particularly like to ensure that international aid is not reduced because I was born in COUNTRY_NAME, and I would be very sad to know that the government is going back on its promise to support countries like COUNTRY_NAME.",
+        "As someone born in COUNTRY_NAME, I would be horrified if the UK promised to provide foreign aid but then went back on that promise, so that’s why I’m writing to you and ask that you don’t let the government do this.",
+        "As someone born in COUNTRY_NAME, I’m so scared to think how reduced support would impact COUNTRY_NAME. Please could you reassure me by telling me that you will do everything in your power to make sure that support for countries like this won’t decrease?",
+        "As someone who was born in COUNTRY_NAME, I can’t even think of devastating effects less aid would bring to countries like COUNRY_NAME. Please tell me you will do everything in your power to make sure the aid budget for these countries isn’t reduced.",
+        "I’m writing to you as someone who was born in COUNTRY_NAME, and I would be very upset if you voted to reduce the amount of foreign aid. I believe that as a globally minded country, I think we should be helping people across the world, including in the country of my birth.",
+        "One reason I really want your support on this is because I was born in COUNTRY_NAME, and I’m so concerned about the effects this cut would have on a country like COUNTRY_NAME.",
+        "I’m writing to you as someone who was born in COUNTRY_NAME, so you can understand why cuts in aid budget for countries such as COUNTRY_NAME worries me.",
+        "I was born in COUNTRY_NAME, so I’m naturally so worried about how a reduced aid budget will affect my country. Please could you reassure me that you will make sure support for COUNTRY_NAME won’t be reduced?"
       ],
       [
         "I have lived in COUNTRY_NAME, and the government’s decision worries me. Can you reassure me that support for COUNTRY_NAME will not be reduced? I’ve spent part of my life there and I would like to ensure that support for COUNTRY_NAME is not reduced",
-        "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I’ve spent quite a bit of my life there"
+        "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I’ve spent quite a bit of my life there.",
+        "Can you please make sure that the government decides not to reduce the aid budget? As someone who lived in COUNTRY_NAME, I’d like to make sure that the support it receives doesn’t decrease.",
+        "I’d particularly like to ensure that foreign aid is not reduced because I have lived in COUNTRY_NAME, and I would be very sad to know that the government is going back on promise to support countries like COUNTRY_NAME.",
+        "One of the reasons I particularly want your support on this is because I’ve lived in COUNTRY_NAME, and I’m concerned about how reduced foreign aid would affect this and other countries.",
+        "I’d particularly like to make sure that aid target doesn’t get reduced because I’ve lived in COUNTRY_NAME, and it would be so disappointing to see my government breaking its promise to support countries like COUNTRY_NAME.",
+        "I’m writing to you as someone who has lived in COUNTRY_NAME, I would be horrified if the UK promised to provide international aid but then went back on that promise, so that’s a big part of what’s causing me to write to you and ask that you don’t let the government do this.",
+        "I’m getting in touch with you as someone who has previously lived in COUNTRY_NAME, and I would be extremely worried that my government has decided to break its promise for countries, where our support is needed. Please could you reassure me the government won’t decide to reduce its aid for countries like COUNTRY_NAME.",
+        "I have lived in COUNTRY_NAME, and I would be really very upset if you voted to reduce the amount of foreign aid. I believe that we in the UK should be a globally minded country, and I think we should be helping people across the world, including in COUNTRY_NAME.",
+        "I’ve lived in COUNTRY_NAME before, and it would make me seriously upset if you decided to vote to reduce the aid budget. I believe that the UK definitely has enough resources to help people across the world, including countries like COUNTRY_NAME.",
+        "I’ve lived in COUNTRY_NAME, and I would be very disappointed if you decided to vote to reduce support in countries such as COUNTRY_NAME. We in the UK should continue being a country that cares about the global poor, and we shouldn’t reduce our support for such countries.",
+        "I’m writing to you because I have lived in COUNTRY_NAME, and I’m writing because I would like to vote against the decision to reduce international aid. If that doesn’t happen, can you please make sure that you provide a personal guarantee that support for COUNTRY_NAME is not reduced at all?"
+      ],
+      [
+        "I’m particularly upset because I have family in COUNTRY_NAME, and I find it horrific that you would do this to me. Why would you do this to COUNTRY_NAME and the other countries which benefit from the UK’s international aid?",
+        "I have family in COUNTRY_NAME, and the government’s decision really worries me. Can you absolutely reassure me that support for COUNTRY_NAME will not be reduced? I have family there and I would like to ensure that support for COUNTRY_NAME is not reduced at all.",
+        "Can you please reassure me that the government decides against reducing foreign aid? Your action on this is really important to me because I have family in COUNTRY_NAME, and I’m so worried about how this cut in aid budget would affect them and others in COUNTRY_NAME.",
+        "Can you please make sure that the government does not reduce the aid budget? I have family in COUNTRY_NAME, so it’s so important for me that support for people in countries like COUNTRY_NAME is not decreased.",
+        "Can you please ensure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I have family there.",
+        "I’d particularly like to ensure that foreign aid is not reduced because I have family in COUNTRY_NAME, and I would be very sad to know that the government is going back on promise to support countries like COUNTRY_NAME",
+        "I’d especially like to make sure that the aid budget is not reduced because I have family in COUNTRY_NAME, and it would seriously upset me if the government decides to break its promise to help countries like COUNTRY_NAME.",
+        "I’m writing to you as someone who has family in COUNTRY_NAME; I would be horrified if the UK promised to provide international aid but then went back on that promise, so that’s a big part of what’s causing me to write to you and ask that you don’t let the government do this.",
+        "I have family in COUNTRY_NAME, and I would be really very upset if you voted to reduce the amount of foreign aid. I believe that we in the UK should be a globally minded country, and I think we should be helping people across the world, including in COUNTRY_NAME.",
+        "I have family in COUNTRY_NAME, and it would be very disappointing if you decided to vote to reduce the aid budget. I think the UK should continue being a country that cares about the global poor and countries such as COUNTRY_NAME.",
+        "I’m writing to you because I have family in COUNTRY_NAME, and I’m writing because I would like you to vote against the decision to reduce international aid. If that doesn’t happen, can you please make sure that you provide a personal guarantee that support for COUNTRY_NAME is not reduced at all?",
+        "I’m turning to you because I have family in COUNTRY_NAME, and I’d like you to vote against the decision to reduce the aid budget. At the very least please could you confirm that you’ll do all you can to make sure that support for countries like COUNTRY_NAME continues."
+      ],
+      [
+        "I’m particularly upset because I have close friends in COUNTRY_NAME, and so I would be very sad if the government reduced its aid budget for countries like COUNTRY_NAME. Please reassure me that you won’t do this to COUNTRY_NAME and the other countries which benefit from the UK’s international aid?",
+        "One of the reasons this is particularly important to me is because I have close friends living in COUNTRY_NAME. It worries me to think about how this cut in foreign aid could affect them and that’s why your vote against the cut would be reassuring.",
+        "I’m especially upset because I have close friends living in COUNTRY_NAME, and it scares me to think that you could vote to reduce aid in countries such as COUNTRY_NAME.",
+        "I have close friends in COUNTRY_NAME, and the government’s decision worries me a lot. Can you ensure that support for COUNTRY_NAME will not be reduced? I have close friends there and I would like to ensure that support for COUNTRY_NAME is not reduced at all.",
+        "Can you please make sure that the government does not reduce foreign aid spend? I would like to be certain that support for COUNTRY_NAME is not reduced, as I have close friends there.",
+        "Can you please promise me that you’ll do everything in your power to make sure that the government doesn’t reduce the aid budget? As I have close friends in COUNTRY_NAME, I want to be reassured that support for their country won’t be reduced.",
+        "I’d particularly like to ensure that foreign aid is not reduced because I have close friends in COUNTRY_NAME, and I would be very sad to know that the government is going back on promise to support countries like COUNTRY_NAME.",
+        "I’m writing to you as someone who has friends in COUNTRY_NAME; I would be horrified if the UK promised to provide international aid but then went back on that promise, so that’s a big part of what’s causing me to write to you and ask that you don’t let the government do this.",
+        "I have close friends in COUNTRY_NAME, and I would be really very upset if you voted to reduce the amount of foreign aid. I believe that we in the UK should be a globally minded country, and I think we should be helping people across the world, including in COUNTRY_NAME.",
+        "I have close friends living in COUNTRY_NAME, and I’d be so disappointed if you decided to vote to reduce the aid budget. I always thought that the UK should be a country that leads by example by supporting those in most need, such as countries like COUNTRY_NAME.",
+        "I’m writing to you because I have friends in COUNTRY_NAME, and I’m writing because I would like you to vote against the decision to reduce international aid. If that doesn’t happen, can you please make sure that you provide a personal guarantee that support for COUNTRY_NAME is not reduced at all?",
+        "I’m getting in touch with you because I have friends in COUNTRY_NAME, and I’d like to ask you to vote against the government’s decision to reduce the aid budget. At the very least, could you please reassure me that you’ll ensure that support for countries like COUNTRY_NAME is not reduced?"
+      ],
+      [
+        "Speaking as someone who is linked to COUNTRY_NAME by ethnicity, I would be very sad if you decided to vote to reduce aid.",
+        "I am linked to COUNTRY_NAME by ethnicity, and I would be very sad if you decided to vote to reduce aid.",
+        "I’m linked to COUNTRY_NAME by ethnicity, and it would deeply worry me if you voted to reduce the aid budget.",
+        "I’m related to COUNTRY_NAME by ethnicity, so it’s so worrying to hear talks about the government cutting aid.",
+        "Just so you know, I’m related to COUNTRY_NAME by ethnicity, so it’d be really concerning to me if you decided to vote for cutting aid to countries like COUNTRY_NAME.",
+        "My ethnicity links me to COUNTRY_NAME, and I would be so upset if you voted to cut aid to COUNTRY_NAME and many other countries.",
+        "Speaking as someone who is linked to COUNTRY_NAME by ethnicity, I would be extremely disappointed if the government decided to fail on its commitments to COUNTRY_NAME and other countries by failing to stick to the promise of 0.7% of GNI.",
+        "As someone linked to COUNTRY_NAME by ethnicity, I’m really worried what would happen to such a country if the government decides to break its promise to COUNTRY_NAME by reducing the aid target.",
+        "I have a personal link to COUNTRY_NAME because of my ethnicity, and I do wonder whether you would have the courage to look me in the eye and tell me that you are willing to let down the people of COUNTRY_NAME and other countries by voting to forsake them in their hour of need?",
+        "I am personally linked to COUNTRY_NAME because of my ethnicity, and it’s hard for me to believe that you would be willing to let down the people living in COUNTRY_NAME and other similar countries by voting to reduce the aid budget’",
+        "I am someone who is linked to COUNTRY_NAME by ethnicity, I would be extremely disappointed if the government decided to fail on its commitments to COUNTRY_NAME and other countries by failing to stick to the promise of 0.7% of GNI.",
+        "Because of my ethnicity, I do feel a connection to COUNTRY_NAME. Please don’t tell me that you would let COUNTRY_NAME down by reducing the amount of aid the UK sends? Particularly now, when it’s most needed?",
+        "As someone who feels a connection to COUNTRY_NAME because of my heritage, I am worried about the people in COUNTRY_NAME and similar countries who would be impacted by the UK government’s decision to cut down aid.",
+        "As someone personally linked to COUNTRY_NAME because of my heritage, I am even more concerned about this decision to reduce the aid budget and failing the people in COUNTRY_NAME and other countries.",
+        "Because of my ethnicity, I feel a personal connection to COUNTRY_NAME and care about the UK government maintaining its aid budget to fulfil its commitment to global development for people in countries like COUNTRY_NAME.",
+        "I care about the UK government’s aid budget even more because I have a personal connection to COUNTRY_NAME from my heritage and feel worried about people in COUNTRY_NAME and similar countries.",
+        "As someone whose ethnicity is linked to COUNTRY_NAME, I hope you can appreciate my feelings that we should maintain our aid budget to help people in COUNTRY_NAME.",
+        "I have a personal connection to COUNTRY_NAME because of my ethnicity and am deeply concerned about the people living in COUNTRY_NAME and in countries like COUNTRY_NAME and how they would be affected by the UK government’s decision to reduce aid."
       ]
     ],
     "meetMp": [
