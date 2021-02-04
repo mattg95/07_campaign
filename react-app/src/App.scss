@@ -169,16 +169,22 @@ p.explanation {
 }
 
 .get-MP-form {
-  margin: 15px;
-  padding: 15px;
   display: flex;
+  flex-direction: column;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    margin-bottom: 80px;
+  }
   justify-content: center;
   align-items: center;
   input {
     margin: 0 15px;
-  }
-  .postcode-error {
-    min-width: 120px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+    }
   }
 }
 
