@@ -10,7 +10,8 @@ $secondary: #4eb9be;
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-html {
+html,
+.App {
   scroll-behavior: smooth;
 }
 body {
@@ -217,6 +218,7 @@ p.explanation {
 
   &.closed {
     height: 0vh;
+    transition: all 2s;
   }
 }
 .typeform-widget::after {
