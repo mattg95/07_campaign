@@ -98,10 +98,10 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     //countryLinksHandler
     if (field.id === "Z4awe4sDljLR") {
       const choiceIndex = getAnswerIndex("Z4awe4sDljLR");
-      const synonyms = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
-      if (synonyms === undefined) return;
+      const choiceObj = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
+      if (choiceObj === undefined) return;
       else {
-        const sentence = getRandomResponse(synonyms);
+        const sentence = getRandomResponse(choiceObj.synonyms);
         const countryNameData = answers.find(
           ({ field: { id } }) => id === "MRPxTl6j1QAw"
         );
@@ -128,7 +128,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
         return survey[questionKeys[thisId]][ele];
       });
       const sentenceArr = synonymns.map((ele) => {
-        return ele && getRandomResponse(ele);
+        return ele && getRandomResponse(ele.synonyms);
       });
       sentenceArr.length && emailMap.set("motivation", sentenceArr.join(" "));
     }
@@ -169,9 +169,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   return getMpByPostcode(postcode.text).then((mp) => {
     if (memberOfConservatives && mp.party === "Conservative") {
       const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      const synonyms = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      if (synonyms.length > 0) {
-        emailMap.set("conservative", getRandomResponse(synonyms));
+      const choiceObj = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+      if (choiceObj.synonyms.length > 0) {
+        emailMap.set("conservative", getRandomResponse(choiceObj.synonyms));
       }
     }
     //adds 'main' content from emailString.Json
