@@ -177,7 +177,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     //adds 'main' content from emailString.Json
     const mainContent =
       getRandomResponse(main.sentence1) +
+      " " +
       getRandomResponse(main.sentence2) +
+      " " +
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
 
@@ -198,6 +200,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
       subject: getRandomResponse(subject),
       body: emailbodyStr,
     };
+    console.log(responseData.body);
     return responseData;
   });
 };
