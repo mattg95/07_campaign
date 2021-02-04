@@ -109,7 +109,6 @@ describe("generateEmail", () => {
     expect(randomResponse.body.search("undefined")).to.equal(-1);
   });
   it("should not include 'RELIGIOUS_DENONYM_NOUN' or 'RELIGIOUS_DENONYM_ADJ' template variable", () => {
-    console.log(jewishEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi));
     expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(-1);
     expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_ADJ/gi)).to.equal(-1);
     expect(otherReligionEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(
@@ -148,7 +147,7 @@ describe("generateEmail", () => {
     expect(negativeEmail.subject).to.equal("");
   });
   it("non-conservative responses should not reference that in the email", () => {
-    expect(nonToryEmail.body.search(/conservative/gi)).to.equal(-1);
+    expect(nonToryEmail.body.search(/member/gi)).to.equal(-1);
   });
   it("Conservative responses to Conservative MPs should reference that in the email", () => {
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
