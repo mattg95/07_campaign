@@ -17,21 +17,6 @@ const IntroContent = () => (
       at risk of extreme poverty,{" "}
       <strong>Britain must show leadership - not break its commitments.</strong>
     </p>
-    <div className="">
-      <h2 className="secondary-header">Fill out the survey to email your MP</h2>
-      <p className="explanation">
-        <strong>We will draft an email</strong> based on your survey responses,{" "}
-        <strong>written to have the maximum impact on your MP.</strong> With
-        your help we can safeguard the support so many need.
-      </p>
-      {/* <a href="#typeform">
-        <img
-          src={ArrowDown}
-          alt="arrow pointing down the webpage"
-          className="arrow-down"
-        />
-      </a> */}
-    </div>
   </div>
 );
 export default IntroContent;

@@ -10,7 +10,8 @@ $secondary: #4eb9be;
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-html {
+html,
+.App {
   scroll-behavior: smooth;
 }
 body {
@@ -96,6 +97,61 @@ h2.secondary-header {
     }
   }
 }
+.call-to-action {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  button {
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+}
+
+.main-cta {
+  white-space: break-spaces;
+}
+
+.typeform-widget {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+  @media only screen and (min-width: 768px) {
+    height: 100vh;
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+
+  &.closed {
+    height: 0vh;
+    margin: 0;
+    transition: all 2s;
+  }
+}
+
+.typeform-widget::after {
+  background-color: #4eb9be;
+  content: "";
+  top: 80px;
+  right: 15px;
+  bottom: 40px;
+  left: 15px;
+  @media only screen and (min-width: 768px) {
+    top: 260px;
+    bottom: 80px;
+  }
+  opacity: 0.4;
+  z-index: -1;
+  border-radius: 10px;
+  position: absolute;
+  display: inline-block;
+}
+
 p.explanation {
   font-size: 1.7rem;
   line-height: 2.5rem;
@@ -118,7 +174,7 @@ p.explanation {
 }
 .copy-button {
   position: absolute;
-  bottom: 0px;
+  bottom: 60px;
   right: 15px;
 }
 .send-button {
@@ -129,6 +185,7 @@ p.explanation {
   margin-bottom: 40px;
 }
 
+button,
 .btn {
   padding: 17px !important;
 }
@@ -162,8 +219,19 @@ p.explanation {
 .button-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   margin-bottom: 40px;
+  font-size: 16px;
+  @media only screen and (max-width: 767px) {
+    .left-button,
+    .right-button {
+      width: 50%;
+    }
+    button {
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+  }
+
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     margin-bottom: 80px;
@@ -171,17 +239,29 @@ p.explanation {
 }
 
 .get-MP-form {
-  margin: 15px;
-  padding: 15px;
   display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  margin-bottom: 40px;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    margin-bottom: 80px;
+  }
   justify-content: center;
   align-items: center;
   input {
     margin: 0 15px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+    }
   }
-  .postcode-error {
-    min-width: 120px;
-  }
+}
+.mpEmailAddress {
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .emailBox {
@@ -191,6 +271,7 @@ p.explanation {
     border: 1px solid grey;
     margin: 15px 0;
     padding: 20px;
+    font-size: 16px;
     white-space: pre-wrap;
   }
   button {
@@ -201,36 +282,15 @@ p.explanation {
     margin-bottom: 80px;
   }
 }
-
-.typeform-widget {
-  height: 100vh;
-  margin-bottom: 40px;
-  margin-top: 40px;
+//'edit your email button'
+button.styles_Editext__buttons_container__1kphL,
+.styles_Editext__buttons_after_aligned__1nlcG {
+  font-size: 16px;
+  width: 100%;
+  padding: 17px !important;
   @media only screen and (min-width: 768px) {
-    margin-top: 80px;
-    margin-bottom: 80px;
+    width: auto;
   }
-
-  &.closed {
-    height: 0vh;
-  }
-}
-.typeform-widget::after {
-  background-color: #4eb9be;
-  content: "";
-  top: 40px;
-  right: 20px;
-  bottom: 40px;
-  left: 20px;
-  @media only screen and (min-width: 768px) {
-    top: 80px;
-    bottom: 80px;
-  }
-  opacity: 0.4;
-  z-index: -1;
-  border-radius: 10px;
-  position: absolute;
-  display: inline-block;
 }
 
 //for pop ups
