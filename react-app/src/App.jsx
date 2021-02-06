@@ -78,6 +78,13 @@ const App = () => {
     }
   }, [mpData]);
 
+  useEffect(() => {
+    setState({
+      ...state,
+      emailWithGreeting: greeting + generatedEmailBody,
+    });
+  }, [generatedEmailBody, greeting]);
+
   const handleWindowSizeChange = () => {
     setState({ ...state, width: window.innerWidth });
   };
