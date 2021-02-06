@@ -4,11 +4,18 @@ import React from "react";
 
 const IntroContent = () => (
   <div className="intro-content">
-    <h1 className="title">0.7% Campaign</h1>
+    <h1 className="title">The 0.7% Campaign</h1>
     <p className="intro-para">
-      Info about our campaign. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua.
+      The 2019 Conservative Manifesto declared Britain would{" "}
+      <strong>
+        "proudly maintain our commitment to spend 0.7 per cent of GNI on
+        development"
+      </strong>
+      . But just one year later, the government intends to cut foreign aid
+      indefinitely.<br></br>
+      <br></br> At a time of unprecedented international crisis, with millions
+      at risk of extreme poverty,{" "}
+      <strong>Britain must show leadership - not break its commitments.</strong>
     </p>
   </div>
 );
