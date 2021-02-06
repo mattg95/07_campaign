@@ -118,7 +118,7 @@ const App = () => {
     <div className="App">
       <Container>
         <Row>
-          <Col xs={12} lg={6}>
+          <Col>
             <IntroContent />
           </Col>
         </Row>
