@@ -23,7 +23,7 @@ const App = () => {
     mpData: { error: "Could not find MP" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    positiveTypeFormResponseReturned: true,
+    positiveTypeFormResponseReturned: false,
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",

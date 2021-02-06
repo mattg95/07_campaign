@@ -54,7 +54,7 @@ const MpForm = ({ passDataUpstream }) => {
             type="submit"
             onClick={() => setState({ ...state, dropDownOpen: false })}
           >
-            Continue with this MP
+            Yes, continue with this MP
           </button>
         </a>
       </div>
