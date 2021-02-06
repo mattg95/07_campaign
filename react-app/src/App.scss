@@ -1,4 +1,4 @@
-$primary: #da6846;
+$primary: #ed4b1a;
 $secondary: #4eb9be;
 
 //#DA6846
@@ -15,8 +15,8 @@ html,
   scroll-behavior: smooth;
 }
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./assets/Background Image.svg");
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url("./assets/Background Image.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -65,7 +65,7 @@ p,
 label {
   font-family: "Poppins", sans-serif;
   color: white;
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 h1.title {
   margin-top: 40px;
@@ -83,8 +83,10 @@ h2.secondary-header {
   line-height: 6rem;
 }
 
-p.intro-para {
-  font-size: 3rem;
+.intro-para {
+  font-size: 2.1rem;
+  line-height: 3rem;
+  margin-bottom: 40px;
 }
 .intro-content {
   h1,
@@ -146,8 +148,8 @@ p.intro-para {
 }
 
 p.explanation {
-  font-size: 1.5rem;
-  line-height: 3rem;
+  font-size: 1.7rem;
+  line-height: 2.5rem;
   margin-bottom: 40px;
 }
 .surveyQuestions {
