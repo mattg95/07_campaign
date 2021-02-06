@@ -162,6 +162,7 @@ p.explanation {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  font-size: 16px;
   @media only screen and (max-width: 767px) {
     .left-button,
     .right-button {
@@ -182,6 +183,7 @@ p.explanation {
 .get-MP-form {
   display: flex;
   flex-direction: column;
+  font-size: 16px;
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     margin-bottom: 80px;
@@ -210,6 +212,7 @@ p.explanation {
     border: 1px solid grey;
     margin: 15px 0;
     padding: 20px;
+    font-size: 16px;
     white-space: pre-wrap;
   }
   button {
@@ -218,6 +221,15 @@ p.explanation {
   margin-bottom: 40px;
   @media only screen and (min-width: 768px) {
     margin-bottom: 80px;
+  }
+}
+//'edit your email button'
+.styles_Editext__buttons_container__1kphL,
+.styles_Editext__buttons_after_aligned__1nlcG {
+  font-size: 16px;
+  width: 100%;
+  @media only screen and (min-width: 768px) {
+    width: auto;
   }
 }
 
