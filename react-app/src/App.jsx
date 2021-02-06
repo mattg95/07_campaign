@@ -22,7 +22,7 @@ const App = () => {
   const [state, setState] = useState({
     width: window.innerWidth,
     responseId: "",
-    mpData: { error: "Could not find MP" },
+    mpData: { error: "Could not find MP", name: "", full_name: "" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
     positiveTypeFormResponseReturned: false,
@@ -48,6 +48,15 @@ const App = () => {
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
 
+  const getEmailAddress = (mpData) => {
+    const { name, full_name } = mpData;
+    const mpName = full_name ? full_name : name;
+    return (
+      mpName.toLowerCase().replace(" ", ".").replace("'", "") +
+      ".mp@parliament.uk"
+    );
+  };
+
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
@@ -57,6 +66,7 @@ const App = () => {
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
+          mpEmailAddress: getEmailAddress(generatedEmail.mpData),
           emailWithGreeting: generatedEmail.greeting + generatedEmail.body,
           positiveTypeFormResponseReturned: generatedEmail.supportsAid,
         });
@@ -71,14 +81,12 @@ const App = () => {
       if (mpName) {
         setState({
           ...state,
-          mpEmailAddress:
-            mpName.toLowerCase().replace(" ", ".").replace("'", "") +
-            ".mp@parliament.uk",
+          mpEmailAddress: getEmailAddress(mpData),
           greeting: `Dear ${mpName},\n`,
         });
       }
     }
-  }, [mpData]);
+  }, [mpData.name, mpData.full_name]);
 
   useEffect(() => {
     setState({
@@ -106,8 +114,6 @@ const App = () => {
       if (current) {
         if (isMobile) {
           if (positiveTypeFormResponseReturned) {
-            console.log("should be scrolling");
-            console.log(current);
             current.scrollIntoView({
               behavior: "smooth",
               block: "start",
