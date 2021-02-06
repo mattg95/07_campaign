@@ -15,7 +15,7 @@ html {
 }
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-    url("./assets/Background Image.svg");
+    url("./assets/Background Image.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -84,9 +84,8 @@ h2.secondary-header {
 
 .intro-para {
   font-size: 2.1rem;
-  line-height: 3.8rem;
+  line-height: 3rem;
   margin-bottom: 40px;
-  font-weight: 600;
 }
 .intro-content {
   h1,
@@ -99,7 +98,7 @@ h2.secondary-header {
 }
 p.explanation {
   font-size: 1.7rem;
-  line-height: 3rem;
+  line-height: 2.5rem;
   margin-bottom: 40px;
 }
 .surveyQuestions {
