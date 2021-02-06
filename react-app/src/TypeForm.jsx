@@ -5,7 +5,7 @@ const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
   const mpForm = document.getElementById("displayMP");
   const [width, setWidth] = useState(window.innerWidth);
-  const [desktopTypeformOpen, setDesktopTypeformOpen] = useState(true);
+  const [typeformWidgetOpen, setTypeformWidgetOpen] = useState(true);
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth);
@@ -29,6 +29,10 @@ const TypeForm = ({ passDataUpstream }) => {
             open: "scroll",
             openValue: 50,
             autoClose: 3,
+            onSubmit: ({ response_id }) => {
+              passDataUpstream({ responseId: response_id });
+              setTypeformWidgetOpen(false);
+            },
           }
         )
       : typeformEmbed.makeWidget(
@@ -40,7 +44,7 @@ const TypeForm = ({ passDataUpstream }) => {
             onSubmit: ({ response_id }) => {
               passDataUpstream({ responseId: response_id });
               setTimeout(() => {
-                setDesktopTypeformOpen(false);
+                setTypeformWidgetOpen(false);
               }, 3000);
             },
           }
@@ -51,7 +55,7 @@ const TypeForm = ({ passDataUpstream }) => {
     <div>
       <div
         ref={myRef}
-        className={`typeform-widget ${desktopTypeformOpen ? "" : "closed"}`}
+        className={`typeform-widget ${typeformWidgetOpen ? "" : "closed"}`}
         id="typeform"
       />
     </div>
