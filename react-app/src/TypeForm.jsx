@@ -1,24 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as typeformEmbed from "@typeform/embed";
 
-const TypeForm = ({ passDataUpstream }) => {
+const TypeForm = ({ passDataUpstream, isMobile }) => {
   const myRef = useRef(null);
-  const mpForm = document.getElementById("displayMP");
-  const [width, setWidth] = useState(window.innerWidth);
+  let mpForm;
   const [typeformWidgetOpen, setTypeformWidgetOpen] = useState(true);
-
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  let isMobile = width <= 768;
 
   useEffect(() => {
     isMobile
