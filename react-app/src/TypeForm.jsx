@@ -4,38 +4,54 @@ import * as typeformEmbed from "@typeform/embed";
 const TypeForm = ({ passDataUpstream }) => {
   const myRef = useRef(null);
   const mpForm = document.getElementById("displayMP");
-  const [isOpen, setIsOpen] = useState(true);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [desktopTypeformOpen, setDesktopTypeformOpen] = useState(true);
+
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
+  };
 
   useEffect(() => {
-    typeformEmbed.makeWidget(
-      myRef.current,
-      `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
-      {
-        hideFooter: false,
-        hideHeaders: false,
-        opacity: 0,
-        onSubmit: ({ response_id }) => {
-          passDataUpstream({ responseId: response_id });
-          setTimeout(() => {
-            setIsOpen(false);
-          }, 2000);
-          setTimeout(() => {
-            myRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }, 3000);
-        },
-      }
-    );
-  }, [myRef, mpForm, passDataUpstream]);
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  let isMobile = width <= 768;
+
+  useEffect(() => {
+    isMobile
+      ? typeformEmbed.makePopup(
+          `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
+          {
+            mode: "popup",
+            open: "scroll",
+            openValue: 50,
+            autoClose: 3,
+          }
+        )
+      : typeformEmbed.makeWidget(
+          myRef.current,
+          `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
+          {
+            hideScrollbars: true,
+            opacity: 0,
+            onSubmit: ({ response_id }) => {
+              passDataUpstream({ responseId: response_id });
+              setTimeout(() => {
+                setDesktopTypeformOpen(false);
+              }, 3000);
+            },
+          }
+        );
+  }, [myRef, mpForm, passDataUpstream, isMobile]);
 
   return (
     <div>
-      {/* potentially use state to close typform widget after completion */}
       <div
         ref={myRef}
-        className={`typeform-widget ${isOpen ? "" : "closed"}`}
+        className={`typeform-widget ${desktopTypeformOpen ? "" : "closed"}`}
         id="typeform"
       />
     </div>

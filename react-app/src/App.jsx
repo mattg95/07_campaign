@@ -50,18 +50,13 @@ const App = () => {
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
+          emailWithGreeting: generatedEmail.greeting + generatedEmail.body,
           positiveTypeFormResponseReturned: generatedEmail.supportsAid,
         });
       }
     });
   }, [responseId]);
-
-  useEffect(() => {
-    setState({
-      ...state,
-      emailWithGreeting: greeting + generatedEmailBody,
-    });
-  }, [generatedEmailBody, greeting]);
+  console.log(state);
 
   useEffect(() => {
     if (mpData) {
