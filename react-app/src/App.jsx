@@ -1,6 +1,7 @@
 /* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
 
 import React, { useEffect, useState } from "react";
+import HttpsRedirect from "react-https-redirect";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -86,62 +87,68 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Container>
-        <Row>
-          <Col>
-            <IntroContent />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="typeform">
-              <TypeForm passDataUpstream={passDataUpstream} />
-            </div>
-          </Col>
-        </Row>
-        {positiveTypeFormResponseReturned && (
-          <>
-            <Row>
-              <Col>
-                <div className="">
-                  <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div id="mpForm" className="">
-                  <MpForm passDataUpstream={passDataUpstream} />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div id="emailBox" className="">
-                  <TextBox
-                    passDataUpstream={passDataUpstream}
-                    emailBody={emailWithGreeting}
-                    subject={emailSubject}
-                  />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className="">
-                  <SendEmail
-                    mpEmailAddress={mpEmailAddress}
-                    body={emailWithGreeting}
-                    subject={emailSubject}
-                  />
-                </div>
-              </Col>
-            </Row>
-          </>
-        )}
-      </Container>
-    </div>
+    <HttpsRedirect>
+      <div className="App">
+        <Container>
+          <Row>
+            <Col>
+              <IntroContent />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="typeform">
+                <TypeForm passDataUpstream={passDataUpstream} />
+              </div>
+            </Col>
+          </Row>
+          {positiveTypeFormResponseReturned && (
+            <>
+              <Row>
+                <Col>
+                  <div className="">
+                    <DisplayMp
+                      mpData={mpData}
+                      mpEmailAddress={mpEmailAddress}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div id="mpForm" className="">
+                    <MpForm passDataUpstream={passDataUpstream} />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div id="emailBox" className="">
+                    <TextBox
+                      passDataUpstream={passDataUpstream}
+                      emailBody={emailWithGreeting}
+                      subject={emailSubject}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="">
+                    <SendEmail
+                      mpEmailAddress={mpEmailAddress}
+                      body={emailWithGreeting}
+                      subject={emailSubject}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            </>
+          )}
+        </Container>
+      </div>
+    </HttpsRedirect>
+
     // Cookie banner here
   );
 };
