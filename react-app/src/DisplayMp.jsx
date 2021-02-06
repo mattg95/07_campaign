@@ -12,7 +12,7 @@ const DisplayMp = ({
       <div>{name}</div>
       <div>{full_name}</div>
       <div>{party}</div>
-      <div>{mpEmailAddress}</div>
+      <div className="mpEmailAddress">{mpEmailAddress}</div>
     </div>
   </div>
 );

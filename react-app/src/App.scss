@@ -161,8 +161,18 @@ p.explanation {
 .button-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   margin-bottom: 40px;
+  @media only screen and (max-width: 767px) {
+    .left-button,
+    .right-button {
+      width: 50%;
+    }
+    button {
+      overflow-wrap: break-word;
+      white-space: normal;
+    }
+  }
+
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     margin-bottom: 80px;
@@ -187,6 +197,10 @@ p.explanation {
       text-align: left;
     }
   }
+}
+.mpEmailAddress {
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .emailBox {
