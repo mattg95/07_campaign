@@ -50,6 +50,7 @@ const App = () => {
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
+          emailWithGreeting: generatedEmail.greeting + generatedEmail.body,
           positiveTypeFormResponseReturned: generatedEmail.supportsAid,
         });
       }
