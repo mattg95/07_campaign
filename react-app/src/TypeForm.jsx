@@ -49,12 +49,15 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
                   block: "end",
                 });
           }}
-          className="btn btn-primary btn-lg"
+          className="btn btn-primary btn-lg main-cta"
         >
-          1. Fill out the form
+          Fill out the survey to email your MP{" "}
         </button>
         <p className="explanation">
-          This will generate an email to send to your MP
+          <strong>We will draft an email</strong> based on your survey
+          responses,{" "}
+          <strong>written to have the maximum impact on your MP.</strong> With
+          your help we can safeguard the support so many need.
         </p>
       </div>
       <div
