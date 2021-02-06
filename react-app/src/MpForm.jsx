@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 
 const MpForm = ({ passDataUpstream }) => {
@@ -7,6 +7,15 @@ const MpForm = ({ passDataUpstream }) => {
     postcodeError: "",
   });
   const { dropDownOpen, postcodeError } = state;
+  const myref = useRef();
+  useEffect(() => {
+    const { current } = myref;
+    current &&
+      current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }, [dropDownOpen]);
 
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
@@ -69,10 +78,12 @@ const MpForm = ({ passDataUpstream }) => {
         >
           {(values) => (
             <Form className="get-MP-form" id="postcodeDropdown">
-              <label htmlFor="postcode">Postcode:</label>
-              <Field type="text" name="postcode" />
-              <div className="error postcode-error">
-                {postcodeError ? postcodeError : ""}
+              <div ref={myref}>
+                <label htmlFor="postcode">Postcode:</label>
+                <Field type="text" name="postcode" />
+                <div className="error postcode-error">
+                  {postcodeError ? postcodeError : ""}
+                </div>
               </div>
             </Form>
           )}
