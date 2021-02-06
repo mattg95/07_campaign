@@ -46,6 +46,7 @@ const App = () => {
   } = state;
 
   const displayMpRef = useRef(null);
+  const emailBoxRef = useRef(null);
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
@@ -71,7 +72,8 @@ const App = () => {
         setState({
           ...state,
           mpEmailAddress:
-            mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
+            mpName.toLowerCase().replace(" ", ".").replace("'", "") +
+            ".mp@parliament.uk",
           greeting: `Dear ${mpName},\n`,
         });
       }
@@ -156,7 +158,11 @@ const App = () => {
               <Row>
                 <Col>
                   <div id="mpForm" className="">
-                    <MpForm passDataUpstream={passDataUpstream} />
+                    <MpForm
+                      passDataUpstream={passDataUpstream}
+                      emailBoxRef={emailBoxRef}
+                      emailVisible={emailVisible}
+                    />
                   </div>
                 </Col>
               </Row>
@@ -164,7 +170,7 @@ const App = () => {
                 <div>
                   <Row>
                     <Col>
-                      <div id="emailBox" className="">
+                      <div ref={emailBoxRef}>
                         <TextBox
                           passDataUpstream={passDataUpstream}
                           emailBody={emailWithGreeting}
