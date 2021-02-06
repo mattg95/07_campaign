@@ -1,6 +1,6 @@
 /* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import HttpsRedirect from "react-https-redirect";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
@@ -20,6 +20,7 @@ const socket = socketIOClient();
 
 const App = () => {
   const [state, setState] = useState({
+    width: window.innerWidth,
     responseId: "",
     mpData: { error: "Could not find MP" },
     generatedEmailBody: "Your email will appear here",
@@ -28,6 +29,7 @@ const App = () => {
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
+    emailVisible: false,
   });
 
   const {
@@ -39,12 +41,16 @@ const App = () => {
     greeting,
     emailWithGreeting,
     positiveTypeFormResponseReturned,
+    width,
+    emailVisible,
   } = state;
+
+  const displayMpRef = useRef(null);
+  const emailBoxRef = useRef(null);
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
-        console.log(generatedEmail);
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
@@ -59,13 +65,6 @@ const App = () => {
   }, [responseId]);
 
   useEffect(() => {
-    setState({
-      ...state,
-      emailWithGreeting: greeting + generatedEmailBody,
-    });
-  }, [generatedEmailBody, greeting]);
-
-  useEffect(() => {
     if (mpData) {
       const { name, full_name } = mpData;
       const mpName = full_name ? full_name : name;
@@ -73,12 +72,51 @@ const App = () => {
         setState({
           ...state,
           mpEmailAddress:
-            mpName.toLowerCase().replace(" ", ".") + ".mp@parliament.uk",
+            mpName.toLowerCase().replace(" ", ".").replace("'", "") +
+            ".mp@parliament.uk",
           greeting: `Dear ${mpName},\n`,
         });
       }
     }
   }, [mpData]);
+
+  useEffect(() => {
+    setState({
+      ...state,
+      emailWithGreeting: greeting + generatedEmailBody,
+    });
+  }, [generatedEmailBody, greeting]);
+
+  const handleWindowSizeChange = () => {
+    setState({ ...state, width: window.innerWidth });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  let isMobile = width && width <= 768;
+
+  useEffect(() => {
+    setTimeout(() => {
+      const { current } = displayMpRef;
+      if (current) {
+        if (isMobile) {
+          if (positiveTypeFormResponseReturned) {
+            console.log("should be scrolling");
+            console.log(current);
+            current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      }
+    }, 3000);
+  }, [displayMpRef, positiveTypeFormResponseReturned]);
 
   const passDataUpstream = (data) => {
     Object.keys(data).forEach((key) => {
@@ -98,7 +136,10 @@ const App = () => {
           <Row>
             <Col>
               <div className="typeform">
-                <TypeForm passDataUpstream={passDataUpstream} />
+                <TypeForm
+                  passDataUpstream={passDataUpstream}
+                  isMobile={isMobile}
+                />
               </div>
             </Col>
           </Row>
@@ -106,7 +147,7 @@ const App = () => {
             <>
               <Row>
                 <Col>
-                  <div className="">
+                  <div ref={displayMpRef}>
                     <DisplayMp
                       mpData={mpData}
                       mpEmailAddress={mpEmailAddress}
@@ -117,32 +158,40 @@ const App = () => {
               <Row>
                 <Col>
                   <div id="mpForm" className="">
-                    <MpForm passDataUpstream={passDataUpstream} />
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div id="emailBox" className="">
-                    <TextBox
+                    <MpForm
                       passDataUpstream={passDataUpstream}
-                      emailBody={emailWithGreeting}
-                      subject={emailSubject}
+                      emailBoxRef={emailBoxRef}
+                      emailVisible={emailVisible}
                     />
                   </div>
                 </Col>
               </Row>
-              <Row>
-                <Col>
-                  <div className="">
-                    <SendEmail
-                      mpEmailAddress={mpEmailAddress}
-                      body={emailWithGreeting}
-                      subject={emailSubject}
-                    />
-                  </div>
-                </Col>
-              </Row>
+              {emailVisible && (
+                <div>
+                  <Row>
+                    <Col>
+                      <div ref={emailBoxRef}>
+                        <TextBox
+                          passDataUpstream={passDataUpstream}
+                          emailBody={emailWithGreeting}
+                          subject={emailSubject}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <div className="">
+                        <SendEmail
+                          mpEmailAddress={mpEmailAddress}
+                          body={emailWithGreeting}
+                          subject={emailSubject}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              )}
             </>
           )}
         </Container>

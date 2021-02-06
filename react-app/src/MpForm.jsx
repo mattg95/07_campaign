@@ -1,12 +1,36 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState, useEffect, useRef } from "react";
+import { Formik, Form, Field } from "formik";
 
-const MpForm = ({ passDataUpstream }) => {
+const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
   const [state, setState] = useState({
     dropDownOpen: false,
     postcodeError: "",
   });
+
   const { dropDownOpen, postcodeError } = state;
+
+  const dropdownRef = useRef();
+
+  //if the dropdown postcode is opened, on 'don't see your MP' this scrolls the page down to it
+  useEffect(() => {
+    const { current } = dropdownRef;
+    current &&
+      current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    window.scrollBy(0, 100);
+  }, [dropDownOpen]);
+
+  //once the emailBox postcode is rendered on click of 'Continue with this MP', this scrolls the page down to it
+  useEffect(() => {
+    const { current } = emailBoxRef;
+    current &&
+      current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  }, [emailVisible]);
 
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
@@ -40,23 +64,28 @@ const MpForm = ({ passDataUpstream }) => {
 
   return (
     <div>
-      <div className="button-container">
+      <div className="button-container" id="postcodeDropdown">
         <button
-          className="btn btn-lg cta btn-outline-primary"
+          className="btn btn-lg cta btn-outline-primary left-button"
           type="submit"
-          onClick={() => setState({ ...state, dropDownOpen: true })}
+          onClick={(e) => {
+            e.preventDefault();
+            setState({ ...state, dropDownOpen: true });
+          }}
         >
           Don't see your MP?
         </button>
-        <a href="#emailBox">
-          <button
-            className="btn btn-lg cta btn-primary"
-            type="submit"
-            onClick={() => setState({ ...state, dropDownOpen: false })}
-          >
-            Continue with this MP
-          </button>
-        </a>
+        <button
+          className="btn btn-lg cta btn-primary right-button "
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            setState({ ...state, dropDownOpen: false });
+            passDataUpstream({ emailVisible: true });
+          }}
+        >
+          Yes, continue with this MP
+        </button>
       </div>
       {dropDownOpen && (
         <Formik
@@ -65,7 +94,11 @@ const MpForm = ({ passDataUpstream }) => {
           onSubmit={handleValidation}
         >
           {(values) => (
-            <Form className="get-MP-form">
+            <Form
+              className="get-MP-form"
+              id="postcodeDropdown"
+              ref={dropdownRef}
+            >
               <label htmlFor="postcode">Postcode:</label>
               <Field type="text" name="postcode" />
               <div className="error postcode-error">
