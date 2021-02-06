@@ -1,6 +1,6 @@
 /* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -19,6 +19,7 @@ const socket = socketIOClient();
 
 const App = () => {
   const [state, setState] = useState({
+    width: window.innerWidth,
     responseId: "",
     mpData: { error: "Could not find MP" },
     generatedEmailBody: "Your email will appear here",
@@ -38,7 +39,10 @@ const App = () => {
     greeting,
     emailWithGreeting,
     positiveTypeFormResponseReturned,
+    width,
   } = state;
+
+  const displayMpRef = useRef(null);
 
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
@@ -56,7 +60,6 @@ const App = () => {
       }
     });
   }, [responseId]);
-  console.log(state);
 
   useEffect(() => {
     if (mpData) {
@@ -72,6 +75,37 @@ const App = () => {
       }
     }
   }, [mpData]);
+
+  const handleWindowSizeChange = () => {
+    setState({ ...state, width: window.innerWidth });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  let isMobile = width && width <= 768;
+
+  useEffect(() => {
+    setTimeout(() => {
+      const { current } = displayMpRef;
+      if (current) {
+        if (isMobile) {
+          if (positiveTypeFormResponseReturned) {
+            console.log("should be scrolling");
+            console.log(current);
+            current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      }
+    }, 3000);
+  }, [displayMpRef, positiveTypeFormResponseReturned]);
 
   const passDataUpstream = (data) => {
     Object.keys(data).forEach((key) => {
@@ -90,7 +124,10 @@ const App = () => {
         <Row>
           <Col>
             <div className="typeform">
-              <TypeForm passDataUpstream={passDataUpstream} />
+              <TypeForm
+                passDataUpstream={passDataUpstream}
+                isMobile={isMobile}
+              />
             </div>
           </Col>
         </Row>
@@ -98,7 +135,7 @@ const App = () => {
           <>
             <Row>
               <Col>
-                <div className="">
+                <div ref={displayMpRef}>
                   <DisplayMp mpData={mpData} mpEmailAddress={mpEmailAddress} />
                 </div>
               </Col>
