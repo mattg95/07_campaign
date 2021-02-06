@@ -42,15 +42,15 @@ const MpForm = ({ passDataUpstream }) => {
     <div>
       <div className="button-container">
         <button
-          className="btn btn-lg cta btn-outline-primary"
+          className="btn btn-lg cta btn-outline-primary left-button"
           type="submit"
           onClick={() => setState({ ...state, dropDownOpen: true })}
         >
           Don't see your MP?
         </button>
-        <a href="#emailBox">
+        <a href="#emailBox" className="right-button">
           <button
-            className="btn btn-lg cta btn-primary"
+            className="btn btn-lg cta btn-primary "
             type="submit"
             onClick={() => setState({ ...state, dropDownOpen: false })}
           >
