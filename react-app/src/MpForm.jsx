@@ -40,7 +40,7 @@ const MpForm = ({ passDataUpstream }) => {
 
   return (
     <div>
-      <div className="button-container">
+      <div className="button-container" id="postcodeDropdown">
         <button
           className="btn btn-lg cta btn-outline-primary left-button"
           type="submit"
@@ -52,7 +52,10 @@ const MpForm = ({ passDataUpstream }) => {
           <button
             className="btn btn-lg cta btn-primary "
             type="submit"
-            onClick={() => setState({ ...state, dropDownOpen: false })}
+            onClick={() => {
+              setState({ ...state, dropDownOpen: false });
+              passDataUpstream({ emailVisible: true });
+            }}
           >
             Yes, continue with this MP
           </button>
@@ -65,7 +68,7 @@ const MpForm = ({ passDataUpstream }) => {
           onSubmit={handleValidation}
         >
           {(values) => (
-            <Form className="get-MP-form">
+            <Form className="get-MP-form" id="postcodeDropdown">
               <label htmlFor="postcode">Postcode:</label>
               <Field type="text" name="postcode" />
               <div className="error postcode-error">

@@ -19,6 +19,9 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
               passDataUpstream({ responseId: response_id });
               setTypeformWidgetOpen(false);
             },
+            onClose: () => {
+              setTypeformWidgetOpen(false);
+            },
           }
         )
       : typeformEmbed.makeWidget(

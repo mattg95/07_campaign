@@ -28,6 +28,7 @@ const App = () => {
     mpEmailAddress: "",
     greeting: "",
     emailWithGreeting: "",
+    emailVisible: false,
   });
 
   const {
@@ -40,6 +41,7 @@ const App = () => {
     emailWithGreeting,
     positiveTypeFormResponseReturned,
     width,
+    emailVisible,
   } = state;
 
   const displayMpRef = useRef(null);
@@ -47,7 +49,6 @@ const App = () => {
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
-        console.log(generatedEmail);
         setState({
           ...state,
           generatedEmailBody: generatedEmail.body,
@@ -147,28 +148,32 @@ const App = () => {
                 </div>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <div id="emailBox" className="">
-                  <TextBox
-                    passDataUpstream={passDataUpstream}
-                    emailBody={emailWithGreeting}
-                    subject={emailSubject}
-                  />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className="">
-                  <SendEmail
-                    mpEmailAddress={mpEmailAddress}
-                    body={emailWithGreeting}
-                    subject={emailSubject}
-                  />
-                </div>
-              </Col>
-            </Row>
+            {emailVisible && (
+              <div>
+                <Row>
+                  <Col>
+                    <div id="emailBox" className="">
+                      <TextBox
+                        passDataUpstream={passDataUpstream}
+                        emailBody={emailWithGreeting}
+                        subject={emailSubject}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <div className="">
+                      <SendEmail
+                        mpEmailAddress={mpEmailAddress}
+                        body={emailWithGreeting}
+                        subject={emailSubject}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            )}
           </>
         )}
       </Container>
