@@ -49,12 +49,15 @@ const App = () => {
   const emailBoxRef = useRef(null);
 
   const getEmailAddress = (mpData) => {
-    const { name, full_name } = mpData;
-    const mpName = full_name ? full_name : name;
-    return (
-      mpName.toLowerCase().replace(" ", ".").replace("'", "") +
-      ".mp@parliament.uk"
-    );
+    if (mpData.error) return;
+    else {
+      const { name, full_name } = mpData;
+      const mpName = full_name ? full_name : name;
+      return (
+        mpName.toLowerCase().replace(" ", ".").replace("'", "") +
+        ".mp@parliament.uk"
+      );
+    }
   };
 
   useEffect(() => {
