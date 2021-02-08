@@ -1,7 +1,6 @@
 /* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
 
 import React, { useEffect, useState, useRef } from "react";
-import HttpsRedirect from "react-https-redirect";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -11,6 +10,7 @@ import MpForm from "./MpForm";
 import DisplayMp from "./DisplayMp";
 import SendEmail from "./SendEmail";
 import IntroContent from "./IntroContent";
+import Footer from "./Footer";
 
 import "./App.scss";
 
@@ -134,8 +134,8 @@ const App = () => {
   };
 
   return (
-    <HttpsRedirect>
-      <div className="App">
+    <div>
+      <div className="app-body">
         <Container>
           <Row>
             <Col>
@@ -205,7 +205,12 @@ const App = () => {
           )}
         </Container>
       </div>
-    </HttpsRedirect>
+      <div className="footer">
+        <Container>
+          <Footer />
+        </Container>
+      </div>
+    </div>
 
     // Cookie banner here
   );

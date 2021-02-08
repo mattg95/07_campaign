@@ -1,8 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import TagManager from "react-gtm-module";
+import { Router } from "@reach/router";
+import HttpsRedirect from "react-https-redirect";
+
+import App from "./App";
+import PrivacyPolicy from "./PrivacyPolicy";
+
 import reportWebVitals from "./reportWebVitals";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const tagManagerArgs = {
@@ -11,7 +17,15 @@ const tagManagerArgs = {
 
 TagManager.initialize(tagManagerArgs);
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <HttpsRedirect>
+    <Router>
+      <App path="/" />
+      <PrivacyPolicy path="/privacy-policy" />
+    </Router>
+  </HttpsRedirect>,
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
