@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Formik, Form, Field } from "formik";
 
-const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
+const MpForm = ({ passDataUpstream }) => {
   const [state, setState] = useState({
     dropDownOpen: false,
     postcodeError: "",
@@ -22,16 +21,6 @@ const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
     window.scrollBy(0, 100);
   }, [dropDownOpen]);
 
-  //once the emailBox postcode is rendered on click of 'Continue with this MP', this scrolls the page down to it
-  useEffect(() => {
-    const { current } = emailBoxRef;
-    current &&
-      current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  }, [emailVisible, emailBoxRef]);
-
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
@@ -51,13 +40,17 @@ const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
     return response;
   };
 
-  const handleValidation = ({ postcode }) => {
+  const handleValidation = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
-    if (postCodeRegex.test(postcode.toUpperCase())) {
-      postToApi(postcode);
-    } else {
-      if (postcode.length > 5) {
-        setState({ ...state, postcodeError: "Invalid postcode" });
+    if (value) {
+      if (value.length > 5) {
+        if (postCodeRegex.test(value.toUpperCase())) {
+          postToApi(value);
+        } else {
+          setState({ ...state, postcodeError: "Invalid postcode" });
+        }
       }
     }
   };
@@ -88,25 +81,19 @@ const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
         </button>
       </div>
       {dropDownOpen && (
-        <Formik
-          initialValues={{ postcode: "" }}
-          validate={handleValidation}
+        <form
+          className="get-MP-form"
+          id="postcodeDropdown"
+          ref={dropdownRef}
+          onChange={handleValidation}
           onSubmit={handleValidation}
         >
-          {(values) => (
-            <Form
-              className="get-MP-form"
-              id="postcodeDropdown"
-              ref={dropdownRef}
-            >
-              <label htmlFor="postcode">Postcode:</label>
-              <Field type="text" name="postcode" />
-              <div className="error postcode-error">
-                {postcodeError ? postcodeError : ""}
-              </div>
-            </Form>
-          )}
-        </Formik>
+          <label htmlFor="postcode">Postcode:</label>
+          <input type="text" name="postcode" />
+          <div className="error postcode-error">
+            {postcodeError ? postcodeError : ""}
+          </div>
+        </form>
       )}
     </div>
   );
