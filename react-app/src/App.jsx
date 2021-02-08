@@ -135,7 +135,7 @@ const App = () => {
 
   return (
     <div>
-      <div className="app-body">
+      <div className="main">
         <Container>
           <Row>
             <Col>
