@@ -30,7 +30,7 @@ const MpForm = ({ passDataUpstream, emailBoxRef, emailVisible }) => {
         behavior: "smooth",
         block: "start",
       });
-  }, [emailVisible]);
+  }, [emailVisible, emailBoxRef]);
 
   const postToApi = async (postcode) => {
     const response = await fetch(`/api/postcode/${postcode}`, {
