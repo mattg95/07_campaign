@@ -13,9 +13,9 @@ $secondary: #4eb9be;
 html {
   scroll-behavior: smooth;
 }
-.app-body {
+body {
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-    url("./assets/Background Image.png");
+    url("./assets/Background Image.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -23,6 +23,9 @@ html {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+}
+
+.main {
   padding-bottom: 40px;
   @media only screen and (min-width: 768px) {
     padding-bottom: 80px;
