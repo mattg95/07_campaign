@@ -127,6 +127,16 @@ const App = () => {
     }, 3000);
   }, [displayMpRef, positiveTypeFormResponseReturned]);
 
+  //once the emailBox postcode is rendered on click of 'Continue with this MP', this scrolls the page down to it
+  useEffect(() => {
+    const { current } = emailBoxRef;
+    current &&
+      current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+  }, [emailVisible, emailBoxRef]);
+
   const passDataUpstream = (data) => {
     Object.keys(data).forEach((key) => {
       setState({ ...state, [key]: data[key] });
@@ -167,11 +177,7 @@ const App = () => {
               <Row>
                 <Col>
                   <div id="mpForm" className="">
-                    <MpForm
-                      passDataUpstream={passDataUpstream}
-                      emailBoxRef={emailBoxRef}
-                      emailVisible={emailVisible}
-                    />
+                    <MpForm passDataUpstream={passDataUpstream} />
                   </div>
                 </Col>
               </Row>
