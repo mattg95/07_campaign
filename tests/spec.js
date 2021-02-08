@@ -108,13 +108,21 @@ describe("generateEmail", () => {
   it("should not include the string 'undefined' anywhere in the email", () => {
     expect(randomResponse.body.search("undefined")).to.equal(-1);
   });
-  it("should not include 'RELIGIOUS_DENONYM_NOUN' or 'RELIGIOUS_DENONYM_ADJ' template variable", () => {
+  it.only("should not include 'RELIGIOUS_DENONYM_NOUN' or 'RELIGIOUS_DENONYM_ADJ' template variable", () => {
     expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(-1);
+    expect(jewishEmail.body.search(/RELIGIOUS_DEMONYM_NOUN/gi)).to.equal(-1);
     expect(jewishEmail.body.search(/RELIGIOUS_DENONYM_ADJ/gi)).to.equal(-1);
+    expect(jewishEmail.body.search(/RELIGIOUS_DEMONYM_ADJ/gi)).to.equal(-1);
     expect(otherReligionEmail.body.search(/RELIGIOUS_DENONYM_NOUN/gi)).to.equal(
       -1
     );
+    expect(otherReligionEmail.body.search(/RELIGIOUS_DEMONYM_NOUN/gi)).to.equal(
+      -1
+    );
     expect(otherReligionEmail.body.search(/RELIGIOUS_DENONYM_ADJ/gi)).to.equal(
+      -1
+    );
+    expect(otherReligionEmail.body.search(/RELIGIOUS_DEMONYM_ADJ/gi)).to.equal(
       -1
     );
   });
