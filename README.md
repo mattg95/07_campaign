@@ -32,12 +32,16 @@ Your terminal should present you with two urls in the form:
 
 # Tests
 
-The back-end features tests made using Mocha and Chai. To run all the tests, run `npm run test`. This calls any APIs used in the project, which can use API call limits quickly. To run tests specifically on the random email generator, run `npm run test-email`. To run tests specifically on the They Work for You API, run `npm run test-postcode`
+The back-end features tests made using Mocha, Chai, and Puppeteer. To run all the tests, run `npm run test`. This calls any APIs used in the project, which can use API call limits quickly. To run tests specifically on the random email generator, run `npm run test-email`. To run tests specifically on the They Work for You API, run `npm run test-postcode`.
 
 # Build
 
-To see how the app will look in production, run `npm run build`. This is neccesary before pushing to the heroku hosted demo site. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on
+To see how the app will look in production, run `npm run build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
 
 # Demo
 
-- The demo site can be found at `https://uk-foreign-aid-campaign.herokuapp.com/` . To push to heroku, run `git push heroku master`. Heroku only tracks the master branch. If you are pushing from a non-master branch, run `git push heroku +HEAD:master`
+- The demo site can be found at `https://uk-foreign-aid-campaign.herokuapp.com/`. To push to demo, run `git push demo master`. Make sure the build files are up-to-date by running `npm run react-build` and committing before you push. Heroku only tracks the master branch. If you are pushing from a non-master branch, run `git push demo +HEAD:master`.
+
+# Production
+
+- The production site is another heroku app, running at`https://www.point7percent.org/` . The domain and SSL certificate were bought from `https://www.namecheap.com/`. Make sure the build files are up-to-date by running `npm run react-build` and committing before you push. To push to production, run `git push production master`. Heroku only tracks the master branch. If you are pushing from a non-master branch, run `git push production +HEAD:master`.
