@@ -124,7 +124,7 @@ const App = () => {
           }
         }
       }
-    }, 3000);
+    }, 2000);
   }, [displayMpRef, positiveTypeFormResponseReturned]);
 
   //once the emailBox postcode is rendered on click of 'Continue with this MP', this scrolls the page down to it
