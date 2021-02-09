@@ -3,7 +3,7 @@ import React from "react";
 const sendEmail = ({ subject, body, mpEmailAddress }) => {
   return (
     <div className="send-email">
-      <h2 className="secondary-header">4. Send your email</h2>
+      <h2 className="secondary-header">Send your email</h2>
       <p className="explanation">
         This will open your email service in a different window
       </p>
