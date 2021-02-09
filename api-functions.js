@@ -7,7 +7,7 @@ const apiBase =
 exports.getMpByPostcode = (postcode) => {
   return axios
     .get(apiBase + postcode + "&House=Commons")
-    .then(({ data }) => {
+    .then(async ({ data }) => {
       const contactInfoArr = data.items[0].links;
       const contactInfoUrl = contactInfoArr.find(
         ({ rel }) => (rel = "contactInformation")
@@ -16,7 +16,7 @@ exports.getMpByPostcode = (postcode) => {
         full_name: data.items[0].value.nameDisplayAs,
         constituency: data.items[0].value.latestHouseMembership.membershipFrom,
         party: data.items[0].value.latestParty.name,
-        mpContact: axios
+        mpEmailAddress: await axios
           .get(
             `https://members-api.parliament.uk/api${contactInfoUrl.href}/Contact`
           )
@@ -26,7 +26,7 @@ exports.getMpByPostcode = (postcode) => {
             const consituencyDetails = allContactDetailsArr.find(
               ({ type }) => (type = "Constituency")
             );
-            return (mpObj.email = consituencyDetails.email);
+            return consituencyDetails.email;
           })
           .catch(() => {
             return { error: "Could not retrieve MP contact details" };
