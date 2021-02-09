@@ -21,7 +21,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
   return (
     <div>
       <div>
-        <h2 className="secondary-header">3.Edit your email</h2>
+        <h2 className="secondary-header">Edit your email</h2>
         <EdiText
           viewContainerClassName="emailBox"
           type="textarea"

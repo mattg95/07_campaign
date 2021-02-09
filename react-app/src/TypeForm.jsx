@@ -10,9 +10,12 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
     `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc`,
     {
       mode: "popup",
+      autoClose: 2,
       openValue: 50,
-      autoClose: 3,
       onSubmit: ({ response_id }) => {
+        passDataUpstream({ responseId: response_id });
+      },
+      onClose: ({ response_id }) => {
         passDataUpstream({ responseId: response_id });
       },
     }
