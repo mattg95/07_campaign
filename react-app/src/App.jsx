@@ -25,8 +25,7 @@ const App = () => {
     mpData: { error: "Could not find MP", name: "", full_name: "" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    positiveTypeFormResponseReturned: false,
-    mpEmailAddress: "",
+    positiveTypeFormResponseReturned: true,
     greeting: "",
     emailWithGreeting: "",
     emailVisible: false,
@@ -37,7 +36,6 @@ const App = () => {
     mpData,
     generatedEmailBody,
     emailSubject,
-    mpEmailAddress,
     greeting,
     emailWithGreeting,
     positiveTypeFormResponseReturned,
@@ -48,18 +46,6 @@ const App = () => {
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
 
-  const getEmailAddress = (mpData) => {
-    if (mpData.error) return;
-    else {
-      const { name, full_name } = mpData;
-      const mpName = full_name ? full_name : name;
-      return (
-        mpName.toLowerCase().replace(" ", ".").replace("'", "") +
-        ".mp@parliament.uk"
-      );
-    }
-  };
-
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
@@ -69,7 +55,6 @@ const App = () => {
           emailSubject: generatedEmail.subject,
           mpData: generatedEmail.mpData,
           greeting: generatedEmail.greeting,
-          mpEmailAddress: getEmailAddress(generatedEmail.mpData),
           emailWithGreeting: generatedEmail.greeting + generatedEmail.body,
           positiveTypeFormResponseReturned: generatedEmail.supportsAid,
         });
@@ -79,13 +64,11 @@ const App = () => {
 
   useEffect(() => {
     if (mpData) {
-      const { name, full_name } = mpData;
-      const mpName = full_name ? full_name : name;
-      if (mpName) {
+      const { full_name } = mpData;
+      if (full_name) {
         setState({
           ...state,
-          mpEmailAddress: getEmailAddress(mpData),
-          greeting: `Dear ${mpName},\n`,
+          greeting: `Dear ${full_name},\n`,
         });
       }
     }
@@ -167,10 +150,7 @@ const App = () => {
               <Row>
                 <Col>
                   <div ref={displayMpRef}>
-                    <DisplayMp
-                      mpData={mpData}
-                      mpEmailAddress={mpEmailAddress}
-                    />
+                    <DisplayMp mpData={mpData} />
                   </div>
                 </Col>
               </Row>
@@ -198,7 +178,7 @@ const App = () => {
                     <Col>
                       <div className="">
                         <SendEmail
-                          mpEmailAddress={mpEmailAddress}
+                          mpEmailAddress={mpData.mpEmailAddress}
                           body={emailWithGreeting}
                           subject={emailSubject}
                         />
