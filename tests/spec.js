@@ -42,12 +42,14 @@ describe("/api/postcode", () => {
     expect(result.full_name).to.equal("Rishi Sunak");
     expect(result.constituency).to.equal("Richmond (Yorks)");
     expect(result.party).to.equal("Conservative");
+    expect(result.mpEmailAddress).to.equal("rishi.sunak.mp@parliament.uk");
   });
   it("should return expected MP details for s6 2PN", async () => {
     result = await getMpByPostcode("s6 2pn");
     expect(result.full_name).to.equal("Paul Blomfield");
     expect(result.constituency).to.equal("Sheffield Central");
     expect(result.party).to.equal("Labour");
+    expect(result.mpEmailAddress).to.equal("paul.blomfield.mp@parliament.uk");
   });
   it("should correctly handle errors for an invalid postcode", async () => {
     result = await getMpByPostcode("marmite");
