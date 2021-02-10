@@ -25,7 +25,7 @@ const App = () => {
     mpData: { error: "Could not find MP", name: "", full_name: "" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    positiveTypeFormResponseReturned: true,
+    positiveTypeFormResponseReturned: false,
     greeting: "",
     emailWithGreeting: "",
     emailVisible: false,
@@ -191,11 +191,11 @@ const App = () => {
           )}
         </Container>
       </div>
-      <div className="footer">
+      {/* <div className="footer">
         <Container>
           <Footer />
         </Container>
-      </div>
+      </div> */}
     </div>
 
     // Cookie banner here
