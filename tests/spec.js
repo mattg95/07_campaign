@@ -57,6 +57,14 @@ describe("/api/postcode", () => {
     secondResult = await getMpByPostcode("S62 2PB");
     expect(secondResult.error).to.equal("Could not retrieve MP");
   });
+  it("should return the 2021 current MP", async () => {
+    result = await getMpByPostcode("EH39 4PS");
+    expect(result.full_name).to.equal("Kenny MacAskill");
+    expect(result.full_name).to.not.equal("George Kerevan");
+    secondResult = await getMpByPostcode("M54YD");
+    expect(secondResult.full_name).to.equal("Rebecca Long Bailey");
+    expect(secondResult.full_name).to.not.equal("Hazel Blears");
+  });
 });
 
 //how to test webhooks?

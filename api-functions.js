@@ -6,8 +6,11 @@ const apiBase =
 
 exports.getMpByPostcode = (postcode) => {
   return axios
-    .get(apiBase + postcode + "&House=Commons")
+    .get(apiBase + postcode + "&House=Commons&IsEligible=true")
     .then(async ({ data }) => {
+      if (!data.items.length) {
+        throw new Error();
+      }
       const contactInfoArr = data.items[0].links;
       const contactInfoUrl = contactInfoArr.find(
         ({ rel }) => (rel = "contactInformation")
@@ -21,7 +24,6 @@ exports.getMpByPostcode = (postcode) => {
             `https://members-api.parliament.uk/api${contactInfoUrl.href}/Contact`
           )
           .then(({ data }) => {
-            const key = process.env.REACT_APP_TWFY_KEY;
             const allContactDetailsArr = data.value;
             const consituencyDetails = allContactDetailsArr.find(
               ({ type }) => (type = "Constituency")
