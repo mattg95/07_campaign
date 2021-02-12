@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="dist">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/react-app/node_modules/react-typeform-embed/node_modules/@typeform/embed/dist/typeform_embed_fullpage.html.zip!/" />
+      <root url="jar://$PROJECT_DIR$/react-app/node_modules/react-typeform-embed/node_modules/@typeform/embed/dist/typeform_incrustar-pagina-completa.html.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
