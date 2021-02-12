@@ -161,32 +161,32 @@ const App = () => {
                   </div>
                 </Col>
               </Row>
-              {emailVisible && (
-                <div>
-                  <Row>
-                    <Col>
-                      <div ref={emailBoxRef}>
-                        <TextBox
-                          passDataUpstream={passDataUpstream}
-                          emailBody={emailWithGreeting}
-                          subject={emailSubject}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <div className="">
-                        <SendEmail
-                          mpEmailAddress={mpData.mpEmailAddress}
-                          body={emailWithGreeting}
-                          subject={emailSubject}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              )}
+              {/* {emailVisible && ( */}
+              <div>
+                <Row>
+                  <Col>
+                    <div ref={emailBoxRef}>
+                      <TextBox
+                        passDataUpstream={passDataUpstream}
+                        emailBody={emailWithGreeting}
+                        subject={emailSubject}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <div className="">
+                      <SendEmail
+                        mpEmailAddress={mpData.mpEmailAddress}
+                        body={emailWithGreeting}
+                        subject={emailSubject}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+              {/* )} */}
             </>
           )}
         </Container>
