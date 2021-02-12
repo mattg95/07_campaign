@@ -81,16 +81,18 @@ const App = () => {
     });
   }, [generatedEmailBody, greeting]);
 
-  const handleWindowSizeChange = () => {
-    setState({ ...state, width: window.innerWidth });
-  };
+  // const handleWindowSizeChange = () => {
+  //   setState({ ...state, width: window.innerWidth });
+  // };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+  // console.log(state);
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleWindowSizeChange);
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowSizeChange);
+  //   };
+  // }, []);
 
   let isMobile = width && width <= 768;
 
