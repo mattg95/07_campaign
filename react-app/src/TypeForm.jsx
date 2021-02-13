@@ -11,7 +11,6 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
     {
       mode: "popup",
       autoClose: 2,
-      openValue: 50,
       onSubmit: ({ response_id }) => {
         passDataUpstream({ responseId: response_id });
       },
@@ -44,7 +43,8 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
       <div className="call-to-action text-center">
         <button
           ref={buttonRef}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             isMobile
               ? mobileTypeform.open()
               : typeformComponent.current.scrollIntoView({
