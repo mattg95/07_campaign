@@ -34,7 +34,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
           editButtonContent="Edit Your Email"
           value={emailBody} // validates the webhook response token against the response id from the embedded tyeform widget
           onSave={(val) => {
-            passDataUpstream({ generatedEmail: val }); //if the user edits the text box, a new property called editedResponse is set in state
+            passDataUpstream({ emailWithGreeting: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
 
