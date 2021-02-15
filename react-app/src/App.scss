@@ -129,15 +129,7 @@ h2.secondary-header {
     margin-bottom: 40px;
   }
 }
-.intro-content {
-  h1,
-  h2,
-  p {
-    @media only screen and (min-width: 768px) {
-      text-align: left;
-    }
-  }
-}
+
 .call-to-action {
   margin-bottom: 40px;
   margin-top: 40px;
