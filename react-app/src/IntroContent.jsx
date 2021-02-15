@@ -4,7 +4,7 @@ import React from "react";
 
 const IntroContent = () => (
   <div className="intro-content">
-    <h1 className="title">The 0.7% Campaign</h1>
+    <h1 className="title">The 0.7% Commitment</h1>
     <p className="intro-para">
       The 2019 Conservative Manifesto declared Britain would{" "}
       <strong>
