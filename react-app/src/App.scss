@@ -110,9 +110,11 @@ h1.title {
   @media only screen and (min-width: 768px) {
     margin-top: 80px;
     margin-bottom: 40px;
+    font-size: 5rem;
+    line-height: 8rem;
   }
-  font-size: 5rem;
-  line-height: 8rem;
+  font-size: 4rem;
+  line-height: 6.5rem;
 }
 
 h2.secondary-header {
@@ -123,7 +125,9 @@ h2.secondary-header {
 .intro-para {
   font-size: 2.1rem;
   line-height: 3rem;
-  margin-bottom: 40px;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 40px;
+  }
 }
 .intro-content {
   h1,
@@ -394,13 +398,23 @@ button.styles_Editext__buttons_container__1kphL,
 .privacy-policy {
   background-color: #313147;
   color: white;
-  height: 100vh;
+  padding-bottom: 40px;
+  @media only screen and (min-width: 768px) {
+    padding-bottom: 80px;
+  }
   h1 {
-    color: white;
     margin-top: 40px;
     margin-bottom: 40px;
+    @media only screen and (min-width: 768px) {
+      margin-top: 80px;
+    }
+  }
+  h2 {
+    text-align: left;
   }
   p {
+    text-align: left;
+
     color: white;
     font-size: 16px;
   }
