@@ -5,11 +5,6 @@ import { Col, Row } from "react-bootstrap";
 const Footer = () => (
   <div id="Footer">
     <Row>
-      <Col>
-        <h3 className="text-center">The 0.7% Campaign</h3>
-      </Col>
-    </Row>
-    <Row>
       <Col xs={12}>
         <Link to="privacy-policy">Privacy Policy</Link>
         © 2021 Red Scarf Services Ltd
