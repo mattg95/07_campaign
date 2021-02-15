@@ -21,7 +21,7 @@ ReactDOM.render(
   <HttpsRedirect>
     <Router>
       <App path="/" />
-      {/* <PrivacyPolicy path="/privacy-policy" /> */}
+      <PrivacyPolicy path="/privacy-policy" />
     </Router>
   </HttpsRedirect>,
   document.getElementById("root")

@@ -109,7 +109,7 @@ const App = () => {
           }
         }
       }
-    }, 2000);
+    }, 3000);
   }, [displayMpRef, positiveTypeFormResponseReturned]);
 
   //once the emailBox postcode is rendered on click of 'Continue with this MP', this scrolls the page down to it
@@ -188,19 +188,17 @@ const App = () => {
                   </Col>
                 </Row>
               </div>
-              {/* )} */}
+              // )}
             </>
           )}
         </Container>
       </div>
-      {/* <div className="footer">
+      <div className="footer">
         <Container>
           <Footer />
         </Container>
-      </div> */}
+      </div>
     </div>
-
-    // Cookie banner here
   );
 };
 
