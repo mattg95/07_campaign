@@ -12,9 +12,6 @@ const Footer = () => (
     <Row>
       <Col xs={12}>
         <Link to="privacy-policy">Privacy Policy</Link>
-        {/* <Link to="about"> */}
-        {/* Who we are */}
-        {/* </Link> */}
         © 2021 Red Scarf Services Ltd
         <br />
         Company No. 12407870
