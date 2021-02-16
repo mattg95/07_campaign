@@ -6,6 +6,7 @@ const app = express();
 var http = require("http").createServer(app);
 const crypto = require("crypto");
 const fs = require("fs");
+const proxy = require("http-proxy-middleware");
 
 const io = require("socket.io")(http);
 
@@ -19,6 +20,8 @@ const client = require("socket.io-client")("http://localhost:" + port);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use(proxy("*", { target: "http://localhost:5000" }));
 
 const writeDataToExampleResponsesFile = (data) => {
   // Use hashed answers as filename to avoid generating multiple files containing the same responses.
