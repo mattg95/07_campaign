@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "install-react": "cd react-app && npm install",
+    "install": "cd react-app && npm install",
     "start": "cd react-app && npm start",
     "build": "cd react-app && npm run build",
     "react-test": "cd react-app && npm run test",
