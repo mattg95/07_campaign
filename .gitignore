@@ -11,7 +11,7 @@
 /tests/exampleResponses
 
 # production
-react-app/build
+/react-app/build
 
 # misc
 .DS_Store
