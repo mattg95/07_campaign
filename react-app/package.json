@@ -27,7 +27,8 @@
     "reset-css": "^5.0.1",
     "sass": "^1.30.0",
     "socket.io-client": "^3.0.5",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "http-proxy-middleware": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
