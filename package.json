@@ -10,11 +10,11 @@
     ]
   },
   "scripts": {
-    "install-react": "cd react-app && npm install",
-    "react-start": "cd react-app && npm start",
-    "react-build": "cd react-app && npm run build",
+    "install": "cd react-app && npm install",
+    "start": "cd react-app && npm start",
+    "build": "cd react-app && npm run build",
     "react-test": "cd react-app && npm run test",
-    "react-eject": "cd react-app && npm run eject",
+    "eject": "cd react-app && npm run eject",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
     "test": "mocha --timeout 50000 tests/puppeteer/bootstrap.js --recursive tests",
