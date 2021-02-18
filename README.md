@@ -36,7 +36,7 @@ The back-end features tests made using Mocha, Chai, and Puppeteer. To run all th
 
 # Build
 
-To see how the app will look in production, run `npm run build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
+To see how the app will look in production, run `npm run react-build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
 
 # Demo
 
