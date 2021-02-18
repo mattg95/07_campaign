@@ -36,11 +36,11 @@ The back-end features tests made using Mocha, Chai, and Puppeteer. To run all th
 
 # Build
 
-To see how the app will look in production, run `npm run build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
+To see how the app will look in production, run `npm run react-build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
 
-# Demo
+# Staging
 
-- The demo site can be found at `https://uk-foreign-aid-campaign.herokuapp.com/`. To push to demo, run `git push demo master`. Make sure the build files are up-to-date by running `npm run react-build` and committing before you push. Heroku only tracks the master branch. If you are pushing from a non-master branch, run `git push demo +HEAD:master`.
+- The demo site can be found at `https://point-7-staging.herokuapp.com/`. To push to demo, run `git push staging master`. Make sure the build files are up-to-date by running `npm run react-build` and committing before you push. Heroku only tracks the master branch. If you are pushing from a non-master branch, run `git push staging +HEAD:master`.
 
 # Production
 
