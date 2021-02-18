@@ -37,7 +37,7 @@ describe("Puppeteer tests", function () {
       (heading) => heading.innerText
     );
 
-    expect(heading).to.eql("The 0.7% Campaign");
+    expect(heading).to.eql("The 0.7% Commitment");
   });
 
   it("should stop the survey if the user answers No to the first question", async function () {
