@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.60bad374.chunk.css",
+    "main.js": "/static/js/main.cde7ced2.chunk.js",
+    "main.js.map": "/static/js/main.cde7ced2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2ba4faf2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2ba4faf2.js.map",
+    "static/css/2.0ec887ff.chunk.css": "/static/css/2.0ec887ff.chunk.css",
+    "static/js/2.d3f75373.chunk.js": "/static/js/2.d3f75373.chunk.js",
+    "static/js/2.d3f75373.chunk.js.map": "/static/js/2.d3f75373.chunk.js.map",
+    "static/js/3.1fac8129.chunk.js": "/static/js/3.1fac8129.chunk.js",
+    "static/js/3.1fac8129.chunk.js.map": "/static/js/3.1fac8129.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0ec887ff.chunk.css.map": "/static/css/2.0ec887ff.chunk.css.map",
+    "static/css/main.60bad374.chunk.css.map": "/static/css/main.60bad374.chunk.css.map",
+    "static/js/2.d3f75373.chunk.js.LICENSE.txt": "/static/js/2.d3f75373.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/Background Small.010671cc.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2ba4faf2.js",
+    "static/css/2.0ec887ff.chunk.css",
+    "static/js/2.d3f75373.chunk.js",
+    "static/css/main.60bad374.chunk.css",
+    "static/js/main.cde7ced2.chunk.js"
+  ]
+}
