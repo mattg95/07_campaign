@@ -185,6 +185,16 @@ h2.secondary-header {
   display: inline-block;
 }
 
+#ccc,
+.ccc {
+  position: relative;
+}
+
+#ccc-icon,
+.ccc-icon {
+  position: absolute;
+}
+
 p.explanation {
   font-size: 1.7rem;
   line-height: 2.5rem;
