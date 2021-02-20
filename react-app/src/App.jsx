@@ -11,6 +11,7 @@ import DisplayMp from "./DisplayMp";
 import SendEmail from "./SendEmail";
 import IntroContent from "./IntroContent";
 import Footer from "./Footer";
+import ThankyouScreen from "./thankyouScreen";
 
 import "./App.scss";
 
@@ -25,10 +26,11 @@ const App = () => {
     mpData: { error: "Could not find MP", name: "", full_name: "" },
     generatedEmailBody: "Your email will appear here",
     emailSubject: "",
-    positiveTypeFormResponseReturned: false,
+    positiveTypeFormResponseReturned: true,
     greeting: "",
     emailWithGreeting: "",
     emailVisible: false,
+    emailSent: false,
   });
 
   const {
@@ -41,6 +43,7 @@ const App = () => {
     positiveTypeFormResponseReturned,
     width,
     emailVisible,
+    emailSent,
   } = state;
 
   const displayMpRef = useRef(null);
@@ -80,6 +83,13 @@ const App = () => {
       emailWithGreeting: greeting + generatedEmailBody,
     });
   }, [generatedEmailBody, greeting]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://static.addtoany.com/menu/page.js";
+    document.body.appendChild(script);
+  }, [emailSent]);
 
   // const handleWindowSizeChange = () => {
   //   setState({ ...state, width: window.innerWidth });
@@ -183,10 +193,18 @@ const App = () => {
                           mpEmailAddress={mpData.mpEmailAddress}
                           body={emailWithGreeting}
                           subject={emailSubject}
+                          passDataUpstream={passDataUpstream}
                         />
                       </div>
                     </Col>
                   </Row>
+                  {emailSent && (
+                    <Row>
+                      <Col>
+                        <ThankyouScreen />
+                      </Col>
+                    </Row>
+                  )}
                 </div>
               )}
             </>
