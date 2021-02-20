@@ -195,6 +195,14 @@ h2.secondary-header {
   position: absolute !important;
 }
 
+.a2a_kit {
+  display: flex;
+  justify-content: space-evenly;
+  a {
+    height: 150px;
+  }
+}
+
 p.explanation {
   font-size: 1.7rem;
   line-height: 2.5rem;
