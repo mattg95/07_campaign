@@ -1,15 +1,15 @@
 {
-  "name": "example-create-react-app-express",
+  "name": "create-07-campaign-app",
   "version": "1.0.0",
   "main": "server.js",
   "start": "node server.js",
-  "heroku-postbuild": "cd react-app && npm install --only=dev --no-shrinkwrap && npm run build",
   "nodemonConfig": {
     "ignore": [
       "tests/exampleResponses/*"
     ]
   },
   "scripts": {
+    "heroku-postbuild": "cd react-app && npm install --no-shrinkwrap && npm run build",
     "install-react": "cd react-app && npm install",
     "react-start": "cd react-app && npm start",
     "react-build": "cd react-app && npm run build",
@@ -25,13 +25,10 @@
     "@reach/router": "^1.3.4",
     "axios": "^0.21.1",
     "body-parser": "^1.18.3",
-    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "http-proxy-middleware": "^1.0.6",
-    "mocha": "^8.2.1",
-    "puppeteer": "^5.5.0",
     "react-gtm-module": "^2.0.11",
     "react-https-redirect": "^1.1.0",
     "reactjs-popup": "^2.0.4",
@@ -39,7 +36,10 @@
     "socket.io-client": "^3.0.5"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "concurrently": "^4.0.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "mocha": "^8.2.1",
+    "puppeteer": "^5.5.0"
   }
 }
