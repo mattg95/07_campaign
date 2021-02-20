@@ -187,12 +187,12 @@ h2.secondary-header {
 
 #ccc,
 .ccc {
-  position: relative;
+  position: relative !important;
 }
 
 #ccc-icon,
 .ccc-icon {
-  position: absolute;
+  position: absolute !important;
 }
 
 p.explanation {
