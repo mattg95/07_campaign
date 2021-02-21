@@ -2,7 +2,7 @@ const { expect } = require("chai");
 
 const LIST_ITEMS_SELECTOR = "li";
 
-const BASE_URL = `http://localhost:${process.env.PORT || 5000}`
+const BASE_URL = `http://localhost:${process.env.PORT || 3000}`
 
 const getTypeformFrame = (page) => {
   for (const frame of page.frames()) {
