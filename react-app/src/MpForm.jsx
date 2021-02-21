@@ -4,9 +4,10 @@ const MpForm = ({ passDataUpstream }) => {
   const [state, setState] = useState({
     dropDownOpen: false,
     postcodeError: "",
+    isLoading: false,
   });
 
-  const { dropDownOpen, postcodeError } = state;
+  const { dropDownOpen, postcodeError, isLoading } = state;
 
   const dropdownRef = useRef();
 
@@ -22,6 +23,7 @@ const MpForm = ({ passDataUpstream }) => {
   }, [dropDownOpen]);
 
   const postToApi = async (postcode) => {
+    setState({ ...state, isLoading: true });
     const response = await fetch(`/api/postcode/${postcode}`, {
       method: "GET",
       headers: {
@@ -31,10 +33,10 @@ const MpForm = ({ passDataUpstream }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          setState({ ...state, postcodeError: data.error });
+          setState({ ...state, isLoading: false, postcodeError: data.error });
         } else {
           passDataUpstream({ mpData: data });
-          setState({ ...state, postcodeError: "" });
+          setState({ ...state, isLoading: false, postcodeError: "" });
         }
       });
     return response;
@@ -91,7 +93,11 @@ const MpForm = ({ passDataUpstream }) => {
           <label htmlFor="postcode">Postcode:</label>
           <input type="text" name="postcode" />
           <div className="error postcode-error">
-            {postcodeError ? postcodeError : ""}
+            {postcodeError && !isLoading ? postcodeError : ""}
+          </div>
+          {/* Probably should not use 'error' style class for this loading message */}
+          <div className="loading">
+            {isLoading ? "Fetching your MP..." : ""}
           </div>
         </form>
       )}
