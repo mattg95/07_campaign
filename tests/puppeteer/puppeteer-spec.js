@@ -2,6 +2,8 @@ const { expect } = require("chai");
 
 const LIST_ITEMS_SELECTOR = "li";
 
+const BASE_URL = `http://localhost:${process.env.PORT || 5000}`
+
 const getTypeformFrame = (page) => {
   for (const frame of page.frames()) {
     if (frame.url().includes("typeform.com")) {
@@ -20,7 +22,7 @@ describe("Puppeteer tests", function () {
   });
 
   beforeEach(async function () {
-    await page.goto("http://localhost:3000");
+    await page.goto(BASE_URL);
   });
 
   after(async function () {
