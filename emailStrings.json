@@ -112,6 +112,10 @@
     "Government commitments on foreign aid",
     "The 0.7%: foreign aid",
     "Foreign aid -- sticking to the 0.7%",
+    "Foreign aid",
+    "Maintain foreign aid",
+    "International aid",
+    "Maintain International aid",
     "International aid (the 0.7%)",
     "International aid is important - defend the 0.7%",
     "International aid is important - stick to the 0.7%",
@@ -137,6 +141,8 @@
     "Vote against reducing overseas aid",
     "I want you to vote against a decrease in foreign aid",
     "Please stick to your government’s commitment to 0.7%",
+    "Overseas aid",
+    "Maintain Overseas aid",
     "Overseas aid saves lives",
     "Foreign aid helps the world’s poorest",
     "Re: foreign aid",
@@ -161,6 +167,11 @@
     "Keeping overseas aid at 0.7% is truly important to me",
     "Foreign aid is very important to me",
     "I disagree with reducing international aid spending",
+    "Aid to the developing world",
+    "Please maintain foreign aid",
+    "Please maintain foreign aid spending",
+    "Please maintain the aid budget",
+    "Please maintain the aid to the developing world",
     "Please reject proposals to reduce overseas aid spending"
   ],
   "survey": {
@@ -178,6 +189,7 @@
           "As I’m a Conservative Party member, I hope you pay particular attention to this.",
           "I hope my membership at the Conservative Party will mean you will kindly listen to my concerns.",
           "I am contacting you as a Conservative Party member.",
+          "As a Conservative party member, I hope you’ll consider my views.",
           "As a member of the Conservative party, I hope you’ll hear me out."
         ]
       },
@@ -187,6 +199,7 @@
           "I'm writing to you as someone who has been a member of the Conservative Party.",
           "I want to start by letting you know that I’ve been a member of the Conservative Party.",
           "As a former member of the Conservative Party, I hope this carries some weight.",
+          "As a former Conservative Party member, I hope you will consider my views.",
           "I’m writing to you as someone who was a former member of the Conservative Party.",
           "I am contacting you as someone who was previously a member of the Conservative Party.",
           "I’d like to mention that I’ve been a member of the Conservative Party in the past.",
@@ -208,6 +221,7 @@
           "First and foremost, please know that I have voted for the Conservative Party before.",
           "Let me start by letting you know that I have voted for the Conservatives in the past.",
           "I’d like to begin by telling you that I have voted for the Conservatives before.",
+          "As someone who has previously voted for the Conservative Party, I’m writing to share my views.",
           "Just so you know, I’m writing to you as someone who has voted for the Conservative Party previously."
         ]
       },
@@ -249,6 +263,7 @@
           "As someone who is often open and sympathetic to the Conservative party, it really baffles me why you would reduce assistance to those who desperately need it.",
           "I’m not always opposed to the Conservatives as you may expect from someone writing against government policy, in fact I’m quite open and agree on some things, however I strongly disagree with the proposal to reduce foreign aid.",
           "As someone who is somewhat sympathetic to the Conservatives, I am writing to you about an issue that is important to me.",
+          "As a person with sympathies toward Conservative party policies, the decision to reduce our contribution to fight extreme global poverty is one I disagree with.",
           "I want to start by saying that I am sympathetic to the Conservatives, and I hope you carefully consider your position on the proposed reduction in foreign aid budgets.",
           "Firstly, I want you to know that I am someone who can understand Conservative ideas, but I feel compelled to write to you about one issue in particular.",
           "First of all, please note that I am someone who can be sympathetic to Conservative policies, but am disappointed to hear about planned cuts to overseas aid.",
@@ -259,12 +274,12 @@
       }
     ],
     "religion": [
-      "I want to add that I am a RELIGIOUS_DENONYM_NOUN, and according to my religion it’s not right to forsake the poor. I don’t know about your religious beliefs, but I hope you will reassure me that you will respect that people in your constituency don’t think the government’s decision on this is acceptable.",
-      "For RELIGIOUS_DENONYM_ADJ people like me, it feels wrong to let the poor down in their hour of need. I hope you will recognise and respect that there are people of faith in your constituency and let that guide you to make the right decision; I’m hoping you will vote not to let the poor people in this world down. Please vote against the government on this.",
+      "I want to add that I am a RELIGIOUS_DEMONYM_NOUN, and according to my religion it’s not right to forsake the poor. I don’t know about your religious beliefs, but I hope you will reassure me that you will respect that people in your constituency don’t think the government’s decision on this is acceptable.",
+      "For RELIGIOUS_DEMONYM_ADJ people like me, it feels wrong to let the poor down in their hour of need. I hope you will recognise and respect that there are people of faith in your constituency and let that guide you to make the right decision; I’m hoping you will vote not to let the poor people in this world down. Please vote against the government on this.",
       "Let me please add that I’m a RELIGIOUS_DENONYM_NOUN, and according to my faith it’s wrong to let the global poor down. I can’t be sure about your religious beliefs, however I’d like your reassurance that you will take mine and other people’s of faith in your constituency views into account in the upcoming vote.",
       "As a RELIGIOUS_DENONYM_NOUN, I feel uneasy about letting the poor down, especially now, when the pandemic continues to affect everyone. I hope you will acknowledge people of faith in your constituency and represent my view in the upcoming vote.",
       "For RELIGIOUS_DENONYM_NOUN people just like me, it feels absolutely wrong to turn away from the poor when they need us most. Please respect your constituents of faith and represent our views. I strongly encourage you to vote against reduction in the aid budget.",
-      "I’m RELIGIOUS_DENONYM_ADJ and I really feel that the government should respect people of faith and our desire to ensure that the poorest people in this world don’t suffer. Please bear this in mind when you vote.",
+      "I’m RELIGIOUS_DEMONYM_ADJ and I really feel that the government should respect people of faith and our desire to ensure that the poorest people in this world don’t suffer. Please bear this in mind when you vote.",
       "I’m RELIGIOUS_DENONYM_ADJ and I strongly believe that the government should ensure they respect people of faith like me, and our strong desire to make sure that the global poor are not left alone to suffer. I’d appreciate you bearing this in mind when you vote.",
       "I’m RELIGIOUS_DENONYM_ADJ and in my views, it’s our government’s responsibility to take into account all views, including people’s of faith. Especially our belief that we should make sure the global poor are not left to suffer. Please make sure you take our views seriously and vote against reducing the aid target.",
       "I am RELIGIOUS_DENONYM_ADJ and I wanted to ask you to respect your constituents of faith, and our belief that our government must do everything in their power to ensure that the global poor get support and help from us. Let me urge you to consider this and vote against cutting aid.",
@@ -274,7 +289,7 @@
       "As a RELIGIOUS_DENONYM_NOUN, my religion really emphasises helping the poor and striving for justice for them, and I know that many other faiths do too.",
       "I’m a RELIGIOUS_DENONYM_NOUN, and compassion is really important to me.",
       "I know kindness and integrity are important to many people, including many others like me who are also RELIGIOUS_DENONYM_ADJ.",
-      "As I am a RELIGIOUS_DENONYM_NOUN I believe we should strive for justice and equality for the poor, as my religion and many others emphasise.",
+      "As I am a  RELIGIOUS_DENONYM_NOUN I believe we should strive for justice and equality for the poor, as my religion and many others emphasise.",
       "As a RELIGIOUS_DENONYM_NOUN, I think it’s a good thing for the government to realise the values my religion shares with others, such as kindness and justice.",
       "I am a RELIGIOUS_DENONYM_NOUN, and  in my religion, it’s not considered right to turn our backs on suffering, and I believe you don’t have to share this religion to share this value.",
       "As a RELIGIOUS_DENONYM_NOUN, I feel that it is very important to have compassion for others and work to reduce the suffering of those in poverty; I’m sure many other people of faith feel the same as well as people who are not religious.",
@@ -304,6 +319,7 @@
           "We need to assist other countries in strengthening their health systems to eradicate the threat of COVID-19, if we do not it could mutate and resurge, so even after people in the UK have had a vaccine we could be at risk.",
           "If everyone has a strong health system we will all be much safer, as COVID has proved.",
           "Covid-19 has shown us how interconnected the world is and how we are not safe if people in developing countries are not protected.",
+          "Covid-19 has shone a light on the global nature of public health and how without protection for developing countries, citizens across the world will remain unsafe.",
           "I want to feel safe from COVID-19, so we need to ensure that aid is used to keep everyone safe.",
           "If you’re to keep your constituents safe from COVID-19, you need to keep people in the developing world safe from COVID-19. That’s how infectious diseases work in a globalised world.",
           "If you want to keep people in your constituency safe from the COVID-19 virus, you need to make sure that people in the developing world are safe from it. Because that’s how such an infectious virus works in a world, where we’re so interconnected.",
@@ -326,6 +342,7 @@
           "I fear that cutting foreign aid will be the nail in the coffin for many poor families around the world struggling because of the pandemic.",
           "We cannot reduce support at a time when so many are experiencing crises around the world, exacerbated by the pandemic.",
           "We should be extending a hand to the millions of people pushed into global poverty by COVID-19, not turning our backs on them.",
+          "In a moment of crisis, we should be leading the world in our COVID response by extending a hand to the millions of people forced into global poverty as a result of the pandemic.",
           "I know that we have all had to sacrifice a lot in this pandemic, but we do not have to sacrifice our values. Hundreds of millions are suffering increased poverty because of COVID-19, let us not betray them now.",
           "It seems wrong to add to people’s misery at a time when extreme poverty is on the rise due to the pandemic.",
           "With millions of people being pushed into extreme poverty due to the effects of Covid-19, the last thing a rich nation like the UK should be doing is cutting foreign aid.",
@@ -335,13 +352,13 @@
       {
         "response": "The Global Britain agenda and the forthcoming presidencies of the G7 and COP26 make it particularly important that we show moral leadership",
         "synonyms": [
-          "We have to maintain our aid budget for our political and strategic interests, aligned with the “Global Britain” agenda.",
+          "We have to maintain our aid budget for our political and strategic interests, aligned with the 'Global Britain' agenda.",
           "How can Britain lead by example if it is a country that breaks its promises to other countries, and to its own electorate? This is all the more important with the forthcoming presidencies of the G7 and COP26.",
           "2021 is a big year for the UK as the host of the G7 summit and COP26 climate conference. We need to lead by example.",
           "It is in the UK’s national interest to remain committed to the 0.7% aid budget to further our ‘Global Britain’ agenda.",
           "Talk of a ‘Global Britain’ sounds rather hollow when we are not prepared to spend just 0.7% of our GNI on helping the world’s most vulnerable populations.",
           "Promises of a post-Brexit ‘Global Britain’ seem hollow when we aren’t even maintaining our commitment to the world’s poorest people.",
-          "The government implied that we would be outward-looking after Brexit and not retreat from the rest of the world, but we cannot talk of “Global Britain” if this is our attitude to low income countries.",
+          "The government implied that we would be outward-looking after Brexit and not retreat from the rest of the world, but we cannot talk of 'Global Britain' if this is our attitude to low income countries.",
           "How can Britain lead by example if it is a country that breaks its promises to other countries, and to its own electorate? Leading by example is particularly important with the forthcoming presidencies of the G7 and COP26.",
           "Talking of a ‘Global Britain’ and then cutting aid seems like hypocrisy.",
           "I want to take pride in Britain leading by example, and I can only do that if we show integrity in keeping to our promises and staying concerned about people in other countries by maintaining our aid budget. Leading by example is particularly important with the forthcoming presidencies of the G7 and COP26.",
@@ -354,6 +371,7 @@
           "We should be setting an example as hosts of the G7 and COP26, if we break our promises other countries will feel empowered to do the same.",
           "Maintaining the UK’s international aid spending is particularly important in the lead-up to the UK’s presidency of the G7 and COP26.",
           "Britain should be leading by example in the lead-up to our hosting of the G7 and COP26.",
+          "The UK government needs to be a world leader and maintain foreign aid as it prepares to host the G7.",
           "The UK government needs to ask itself whether cutting foreign aid can be justified in the lead-up to its hosting of the G7."
         ]
       },
@@ -374,7 +392,8 @@
         "response": "If we can find money for military spending and nuclear weapons we can find money to help the poor",
         "synonyms": [
           "If the government can find money in the budget for nuclear weapons and warfare, we can certainly find the money to help the poorest and most vulnerable people in the world.",
-          "Increasing our defence budget while reducing aid is abhorrent as we should be focusing on improving the well-being of the global poor, not building military defence unecessarily.",
+          "If we are capable of funding nuclear weapons and the military, we should find the money to help the global poor.",
+          "Increasing our defence budget while reducing aid is abhorrent as we should be focusing on improving the well-being of the global poor, not building military defence unnecessarily.",
           "At the same time, the government has announced a huge increase in military spending, which unlike foreign aid, will not prevent problems from arising.",
           "It cannot be right that we are able to find money for nuclear weapons but not for helping the world’s most vulnerable populations.",
           "I would be ashamed to be part of a nation that maintains an array of nuclear weapons while cutting back on our efforts to alleviate poverty.",
@@ -396,6 +415,7 @@
           "This decision will cause immense suffering for already vulnerable people.",
           "I think that when we see suffering and are able to do something to prevent it we should.",
           "We should not ignore the huge suffering due to poverty when we are able to do something to reduce it.",
+          "I believe it is the moral duty of the UK, as a global leader, to reduce the suffering of people in poverty.",
           "Can you imagine the suffering of those who lose a child to a disease that is easily preventable and treatable with the right resources? I hope you can feel compassion for them.",
           "Many people will suffer painful illnesses or the grief of losing a child if the UK reduces its commitments to global health.",
           "I hope you can feel compassion for those suffering from diseases like malaria, tuberculosis and AIDS, who are greatly benefited by UK aid.",
@@ -435,6 +455,7 @@
           "The UK’s money can help many more people in developing countries than it can here, and I think improving the lives of people in other countries is just as important as helping ourselves in these difficult times.",
           "Because of diminishing returns to wealth, the same amount of spending actually goes much further in low income countries than it does in the UK.",
           "Much of aid spending goes on very cheap things that we take for granted in the UK or do not need like routine childhood vaccinations, malaria nets or clean water. Therefore the aid department is one of the most effective in terms of how much it helps people versus how much we spend on it.",
+          "The positive impact of international aid from the UK would be immense because spending goes much further in low income countries than it does in the UK",
           "This money does so much good, as the people who receive this spending have so little, so what seems like a small amount for people in the UK can make a huge difference.",
           "The global economy works in a way that the same amount of money can buy much more in low income countries than it can in the UK, and what's more, many the people in these countries have very little money so this makes a much bigger difference than it could here.",
           "The struggles of people in other countries are no less important because of where they live, and it is relatively cheap for our government to help them, as this money goes much further than it would here.",
@@ -560,6 +581,7 @@
       "Please could we have a phone call or video to talk about this such as during your advice surgery time, or another time if you do not have space in this time?",
       "Please could we talk about this? I know you have an advice surgery for constituents, could we do a call or video call in that time?",
       "Would it be possible for us to have a phone or video call at some point, to further discuss this issue? If you would prefer this to be part of your advice surgery, I’m happy to do that as well.",
+      "Would it be possible for us to discuss this via phone or video call at some point?",
       "It’d be great to discuss this issue in more detail with you. Please could I request a meeting or a slot in your advice surgery for us to talk about it?",
       "I’d really appreciate you taking time to discuss these concerns with me. Are you available for a meeting or is there a suitable slot in your advice surgery to talk about this issue further?",
       "As you can see, I’m really keen to talk about this issue, and it would be great to discuss it with you in more detail. Could we please set some time for a meeting, or if you prefer, could I please ask for a slot in your advice surgery?",
@@ -584,6 +606,7 @@
       "I find it pretty disappointing that the government is deciding to go against its own manifesto promises and is no longer providing 0.7% of GNI as foreign aid to help people around the globe.",
       "I am sad that the government is breaking its manifesto pledge of providing 0.7% of GNI as foreign aid.",
       "I am quite disappointed that the government has decided to go against its manifesto pledges of providing 0.7% of national income to the global poor.",
+      "I am disappointed in the government for deciding to reduce investment in fighting global poverty.",
       "I hope the Conservative party will keep its manifesto pledges as you are going against it by dropping the promise to provide 0.7% of GNI as foreign aid.",
       "I am quite disappointed that the government has decided to go against its manifesto pledges of providing 0.7% of national income to the global poor.",
       "Politicians should not be able to be elected on the basis of one set of policies, spending 0.7% of GDP on foreign aid, and then change them once they get into power.",
@@ -718,6 +741,7 @@
       "Thank you",
       "Yours faithfully",
       "Sincerely",
+      "Best wishes",
       "Many thanks"
     ]
   }
