@@ -2,7 +2,7 @@ const { expect } = require("chai");
 
 const LIST_ITEMS_SELECTOR = "li";
 
-const BASE_URL = `http://localhost:${process.env.PORT || 3000}`
+const BASE_URL = `http://localhost:${process.env.PORT || 3000}`;
 
 const getTypeformFrame = (page) => {
   for (const frame of page.frames()) {
@@ -29,7 +29,7 @@ describe("Puppeteer tests", function () {
     await page.close();
   });
 
-  it("should have a heading that says 0.7% Campaign", async function () {
+  it("should have a heading that says 0.7% Commitment", async function () {
     const HEADING_SELECTOR = "h1";
     let heading;
 
