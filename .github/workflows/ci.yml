@@ -20,5 +20,5 @@ jobs:
         node-version: 14.x
     - run: npm ci
     - run: npm run heroku-postbuild # installs deps for the react-app frontend and builds it
-    - run: NODE_ENV=production npm start # start serving the backend for puppeteer tests to connect to
-    - run: npm test
+    - run: NODE_ENV=production npm start & npx wait-on http://localhost:5000 # start serving the backend for puppeteer tests
+    - run: PORT=5000 npm test
