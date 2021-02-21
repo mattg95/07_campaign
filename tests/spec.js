@@ -173,9 +173,6 @@ describe("generateEmail", () => {
   it("Conservative responses to Conservative MPs should reference that in the email", () => {
     expect(allToryEmail.body.search(/conservative/gi)).to.not.equal(-1);
   });
-  it("emails to non-conservative MPs should not reference that the user is a conservative in the email", () => {
-    expect(nonToryMpEmail.body.search(/conservative/gi)).to.equal(-1);
-  });
   it("works even if a user inputs an invalid postcode", () => {
     expect(nonValidPostcodeEmail).to.have.keys(
       "body",
