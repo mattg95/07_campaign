@@ -14,7 +14,8 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
           "?Subject=" +
           encodeURIComponent(subject) +
           "&Body=" +
-          encodeURIComponent(body)
+          encodeURIComponent(body) +
+          "&bcc=campaign@point7percent.org"
         }
         className="btn btn-primary btn-lg cta send-button"
         target="_blank"
