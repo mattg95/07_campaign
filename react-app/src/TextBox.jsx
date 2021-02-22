@@ -26,8 +26,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
           viewContainerClassName="emailBox"
           type="textarea"
           inputProps={{
-            placeholder: "your email will appear here",
-            rows: 10,
+            placeholder: "Your email will appear here",
           }}
           saveButtonContent="Apply"
           cancelButtonContent={<strong>Cancel</strong>}
@@ -40,9 +39,11 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
 
         <Popup
           trigger={(open) => (
-            <button className="btn btn-outline-primary copy-button">
-              Copy
-            </button>
+            <div className="copy-button-container">
+              <button className="btn btn-outline-primary copy-button">
+                Copy
+              </button>
+            </div>
           )}
           closeOnDocumentClick
           onOpen={copyToClipboard}
@@ -50,6 +51,10 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
         >
           <span> Copied to clipboard </span>
         </Popup>
+        <p className="explanation">
+          Personalising your email will distinguish it from others and is much
+          more likely to grab your MP’s attention.
+        </p>
       </div>
     </div>
   );
