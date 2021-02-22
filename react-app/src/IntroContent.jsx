@@ -5,6 +5,7 @@ import React from "react";
 const IntroContent = () => (
   <div className="intro-content">
     <h1 className="title">The 0.7% Commitment</h1>
+    <h2 className="main-h2">Stop the cuts to UK aid</h2>
     <p className="intro-para">
       The 2019 Conservative Manifesto declared Britain would{" "}
       <strong>
