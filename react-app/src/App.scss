@@ -122,6 +122,12 @@ h2.secondary-header {
   line-height: 6rem;
 }
 
+.main-h2 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 40px;
+}
+
 .intro-para {
   font-size: 2.1rem;
   line-height: 3rem;
@@ -207,6 +213,7 @@ p.explanation {
   font-size: 1.7rem;
   line-height: 2.5rem;
   margin-bottom: 40px;
+  display: block;
 }
 .surveyQuestions {
   label {
@@ -223,11 +230,22 @@ p.explanation {
   background-color: rgba(255, 255, 255, 0.7);
   color: black;
 }
-.copy-button {
-  position: absolute;
-  bottom: 60px;
-  right: 15px;
+
+.copy-button-container {
+  widows: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  @media only screen and (min-width: 768px) {
+    justify-content: flex-end;
+  }
 }
+// . .copy-button {
+//   position: relative;
+
+//   // bottom: 60px;
+//   // right: 15px;
+// }
 .send-button {
   margin-top: 40px;
 }
@@ -339,10 +357,6 @@ button,
   button {
     margin: auto;
   }
-  margin-bottom: 40px;
-  @media only screen and (min-width: 768px) {
-    margin-bottom: 80px;
-  }
 }
 //'edit your email button'
 button.styles_Editext__buttons_container__1kphL,
@@ -353,6 +367,17 @@ button.styles_Editext__buttons_container__1kphL,
   @media only screen and (min-width: 768px) {
     width: auto;
   }
+}
+.styles_Editext__input__1534X {
+  border: 2px solid blue;
+}
+
+textarea:disabled {
+  height: 100%;
+  font-size: 13px;
+  text-align: justify;
+  resize: none;
+  overflow: hidden;
 }
 
 //for pop ups
@@ -425,7 +450,7 @@ button.styles_Editext__buttons_container__1kphL,
   }
   h1 {
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     @media only screen and (min-width: 768px) {
       margin-top: 80px;
     }
