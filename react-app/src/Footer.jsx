@@ -6,6 +6,7 @@ const Footer = () => (
   <div id="Footer">
     <Row>
       <Col xs={12}>
+        <Link to="about">About</Link>
         <Link to="privacy-policy">Privacy Policy</Link>
         © 2021 Red Scarf Services Ltd
         <br />
