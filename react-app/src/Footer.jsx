@@ -6,7 +6,7 @@ const Footer = () => (
   <div id="Footer">
     <Row>
       <Col xs={12}>
-        <Link to="about">About</Link>
+        {/* <Link to="about">About</Link> */}
         <Link to="privacy-policy">Privacy Policy</Link>
         © 2021 The 0.7% Commitment
         <br />
