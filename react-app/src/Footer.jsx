@@ -8,9 +8,9 @@ const Footer = () => (
       <Col xs={12}>
         <Link to="about">About</Link>
         <Link to="privacy-policy">Privacy Policy</Link>
-        © 2021 Red Scarf Services Ltd
+        © 2021 The 0.7% Commitment
         <br />
-        Company No. 12407870
+        Red Scarf Services Ltd,
         <br />
         48 Queen Edith's Way, Cambridge, England, CB1 8PW
         <br />
