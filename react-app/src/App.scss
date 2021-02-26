@@ -465,3 +465,56 @@ textarea:disabled {
     font-size: 16px;
   }
 }
+
+.about {
+	background-color: #313147;
+	color: white;
+	padding-bottom: 40px;
+	@media only screen and (min-width: 768px) {
+	  padding-bottom: 80px;
+	  }
+	h1 {
+		margin-top: 40px;
+		margin-bottom: 20px;
+		@media only screen and (min-width: 768px) {
+		  margin-top: 80px;
+		}
+	  }
+	h2 {
+		text-align: left;
+	  }
+	p {
+		text-align: left;
+		margin-bottom: 16px;
+		color: white;
+		font-size: 16px;
+	  }
+	  
+	.image-grid
+	 {
+	  display: grid;
+	  grid-template-columns: repeat(3,150px);
+	  grid-template-rows: repeat(2,150px);
+	  grid-gap:50px 30px;
+	  margin-left: auto;
+	  margin-right: auto;
+	  margin-bottom: 50px;
+	  width: 450px
+	  }
+
+	.grid-item{
+	  border:thin gray solid;
+	  padding:10px;
+	}
+
+	img {
+	  width: 100%;
+	}
+
+	figcaption {
+		margin: 15px 0 0 0;
+		font-size: 20px;
+		color: #ffffff;
+		text-align: center;
+	}
+}
