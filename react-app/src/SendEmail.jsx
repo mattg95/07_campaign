@@ -54,9 +54,7 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
             </div>
           )}
           closeOnDocumentClick
-          onOpen={() =>
-            copyToClipboard(mpEmailAddress + ",bcc=campaign@point7percent.org")
-          }
+          onOpen={() => copyToClipboard(mpEmailAddress)}
           className="copy-popup"
         >
           <span> Copied to clipboard </span>
