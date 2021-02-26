@@ -75,12 +75,6 @@ body {
   }
 }
 
-.send-email {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 80px;
-}
 h1,
 h2 {
   font-family: "Open Sans", sans-serif;
@@ -181,8 +175,8 @@ h2.secondary-header {
   bottom: 40px;
   left: 15px;
   @media only screen and (min-width: 768px) {
-    top: 260px;
-    bottom: 80px;
+    top: 300px;
+    bottom: 60px;
   }
   opacity: 0.4;
   z-index: -1;
@@ -240,14 +234,14 @@ p.explanation {
     justify-content: flex-end;
   }
 }
-// . .copy-button {
-//   position: relative;
-
-//   // bottom: 60px;
-//   // right: 15px;
-// }
+.copy-button {
+  @media only screen and (min-width: 425px) {
+    min-width: 200px;
+  }
+}
 .send-button {
   margin-top: 40px;
+  margin-bottom: 20px;
 }
 .copy-popup {
   cursor: pointer;
@@ -400,65 +394,90 @@ textarea:disabled {
   resize: none;
   overflow: hidden;
 }
-
-//for pop ups
-/* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
+.popup-container {
+  display: flex;
+  .popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
   }
-  to {
-    opacity: 1;
+
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+.edit-email {
+  p.explanation {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
   }
-  to {
-    opacity: 1;
+}
+.send-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  .send-email-header {
+    font-size: 4rem;
+    margin-bottom: 15px;
+  }
+  .send-explanation {
+    font-size: 1.9rem;
+    line-height: 2.8rem;
+  }
+  .campaign-explanation {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    margin: 40px 30px auto;
   }
 }
 
