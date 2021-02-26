@@ -13,16 +13,13 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
     passDataUpstream({ copied: true });
   };
 
-  const getFullEmailLink = (mpEmailAddress) => {
-    return (
-      mpEmailAddress +
-      "?Subject=" +
-      encodeURIComponent(subject) +
-      "&Body=" +
-      encodeURIComponent(body) +
-      "&bcc=campaign@point7percent.org"
-    );
-  };
+  const getFullEmailLink = (mpEmailAddress) =>
+    mpEmailAddress +
+    "?Subject=" +
+    encodeURIComponent(subject) +
+    "&Body=" +
+    encodeURIComponent(body) +
+    "&bcc=campaign@point7percent.org";
 
   return (
     <div className="send-email">
@@ -57,7 +54,9 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
             </div>
           )}
           closeOnDocumentClick
-          onOpen={() => copyToClipboard(getFullEmailLink(mpEmailAddress))}
+          onOpen={() =>
+            copyToClipboard(mpEmailAddress + "&bcc=campaign@point7percent.org")
+          }
           className="copy-popup"
         >
           <span> Copied to clipboard </span>
