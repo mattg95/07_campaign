@@ -204,8 +204,10 @@ const PrivacyPolicy = () => (
             <br />
             We are regulated by the Information Commissioner’s Office, who you
             can also contact for advice and support:
-            <a href="https://ico.org.uk/make-a-complaint/"></a>
-            https://ico.org.uk/make-a-complaint/
+            <a href="https://ico.org.uk/make-a-complaint/">
+              {" "}
+              https://ico.org.uk/make-a-complaint/
+            </a>
           </p>
         </Col>
       </Row>
