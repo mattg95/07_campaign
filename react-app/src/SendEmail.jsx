@@ -29,6 +29,10 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
         comes from your email address. Click 'Open email service' to be sent to
         your default email service.
       </p>
+      <p className="explanation campaign-explanation">
+        Your email will also be sent to campaign@point7percent.org for campaign
+        monitoring.
+      </p>
       <a
         href={"mailto:" + getFullEmailLink(mpEmailAddress)}
         className="btn btn-primary btn-lg cta send-button"
@@ -77,10 +81,6 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
           <span> Copied to clipboard </span>
         </Popup>
       </div>
-      <p className="explanation campaign-explanation">
-        Your email will also be send to campaign@point7percent.org for campaign
-        monitoring
-      </p>
     </div>
   );
 };
