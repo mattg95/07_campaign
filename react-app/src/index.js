@@ -10,6 +10,7 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import reportWebVitals from "./reportWebVitals";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./Footer";
 
 const tagManagerArgs = {
   gtmId: "GTM-MWBT83W",
@@ -24,6 +25,7 @@ ReactDOM.render(
       <PrivacyPolicy path="/privacy-policy" />
       {/* <About path="/about" /> */}
     </Router>
+    <Footer />
   </HttpsRedirect>,
   document.getElementById("root")
 );
