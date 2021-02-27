@@ -45,25 +45,13 @@ The back-end features tests made using Mocha, Chai, and Puppeteer.
 
 # Build
 
-To see how the app will look in production, run `npm run react-build`. This is neccesary before pushing to the demo and production sites. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
+(Optional) React skips some features and warning when running `npm run dev` that will be present in the production build. To see how the app will look in production, run `npm run react-build`. To see the built site, run `serve -s build` and navigate to the port that the terminal indicates the build script is running on.
 
-# Staging and production sites
+# Heroku pipeline
 
-There are two Heroku sites set up, a staging site (https://point-7-staging.herokuapp.com/) and a production site (https://www.point7percent.org/). 
+We have a Heroku pipeline set up, with a staging site (https://point-7-staging.herokuapp.com/) and a production site (https://www.point7percent.org/). Whe  you make a pull request, two checks will be run
 
-To push to either of these first install the Heroku CLI from https://devcenter.heroku.com/articles/heroku-cli. Create a 'staging' and 'production' remote branch by running:
+- Github, checking there are no merge conflicts
+- Heroku, checking the site can be built if the branch is merges. All tests in the ./tests folder will also be run. (This check takes around 5 minutes).
 
-`heroku git:remote -a https://git.heroku.com/point-7-staging.git -r staging`
-`heroku git:remote -a https://git.heroku.com/production-aid-app.git -r production`
-
-You can now push to staging and production.
-
-## Pushing to staging:
-
- - Run `npm run react-build` to update the build files.
- - Run `git push staging master` if you are pushing from 'master' branch, or `git push staging +HEAD:master` if you are on any other branches.
-
-## Pushing to production:
-
- - Run `npm run react-build` to update the build files.
- - Run `git push production master` if you are pushing from 'master' branch, or `git push production +HEAD:master` if you are on any other branches.
+Please check with Matt if you have not merged a pull reuqest before, or if either of these checks are failing. Once the branch is merged into master, an updated build will automatically be run in the staging site. Heroku will send a notification to slack when the build is done. To see site statuses, log into the Heroku dashboard (ask Matt for login details). The Heorku dashboard also has the 'promote to production' button, which moves the staging site to production.
