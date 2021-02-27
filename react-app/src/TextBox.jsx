@@ -10,6 +10,10 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
     <div className="edit-email">
       <div>
         <h2 className="secondary-header send-email-header">Edit your email</h2>
+        <p className="explanation">
+          Personalising your email will distinguish it from others and is much
+          more likely to grab your MP’s attention.
+        </p>
         <EdiText
           viewContainerClassName="emailBox"
           type="textarea"
@@ -24,10 +28,6 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
             passDataUpstream({ emailWithGreeting: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
-        <p className="explanation">
-          Personalising your email will distinguish it from others and is much
-          more likely to grab your MP’s attention.
-        </p>
       </div>
     </div>
   );
