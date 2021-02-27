@@ -26,37 +26,37 @@ const About = () => {
 			  <div class="image-grid">
 				<div class="grid-item">
 				  <figure>
-					<img src={matt} alt=""/>
+					<img src={matt} alt="Matt"/>
 					<figcaption>Matt</figcaption>
 				  </figure>
 				</div>
 				<div class="grid-item">
 				  <figure>
-					<img src={sanjay} alt=""/>
+					<img src={sanjay} alt="Sanjay"/>
 					<figcaption>Sanjay</figcaption>
 				  </figure>
 				</div>
 				<div class="grid-item">
 				  <figure>
-					<img src={natasha} alt=""/>
+					<img src={natasha} alt="Natasha"/>
 					<figcaption>Natasha</figcaption>
 				  </figure>
 				</div>
 				<div class="grid-item">
 				  <figure>
-					<img src={sahil} alt=""/>
+					<img src={sahil} alt="Sahil"/>
 					<figcaption>Sahil</figcaption>
 				  </figure>
 				</div>
 				<div class="grid-item">
 				  <figure>
-					<img src={robert} alt=""/>
+					<img src={robert} alt="Robert"/>
 					<figcaption>Robert</figcaption>
 				  </figure>
 				</div>
 				<div class="grid-item">
 				  <figure>
-					<img src={sean} alt=""/>
+					<img src={sean} alt="Sean"/>
 					<figcaption>Sean</figcaption>
 				  </figure>
 				</div>
