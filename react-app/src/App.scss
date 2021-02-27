@@ -75,12 +75,6 @@ body {
   }
 }
 
-.send-email {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 80px;
-}
 h1,
 h2 {
   font-family: "Open Sans", sans-serif;
@@ -108,7 +102,7 @@ h1.title {
   margin-top: 40px;
   margin-bottom: 20px;
   @media only screen and (min-width: 768px) {
-    margin-top: 80px;
+    margin-top: 60px;
     margin-bottom: 40px;
     font-size: 5rem;
     line-height: 8rem;
@@ -181,8 +175,8 @@ h2.secondary-header {
   bottom: 40px;
   left: 15px;
   @media only screen and (min-width: 768px) {
-    top: 260px;
-    bottom: 80px;
+    top: 300px;
+    bottom: 60px;
   }
   opacity: 0.4;
   z-index: -1;
@@ -240,14 +234,14 @@ p.explanation {
     justify-content: flex-end;
   }
 }
-// . .copy-button {
-//   position: relative;
-
-//   // bottom: 60px;
-//   // right: 15px;
-// }
+.copy-button {
+  @media only screen and (min-width: 425px) {
+    min-width: 200px;
+  }
+}
 .send-button {
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 .copy-popup {
   cursor: pointer;
@@ -312,6 +306,19 @@ button,
   flex-direction: column;
   font-size: 16px;
   margin-bottom: 40px;
+  align-items: center;
+
+  @media only screen and (min-width: 768px) {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 80px;
+    .postcode-label {
+      margin-bottom: 0;
+      margin-left: 130px;
+    }
+  }
   label {
     margin-bottom: 5px;
   }
@@ -319,22 +326,30 @@ button,
     margin-top: 5px;
     color: #2ecc71;
   }
-  @media only screen and (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 80px;
-    label {
-      margin-bottom: 0;
+  .bots {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+    z-index: -1;
+  }
+  .form-messages {
+    min-width: 200px;
+    @media only screen and (max-width: 767px) {
+      margin-top: 10px;
+      text-align: center;
     }
   }
-  justify-content: center;
-  align-items: center;
   input {
     margin: 0 15px;
-    width: 100%;
+    min-width: 100%;
     max-width: 250px;
     text-align: center;
+    line-height: 30px;
     @media only screen and (min-width: 768px) {
+      min-width: auto;
       text-align: left;
     }
   }
@@ -379,93 +394,98 @@ textarea:disabled {
   resize: none;
   overflow: hidden;
 }
-
-//for pop ups
-/* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
+.popup-container {
+  display: flex;
+  .popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
   }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
   }
-  to {
-    opacity: 1;
-  }
-}
 
-.privacy-policy {
-  background-color: #313147;
-  color: white;
-  padding-bottom: 40px;
-  @media only screen and (min-width: 768px) {
-    padding-bottom: 80px;
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
   }
-  h1 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    @media only screen and (min-width: 768px) {
-      margin-top: 80px;
+
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
-  h2 {
-    text-align: left;
-  }
-  p {
-    text-align: left;
 
-    color: white;
-    font-size: 16px;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+.edit-email {
+  p.explanation {
+    margin: auto 30px;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+  }
+}
+.send-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 80px;
+  }
+  .send-email-header {
+    font-size: 4rem;
+    margin-bottom: 15px;
+  }
+  .send-explanation {
+    font-size: 1.9rem;
+    line-height: 2.8rem;
+    margin-bottom: 20px;
+  }
+  .campaign-explanation {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    margin: 0 30px 0;
   }
 }
 
+.privacy-policy,
 .about {
   background-color: #313147;
   color: white;
@@ -473,22 +493,26 @@ textarea:disabled {
   @media only screen and (min-width: 768px) {
     padding-bottom: 80px;
   }
-  h1 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    @media only screen and (min-width: 768px) {
-      margin-top: 80px;
-    }
-  }
   h2 {
     text-align: left;
   }
+  h3 {
+    text-align: left;
+    font-weight: 800;
+    margin: 10px auto;
+  }
   p {
     text-align: left;
-    margin-bottom: 16px;
+
     color: white;
     font-size: 16px;
   }
+  a {
+    color: #4eb9be;
+  }
+}
+
+.about {
   .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 140px);
@@ -515,6 +539,7 @@ textarea:disabled {
   img {
     width: 100%;
   }
+
   figcaption {
     margin: 15px 0 0 0;
     font-size: 20px;
