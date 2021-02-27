@@ -4,8 +4,6 @@ const MpForm = ({ passDataUpstream }) => {
   const [state, setState] = useState({
     dropDownOpen: false,
     postcodeError: "",
-    postcode: "",
-    bots: "",
     isLoading: false,
   });
 
@@ -43,15 +41,12 @@ const MpForm = ({ passDataUpstream }) => {
       });
     return response;
   };
+
   const handleValidation = (e) => {
     e.preventDefault();
     const { value } = e.target;
-    setState({
-      ...state,
-      [e.target.name]: value,
-    });
     const postCodeRegex = /([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/;
-    if (value && state.bots !== "on") {
+    if (value) {
       if (value.length > 5) {
         if (postCodeRegex.test(value.toUpperCase())) {
           postToApi(value);
@@ -93,23 +88,16 @@ const MpForm = ({ passDataUpstream }) => {
           id="postcodeDropdown"
           ref={dropdownRef}
           onChange={handleValidation}
+          onSubmit={handleValidation}
         >
-          <label htmlFor="postcode" className="postcode-label">
-            Postcode:
-          </label>
-          <input type="text" name="postcode" className="postcode-input" />
-          <input
-            type="checkbox"
-            className="bots"
-            name="bots"
-            tabIndex="-1"
-            autoComplete="off"
-          />
-          <div className="form-messages">
-            {postcodeError && !isLoading && (
-              <div className="error postcode-error">{postcodeError}</div>
-            )}
-            {isLoading && <div className="loading">Fetching your MP...</div>}
+          <label htmlFor="postcode">Postcode:</label>
+          <input type="text" name="postcode" />
+          <div className="error postcode-error">
+            {postcodeError && !isLoading ? postcodeError : ""}
+          </div>
+          {/* Probably should not use 'error' style class for this loading message */}
+          <div className="loading">
+            {isLoading ? "Fetching your MP..." : ""}
           </div>
         </form>
       )}
