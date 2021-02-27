@@ -241,7 +241,7 @@ p.explanation {
 }
 .send-button {
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 }
 .copy-popup {
   cursor: pointer;
@@ -457,6 +457,7 @@ textarea:disabled {
 }
 .edit-email {
   p.explanation {
+    margin: auto 30px;
     font-size: 1.5rem;
     line-height: 2.5rem;
   }
@@ -465,7 +466,9 @@ textarea:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 80px;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 80px;
+  }
   .send-email-header {
     font-size: 4rem;
     margin-bottom: 15px;
@@ -473,11 +476,12 @@ textarea:disabled {
   .send-explanation {
     font-size: 1.9rem;
     line-height: 2.8rem;
+    margin-bottom: 20px;
   }
   .campaign-explanation {
     font-size: 1.5rem;
     line-height: 2.5rem;
-    margin: 40px 30px auto;
+    margin: 0 30px 0;
   }
 }
 
