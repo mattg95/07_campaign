@@ -3,7 +3,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 const Footer = () => (
-  <div id="Footer">
+  <div className="footer" id="Footer">
     <Row>
       <Col xs={12}>
         {/* <Link to="about">About</Link> */}
