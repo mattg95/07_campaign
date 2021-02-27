@@ -488,25 +488,29 @@ textarea:disabled {
     margin-bottom: 16px;
     color: white;
     font-size: 16px;
-  }      
+  }
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(2,150px);
-    grid-template-rows: repeat(3,150px);
-    grid-gap:50px 30px;
+    grid-template-columns: repeat(2, 140px);
+    grid-template-rows: repeat(3, 140px);
+    row-gap: 50px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
-    width: 300px;
+    width: 280px;
+    @media only screen and (min-width: 375px) {
+      column-gap: 30px;
+      width: 310px;
+    }
     @media only screen and (min-width: 768px) {
-      grid-template-columns: repeat(3,150px);
-      grid-template-rows: repeat(2,150px);
-      width: 450px
+      grid-template-columns: repeat(3, 150px);
+      grid-template-rows: repeat(2, 150px);
+      width: 510px;
     }
   }
-  .grid-item{
-    border:thin gray solid;
-    padding:10px;
+  .grid-item {
+    border: thin gray solid;
+    padding: 10px;
   }
   img {
     width: 100%;
