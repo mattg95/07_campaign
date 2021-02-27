@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./Footer";
+import About from "./About";
 
 const tagManagerArgs = {
   gtmId: "GTM-MWBT83W",
