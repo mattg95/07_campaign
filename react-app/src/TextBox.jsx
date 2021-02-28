@@ -2,10 +2,20 @@
 
 import React from "react";
 import EdiText from "react-editext";
-
+import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 const TextBox = ({ emailBody, passDataUpstream }) => {
+  const copyToClipboard = (itemToCopy) => {
+    const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
+    el.value = itemToCopy;
+    document.body.appendChild(el);
+    el.select();
+    el.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    passDataUpstream({ copied: true });
+  };
   return (
     <div className="edit-email">
       <div>
@@ -28,6 +38,20 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
             passDataUpstream({ emailWithGreeting: val }); //if the user edits the text box, a new property called editedResponse is set in state
           }}
         />
+        <Popup
+          trigger={() => (
+            <div className="copy-button-container">
+              <button className="btn btn-outline-primary copy-button">
+                Copy
+              </button>
+            </div>
+          )}
+          closeOnDocumentClick
+          onOpen={() => copyToClipboard(emailBody)}
+          className="copy-popup"
+        >
+          <span> Copied to clipboard </span>
+        </Popup>
       </div>
     </div>
   );
