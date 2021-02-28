@@ -14,6 +14,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  // width: 100%;
+  margin: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
     url("./assets/Background Small.jpg");
   background-repeat: no-repeat;
@@ -487,6 +489,7 @@ textarea:disabled {
 
 .privacy-policy,
 .about {
+  width: 100%;
   background-color: #313147;
   color: white;
   padding-bottom: 40px;
