@@ -6,8 +6,10 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
   const buttonRef = useRef(null);
   const [typeformWidgetOpen, setTypeformWidgetOpen] = useState(true);
 
+  const queryStr = window.location.search.substr(1);
+
   const mobileTypeform = typeformEmbed.makePopup(
-    `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc#${window.location.search}`,
+    `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc#${queryStr}`,
     {
       mode: "popup",
       autoClose: 3,
@@ -24,7 +26,7 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
     !isMobile &&
       typeformEmbed.makeWidget(
         typeformComponent.current,
-        `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc#${window.location.search}`,
+        `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc#${queryStr}`,
         {
           hideScrollbars: true,
           opacity: 0,
@@ -36,7 +38,7 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
           },
         }
       );
-  }, [typeformComponent, passDataUpstream, isMobile]);
+  }, [typeformComponent, passDataUpstream, isMobile, queryStr]);
 
   return (
     <div>
