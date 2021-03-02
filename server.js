@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const writeDataToexampleTypeformResponsesFile = (data) => {
+const writeDataToExampleResponsesFile = (data) => {
   // Use hashed answers as filename to avoid generating multiple files containing the same responses.
   const answersJson = JSON.stringify(data.form_response.answers);
   const answersHashCode = crypto
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         generatedEmail: generatedEmail,
       });
       if (app.settings.env === "development") {
-        writeDataToexampleTypeformResponsesFile(data);
+        writeDataToExampleResponsesFile(data);
       }
     });
   });
