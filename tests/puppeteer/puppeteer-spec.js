@@ -38,7 +38,7 @@ describe("Puppeteer tests", function () {
       HEADING_SELECTOR,
       (heading) => heading.innerText
     );
-
+    console.log(heading);
     expect(heading).to.eql("The 0.7% Commitment");
   });
 
