@@ -1,0 +1,159 @@
+{
+  "event_id": "01EY3215BZCXWQS2785KC5YTKJ",
+  "event_type": "form_response",
+  "form_response": {
+    "form_id": "YbkRDwtc",
+    "token": "zad70tyv12pm2d2u862z8yzad70tx3s5",
+    "landed_at": "2021-02-09T09:29:27Z",
+    "submitted_at": "2021-02-09T09:30:18Z",
+    "calculated": { "score": 0 },
+    "variables": [{ "key": "score", "type": "number", "number": 0 }],
+    "definition": {
+      "id": "YbkRDwtc",
+      "title": "UK foreign aid questions",
+      "fields": [
+        {
+          "id": "gil6UCe4dG9T",
+          "title": "Do you believe that it’s good for the UK government to provide aid to people in the developing world?",
+          "type": "multiple_choice",
+          "ref": "1-Is-aid-good",
+          "properties": {},
+          "choices": [
+            { "id": "0MMVYjNeS2lS", "label": "Yes" },
+            { "id": "sifVxBTGdTiA", "label": "No" }
+          ]
+        },
+        {
+          "id": "wKGNjgRDml1H",
+          "title": " Which of the following best reflect your motivations for supporting international aid/development?",
+          "type": "multiple_choice",
+          "allow_multiple_selections": true,
+          "ref": "2-Motivations",
+          "properties": {},
+          "choices": [
+            {
+              "id": "bxQtiqPordqM",
+              "label": "COVID -- as long as any people in the world have COVID, all of us are unsafe"
+            },
+            {
+              "id": "P9iJPQMgOAz2",
+              "label": "COVID -- hundreds of millions of people will be pushed into extreme poverty"
+            },
+            {
+              "id": "sFjiqVGt1Qys",
+              "label": "The Global Britain agenda and the forthcoming presidencies of the G7 and COP26 make it particularly important that we show moral leadership"
+            },
+            {
+              "id": "03hZJbLCuqUh",
+              "label": "Foreign aid improves national security and reduces immigration"
+            },
+            {
+              "id": "eyqNtdDrwY38",
+              "label": "If we can find money for military spending and nuclear weapons we can find money to help the poor"
+            },
+            {
+              "id": "CUydnMGQ0p6p",
+              "label": "Foreign aid is morally right because it reduces suffering and injustice"
+            },
+            {
+              "id": "CR1RaEx9YifJ",
+              "label": "Money goes further overseas, so we can do so much more good with our money there"
+            }
+          ]
+        },
+        {
+          "id": "nfkfl48YcQLu",
+          "title": "Do you have links with a country that is receiving or might receive aid?",
+          "type": "multiple_choice",
+          "ref": "3-Links-to-aid-country",
+          "properties": {},
+          "choices": [
+            { "id": "dFnMBxGwSIZi", "label": "Yes" },
+            { "id": "MumVm8oTIrzg", "label": "No" }
+          ]
+        },
+        {
+          "id": "hgdzZ05GxSAs",
+          "title": "Please enter your postcode",
+          "type": "short_text",
+          "ref": "Postcode",
+          "properties": {}
+        },
+        {
+          "id": "uLPPjjg5B0Bn",
+          "title": "Please enter the rest of your address",
+          "type": "long_text",
+          "ref": "Mailing-address",
+          "properties": {}
+        },
+        {
+          "id": "daZZA6TwyMP5",
+          "title": "What is your name?",
+          "type": "short_text",
+          "ref": "Full-name",
+          "properties": {}
+        }
+      ]
+    },
+    "answers": [
+      {
+        "type": "choice",
+        "choice": { "label": "Yes" },
+        "field": {
+          "id": "gil6UCe4dG9T",
+          "type": "multiple_choice",
+          "ref": "1-Is-aid-good"
+        }
+      },
+      {
+        "type": "choices",
+        "choices": {
+          "labels": [
+            "Foreign aid improves national security and reduces immigration"
+          ]
+        },
+        "field": {
+          "id": "wKGNjgRDml1H",
+          "type": "multiple_choice",
+          "ref": "2-Motivations"
+        }
+      },
+      {
+        "type": "choice",
+        "choice": { "label": "No" },
+        "field": {
+          "id": "nfkfl48YcQLu",
+          "type": "multiple_choice",
+          "ref": "3-Links-to-aid-country"
+        }
+      },
+      {
+        "type": "text",
+        "text": "N16 6UP",
+        "field": {
+          "id": "hgdzZ05GxSAs",
+          "type": "short_text",
+          "ref": "Postcode"
+        }
+      },
+      {
+        "type": "text",
+        "text": "59 Test House",
+        "field": {
+          "id": "uLPPjjg5B0Bn",
+          "type": "long_text",
+          "ref": "Mailing-address"
+        }
+      },
+      {
+        "type": "text",
+        "text": "Testy McTestface",
+        "field": {
+          "id": "daZZA6TwyMP5",
+          "type": "short_text",
+          "ref": "Full-name"
+        }
+      }
+    ]
+  }
+}
