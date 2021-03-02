@@ -34,10 +34,8 @@ fs.readdirSync(normalizedPath).forEach(function (file) {
 });
 
 const getRandomEmail = () => {
-  const randomIndex = Math.floor(
-    Math.random() * exampleTypeformResponses.length
-  );
-  const randomResponse = exampleTypeformResponses[randomIndex];
+  const randomIndex = Math.floor(Math.random() * exampleResponses.length);
+  const randomResponse = exampleResponses[randomIndex];
   return generateEmail(randomResponse.json.form_response);
 };
 
