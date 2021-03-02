@@ -20,14 +20,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-const writeDataToExampleResponsesFile = (data) => {
+const writeDataToexampleTypeformResponsesFile = (data) => {
   // Use hashed answers as filename to avoid generating multiple files containing the same responses.
   const answersJson = JSON.stringify(data.form_response.answers);
   const answersHashCode = crypto
     .createHash("md5")
     .update(answersJson)
     .digest("hex");
-  const filePath = `./tests/exampleResponses/${answersHashCode}.json`;
+  const filePath = `./tests/exampleTypeformResponses/${answersHashCode}.json`;
   fs.writeFileSync(filePath, JSON.stringify(data));
   console.log("Wrote form data to", filePath);
 };
@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         generatedEmail: generatedEmail,
       });
       if (app.settings.env === "development") {
-        writeDataToExampleResponsesFile(data);
+        writeDataToexampleTypeformResponsesFile(data);
       }
     });
   });

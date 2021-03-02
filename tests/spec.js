@@ -4,35 +4,40 @@ const { generateEmail } = require("../formResponseHandler");
 const { getMpByPostcode } = require("../api-functions");
 const fs = require("fs");
 
-const negativeResult = require("./exampleResponses/8266dd221cf80375e6716f715ab41db2.json");
+const negativeResult = require("./exampleTypeformResponses/8266dd221cf80375e6716f715ab41db2.json");
 
-const jewishResponse = require("./exampleResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
+const jewishResponse = require("./exampleTypeformResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
 
-const otherReligionResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
+const otherReligionResponse = require("./exampleTypeformResponses/38d468e36442fdeb2673c287d7086fd6.json");
 
-const nonToryResponse = require("./exampleResponses/47dc774ed2492222f7ed29fc74b16732.json");
+const nonToryResponse = require("./exampleTypeformResponses/47dc774ed2492222f7ed29fc74b16732.json");
 
-const nonToryMpResponse = require("./exampleResponses/bfedb30c6203ed71bd65a126dae816c7.json");
+const nonToryMpResponse = require("./exampleTypeformResponses/bfedb30c6203ed71bd65a126dae816c7.json");
 
-const allToryResponse = require("./exampleResponses/38d468e36442fdeb2673c287d7086fd6.json");
+const allToryResponse = require("./exampleTypeformResponses/38d468e36442fdeb2673c287d7086fd6.json");
 
-const nonValidPostcodeResponse = require("./exampleResponses/fe72b4b7520c85f7c5590f35747d2618.json");
+const nonValidPostcodeResponse = require("./exampleTypeformResponses/fe72b4b7520c85f7c5590f35747d2618.json");
 
-const covidMotivationsRes = require("./exampleResponses/f53bb312523d0a911da1e347dc77edbc.json");
+const covidMotivationsRes = require("./exampleTypeformResponses/f53bb312523d0a911da1e347dc77edbc.json");
 
-const exampleResponses = [];
-var normalizedPath = require("path").join(__dirname, "exampleResponses");
+const exampleTypeformResponses = [];
+var normalizedPath = require("path").join(
+  __dirname,
+  "exampleTypeformResponses"
+);
 
 fs.readdirSync(normalizedPath).forEach(function (file) {
-  exampleResponses.push({
+  exampleTypeformResponses.push({
     filename: file,
-    json: require("./exampleResponses/" + file),
+    json: require("./exampleTypeformResponses/" + file),
   });
 });
 
 const getRandomEmail = () => {
-  const randomIndex = Math.floor(Math.random() * exampleResponses.length);
-  const randomResponse = exampleResponses[randomIndex];
+  const randomIndex = Math.floor(
+    Math.random() * exampleTypeformResponses.length
+  );
+  const randomResponse = exampleTypeformResponses[randomIndex];
   return generateEmail(randomResponse.json.form_response);
 };
 
