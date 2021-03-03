@@ -29,6 +29,7 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
         `https://z8ivgb8lhnl.typeform.com/to/YbkRDwtc#${queryStr}`,
         {
           hideScrollbars: true,
+          hideHeaders: true,
           opacity: 0,
           onSubmit: ({ response_id }) => {
             passDataUpstream({ responseId: response_id });
