@@ -153,11 +153,12 @@ h2.secondary-header {
 .typeform-widget {
   margin-bottom: 40px;
   margin-top: 40px;
+  overflow-x: hidden !important;
   @media only screen and (max-width: 767px) {
     display: none;
   }
   @media only screen and (min-width: 768px) {
-    height: 100vh;
+    height: 120vh;
     margin-top: 80px;
     margin-bottom: 80px;
   }
