@@ -140,7 +140,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     //meetMp double check hanlder
     if (field.id === "UhNb2Z5nqHtb") {
-      if (getAnswerIndex("UhNb2Z5nqHtb") === 1) {
+      if (getAnswerIndex("UhNb2Z5nqHtb") === 0) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
