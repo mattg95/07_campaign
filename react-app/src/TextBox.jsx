@@ -29,13 +29,11 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
           type="textarea"
           inputProps={{
             placeholder: "Your email will appear here",
-            rows: 15
           }}
           saveButtonContent="Apply"
           cancelButtonContent={<strong>Cancel</strong>}
           editButtonContent="Edit Your Email"
           editOnViewClick={true}
-          startEditingOnFocus
           value={emailBody} // validates the webhook response token against the response id from the embedded tyeform widget
           onSave={(val) => {
             passDataUpstream({ emailWithGreeting: val }); //if the user edits the text box, a new property called editedResponse is set in state
