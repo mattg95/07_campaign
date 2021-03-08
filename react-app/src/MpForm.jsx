@@ -93,6 +93,7 @@ const MpForm = ({ passDataUpstream }) => {
           id="postcodeDropdown"
           ref={dropdownRef}
           onChange={handleValidation}
+          onSubmit={handleValidation}
         >
           <label htmlFor="postcode" className="postcode-label">
             Postcode:
