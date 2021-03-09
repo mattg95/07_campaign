@@ -29,6 +29,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
           type="textarea"
           inputProps={{
             placeholder: "Your email will appear here",
+            rows: 15,
           }}
           saveButtonContent="Apply"
           cancelButtonContent={<strong>Cancel</strong>}
