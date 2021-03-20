@@ -1,9 +1,9 @@
 {
-  "short_name": "Point7percent",
-  "name": "The 0.7% Campaign",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#db866e",
+  "background_color": "#000000"
 }
