@@ -90,18 +90,15 @@ const App = () => {
     document.body.appendChild(script);
   }, [emailSent]);
 
-  // const handleWindowSizeChange = () => {
-  //   setState({ ...state, width: window.innerWidth });
-  // };
-
-  // console.log(state);
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleWindowSizeChange);
-  //   return () => {
-  //     window.removeEventListener("resize", handleWindowSizeChange);
-  //   };
-  // }, []);
+  const handleWindowSizeChange = () => {
+    setState({ ...state, width: window.innerWidth });
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
 
   let isMobile = width && width <= 768;
 
