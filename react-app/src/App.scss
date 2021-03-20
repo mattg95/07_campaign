@@ -20,11 +20,8 @@ body {
     url("./assets/Background Small.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
-  background-position: center bottom;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-size: auto 100vh;
+  background-position: center top;
 }
 
 .main {
