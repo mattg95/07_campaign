@@ -63,7 +63,7 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
   const createGreeting = ({ name, full_name }) => {
     salutation = getRandomResponse(main.greeting);
     const mpName = full_name ? full_name : name;
-    return mpName ? `${salutation} ${mpName},\n` : "";
+    return mpName ? `${salutation} ${mpName},\n\n` : "";
   };
 
   //this is the 'router' that handles all question responses based on their id
@@ -184,10 +184,9 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     emailMap.set("mainContent", mainContent);
 
     let emailbodyStr = "";
-    for (const [k, v] of emailMap) {
-      if (k === "name") {
-        emailbodyStr += v + `\n`;
-      } else if (k === "address") {
+    for (let [k, v] of emailMap) {
+      if (k === "address") {
+        v = v.replace(/,\s/g, ",\n");
         emailbodyStr += v;
       } else {
         v.length && (emailbodyStr += v + `\n\n`);

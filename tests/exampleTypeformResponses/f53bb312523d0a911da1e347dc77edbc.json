@@ -264,7 +264,7 @@
       },
       {
         "type": "text",
-        "text": "road street avenue",
+        "text": "road street avenue, city, placearea",
         "field": {
           "id": "uLPPjjg5B0Bn",
           "type": "long_text",
