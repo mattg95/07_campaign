@@ -15,7 +15,9 @@ When a user fills in the survey, their data first goes to Typeform, which keeps 
 
 ## Webhooks and Ngrok
 
-The React features an embeded Typeform. You will need to expose your localhost to Typeform via webhooks to get the resposnes from the embeded Typeform to generate an email. Download Ngrok from `https://ngrok.com/download` and create an account. Then, navigate to the folder where Ngrok is located and run:
+The React features an embeded Typeform. In order for the site to work with the embedded Typeform locally, you will need to expose your localhost to Typeform via webhooks. There are a couple of ways of doing this. The following details setting up Ngrok:
+
+Download Ngrok from `https://ngrok.com/download` and create an account. Then, navigate to the folder where Ngrok is located and run:
 
 `ngrok http 3000 -host-header="localhost:3000"`
 
@@ -34,7 +36,11 @@ Your terminal should present you with two urls in the form:
 
 -Click 'send test request'. If it is working, you should see a 200 OK status response in Typeform's webhook interface and also in the terminal in which you are running Ngrok from.
 
-Ngrok generates a random URL each time it is started. To get a stable URL name, you must buy a subscription to Ngrok ~$7/month.
+Ngrok generates a random URL each time it is started. To get a consitstent URL name, you must buy a subscription to Ngrok ~$7/month. You can then run the following command:
+
+`./ngrok http 3000 -hostname=<yourchosenname>.ngrok.io -host-header="localhost:3000"`
+
+This will allow you to have a consistent URL that you expose to Typeform.
 
 # Tests
 
