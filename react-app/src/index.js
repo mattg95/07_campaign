@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import TagManager from "react-gtm-module";
 import { Router } from "@reach/router";
 import HttpsRedirect from "react-https-redirect";
+import { Provider } from "react-redux";
 
+import { store } from "./store";
 import App from "./App";
 import PrivacyPolicy from "./PrivacyPolicy";
 
@@ -21,12 +23,14 @@ TagManager.initialize(tagManagerArgs);
 
 ReactDOM.render(
   <HttpsRedirect>
-    <Router>
-      <App path="/" />
-      <PrivacyPolicy path="/privacy-policy" />
-      <About path="/about" />
-    </Router>
-    <Footer />
+    <Provider store={store}>
+      <Router>
+        <App path="/" />
+        <PrivacyPolicy path="/privacy-policy" />
+        <About path="/about" />
+      </Router>
+      <Footer />
+    </Provider>
   </HttpsRedirect>,
   document.getElementById("root")
 );
