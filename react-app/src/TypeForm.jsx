@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as typeformEmbed from "@typeform/embed";
+import { store } from "./store";
+import { setResponseId } from "./actions";
 
-const TypeForm = ({ passDataUpstream, isMobile }) => {
+const TypeForm = ({ isMobile }) => {
   const typeformComponent = useRef(null);
   const buttonRef = useRef(null);
   const [typeformWidgetOpen, setTypeformWidgetOpen] = useState(true);
@@ -14,10 +16,10 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
       mode: "popup",
       autoClose: 3,
       onSubmit: ({ response_id }) => {
-        passDataUpstream({ responseId: response_id });
+        store.dispatch(setResponseId(response_id));
       },
       onClose: ({ response_id }) => {
-        passDataUpstream({ responseId: response_id });
+        store.dispatch(setResponseId(response_id));
       },
     }
   );
@@ -32,14 +34,14 @@ const TypeForm = ({ passDataUpstream, isMobile }) => {
           hideHeaders: true,
           opacity: 0,
           onSubmit: ({ response_id }) => {
-            passDataUpstream({ responseId: response_id });
+            store.dispatch(setResponseId(response_id));
             setTimeout(() => {
               setTypeformWidgetOpen(false);
             }, 3000);
           },
         }
       );
-  }, [typeformComponent, passDataUpstream, isMobile, queryStr]);
+  }, [typeformComponent, isMobile, queryStr]);
 
   return (
     <div>

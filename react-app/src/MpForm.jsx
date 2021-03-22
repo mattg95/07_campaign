@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { setMpData, setEmailVisible } from "./actions";
+import { store } from "./store";
 
-const MpForm = ({ passDataUpstream }) => {
+const MpForm = () => {
   const [state, setState] = useState({
     dropDownOpen: false,
     postcodeError: "",
@@ -37,7 +39,7 @@ const MpForm = ({ passDataUpstream }) => {
         if (data.error) {
           setState({ ...state, isLoading: false, postcodeError: data.error });
         } else {
-          passDataUpstream({ mpData: data });
+          store.dispatch(setMpData(data));
           setState({ ...state, isLoading: false, postcodeError: "" });
         }
       });
@@ -81,7 +83,7 @@ const MpForm = ({ passDataUpstream }) => {
           onClick={(e) => {
             e.preventDefault();
             setState({ ...state, dropDownOpen: false });
-            passDataUpstream({ emailVisible: true });
+            store.dispatch(setEmailVisible());
           }}
         >
           Yes, continue with this MP

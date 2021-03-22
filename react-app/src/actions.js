@@ -40,8 +40,24 @@ export const setWindowWidth = (width) => {
     payload: width,
   };
 };
+export const setEmailVisible = () => {
+  return {
+    type: "emailVisible/setEmailVisible",
+  };
+};
+export const setEmailSent = () => {
+  return {
+    type: "emailSent/setEmailSent",
+  };
+};
 export const setCopied = () => {
   return {
     type: "generatedEmailBody/copied",
+  };
+};
+export const setResponseId = (id) => {
+  return {
+    type: "responseId/setResponseId",
+    payload: id,
   };
 };

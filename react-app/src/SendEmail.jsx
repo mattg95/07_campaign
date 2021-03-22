@@ -1,6 +1,8 @@
 import React from "react";
+import { setEmailSent } from "./actions";
+import { store } from "./store";
 
-const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
+const sendEmail = ({ subject, body, mpEmailAddress }) => {
   const getFullEmailLink = (mpEmailAddress) =>
     mpEmailAddress +
     "?Subject=" +
@@ -21,7 +23,7 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
         target="_blank"
         rel="noreferrer"
         onClick={() => {
-          passDataUpstream({ emailSent: true });
+          store.dispatch(setEmailSent());
         }}
       >
         SEND EMAIL

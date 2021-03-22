@@ -49,5 +49,23 @@ export function reducer(state = initialState, action) {
       copied: true,
     };
   }
+  if (action.type === "emailVisible/setEmailVisible") {
+    return {
+      ...state,
+      emailVisible: true,
+    };
+  }
+  if (action.type === "emailSent/setEmailSent") {
+    return {
+      ...state,
+      emailSent: true,
+    };
+  }
+  if (action.type === "responseId/setResponseId") {
+    return {
+      ...state,
+      responseId: action.payload,
+    };
+  }
   return state;
 }
