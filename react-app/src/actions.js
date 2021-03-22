@@ -22,10 +22,10 @@ export const setEmailWithGreeting = (greeting) => {
     payload: greeting,
   };
 };
-export const setPositiveTypeformResponse = (typeformResponse) => {
+export const setPositiveTypeformResponse = (bool) => {
   return {
-    type: "generatedEmailBody/setEmailWithGreeting",
-    payload: typeformResponse,
+    type: "typeFormReturned/setPositiveTypeFormResponse",
+    payload: bool,
   };
 };
 export const setGreeting = (greeting) => {

@@ -31,16 +31,28 @@ export function reducer(state = initialState, action) {
       mpData: action.payload,
     };
   }
-  if (action.type === "generatedEmailBody/setGreeting") {
+  if (action.type === "generatedEmailBody/setEmailWithGreeting") {
     return {
       ...state,
       emailWithGreeting: action.payload,
     };
   }
+  if (action.type === "windowWidth/setWindowWidth") {
+    return {
+      ...state,
+      width: action.payload,
+    };
+  }
   if (action.type === "generatedEmailBody/setGreeting") {
     return {
       ...state,
-      emailWithGreeting: action.payload,
+      greeting: action.payload,
+    };
+  }
+  if (action.type === "typeFormReturned/setPositiveTypeFormResponse") {
+    return {
+      ...state,
+      positiveTypeFormResponseReturned: action.payload,
     };
   }
   if (action.type === "generatedEmailBody/copied") {
