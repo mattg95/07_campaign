@@ -16,24 +16,27 @@ export const setMpData = (mpData) => {
     payload: mpData,
   };
 };
-export const setEmailWithGreeting = (greeting) => {
-  return {
-    type: "generatedEmailBody/setEmailWithGreeting",
-    payload: greeting,
-  };
-};
-export const setPositiveTypeformResponse = (bool) => {
-  return {
-    type: "typeFormReturned/setPositiveTypeFormResponse",
-    payload: bool,
-  };
-};
 export const setGreeting = (greeting) => {
+  console.log(greeting);
   return {
     type: "greeting/setGreeting",
     payload: greeting,
   };
 };
+export const setEmailWithGreeting = (greeting) => {
+  console.log(greeting);
+  return {
+    type: "generatedEmailBody/setGreeting",
+    payload: greeting,
+  };
+};
+export const setPositiveTypeformResponse = (typeformResponse) => {
+  return {
+    type: "typeFormResponse/setPositiveTypeformResponse",
+    payload: typeformResponse,
+  };
+};
+
 export const setWindowWidth = (width) => {
   return {
     type: "windowWidth/setWindowWidth",
@@ -52,7 +55,7 @@ export const setEmailSent = () => {
 };
 export const setCopied = () => {
   return {
-    type: "generatedEmailBody/copied",
+    type: "generatedEmailBody/setCopied",
   };
 };
 export const setResponseId = (id) => {

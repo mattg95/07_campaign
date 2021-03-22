@@ -5,7 +5,7 @@ const initialState = {
   mpData: { error: "Could not find MP", name: "", full_name: "" },
   generatedEmailBody: "Your email will appear here",
   emailSubject: "",
-  positiveTypeFormResponseReturned: false,
+  positiveTypeFormResponseReturned: true,
   greeting: "",
   emailWithGreeting: "",
   emailVisible: false,
@@ -25,7 +25,7 @@ export function reducer(state = initialState, action) {
       emailSubject: action.payload,
     };
   }
-  if (action.type === "generatedEmailBody/setMpData") {
+  if (action.type === "mpData/setMpData") {
     return {
       ...state,
       mpData: action.payload,
@@ -55,7 +55,7 @@ export function reducer(state = initialState, action) {
       positiveTypeFormResponseReturned: action.payload,
     };
   }
-  if (action.type === "generatedEmailBody/copied") {
+  if (action.type === "generatedEmailBody/setCopied") {
     return {
       ...state,
       copied: true,
@@ -77,6 +77,12 @@ export function reducer(state = initialState, action) {
     return {
       ...state,
       responseId: action.payload,
+    };
+  }
+  if (action.type === "typeFormResponse/setPositiveTypeformResponse") {
+    return {
+      ...state,
+      positiveTypeFormResponseReturned: action.payload,
     };
   }
   return state;
