@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 
 import "./App.scss";
 
-import TypeForm from "./TypeForm";
-import TextBox from "./TextBox";
-import MpForm from "./MpForm";
-import DisplayMp from "./DisplayMp";
-import SendEmail from "./SendEmail";
-import IntroContent from "./IntroContent";
-import ThankyouScreen from "./thankyouScreen";
+import TypeForm from "./components/TypeForm";
+import TextBox from "./components/TextBox";
+import MpForm from "./components/MpForm";
+import DisplayMp from "./components/DisplayMp";
+import SendEmail from "./components/SendEmail";
+import IntroContent from "./components/IntroContent";
+import ThankyouScreen from "./components/thankyouScreen";
 
-import { store } from "./store";
+import { store } from "./redux/store";
 
 import {
   setEmailBody,
@@ -25,26 +25,26 @@ import {
   setMpData,
   setEmailWithGreeting,
   setPositiveTypeformResponse,
-} from "./actions";
+} from "./redux/actions";
+
+import {
+  responseId,
+  mpData,
+  generatedEmailBody,
+  emailSubject,
+  greeting,
+  emailWithGreeting,
+  positiveTypeformResponseReturned,
+  width,
+  emailVisible,
+  emailSent,
+} from "./redux/selectors";
 
 require("dotenv").config({ path: "../.env" });
 
 const socket = socketIOClient();
 
 const App = () => {
-  const responseId = useSelector((state) => state.responseId);
-  const mpData = useSelector((state) => state.mpData);
-  const generatedEmailBody = useSelector((state) => state.generatedEmailBody);
-  const emailSubject = useSelector((state) => state.emailSubject);
-  const greeting = useSelector((state) => state.greeting);
-  const emailWithGreeting = useSelector((state) => state.emailWithGreeting);
-  const positiveTypeFormResponseReturned = useSelector(
-    (state) => state.positiveTypeFormResponseReturned
-  );
-  const width = useSelector((state) => state.width);
-  const emailVisible = useSelector((state) => state.emailVisible);
-  const emailSent = useSelector((state) => state.emailSent);
-
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
 

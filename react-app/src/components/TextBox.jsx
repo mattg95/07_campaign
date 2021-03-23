@@ -4,7 +4,7 @@ import React from "react";
 import EdiText from "react-editext";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { setCopied, setEmailWithGreeting } from "./actions";
+import { setCopied, setEmailWithGreeting } from "../redux/actions";
 
 const TextBox = ({ emailBody }) => {
   const copyToClipboard = (itemToCopy) => {

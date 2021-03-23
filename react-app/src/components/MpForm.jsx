@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { setMpData, setEmailVisible } from "./actions";
-import { store } from "./store";
+import { setMpData, setEmailVisible } from "../redux/actions";
+import { store } from "../redux/store";
 
 const MpForm = () => {
   const [state, setState] = useState({

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as typeformEmbed from "@typeform/embed";
-import { store } from "./store";
-import { setResponseId } from "./actions";
+import { store } from "../redux/store";
+import { setResponseId } from "../redux/actions";
 
 const TypeForm = ({ isMobile }) => {
   const typeformComponent = useRef(null);

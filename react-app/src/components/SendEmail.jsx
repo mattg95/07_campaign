@@ -1,6 +1,6 @@
 import React from "react";
-import { setEmailSent } from "./actions";
-import { store } from "./store";
+import { setEmailSent } from "../redux/actions";
+import { store } from "../redux/store";
 
 const sendEmail = ({ subject, body, mpEmailAddress }) => {
   const getFullEmailLink = (mpEmailAddress) =>
