@@ -36,10 +36,10 @@ export const setPositiveTypeformResponse = (typeformResponse) => {
   };
 };
 
-export const setWindowWidth = (width) => {
+export const setIsMobile = (bool) => {
   return {
-    type: "windowWidth/setWindowWidth",
-    payload: width,
+    type: "isMobile/setIsMobile",
+    payload: bool,
   };
 };
 export const setEmailVisible = () => {

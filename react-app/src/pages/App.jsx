@@ -3,7 +3,6 @@
 import React, { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
 
 import "./App.scss";
 
@@ -20,7 +19,7 @@ import { store } from "../redux/store";
 import {
   setEmailBody,
   setEmailSubject,
-  setWindowWidth,
+  setIsMobile,
   setGreeting,
   setMpData,
   setEmailWithGreeting,
@@ -32,18 +31,16 @@ require("dotenv").config({ path: "../.env" });
 const socket = socketIOClient();
 
 const App = () => {
-  const responseId = useSelector((state) => state.responseId);
-  const mpData = useSelector((state) => state.mpData);
-  const generatedEmailBody = useSelector((state) => state.generatedEmailBody);
-  const emailSubject = useSelector((state) => state.emailSubject);
-  const greeting = useSelector((state) => state.greeting);
-  const emailWithGreeting = useSelector((state) => state.emailWithGreeting);
-  const positiveTypeFormResponseReturned = useSelector(
-    (state) => state.positiveTypeFormResponseReturned
-  );
-  const width = useSelector((state) => state.width);
-  const emailVisible = useSelector((state) => state.emailVisible);
-  const emailSent = useSelector((state) => state.emailSent);
+  const {
+    responseId,
+    mpData,
+    generatedEmailBody,
+    greeting,
+    positiveTypeFormResponseReturned,
+    isMobile,
+    emailVisible,
+    emailSent,
+  } = store.getState();
 
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
@@ -85,7 +82,7 @@ const App = () => {
   }, [emailSent]);
 
   const handleWindowSizeChange = () => {
-    store.dispatch(setWindowWidth(window.innerWidth));
+    store.dispatch(setIsMobile(window.innerWidth <= 768));
   };
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange);
@@ -93,8 +90,6 @@ const App = () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-
-  let isMobile = width && width <= 768;
 
   useEffect(() => {
     setTimeout(() => {
@@ -133,7 +128,7 @@ const App = () => {
         <Row>
           <Col>
             <div className="typeform">
-              <TypeForm isMobile={isMobile} />
+              <TypeForm />
             </div>
           </Col>
         </Row>
@@ -142,7 +137,7 @@ const App = () => {
             <Row>
               <Col>
                 <div ref={displayMpRef}>
-                  <DisplayMp mpData={mpData} />
+                  <DisplayMp />
                 </div>
               </Col>
             </Row>
@@ -158,21 +153,14 @@ const App = () => {
                 <Row>
                   <Col>
                     <div ref={emailBoxRef}>
-                      <TextBox
-                        emailBody={emailWithGreeting}
-                        subject={emailSubject}
-                      />
+                      <TextBox />
                     </div>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <div className="">
-                      <SendEmail
-                        mpEmailAddress={mpData.mpEmailAddress}
-                        body={emailWithGreeting}
-                        subject={emailSubject}
-                      />
+                      <SendEmail />
                     </div>
                   </Col>
                 </Row>

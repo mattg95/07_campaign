@@ -37,10 +37,11 @@ export function reducer(state = initialState, action) {
       emailWithGreeting: action.payload,
     };
   }
-  if (action.type === "windowWidth/setWindowWidth") {
+
+  if (action.type === "isMobile/setIsMobile") {
     return {
       ...state,
-      width: action.payload,
+      isMobile: action.payload,
     };
   }
   if (action.type === "generatedEmailBody/setGreeting") {

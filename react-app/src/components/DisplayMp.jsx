@@ -1,8 +1,11 @@
 import React from "react";
 
-const DisplayMp = ({
-  mpData: { constituency, full_name, party, name, error, mpEmailAddress },
-}) => {
+import { store } from "../redux/store";
+
+const DisplayMp = () => {
+  const {
+    mpData: { constituency, full_name, party, name, error, mpEmailAddress },
+  } = store.getState();
   return (
     <div className="displayMP" id="displayMP">
       <h2 className="secondary-header">Find Your MP</h2>

@@ -3,9 +3,10 @@ import * as typeformEmbed from "@typeform/embed";
 import { store } from "../redux/store";
 import { setResponseId } from "../redux/actions";
 
-const TypeForm = ({ isMobile }) => {
+const TypeForm = () => {
   const typeformComponent = useRef(null);
   const buttonRef = useRef(null);
+  const { isMobile } = store.getState();
   const [typeformWidgetOpen, setTypeformWidgetOpen] = useState(true);
 
   const queryStr = window.location.search.substr(1);

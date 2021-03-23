@@ -6,7 +6,10 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { setCopied, setEmailWithGreeting } from "../redux/actions";
 
-const TextBox = ({ emailBody }) => {
+import { store } from "../redux/store";
+
+const TextBox = () => {
+  const { emailWithGreeting } = store.getState();
   const copyToClipboard = (itemToCopy) => {
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = itemToCopy;
@@ -36,7 +39,7 @@ const TextBox = ({ emailBody }) => {
           cancelButtonContent={<strong>Cancel</strong>}
           editButtonContent="Edit Your Email"
           editOnViewClick={true}
-          value={emailBody} // validates the webhook response token against the response id from the embedded tyeform widget
+          value={emailWithGreeting} // validates the webhook response token against the response id from the embedded tyeform widget
           onSave={(val) => {
             setEmailWithGreeting(val);
           }}
@@ -50,7 +53,7 @@ const TextBox = ({ emailBody }) => {
             </div>
           )}
           closeOnDocumentClick
-          onOpen={() => copyToClipboard(emailBody)}
+          onOpen={() => copyToClipboard(emailWithGreeting)}
           className="copy-popup"
         >
           <span> Copied to clipboard </span>

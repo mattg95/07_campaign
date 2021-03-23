@@ -2,13 +2,18 @@ import React from "react";
 import { setEmailSent } from "../redux/actions";
 import { store } from "../redux/store";
 
-const sendEmail = ({ subject, body, mpEmailAddress }) => {
+const sendEmail = () => {
+  const {
+    emailSubject,
+    emailWithGreeting,
+    mpData: { mpEmailAddress },
+  } = store.getState();
   const getFullEmailLink = (mpEmailAddress) =>
     mpEmailAddress +
     "?Subject=" +
-    encodeURIComponent(subject) +
+    encodeURIComponent(emailSubject) +
     "&Body=" +
-    encodeURIComponent(body) +
+    encodeURIComponent(emailWithGreeting) +
     "&bcc=campaign@point7percent.org";
 
   return (
