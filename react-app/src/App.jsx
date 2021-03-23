@@ -54,7 +54,10 @@ const App = () => {
         store.dispatch(setEmailBody(generatedEmail.body));
         store.dispatch(setEmailSubject(generatedEmail.subject));
         store.dispatch(setMpData(generatedEmail.mpData));
-        store.dispatch(setEmailWithGreeting(generatedEmail.greeeting));
+        store.dispatch(setGreeting(generatedEmail.greeeting));
+        store.dispatch(
+          setEmailWithGreeting(generatedEmail.greeeting + generatedEmail.body)
+        );
         store.dispatch(setPositiveTypeformResponse(generatedEmail.supportsAid));
       }
     });

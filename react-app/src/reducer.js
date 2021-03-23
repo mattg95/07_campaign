@@ -5,7 +5,7 @@ const initialState = {
   mpData: { error: "Could not find MP", name: "", full_name: "" },
   generatedEmailBody: "Your email will appear here",
   emailSubject: "",
-  positiveTypeFormResponseReturned: true,
+  positiveTypeFormResponseReturned: false,
   greeting: "",
   emailWithGreeting: "",
   emailVisible: false,
