@@ -19,7 +19,9 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
     "test": "mocha --timeout 500000 tests/puppeteer/bootstrap.js --recursive tests",
     "test-email": "npm test -- --grep generateEmail",
-    "test-postcode": "npm test -- --grep /api/postcode"
+    "test-postcode": "npm test -- --grep /api/postcode",
+    "tsc": "tsc"
+
   },
   "dependencies": {
     "@reach/router": "^1.3.4",
@@ -40,6 +42,7 @@
     "concurrently": "^6.0.0",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.7",
-    "puppeteer": "^5.5.0"
+    "puppeteer": "^5.5.0",
+    "typescript": "^4.2.3"
   }
 }

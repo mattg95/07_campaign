@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
 const { expect } = require("chai");
-const { generateEmail } = require("../formResponseHandler");
-const { getMpByPostcode } = require("../api-functions");
+const { generateEmail } = require("../emailGenerator");
+const { getMpByPostcode } = require("../apiCalls");
 const fs = require("fs");
 
 const negativeResult = require("./exampleTypeformResponses/8266dd221cf80375e6716f715ab41db2.json");
