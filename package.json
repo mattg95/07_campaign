@@ -19,6 +19,7 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-start\"",
     "test": "mocha --timeout 500000 tests/puppeteer/bootstrap.js --recursive tests",
     "test-email": "npm test -- --grep generateEmail",
+    "test-email-funcs": "npm test -- --grep emailGeneratorFuncs",
     "test-postcode": "npm test -- --grep /api/postcode"
   },
   "dependencies": {
