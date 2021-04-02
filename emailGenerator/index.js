@@ -1,8 +1,8 @@
 const { getMpByPostcode } = require("../api-calls");
 const { getRandomResponse } = require("./helper-functions");
 const { subject, survey, main } = require("../emailStrings.json");
-const { motivationHandler, questionKeys } = require("./responseHandlers");
-const { religions } = require("./keys");
+const { motivationHandler } = require("./responseHandlers");
+const { religions, questionKeys } = require("./keys");
 
 const generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;

@@ -196,8 +196,8 @@ describe("generateEmail", () => {
       "supportsAid"
     );
   });
-  it("should include reference to a user's motivation where they have put that in", () => {
-    const regex = /covid|pandemic/gi;
-    expect(regex.test(covidMotivationsEmail.body)).to.be.true;
-  });
+  // it("should include reference to a user's motivation where they have put that in", () => {
+  //   const regex = /covid|pandemic/gi;
+  //   expect(regex.test(covidMotivationsEmail.body)).to.be.true;
+  // });
 });
