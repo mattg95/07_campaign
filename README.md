@@ -3,7 +3,7 @@
 - NodeJS backend. Express server in `/server.js`
 - ReactJS frontend in `/react-app`
 - A Typeform questionnaire in `/react-app/src/TypeForm.jsx` which is embeded into the website UX. Typeform has an admin panel (ask Matt for login details) which is neccessary to access for project setup and any editing of the questionaire. Tyepform also acts as our database, as it stores survey responses.
-- An API which we query in `api-functions.js` with a users's postcode to retrieve their MP. (members-api.parliament.uk/api)
+- An API which we query in `api-calls.js` with a users's postcode to retrieve their MP. (members-api.parliament.uk/api)
 
 When a user fills in the survey, their data first goes to Typeform, which keeps a copy of their responses. Typeform then triggers a webhook, which is linked to the back-end of the project. An email is generated for the users and sent to the front end via websockets (socket.io).
 
@@ -45,9 +45,10 @@ This will allow you to have a consistent URL that you expose to Typeform.
 # Tests
 
 The back-end features tests made using Mocha, Chai, and Puppeteer.
- - To run all the tests, run `npm run test`. 
- - To run tests specifically on the random email generator, run `npm run test-email`. 
- - To run tests specifically on members-api.parliament.uk/api, run `npm run test-postcode`.
+
+- To run all the tests, run `npm run test`.
+- To run tests specifically on the random email generator, run `npm run test-email`.
+- To run tests specifically on members-api.parliament.uk/api, run `npm run test-postcode`.
 
 # Build
 
@@ -55,7 +56,7 @@ The back-end features tests made using Mocha, Chai, and Puppeteer.
 
 # Heroku pipeline
 
-We have a Heroku pipeline set up, with a staging site (https://point-7-staging.herokuapp.com/) and a production site (https://www.point7percent.org/). Whe  you make a pull request, two checks will be run
+We have a Heroku pipeline set up, with a staging site (https://point-7-staging.herokuapp.com/) and a production site (https://www.point7percent.org/). Whe you make a pull request, two checks will be run
 
 - Github, checking there are no merge conflicts
 - Heroku, checking the site can be built if the branch is merges. All tests in the ./tests folder will also be run. (This check takes around 5 minutes).

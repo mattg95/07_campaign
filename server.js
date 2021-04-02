@@ -9,8 +9,8 @@ const fs = require("fs");
 
 const io = require("socket.io")(http);
 
-const { getMpByPostcode } = require("./api-functions");
-const { generateEmail } = require("./formResponseHandler");
+const { getMpByPostcode } = require("./api-calls");
+const { generateEmail } = require("./emailGenerator");
 
 //initialise express and define a port
 const port = process.env.PORT || 5000;

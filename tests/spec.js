@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
 const { expect } = require("chai");
-const { generateEmail } = require("../formResponseHandler");
-const { getMpByPostcode } = require("../api-functions");
+const { generateEmail } = require("../emailGenerator/index.js");
+const { getMpByPostcode } = require("../api-calls");
 const fs = require("fs");
 
 const negativeResult = require("./exampleTypeformResponses/8266dd221cf80375e6716f715ab41db2.json");
@@ -161,10 +161,9 @@ describe("generateEmail", () => {
     expect(randomResponse.body.search(/agnostic/)).to.equal(-1);
     expect(randomResponse.body.search(/athiest/)).to.equal(-1);
   });
-  // it("should not include escaped 'newline' characters", () => {
-  //   const res = await getRandomEmail();
-  //     expect(res.email.body, "In " + res.filename).not.to.contain("\\n");
-  // });
+  it("should not include escaped 'newline' characters", () => {
+    expect(randomResponse.body).not.to.contain("\\n");
+  });
   it("negative responses to question 1 (supporting aid) should return a blank", () => {
     expect(negativeEmail.body).to.equal("");
     expect(negativeEmail.subject).to.equal("");

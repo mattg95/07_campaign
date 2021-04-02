@@ -1,7 +1,9 @@
-const { getMpByPostcode } = require("./api-functions");
-const { subject, survey, main } = require("./emailStrings.json");
+const { getMpByPostcode } = require("../api-calls");
+const { getRandomResponse } = require("./helper-functions");
+const { subject, survey, main } = require("../emailStrings.json");
+const { motivationHandler, questionKeys } = require("./responseHandlers");
 
-exports.generateEmail = ({ answers, definition: { fields } }) => {
+const generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
   let memberOfConservatives = false;
   const postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
@@ -17,20 +19,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     ["address", ""],
   ]);
   //these map the question ids from the form onto our json object
-  const questionKeys = {
-    gil6UCe4dG9T: "supportAid",
-    wKGNjgRDml1H: "motivation",
-    MRPxTl6j1QAw: "whichCountry",
-    Z4awe4sDljLR: "countryLinks",
-    EejpFBEzP9wK: "conservative",
-    IdqRPd6SUMVh: "religion",
-    vdZgYVyiLE13: "meetMp",
-    UhNb2Z5nqHtb: "meetMpDoubleCheck",
-    ghzBmQTQ2npF: "emailAddress",
-    uLPPjjg5B0Bn: "homeAddress",
-    hgdzZ05GxSAs: "postcode",
-    daZZA6TwyMP5: "name",
-  };
 
   const religions = [
     { adj: "Christian", noun: "Christian" },
@@ -41,10 +29,6 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     { adj: "Buddhist", noun: "Buddhist" },
     { adj: "religious", noun: "person of faith" },
   ];
-
-  const getRandomResponse = (inputArr) => {
-    return inputArr[Math.floor(Math.random() * inputArr.length)];
-  };
 
   //this gets the index of the answer e.g. in a multiple choice, the first choice is index 0
   const getAnswerIndex = (idProp) => {
@@ -114,23 +98,8 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     }
     // moivations handler
     if (field.id === "wKGNjgRDml1H") {
-      const thisId = "wKGNjgRDml1H";
-      const thisField = fields.find(({ id }) => id === thisId);
-      const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
-      let choiceIndex = [];
-      //this gets the synomys array based on the index of the survey multiple choice-
-      thisField.choices.forEach((choice, i) => {
-        if (thisAnswers.choices.labels.includes(choice.label)) {
-          choiceIndex.push(i);
-        }
-      });
-      const synonymns = choiceIndex.map((ele) => {
-        return survey[questionKeys[thisId]][ele];
-      });
-      const sentenceArr = synonymns.map((ele) => {
-        return ele && getRandomResponse(ele.synonyms);
-      });
-      sentenceArr.length && emailMap.set("motivation", sentenceArr.join(" "));
+      const motivations = motivationHandler("wKGNjgRDml1H", fields, answers);
+      emailMap.set("motivation", motivations);
     }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
@@ -203,3 +172,5 @@ exports.generateEmail = ({ answers, definition: { fields } }) => {
     return responseData;
   });
 };
+
+module.exports = { getRandomResponse, generateEmail };
