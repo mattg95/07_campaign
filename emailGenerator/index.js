@@ -168,7 +168,6 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       subject: getRandomResponse(subject),
       body: emailbodyStr,
     };
-    console.log(responseData.body);
     return responseData;
   });
 };

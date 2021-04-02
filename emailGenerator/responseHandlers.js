@@ -17,7 +17,6 @@ const questionKeys = {
 };
 
 const motivationHandler = (thisId, fields, answers) => {
-  console.log("console =====>", questionKeys[thisId]);
   const thisField = fields.find(({ id }) => id === thisId);
   const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
   let choiceIndex = [];

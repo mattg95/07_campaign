@@ -5,20 +5,15 @@ const { getMpByPostcode } = require("../api-calls");
 const fs = require("fs");
 
 const negativeResult = require("./exampleTypeformResponses/8266dd221cf80375e6716f715ab41db2.json");
-
 const jewishResponse = require("./exampleTypeformResponses/81a6c4391347d2f89e5d9ac340e39cb1.json");
-
 const otherReligionResponse = require("./exampleTypeformResponses/38d468e36442fdeb2673c287d7086fd6.json");
-
 const nonToryResponse = require("./exampleTypeformResponses/47dc774ed2492222f7ed29fc74b16732.json");
-
 const nonToryMpResponse = require("./exampleTypeformResponses/bfedb30c6203ed71bd65a126dae816c7.json");
-
 const allToryResponse = require("./exampleTypeformResponses/38d468e36442fdeb2673c287d7086fd6.json");
-
 const nonValidPostcodeResponse = require("./exampleTypeformResponses/fe72b4b7520c85f7c5590f35747d2618.json");
-
 const covidMotivationsRes = require("./exampleTypeformResponses/f53bb312523d0a911da1e347dc77edbc.json");
+
+const { motivationHandler } = require("../emailGenerator/responseHandlers.js");
 
 const exampleTypeformResponses = [];
 var normalizedPath = require("path").join(
@@ -73,6 +68,20 @@ describe("/api/postcode", () => {
 });
 
 //how to test webhooks?
+describe("emailGeneratorFuncs", () => {
+  let covidResponse;
+  before(async function () {
+    let {
+      answers,
+      definition: { fields },
+    } = covidMotivationsRes.form_response;
+    covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
+  });
+  it("should return covid synonyms for a covid motivations choice", () => {
+    const regex = /covid|pandemic/gi;
+    expect(regex.test(covidResponse)).to.be.true;
+  });
+});
 
 describe("generateEmail", () => {
   let randomResponse;
@@ -83,7 +92,7 @@ describe("generateEmail", () => {
   let jewishEmail;
   let otherReligionEmail;
   let nonValidPostcodeEmail;
-  let motivationsEmail;
+  let covidMotivationsEmail;
 
   before(async function () {
     randomResponse = await getRandomEmail();
@@ -99,7 +108,9 @@ describe("generateEmail", () => {
     nonValidPostcodeEmail = await generateEmail(
       nonValidPostcodeResponse.form_response
     );
-    motivationsEmail = await generateEmail(covidMotivationsRes.form_response);
+    covidMotivationsEmail = await generateEmail(
+      covidMotivationsRes.form_response
+    );
   });
   it("should return an object with keys 'body' and 'subject'", () => {
     expect(randomResponse).to.have.keys(
@@ -187,6 +198,7 @@ describe("generateEmail", () => {
     );
   });
   it("should include reference to a user's motivation where they have put that in", () => {
-    expect(motivationsEmail.body.match(/covid|pandemic/gi)).to.not.equal("");
+    const regex = /covid|pandemic/gi;
+    expect(regex.test(covidMotivationsEmail.body)).to.be.true;
   });
 });
