@@ -13,8 +13,8 @@ $secondary: #4eb9be;
 html {
   scroll-behavior: smooth;
 }
-body {
-  // width: 100%;
+.main {
+  width: 100%;
   margin: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
     url("./assets/Background Small.jpg");
@@ -154,6 +154,8 @@ h2.secondary-header {
   margin-bottom: 40px;
   margin-top: 40px;
   overflow-x: hidden !important;
+  z-index: 50;
+  position: relative;
   @media only screen and (max-width: 767px) {
     display: none;
   }
@@ -174,13 +176,9 @@ h2.secondary-header {
   background-color: #4eb9be;
   content: "";
   top: 80px;
-  right: 15px;
-  bottom: 40px;
-  left: 15px;
-  @media only screen and (min-width: 768px) {
-    top: 300px;
-    bottom: 60px;
-  }
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
   opacity: 0.4;
   z-index: -1;
   border-radius: 10px;
