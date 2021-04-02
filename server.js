@@ -27,7 +27,7 @@ const writeDataToExampleResponsesFile = (data) => {
     .createHash("md5")
     .update(answersJson)
     .digest("hex");
-  const filePath = `./tests/exampleTypeformResponses/${answersHashCode}.json`;
+  const filePath = `./tests/mockTypeformResponses/${answersHashCode}.json`;
   fs.writeFileSync(filePath, JSON.stringify(data));
   console.log("Wrote form data to", filePath);
 };

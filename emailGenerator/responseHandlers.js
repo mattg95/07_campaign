@@ -1,20 +1,6 @@
 const { getRandomResponse } = require("./helper-functions");
 const { survey } = require("../emailStrings.json");
-
-const questionKeys = {
-  gil6UCe4dG9T: "supportAid",
-  wKGNjgRDml1H: "motivation",
-  MRPxTl6j1QAw: "whichCountry",
-  Z4awe4sDljLR: "countryLinks",
-  EejpFBEzP9wK: "conservative",
-  IdqRPd6SUMVh: "religion",
-  vdZgYVyiLE13: "meetMp",
-  UhNb2Z5nqHtb: "meetMpDoubleCheck",
-  ghzBmQTQ2npF: "emailAddress",
-  uLPPjjg5B0Bn: "homeAddress",
-  hgdzZ05GxSAs: "postcode",
-  daZZA6TwyMP5: "name",
-};
+const { questionKeys } = require("./keys");
 
 const motivationHandler = (thisId, fields, answers) => {
   const thisField = fields.find(({ id }) => id === thisId);
@@ -35,4 +21,4 @@ const motivationHandler = (thisId, fields, answers) => {
   return sentenceArr.length ? sentenceArr.join(" ") : "";
 };
 
-module.exports = { motivationHandler, questionKeys };
+module.exports = { motivationHandler };

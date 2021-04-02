@@ -67,21 +67,20 @@ describe("/api/postcode", () => {
   });
 });
 
-//how to test webhooks?
-describe("emailGeneratorFuncs", () => {
-  let covidResponse;
-  before(async function () {
-    let {
-      answers,
-      definition: { fields },
-    } = covidMotivationsRes.form_response;
-    covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
-  });
-  it("should return covid synonyms for a covid motivations choice", () => {
-    const regex = /covid|pandemic/gi;
-    expect(regex.test(covidResponse)).to.be.true;
-  });
-});
+// describe("emailGeneratorFuncs", () => {
+//   let covidResponse;
+//   before(async function () {
+//     let {
+//       answers,
+//       definition: { fields },
+//     } = covidMotivationsRes.form_response;
+//     covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
+//   });
+//   it("should return covid synonyms for a covid motivations choice", () => {
+//     const regex = /covid|pandemic/gi;
+//     expect(regex.test(covidResponse)).to.be.true;
+//   });
+// });
 
 describe("generateEmail", () => {
   let randomResponse;

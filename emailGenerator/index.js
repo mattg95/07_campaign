@@ -2,6 +2,7 @@ const { getMpByPostcode } = require("../api-calls");
 const { getRandomResponse } = require("./helper-functions");
 const { subject, survey, main } = require("../emailStrings.json");
 const { motivationHandler, questionKeys } = require("./responseHandlers");
+const { religions } = require("./keys");
 
 const generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
@@ -19,16 +20,6 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     ["address", ""],
   ]);
   //these map the question ids from the form onto our json object
-
-  const religions = [
-    { adj: "Christian", noun: "Christian" },
-    { adj: "Muslim", noun: "Muslim" },
-    { adj: "Hindu", noun: "Hindu" },
-    { adj: "Sikh", noun: "Sikh" },
-    { adj: "Jewish", noun: "Jew" },
-    { adj: "Buddhist", noun: "Buddhist" },
-    { adj: "religious", noun: "person of faith" },
-  ];
 
   //this gets the index of the answer e.g. in a multiple choice, the first choice is index 0
   const getAnswerIndex = (idProp) => {
