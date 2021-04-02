@@ -14,24 +14,19 @@ const nonValidPostcodeBritainSecurityResearchResponse = require("./mockTypeformR
 
 const { motivationHandler } = require("../emailGenerator/responseHandlers.js");
 
-const exampleTypeformResponses = [];
-var normalizedPath = require("path").join(
-  __dirname,
-  "exampleTypeformResponses"
-);
+const mockTypeformResponses = [];
+var normalizedPath = require("path").join(__dirname, "mockTypeformResponses");
 
 fs.readdirSync(normalizedPath).forEach(function (file) {
-  exampleTypeformResponses.push({
+  mockTypeformResponses.push({
     filename: file,
-    json: require("./exampleTypeformResponses/" + file),
+    json: require("./mockTypeformResponses/" + file),
   });
 });
 
 const getRandomEmail = () => {
-  const randomIndex = Math.floor(
-    Math.random() * exampleTypeformResponses.length
-  );
-  const randomResponse = exampleTypeformResponses[randomIndex];
+  const randomIndex = Math.floor(Math.random() * mockTypeformResponses.length);
+  const randomResponse = mockTypeformResponses[randomIndex];
   return generateEmail(randomResponse.json.form_response);
 };
 
@@ -75,9 +70,8 @@ describe("emailGeneratorFuncs", () => {
     } = nonToryMpCovidResponse.form_response;
     covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
   });
-  it("should return covid synonyms for a 'Covid' motivations choice", () => {
+  it("should return synonyms for a 'Covid' motivations choice", () => {
     const regex = /covid|pandemic|poverty/gi;
-    console.log(covidResponse);
     expect(regex.test(covidResponse)).to.be.true;
   });
   before(async function () {
@@ -87,7 +81,7 @@ describe("emailGeneratorFuncs", () => {
     } = nonValidPostcodeBritainSecurityResearchResponse.form_response;
     researchResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
   });
-  it("should return covid synonyms for a 'research' motivations choice", () => {
+  it("should return synonyms for a 'research' motivations choice", () => {
     const regex = /research/gi;
     expect(regex.test(researchResponse)).to.be.true;
   });
@@ -98,7 +92,7 @@ describe("emailGeneratorFuncs", () => {
     } = allToryYemenResponse.form_response;
     yemenResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
   });
-  it("should return covid synonyms for a 'Yemen' motivations choice", () => {
+  it("should return synonyms for a 'Yemen' motivations choice", () => {
     const regex = /yemen/gi;
     expect(regex.test(yemenResponse)).to.be.true;
   });
@@ -218,7 +212,7 @@ describe("generateEmail", () => {
     );
   });
   it("should include reference to a user's motivation where they have put that in", () => {
-    const regex = /covid|pandemic/gi;
+    const regex = /covid|pandemic|poverty/gi;
     expect(regex.test(covidMotivationsEmail.body)).to.be.true;
   });
 });

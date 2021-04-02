@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+//allows us to write exampleResponses for testing in the early stages of development
+//NOTE: be careful to not to save any files with personal details
 const writeDataToExampleResponsesFile = (data) => {
   // Use hashed answers as filename to avoid generating multiple files containing the same responses.
   const answersJson = JSON.stringify(data.form_response.answers);
@@ -52,7 +54,7 @@ io.on("connection", (socket) => {
         generatedEmail: generatedEmail,
       });
       if (app.settings.env === "development") {
-        writeDataToExampleResponsesFile(data);
+        // writeDataToExampleResponsesFile(data);
       }
     });
   });
