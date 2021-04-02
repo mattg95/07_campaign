@@ -187,7 +187,9 @@
         "type": "choices",
         "choices": {
           "labels": [
-            "Global Britain -- we should show moral leadership as we chair the upcoming G7 and COP26 summits"
+            "Global Britain -- we should show moral leadership as we chair the upcoming G7 and COP26 summits",
+            "Research - Cutting funding for international research further exposes us to global dangers like COVID",
+            "Security -- Overseas development spending fights terrorism"
           ]
         },
         "field": {

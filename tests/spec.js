@@ -10,7 +10,7 @@ const otherReligionVaccinesResponse = require("./mockTypeformResponses/otherReli
 const nonToryDefenseResponse = require("./mockTypeformResponses/nonTory-defense.json");
 const nonToryMpCovidResponse = require("./mockTypeformResponses/nonToryMp-covid.json");
 const allToryYemenResponse = require("./mockTypeformResponses/allTory-yemen.json");
-const nonValidPostcodeBritainResponse = require("./mockTypeformResponses/nonValidPostcode-britain.json");
+const nonValidPostcodeBritainSecurityResearchResponse = require("./mockTypeformResponses/nonValidPostcode-britainSecurityResearch.json");
 
 const { motivationHandler } = require("../emailGenerator/responseHandlers.js");
 
@@ -66,20 +66,43 @@ describe("/api/postcode", () => {
   });
 });
 
-// describe("emailGeneratorFuncs", () => {
-//   let covidResponse;
-//   before(async function () {
-//     let {
-//       answers,
-//       definition: { fields },
-//     } = covidMotivationsRes.form_response;
-//     covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
-//   });
-//   it("should return covid synonyms for a covid motivations choice", () => {
-//     const regex = /covid|pandemic/gi;
-//     expect(regex.test(covidResponse)).to.be.true;
-//   });
-// });
+describe("emailGeneratorFuncs", () => {
+  let covidResponse;
+  before(async function () {
+    let {
+      answers,
+      definition: { fields },
+    } = nonToryMpCovidResponse.form_response;
+    covidResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
+  });
+  it("should return covid synonyms for a 'Covid' motivations choice", () => {
+    const regex = /covid|pandemic|poverty/gi;
+    console.log(covidResponse);
+    expect(regex.test(covidResponse)).to.be.true;
+  });
+  before(async function () {
+    let {
+      answers,
+      definition: { fields },
+    } = nonValidPostcodeBritainSecurityResearchResponse.form_response;
+    researchResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
+  });
+  it("should return covid synonyms for a 'research' motivations choice", () => {
+    const regex = /research/gi;
+    expect(regex.test(researchResponse)).to.be.true;
+  });
+  before(async function () {
+    let {
+      answers,
+      definition: { fields },
+    } = allToryYemenResponse.form_response;
+    yemenResponse = await motivationHandler("wKGNjgRDml1H", fields, answers);
+  });
+  it("should return covid synonyms for a 'Yemen' motivations choice", () => {
+    const regex = /yemen/gi;
+    expect(regex.test(yemenResponse)).to.be.true;
+  });
+});
 
 describe("generateEmail", () => {
   let randomResponse;
@@ -103,7 +126,7 @@ describe("generateEmail", () => {
       otherReligionVaccinesResponse.form_response
     );
     nonValidPostcodeEmail = await generateEmail(
-      nonValidPostcodeBritainResponse.form_response
+      nonValidPostcodeBritainSecurityResearchResponse.form_response
     );
     covidMotivationsEmail = await generateEmail(
       nonToryMpCovidResponse.form_response
