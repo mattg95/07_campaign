@@ -48,6 +48,8 @@ const App = () => {
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
 
+  console.log(state);
+
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
@@ -90,15 +92,15 @@ const App = () => {
     document.body.appendChild(script);
   }, [emailSent]);
 
-  const handleWindowSizeChange = () => {
-    setState({ ...state, width: window.innerWidth });
-  };
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+  // const handleWindowSizeChange = () => {
+  //   setState({ ...state, width: window.innerWidth });
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleWindowSizeChange);
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowSizeChange);
+  //   };
+  // }, []);
 
   let isMobile = width && width <= 768;
 
