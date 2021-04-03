@@ -1,18 +1,18 @@
 {
-  "event_id": "01EX2A23J9HZWFGHM4MW65Z9SS",
+  "event_id": "01EWFN105245DNC4V5VM7KCEVZ",
   "event_type": "form_response",
   "form_response": {
     "form_id": "YbkRDwtc",
-    "token": "pp2iwprukv3zkpixc9tptnepp2iwp8tn",
-    "landed_at": "2021-01-27T16:15:09Z",
-    "submitted_at": "2021-01-27T16:15:41Z",
+    "token": "nhxtduas4ws2ku5kn30al92ynhxtduas",
+    "landed_at": "2021-01-20T10:21:05Z",
+    "submitted_at": "2021-01-20T10:21:45Z",
     "definition": {
       "id": "YbkRDwtc",
       "title": "UK foreign aid questions",
       "fields": [
         {
           "id": "gil6UCe4dG9T",
-          "title": "Do you believe that it’s good for the UK government to provide aid to people in the developing world?",
+          "title": "I believe that it’s good for the UK government to provide aid to people in the developing world",
           "type": "multiple_choice",
           "ref": "09880ee7-d3f9-4617-b1b9-01934e4d143e",
           "properties": {},
@@ -31,105 +31,40 @@
           "choices": [
             {
               "id": "bxQtiqPordqM",
-              "label": "COVID -- as long as any people in the world have COVID, all of us are unsafe"
+              "label": "Morally right -- Foreign aid reduces suffering and injustice"
             },
             {
-              "id": "P9iJPQMgOAz2",
-              "label": "COVID -- hundreds of millions of people will be pushed into extreme poverty"
+              "label": "Vaccines -- We need vaccinations in all countries to beat COVID"
             },
             {
-              "id": "JK2MbuxmK1Gw",
-              "label": "I think the government shouldn’t talk about “Global Britain” and then reduce aid"
+              "label": "Defence spending -- If we can find money for additional nuclear weapons we can help the poorest countries"
             },
             {
-              "id": "0Eijxz0bjoZT",
-              "label": "I want to be proud of Britain leading by example"
+              "label": "COVID -- millions of people are being pushed into extreme poverty"
             },
             {
-              "id": "cuzO8gSgHA5F",
-              "label": "I think the forthcoming UK presidency of the G7 and COP26 means it’s particularly important for us to maintain 0.7% of aid spend"
+              "label": "Yemen - Cutting aid will worsen famine in countries like Yemen"
             },
             {
-              "id": "I6sCEwBSze0N",
-              "label": "The reduction in aid will likely cause tens of thousands of avoidable deaths"
+              "label": "Global Britain -- we should show moral leadership as we chair the upcoming G7 and COP26 summits"
             },
             {
-              "id": "BfptPLc3lR5A",
-              "label": "Foreign aid protects us from climate change"
+              "label": "Research - Cutting funding for international research further exposes us to global dangers like COVID"
             },
             {
-              "id": "HwuYiMl94sT4",
-              "label": "Reducing aid risks more immigration to the UK"
-            },
-            {
-              "id": "7FEPkhKsQLNM",
-              "label": "Foreign aid improves national security"
-            },
-            {
-              "id": "q1JaYleMNz62",
-              "label": "If we can find money for military spend, we can find money to help the poor"
-            },
-            {
-              "id": "KweDwOBkEt3i",
-              "label": "If we can find money for nuclear weapons, we can find money to help the poor"
-            },
-            {
-              "id": "APbFeLqNmd1W",
-              "label": "Foreign aid is morally right because it reduces suffering"
-            },
-            {
-              "id": "0G1R0u1KV5S4",
-              "label": "Foreign aid is morally right because it reduces injustice"
-            },
-            {
-              "id": "vtCbuZH0HEKA",
-              "label": "Money goes further overseas, so we can do so much more good with our money there"
+              "label": "Security -- Overseas development spending fights terrorism"
             }
           ]
         },
         {
           "id": "nfkfl48YcQLu",
-          "title": "Do you have links with a country that is receiving or might receive aid?",
+          "title": "I have links with a country that is receiving or might receive aid",
           "type": "multiple_choice",
           "ref": "a7abed1c-0bab-435e-bd19-c2f47230552b",
           "properties": {},
           "choices": [
             { "id": "dFnMBxGwSIZi", "label": "Yes" },
             { "id": "MumVm8oTIrzg", "label": "No" }
-          ]
-        },
-        {
-          "id": "MRPxTl6j1QAw",
-          "title": "Which country do you have links to?",
-          "type": "short_text",
-          "ref": "2880eef6-f4e8-433c-b53d-638a840009f8",
-          "properties": {}
-        },
-        {
-          "id": "Z4awe4sDljLR",
-          "title": "Which of the following best describes the links you have to this country?",
-          "type": "multiple_choice",
-          "ref": "cd943aba-03f2-4a98-8192-fb975e16b73b",
-          "properties": {},
-          "choices": [
-            { "id": "1DnOua1ozV8E", "label": "I was born there" },
-            {
-              "id": "pvEvLBixIYcs",
-              "label": "I was not born there, but I have lived a significant part of my life there"
-            },
-            {
-              "id": "zSQnVm5gKMYl",
-              "label": "None of the above, but I have family there"
-            },
-            {
-              "id": "In74AWf7KGfJ",
-              "label": "None of the above, but I have close friends there"
-            },
-            {
-              "id": "PNYLO1RntJQg",
-              "label": "None of the above, but my ethnicity/heritage is linked to this country"
-            },
-            { "id": "wbDwFJw4vaFG", "label": "Other" }
           ]
         },
         {
@@ -170,11 +105,19 @@
             },
             {
               "id": "Ce0mV2fxzsLI",
-              "label": "I’ve never been a member of the Conservative Party, but I have voted for the Conservatives"
+              "label": "I’ve never been a member of the Conservative Party, but I did vote for the Conservatives at the most recent election"
+            },
+            {
+              "id": "eGzCBX4Oxxli",
+              "label": "I’ve never been a member of the Conservative Party, and I did not vote for the Conservatives at the most recent election, but I have voted for the Conservative Party in the past"
             },
             {
               "id": "dcky3Gsxm88L",
               "label": "I’ve never been a member of the Conservative Party or voted for them, but I am sympathetic to the Conservative Party to some extent"
+            },
+            {
+              "id": "amXGun5QQ61D",
+              "label": "None of the above (i.e. not at all sympathetic to the Conservative Party)"
             },
             {
               "id": "8gUbgcJtYbxi",
@@ -194,17 +137,17 @@
           ]
         },
         {
-          "id": "hgdzZ05GxSAs",
-          "title": "Please enter your postcode",
-          "type": "short_text",
-          "ref": "8f852fe9-60d4-4483-91ae-74a32333dfef",
+          "id": "uLPPjjg5B0Bn",
+          "title": "Please enter your home address. ",
+          "type": "long_text",
+          "ref": "7c7a1cd3-2bec-4a12-97e5-bbb66850c06f",
           "properties": {}
         },
         {
-          "id": "uLPPjjg5B0Bn",
-          "title": "Please enter the rest of your address",
-          "type": "long_text",
-          "ref": "7c7a1cd3-2bec-4a12-97e5-bbb66850c06f",
+          "id": "hgdzZ05GxSAs",
+          "title": "...and postcode",
+          "type": "short_text",
+          "ref": "8f852fe9-60d4-4483-91ae-74a32333dfef",
           "properties": {}
         },
         {
@@ -216,7 +159,7 @@
         },
         {
           "id": "CcSlpbQqpHa3",
-          "title": "Could you share your email address with us?",
+          "title": "Would you like to join our mailing list to be informed of campaign news?",
           "type": "multiple_choice",
           "ref": "b93b415a-5938-44a5-ab70-c47d447dc2fd",
           "properties": {},
@@ -224,13 +167,6 @@
             { "id": "uWq6rTgq6UAB", "label": "Yes" },
             { "id": "jcBTCGlWhRyz", "label": "No" }
           ]
-        },
-        {
-          "id": "922z5KnWprLT",
-          "title": "Please enter your email address",
-          "type": "email",
-          "ref": "35829015-51c0-4549-89af-dd202d08680d",
-          "properties": {}
         }
       ]
     },
@@ -248,7 +184,7 @@
         "type": "choices",
         "choices": {
           "labels": [
-            "The reduction in aid will likely cause tens of thousands of avoidable deaths"
+            "Defence spending -- If we can find money for additional nuclear weapons we can help the poorest countries"
           ]
         },
         "field": {
@@ -259,7 +195,7 @@
       },
       {
         "type": "choice",
-        "choice": { "label": "Yes" },
+        "choice": { "label": "No" },
         "field": {
           "id": "nfkfl48YcQLu",
           "type": "multiple_choice",
@@ -267,28 +203,8 @@
         }
       },
       {
-        "type": "text",
-        "text": "bbd",
-        "field": {
-          "id": "MRPxTl6j1QAw",
-          "type": "short_text",
-          "ref": "2880eef6-f4e8-433c-b53d-638a840009f8"
-        }
-      },
-      {
         "type": "choice",
-        "choice": {
-          "label": "None of the above, but I have close friends there"
-        },
-        "field": {
-          "id": "Z4awe4sDljLR",
-          "type": "multiple_choice",
-          "ref": "cd943aba-03f2-4a98-8192-fb975e16b73b"
-        }
-      },
-      {
-        "type": "choice",
-        "choice": { "label": "Muslim" },
+        "choice": { "label": "Not religious/atheist/agnostic" },
         "field": {
           "id": "IdqRPd6SUMVh",
           "type": "multiple_choice",
@@ -298,7 +214,7 @@
       {
         "type": "choice",
         "choice": {
-          "label": "I’ve never been a member of the Conservative Party, but I have voted for the Conservatives"
+          "label": "None of the above (i.e. not at all sympathetic to the Conservative Party)"
         },
         "field": {
           "id": "EejpFBEzP9wK",
@@ -308,7 +224,7 @@
       },
       {
         "type": "choice",
-        "choice": { "label": "Yes" },
+        "choice": { "label": "No" },
         "field": {
           "id": "vdZgYVyiLE13",
           "type": "multiple_choice",
@@ -317,16 +233,7 @@
       },
       {
         "type": "text",
-        "text": "bfgb",
-        "field": {
-          "id": "hgdzZ05GxSAs",
-          "type": "short_text",
-          "ref": "8f852fe9-60d4-4483-91ae-74a32333dfef"
-        }
-      },
-      {
-        "type": "text",
-        "text": "bfdb",
+        "text": "penny lane",
         "field": {
           "id": "uLPPjjg5B0Bn",
           "type": "long_text",
@@ -335,7 +242,16 @@
       },
       {
         "type": "text",
-        "text": "bfdb",
+        "text": "p4 5rs",
+        "field": {
+          "id": "hgdzZ05GxSAs",
+          "type": "short_text",
+          "ref": "8f852fe9-60d4-4483-91ae-74a32333dfef"
+        }
+      },
+      {
+        "type": "text",
+        "text": "matt testing",
         "field": {
           "id": "daZZA6TwyMP5",
           "type": "short_text",
@@ -344,20 +260,11 @@
       },
       {
         "type": "choice",
-        "choice": { "label": "Yes" },
+        "choice": { "label": "No" },
         "field": {
           "id": "CcSlpbQqpHa3",
           "type": "multiple_choice",
           "ref": "b93b415a-5938-44a5-ab70-c47d447dc2fd"
-        }
-      },
-      {
-        "type": "email",
-        "email": "bm@gmail.com",
-        "field": {
-          "id": "922z5KnWprLT",
-          "type": "email",
-          "ref": "35829015-51c0-4549-89af-dd202d08680d"
         }
       }
     ]

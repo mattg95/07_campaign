@@ -156,6 +156,10 @@ h2.secondary-header {
   overflow-x: hidden !important;
   z-index: 50;
   position: relative;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
   @media only screen and (max-width: 767px) {
     display: none;
   }
@@ -175,7 +179,7 @@ h2.secondary-header {
 .typeform-widget::after {
   background-color: #4eb9be;
   content: "";
-  top: 80px;
+  top: 0px;
   bottom: 0px;
   right: 0px;
   left: 0px;
