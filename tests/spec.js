@@ -216,3 +216,5 @@ describe("generateEmail", () => {
     expect(regex.test(covidMotivationsEmail.body)).to.be.true;
   });
 });
+
+//needs test for country links

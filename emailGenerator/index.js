@@ -37,13 +37,22 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       return;
     }
     if (field.id === questionKeys.get("religion")) {
-      religion = religionHandler(questionKeys.get("religion"), fields, answers);
+      const religionChoiceIndex = getAnswerIndex(
+        questionKeys.get("religion"),
+        fields,
+        answers
+      );
+      religion = religionHandler(religionChoiceIndex);
       emailMap.set("religion", religion);
     }
     if (field.id === questionKeys.get("countryLinks")) {
-      const countryLinks = countryLinksHandler(
+      const countryLinkschoiceIndex = getAnswerIndex(
         questionKeys.get("countryLinks"),
         fields,
+        answers
+      );
+      const countryLinks = countryLinksHandler(
+        countryLinkschoiceIndex,
         answers
       );
       emailMap.set("countryLinks", countryLinks);
@@ -92,7 +101,15 @@ const generateEmail = ({ answers, definition: { fields } }) => {
   }
 
   return getMpByPostcode(postcode.text).then((mp) => {
-    const conservativeResponse = conservativeHandler(mp, fields, answers);
+    const conservativeChoiceIndex = getAnswerIndex(
+      "EejpFBEzP9wK",
+      fields,
+      answers
+    );
+    const conservativeResponse = conservativeHandler(
+      conservativeChoiceIndex,
+      mp
+    );
     emailMap.set("conservative", conservativeResponse);
     const mainContent = getMainContent();
     emailMap.set("mainContent", mainContent);

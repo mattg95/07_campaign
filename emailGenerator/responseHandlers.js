@@ -21,8 +21,7 @@ const motivationHandler = (thisId, fields, answers) => {
   return sentenceArr.length ? sentenceArr.join(" ") : "";
 };
 
-const conservativeHandler = (mp, fields, answers) => {
-  const choiceIndex = getAnswerIndex("EejpFBEzP9wK", fields, answers);
+const conservativeHandler = (choiceIndex, mp) => {
   let memberOfConservatives = choiceIndex < 4;
   if (memberOfConservatives && mp.party === "Conservative") {
     const choiceObj = survey["conservative"][choiceIndex];
@@ -34,8 +33,7 @@ const conservativeHandler = (mp, fields, answers) => {
   return "";
 };
 
-const countryLinksHandler = (id, fields, answers) => {
-  const choiceIndex = getAnswerIndex(id, fields, answers);
+const countryLinksHandler = (choiceIndex) => {
   const choiceObj = survey["countryLinks"][choiceIndex];
   if (choiceObj === undefined) return "";
   else {
@@ -51,8 +49,7 @@ const countryLinksHandler = (id, fields, answers) => {
   }
 };
 
-const religionHandler = (id, fields, answers) => {
-  const choiceIndex = getAnswerIndex(id, fields, answers);
+const religionHandler = (choiceIndex) => {
   if ([7, 8].includes(choiceIndex)) return "";
   else {
     const { adj, noun } = religions[choiceIndex];
