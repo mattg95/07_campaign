@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
-import "./App.scss";
+import "../App.scss";
 
 import TypeForm from "../components/TypeForm";
 import TextBox from "../components/TextBox";
