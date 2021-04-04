@@ -1,49 +1,46 @@
 /* eslint react-hooks/exhaustive-deps: 0 */ // --> turns eslint warning message off
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { Container, Row, Col } from "react-bootstrap";
 
-import TypeForm from "./TypeForm";
-import TextBox from "./TextBox";
-import MpForm from "./MpForm";
-import DisplayMp from "./DisplayMp";
-import SendEmail from "./SendEmail";
-import IntroContent from "./IntroContent";
-import ThankyouScreen from "./thankyouScreen";
-
 import "./App.scss";
+
+import TypeForm from "../components/TypeForm";
+import TextBox from "../components/TextBox";
+import MpForm from "../components/MpForm";
+import DisplayMp from "../components/DisplayMp";
+import SendEmail from "../components/SendEmail";
+import IntroContent from "../components/IntroContent";
+import ThankyouScreen from "../components/thankyouScreen";
+
+import { store } from "../redux/store";
+
+import {
+  setEmailBody,
+  setEmailSubject,
+  setIsMobile,
+  setGreeting,
+  setMpData,
+  setEmailWithGreeting,
+  setPositiveTypeformResponse,
+} from "../redux/actions";
 
 require("dotenv").config({ path: "../.env" });
 
 const socket = socketIOClient();
 
 const App = () => {
-  const [state, setState] = useState({
-    width: window.innerWidth,
-    responseId: "",
-    mpData: { error: "Could not find MP", name: "", full_name: "" },
-    generatedEmailBody: "Your email will appear here",
-    emailSubject: "",
-    positiveTypeFormResponseReturned: false,
-    greeting: "",
-    emailWithGreeting: "",
-    emailVisible: false,
-    emailSent: false,
-  });
-
   const {
     responseId,
     mpData,
     generatedEmailBody,
-    emailSubject,
     greeting,
-    emailWithGreeting,
     positiveTypeFormResponseReturned,
-    width,
+    isMobile,
     emailVisible,
     emailSent,
-  } = state;
+  } = store.getState();
 
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
@@ -53,15 +50,14 @@ const App = () => {
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {
-        setState({
-          ...state,
-          generatedEmailBody: generatedEmail.body,
-          emailSubject: generatedEmail.subject,
-          mpData: generatedEmail.mpData,
-          greeting: generatedEmail.greeting,
-          emailWithGreeting: generatedEmail.greeting + generatedEmail.body,
-          positiveTypeFormResponseReturned: generatedEmail.supportsAid,
-        });
+        store.dispatch(setEmailBody(generatedEmail.body));
+        store.dispatch(setEmailSubject(generatedEmail.subject));
+        store.dispatch(setMpData(generatedEmail.mpData));
+        store.dispatch(setGreeting(generatedEmail.greeeting));
+        store.dispatch(
+          setEmailWithGreeting(generatedEmail.greeeting + generatedEmail.body)
+        );
+        store.dispatch(setPositiveTypeformResponse(generatedEmail.supportsAid));
       }
     });
   }, [responseId]);
@@ -69,20 +65,15 @@ const App = () => {
   useEffect(() => {
     if (mpData) {
       const { full_name } = mpData;
+      const greeting = `Dear ${full_name},\n`;
       if (full_name) {
-        setState({
-          ...state,
-          greeting: `Dear ${full_name},\n`,
-        });
+        store.dispatch(setGreeting(greeting));
       }
     }
   }, [mpData.name, mpData.full_name]);
 
   useEffect(() => {
-    setState({
-      ...state,
-      emailWithGreeting: greeting + generatedEmailBody,
-    });
+    store.dispatch(setEmailWithGreeting(greeting + generatedEmailBody));
   }, [generatedEmailBody, greeting]);
 
   useEffect(() => {
@@ -101,8 +92,6 @@ const App = () => {
   //     window.removeEventListener("resize", handleWindowSizeChange);
   //   };
   // }, []);
-
-  let isMobile = width && width <= 768;
 
   useEffect(() => {
     setTimeout(() => {
@@ -130,12 +119,6 @@ const App = () => {
       });
   }, [emailVisible, emailBoxRef]);
 
-  const passDataUpstream = (data) => {
-    Object.keys(data).forEach((key) => {
-      setState({ ...state, [key]: data[key] });
-    });
-  };
-
   return (
     <div className="main">
       <Container>
@@ -147,10 +130,7 @@ const App = () => {
         <Row>
           <Col>
             <div className="typeform">
-              <TypeForm
-                passDataUpstream={passDataUpstream}
-                isMobile={isMobile}
-              />
+              <TypeForm />
             </div>
           </Col>
         </Row>
@@ -159,14 +139,14 @@ const App = () => {
             <Row>
               <Col>
                 <div ref={displayMpRef}>
-                  <DisplayMp mpData={mpData} />
+                  <DisplayMp />
                 </div>
               </Col>
             </Row>
             <Row>
               <Col>
                 <div id="mpForm" className="">
-                  <MpForm passDataUpstream={passDataUpstream} />
+                  <MpForm />
                 </div>
               </Col>
             </Row>
@@ -175,23 +155,14 @@ const App = () => {
                 <Row>
                   <Col>
                     <div ref={emailBoxRef}>
-                      <TextBox
-                        passDataUpstream={passDataUpstream}
-                        emailBody={emailWithGreeting}
-                        subject={emailSubject}
-                      />
+                      <TextBox />
                     </div>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <div className="">
-                      <SendEmail
-                        mpEmailAddress={mpData.mpEmailAddress}
-                        body={emailWithGreeting}
-                        subject={emailSubject}
-                        passDataUpstream={passDataUpstream}
-                      />
+                      <SendEmail />
                     </div>
                   </Col>
                 </Row>

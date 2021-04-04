@@ -4,8 +4,12 @@ import React from "react";
 import EdiText from "react-editext";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { setCopied, setEmailWithGreeting } from "../redux/actions";
 
-const TextBox = ({ emailBody, passDataUpstream }) => {
+import { store } from "../redux/store";
+
+const TextBox = () => {
+  const { emailWithGreeting } = store.getState();
   const copyToClipboard = (itemToCopy) => {
     const el = document.createElement("textarea"); //creating a text area to be removed later (bit hacky)
     el.value = itemToCopy;
@@ -14,7 +18,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
     el.setSelectionRange(0, 99999); /* For mobile devices */
     document.execCommand("copy");
     document.body.removeChild(el);
-    passDataUpstream({ copied: true });
+    setCopied();
   };
   return (
     <div className="edit-email">
@@ -35,9 +39,9 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
           cancelButtonContent={<strong>Cancel</strong>}
           editButtonContent="Edit Your Email"
           editOnViewClick={true}
-          value={emailBody} // validates the webhook response token against the response id from the embedded tyeform widget
+          value={emailWithGreeting} // validates the webhook response token against the response id from the embedded tyeform widget
           onSave={(val) => {
-            passDataUpstream({ emailWithGreeting: val }); //if the user edits the text box, a new property called editedResponse is set in state
+            setEmailWithGreeting(val);
           }}
         />
         <Popup
@@ -49,7 +53,7 @@ const TextBox = ({ emailBody, passDataUpstream }) => {
             </div>
           )}
           closeOnDocumentClick
-          onOpen={() => copyToClipboard(emailBody)}
+          onOpen={() => copyToClipboard(emailWithGreeting)}
           className="copy-popup"
         >
           <span> Copied to clipboard </span>
