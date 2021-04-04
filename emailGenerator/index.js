@@ -30,7 +30,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
   ]);
 
   answers.forEach(({ text, field, choice }) => {
-    if (field.id === "gil6UCe4dG9T") {
+    if (field.id === questionKeys.get("supportsAid")) {
       if (choice.label === "No") {
         supportsAid = false;
       }

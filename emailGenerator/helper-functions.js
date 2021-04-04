@@ -1,5 +1,4 @@
-const { subject, survey, main } = require("./emailStrings.json");
-const { religions, questionKeys } = require("./keys");
+const { main } = require("./emailStrings.json");
 
 const getRandomResponse = (inputArr) => {
   return inputArr[Math.floor(Math.random() * inputArr.length)];

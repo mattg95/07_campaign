@@ -9,6 +9,7 @@ const religions = [
 ];
 
 const questionKeys = new Map([
+  ["supportsAid", "gil6UCe4dG9T"],
   ["motivation", "wKGNjgRDml1H"],
   ["whichCountry", "MRPxTl6j1QAw"],
   ["countryLinks", "Z4awe4sDljLR"],

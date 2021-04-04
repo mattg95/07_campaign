@@ -1,11 +1,10 @@
 const { getRandomResponse, getAnswerIndex } = require("./helper-functions");
 const { survey } = require("./emailStrings.json");
-const { questionKeys, religions } = require("./keys");
+const { religions } = require("./keys");
 
 const motivationHandler = (thisId, fields, answers) => {
   const thisField = fields.find(({ id }) => id === thisId);
   const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
-  console.log(thisField);
   let choiceIndex = [];
   //this gets the synomys array based on the index of the survey multiple choice-
   thisField.choices.forEach((choice, i) => {
