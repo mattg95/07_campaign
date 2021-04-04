@@ -1,12 +1,21 @@
 const { getMpByPostcode } = require("../api-calls");
-const { getRandomResponse } = require("./helper-functions");
-const { subject, survey, main } = require("../emailStrings.json");
-const { motivationHandler } = require("./responseHandlers");
-const { religions, questionKeys } = require("./keys");
+const {
+  getRandomResponse,
+  createGreeting,
+  getAnswerIndex,
+  getMainContent,
+} = require("./helper-functions");
+const { subject, survey, main } = require("./emailStrings.json");
+const {
+  motivationHandler,
+  conservativeHandler,
+  religionHandler,
+  countryLinksHandler,
+} = require("./responseHandlers");
+const { questionKeys } = require("./keys");
 
 const generateEmail = ({ answers, definition: { fields } }) => {
   let supportsAid = true;
-  let memberOfConservatives = false;
   const postcode = answers.find(({ field: { id } }) => id === "hgdzZ05GxSAs");
 
   const emailMap = new Map([
@@ -19,29 +28,6 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     ["name", ""],
     ["address", ""],
   ]);
-  //these map the question ids from the form onto our json object
-
-  //this gets the index of the answer e.g. in a multiple choice, the first choice is index 0
-  const getAnswerIndex = (idProp) => {
-    let choiceIndex = 0;
-    const thisField = fields.find(({ id }) => id === idProp);
-    const thisAnswers = answers.find(({ field: { id } }) => id === idProp);
-    //this gets the synomys array based on the index of the survey multiple choice options-
-    thisField.choices.forEach((choice, i) => {
-      if (thisAnswers.choice.label === choice.label) {
-        choiceIndex = i;
-      }
-    });
-    return choiceIndex;
-  };
-
-  const createGreeting = ({ name, full_name }) => {
-    salutation = getRandomResponse(main.greeting);
-    const mpName = full_name ? full_name : name;
-    return mpName ? `${salutation} ${mpName},\n\n` : "";
-  };
-
-  //this is the 'router' that handles all question responses based on their id
 
   answers.forEach(({ text, field, choice }) => {
     if (field.id === "gil6UCe4dG9T") {
@@ -50,42 +36,15 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       }
       return;
     }
-    if (field.id === "EejpFBEzP9wK") {
-      //conservatives handler
-      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      // The first 3 choices for survey.conservative have sentences in emailStrings.json about being a conservative
-      memberOfConservatives = choiceIndex < 4;
-    }
-
     //religion handler
     if (field.id === "IdqRPd6SUMVh") {
-      const choiceIndex = getAnswerIndex("IdqRPd6SUMVh");
-      if ([7, 8].includes(choiceIndex)) return;
-      else {
-        const { adj, noun } = religions[choiceIndex];
-        let sentence = getRandomResponse(survey.religion);
-        sentence = sentence
-          .replace("RELIGIOUS_DENONYM_NOUN", noun)
-          .replace("RELIGIOUS_DENONYM_ADJ", adj);
-        emailMap.set("religion", sentence);
-      }
+      religion = religionHandler("IdqRPd6SUMVh", fields, answers);
+      emailMap.set("religion", religion);
     }
     //countryLinksHandler
     if (field.id === "Z4awe4sDljLR") {
-      const choiceIndex = getAnswerIndex("Z4awe4sDljLR");
-      const choiceObj = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
-      if (choiceObj === undefined) return;
-      else {
-        const sentence = getRandomResponse(choiceObj.synonyms);
-        const countryNameData = answers.find(
-          ({ field: { id } }) => id === "MRPxTl6j1QAw"
-        );
-        const sentenceWithCountry = sentence.replace(
-          /COUNTRY_NAME/g,
-          countryNameData.text
-        );
-        emailMap.set("countryLinks", sentenceWithCountry);
-      }
+      const countryLinks = countryLinksHandler("Z4awe4sDljLR", fields, answers);
+      emailMap.set("countryLinks", countryLinks);
     }
     // moivations handler
     if (field.id === "wKGNjgRDml1H") {
@@ -94,17 +53,16 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     }
     //meetMp handler
     if (field.id === "vdZgYVyiLE13") {
-      if (getAnswerIndex("vdZgYVyiLE13") === 0) {
+      if (getAnswerIndex("vdZgYVyiLE13", fields, answers) === 0) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
     //meetMp double check hanlder
     if (field.id === "UhNb2Z5nqHtb") {
-      if (getAnswerIndex("UhNb2Z5nqHtb") === 0) {
+      if (getAnswerIndex("UhNb2Z5nqHtb", fields, answers) === 0) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
-
     //name handler
     if (field.id === "daZZA6TwyMP5") {
       const randomSignoff = getRandomResponse(main.signoff);
@@ -127,20 +85,9 @@ const generateEmail = ({ answers, definition: { fields } }) => {
   }
 
   return getMpByPostcode(postcode.text).then((mp) => {
-    if (memberOfConservatives && mp.party === "Conservative") {
-      const choiceIndex = getAnswerIndex("EejpFBEzP9wK");
-      const choiceObj = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
-      if (choiceObj.synonyms.length > 0) {
-        emailMap.set("conservative", getRandomResponse(choiceObj.synonyms));
-      }
-    }
-    //adds 'main' content from emailString.Json
-    const mainContent =
-      getRandomResponse(main.sentence1) +
-      " " +
-      getRandomResponse(main.sentence2) +
-      " " +
-      getRandomResponse(main.sentence3);
+    const conservativeResponse = conservativeHandler(mp, fields, answers);
+    emailMap.set("conservative", conservativeResponse);
+    const mainContent = getMainContent();
     emailMap.set("mainContent", mainContent);
 
     let emailbodyStr = "";
