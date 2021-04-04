@@ -36,40 +36,47 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       }
       return;
     }
-    //religion handler
-    if (field.id === "IdqRPd6SUMVh") {
-      religion = religionHandler("IdqRPd6SUMVh", fields, answers);
+    if (field.id === questionKeys.get("religion")) {
+      religion = religionHandler(questionKeys.get("religion"), fields, answers);
       emailMap.set("religion", religion);
     }
-    //countryLinksHandler
-    if (field.id === "Z4awe4sDljLR") {
-      const countryLinks = countryLinksHandler("Z4awe4sDljLR", fields, answers);
+    if (field.id === questionKeys.get("countryLinks")) {
+      const countryLinks = countryLinksHandler(
+        questionKeys.get("countryLinks"),
+        fields,
+        answers
+      );
       emailMap.set("countryLinks", countryLinks);
     }
-    // moivations handler
-    if (field.id === "wKGNjgRDml1H") {
-      const motivations = motivationHandler("wKGNjgRDml1H", fields, answers);
+    if (field.id === questionKeys.get("motivation")) {
+      const motivations = motivationHandler(
+        questionKeys.get("motivation"),
+        fields,
+        answers
+      );
       emailMap.set("motivation", motivations);
     }
-    //meetMp handler
-    if (field.id === "vdZgYVyiLE13") {
-      if (getAnswerIndex("vdZgYVyiLE13", fields, answers) === 0) {
+    if (field.id === questionKeys.get("meetMp")) {
+      if (getAnswerIndex(questionKeys.get("meetMp"), fields, answers) === 0) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
-    //meetMp double check hanlder
-    if (field.id === "UhNb2Z5nqHtb") {
-      if (getAnswerIndex("UhNb2Z5nqHtb", fields, answers) === 0) {
+    if (field.id === questionKeys.get("meetMpDoubleCheck")) {
+      if (
+        getAnswerIndex(
+          questionKeys.get("meetMpDoubleCheck"),
+          fields,
+          answers
+        ) === 0
+      ) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
-    //name handler
-    if (field.id === "daZZA6TwyMP5") {
+    if (field.id === questionKeys.get("name")) {
       const randomSignoff = getRandomResponse(main.signoff);
       emailMap.set("name", `${randomSignoff},\n${text}`);
     }
-    //address handler
-    if (field.id === "uLPPjjg5B0Bn") {
+    if (field.id === questionKeys.get("homeAddress")) {
       emailMap.set("address", text);
     }
   });

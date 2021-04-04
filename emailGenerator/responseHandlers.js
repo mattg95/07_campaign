@@ -5,6 +5,7 @@ const { questionKeys, religions } = require("./keys");
 const motivationHandler = (thisId, fields, answers) => {
   const thisField = fields.find(({ id }) => id === thisId);
   const thisAnswers = answers.find(({ field: { id } }) => id === thisId);
+  console.log(thisField);
   let choiceIndex = [];
   //this gets the synomys array based on the index of the survey multiple choice-
   thisField.choices.forEach((choice, i) => {
@@ -13,7 +14,7 @@ const motivationHandler = (thisId, fields, answers) => {
     }
   });
   const synonymns = choiceIndex.map((ele) => {
-    return survey[questionKeys[thisId]][ele];
+    return survey["motivation"][ele];
   });
   const sentenceArr = synonymns.map((ele) => {
     return ele && getRandomResponse(ele.synonyms);
@@ -25,7 +26,7 @@ const conservativeHandler = (mp, fields, answers) => {
   const choiceIndex = getAnswerIndex("EejpFBEzP9wK", fields, answers);
   let memberOfConservatives = choiceIndex < 4;
   if (memberOfConservatives && mp.party === "Conservative") {
-    const choiceObj = survey[questionKeys["EejpFBEzP9wK"]][choiceIndex];
+    const choiceObj = survey["conservative"][choiceIndex];
     if (choiceObj.synonyms.length > 0) {
       return getRandomResponse(choiceObj.synonyms);
     }
@@ -36,7 +37,7 @@ const conservativeHandler = (mp, fields, answers) => {
 
 const countryLinksHandler = (id, fields, answers) => {
   const choiceIndex = getAnswerIndex(id, fields, answers);
-  const choiceObj = survey[questionKeys["Z4awe4sDljLR"]][choiceIndex];
+  const choiceObj = survey["countryLinks"][choiceIndex];
   if (choiceObj === undefined) return "";
   else {
     const sentence = getRandomResponse(choiceObj.synonyms);
