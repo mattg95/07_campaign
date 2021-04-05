@@ -48,8 +48,6 @@ const App = () => {
   const displayMpRef = useRef(null);
   const emailBoxRef = useRef(null);
 
-  console.log(state);
-
   useEffect(() => {
     socket.on("typeform-incoming", ({ formToken, generatedEmail }) => {
       if (formToken === responseId) {

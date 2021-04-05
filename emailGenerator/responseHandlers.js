@@ -1,5 +1,5 @@
 const { getRandomResponse } = require("./helper-functions");
-const { survey } = require("../emailStrings.json");
+const { survey } = require("./emailStrings.json");
 const { questionKeys } = require("./keys");
 
 const motivationHandler = (thisId, fields, answers) => {
