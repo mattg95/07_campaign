@@ -61,9 +61,12 @@ const religionHandler = (choiceIndex) => {
   }
 };
 
+const phoneNumberHandler = (choiceIndex) => {};
+
 module.exports = {
   motivationHandler,
   conservativeHandler,
   countryLinksHandler,
   religionHandler,
+  phoneNumberHandler,
 };

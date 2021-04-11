@@ -11,6 +11,7 @@ const {
   conservativeHandler,
   religionHandler,
   countryLinksHandler,
+  phoneNumberHandler,
 } = require("./responseHandlers");
 const { questionKeys } = require("./keys");
 
@@ -27,9 +28,10 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     ["meetMp", ""],
     ["name", ""],
     ["address", ""],
+    ["phoneNumber", ""],
   ]);
 
-  answers.forEach(({ text, field, choice }) => {
+  answers.forEach(({ text, field, choice, phone_number }) => {
     if (field.id === questionKeys.get("supportsAid")) {
       if (choice.label === "No") {
         supportsAid = false;
@@ -96,6 +98,9 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     if (field.id === questionKeys.get("homeAddress")) {
       emailMap.set("address", text);
     }
+    if (field.id === questionKeys.get("phoneNumber")) {
+      emailMap.set("phoneNumber", phone_number);
+    }
   });
   //returns blank data if user does not support aid
   if (!supportsAid) {
@@ -127,7 +132,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     for (let [k, v] of emailMap) {
       if (k === "address") {
         v = v.replace(/,\s/g, ",\n");
-        emailbodyStr += v;
+        emailbodyStr += v + `\n`;
       } else {
         v.length && (emailbodyStr += v + `\n\n`);
       }
