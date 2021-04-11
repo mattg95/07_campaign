@@ -36,6 +36,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       }
       return;
     }
+    //religion route
     if (field.id === questionKeys.get("religion")) {
       const religionChoiceIndex = getAnswerIndex(
         questionKeys.get("religion"),
@@ -45,6 +46,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       religion = religionHandler(religionChoiceIndex);
       emailMap.set("religion", religion);
     }
+    //country Links route
     if (field.id === questionKeys.get("countryLinks")) {
       const countryLinkschoiceIndex = getAnswerIndex(
         questionKeys.get("countryLinks"),
@@ -57,6 +59,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       );
       emailMap.set("countryLinks", countryLinks);
     }
+    //motivation route
     if (field.id === questionKeys.get("motivation")) {
       const motivations = motivationHandler(
         questionKeys.get("motivation"),
@@ -65,12 +68,15 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       );
       emailMap.set("motivation", motivations);
     }
+    //meet Mp route
     if (field.id === questionKeys.get("meetMp")) {
       if (getAnswerIndex(questionKeys.get("meetMp"), fields, answers) === 0) {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
+    //Mp double check route
     if (field.id === questionKeys.get("meetMpDoubleCheck")) {
+      //fires only if the user does want a meeting
       if (
         getAnswerIndex(
           questionKeys.get("meetMpDoubleCheck"),
@@ -81,15 +87,17 @@ const generateEmail = ({ answers, definition: { fields } }) => {
         emailMap.set("meetMp", getRandomResponse(survey.meetMp));
       }
     }
+    //name route
     if (field.id === questionKeys.get("name")) {
       const randomSignoff = getRandomResponse(main.signoff);
       emailMap.set("name", `${randomSignoff},\n${text}`);
     }
+    //address route
     if (field.id === questionKeys.get("homeAddress")) {
       emailMap.set("address", text);
     }
   });
-
+  //returns blank data if user does not support aid
   if (!supportsAid) {
     return Promise.resolve({
       supportsAid: false,
@@ -106,6 +114,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       fields,
       answers
     );
+    //conservative route fires afer MP is fetched
     const conservativeResponse = conservativeHandler(
       conservativeChoiceIndex,
       mp
@@ -113,7 +122,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     emailMap.set("conservative", conservativeResponse);
     const mainContent = getMainContent();
     emailMap.set("mainContent", mainContent);
-
+    //concatonates the map object into a string
     let emailbodyStr = "";
     for (let [k, v] of emailMap) {
       if (k === "address") {
@@ -123,6 +132,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
         v.length && (emailbodyStr += v + `\n\n`);
       }
     }
+    //returns the data
     const responseData = {
       supportsAid: true,
       mpData: mp,
