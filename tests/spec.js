@@ -11,6 +11,7 @@ const nonToryDefenseResponse = require("./mockTypeformResponses/nonTory-defense.
 const nonToryMpCovidResponse = require("./mockTypeformResponses/nonToryMp-covid.json");
 const allToryYemenResponse = require("./mockTypeformResponses/allTory-yemen.json");
 const nonValidPostcodeBritainSecurityResearchResponse = require("./mockTypeformResponses/nonValidPostcode-britainSecurityResearch.json");
+const phoneNumberResponse = require("./mockTypeformResponses/phoneNumberResponse.json");
 
 const { motivationHandler } = require("../emailGenerator/responseHandlers.js");
 
@@ -108,6 +109,7 @@ describe("generateEmail", () => {
   let otherReligionEmail;
   let nonValidPostcodeEmail;
   let covidMotivationsEmail;
+  let phoneNumberIncludedEmail;
 
   before(async function () {
     randomResponse = await getRandomEmail();
@@ -124,6 +126,9 @@ describe("generateEmail", () => {
     );
     covidMotivationsEmail = await generateEmail(
       nonToryMpCovidResponse.form_response
+    );
+    phoneNumberIncludedEmail = await generateEmail(
+      phoneNumberResponse.form_response
     );
   });
   it("should return an object with keys 'body' and 'subject'", () => {
@@ -214,5 +219,10 @@ describe("generateEmail", () => {
   it("should include reference to a user's motivation where they have put that in", () => {
     const regex = /covid|pandemic|poverty/gi;
     expect(regex.test(covidMotivationsEmail.body)).to.be.true;
+  });
+  it("should include a user's phone number when the user adds it", () => {
+    expect(
+      phoneNumberIncludedEmail.body.search(/[+]447401234566/)
+    ).to.not.equal(-1);
   });
 });

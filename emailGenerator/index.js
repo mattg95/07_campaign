@@ -18,6 +18,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     ["meetMp", ""],
     ["name", ""],
     ["address", ""],
+    ["phoneNumber", ""],
   ]);
   //these map the question ids from the form onto our json object
 
@@ -43,7 +44,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
 
   //this is the 'router' that handles all question responses based on their id
 
-  answers.forEach(({ text, field, choice }) => {
+  answers.forEach(({ text, field, choice, phone_number }) => {
     if (field.id === "gil6UCe4dG9T") {
       if (choice.label === "No") {
         supportsAid = false;
@@ -114,6 +115,10 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     if (field.id === "uLPPjjg5B0Bn") {
       emailMap.set("address", text);
     }
+    // phone number handler
+    if (field.id === "lm89BWs2VeY2") {
+      emailMap.set("phoneNumber", phone_number);
+    }
   });
 
   if (!supportsAid) {
@@ -147,7 +152,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
     for (let [k, v] of emailMap) {
       if (k === "address") {
         v = v.replace(/,\s/g, ",\n");
-        emailbodyStr += v;
+        emailbodyStr += v + `\n`;
       } else {
         v.length && (emailbodyStr += v + `\n\n`);
       }
