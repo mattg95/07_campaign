@@ -7,17 +7,17 @@ const IntroContent = () => (
     <h1 className="title">The 0.7% Commitment</h1>
     <h2 className="main-h2">Stop the cuts to UK aid</h2>
     <p className="intro-para">
-      The 2019 Conservative Manifesto declared Britain would{" "}
-      <strong>
-        "proudly maintain our commitment to spend 0.7 per cent of GNI on
-        development"
-      </strong>
-      . But just one year later, the government intends to cut foreign aid.
-    </p>
-    <p className="intro-para">
-      At a time of unprecedented international crisis, with millions at risk of
-      extreme poverty,{" "}
-      <strong>Britain must show leadership - not break its commitments.</strong>
+      Newsflash! Parliament to vote on reversing aid cuts! <br /> <br />
+      <strong>Stop the cuts to UK aid!</strong>
+      <br /> <br />
+      Conservative rebel MPs are forcing the government to put the decision to
+      cut aid to the vote, and the vote may happen on Mon 7th June! If you can
+      contact your MP before this date, please do so, preferably by calling
+      them, or using this website to send an email is also useful.
+      <br /> <br />
+      <a href="https://members.parliament.uk/members/commons">
+        Click here to easily find your MP's phone number.
+      </a>
     </p>
   </div>
 );
