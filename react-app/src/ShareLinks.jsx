@@ -3,11 +3,10 @@
 
 import React from "react";
 
-const ThankyouScreen = () => {
+const ShareLinks = () => {
   return (
-    <div>
-      <h2 className="secondary-header">Thankyou!</h2>
-      <p className="explanation">Please share this campaign</p>
+    <div className="share-links">
+      <p className="explanation">Please share this campaign!</p>
       <div
         className="a2a_kit a2a_kit_size_50 a2a_default_style"
         data-a2a-url="https://www.point7percent.org/"
@@ -23,4 +22,4 @@ const ThankyouScreen = () => {
   );
 };
 
-export default ThankyouScreen;
+export default ShareLinks;

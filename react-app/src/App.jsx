@@ -10,7 +10,7 @@ import MpForm from "./MpForm";
 import DisplayMp from "./DisplayMp";
 import SendEmail from "./SendEmail";
 import IntroContent from "./IntroContent";
-import ThankyouScreen from "./thankyouScreen";
+import ShareLinks from "./ShareLinks";
 
 import "./App.scss";
 
@@ -89,16 +89,6 @@ const App = () => {
     script.src = "https://static.addtoany.com/menu/page.js";
     document.body.appendChild(script);
   }, [emailSent]);
-
-  // const handleWindowSizeChange = () => {
-  //   setState({ ...state, width: window.innerWidth });
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleWindowSizeChange);
-  //   return () => {
-  //     window.removeEventListener("resize", handleWindowSizeChange);
-  //   };
-  // }, []);
 
   let isMobile = width && width <= 768;
 
@@ -196,7 +186,7 @@ const App = () => {
                 {emailSent && (
                   <Row>
                     <Col>
-                      <ThankyouScreen />
+                      <h2 className="secondary-header">Thankyou!</h2>
                     </Col>
                   </Row>
                 )}
@@ -204,6 +194,7 @@ const App = () => {
             )}
           </>
         )}
+        <ShareLinks />
       </Container>
     </div>
   );

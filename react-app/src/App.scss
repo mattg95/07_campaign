@@ -130,6 +130,9 @@ h2.secondary-header {
   @media only screen and (min-width: 768px) {
     margin-bottom: 40px;
   }
+  a {
+    color: #4eb9be;
+  }
 }
 
 .call-to-action {
@@ -192,7 +195,7 @@ h2.secondary-header {
 
 #ccc,
 .ccc {
-  position: relative !important;
+  position: fixed !important;
 }
 
 #ccc-icon,
@@ -203,9 +206,6 @@ h2.secondary-header {
 .a2a_kit {
   display: flex;
   justify-content: space-evenly;
-  a {
-    height: 150px;
-  }
 }
 
 p.explanation {
@@ -541,4 +541,7 @@ textarea:disabled {
     color: #ffffff;
     text-align: center;
   }
+}
+
+.share-links {
 }
