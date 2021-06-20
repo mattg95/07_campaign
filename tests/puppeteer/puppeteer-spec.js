@@ -14,7 +14,7 @@ const getTypeformFrame = (page) => {
 
 describe("Puppeteer tests", function () {
   // Increase timeout from default of 2s to allow time for page to load.
-  this.timeout(5000);
+  this.timeout(10000);
   let page;
 
   before(async function () {
