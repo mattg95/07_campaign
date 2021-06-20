@@ -1,6 +1,6 @@
 const { getRandomResponse, getAnswerIndex } = require("./helper-functions");
 const { survey } = require("./emailStrings.json");
-const { questionKeys, religions } = require("./keys");
+const { religions } = require("./keys");
 
 const motivationHandler = (thisId, fields, answers) => {
   const thisField = fields.find(({ id }) => id === thisId);
@@ -13,7 +13,7 @@ const motivationHandler = (thisId, fields, answers) => {
     }
   });
   const synonymns = choiceIndex.map((ele) => {
-    return survey[questionKeys[thisId]][ele];
+    return survey.motivation[ele];
   });
   const sentenceArr = synonymns.map((ele) => {
     return ele && getRandomResponse(ele.synonyms);
@@ -23,7 +23,7 @@ const motivationHandler = (thisId, fields, answers) => {
 
 const countryLinksHandler = (thisId, fields, answers) => {
   const choiceIndex = getAnswerIndex(thisId, fields, answers);
-  const choiceObj = survey[questionKeys[thisId]][choiceIndex];
+  const choiceObj = survey.countryLinks[choiceIndex];
   if (choiceObj === undefined) return "";
   else {
     const sentence = getRandomResponse(choiceObj.synonyms);

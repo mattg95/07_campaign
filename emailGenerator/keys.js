@@ -9,49 +9,19 @@ const religions = [
 ];
 
 const questionKeys = {
-  gil6UCe4dG9T: "supportAid",
-  wKGNjgRDml1H: "motivation",
-  MRPxTl6j1QAw: "whichCountry",
-  Z4awe4sDljLR: "countryLinks",
-  EejpFBEzP9wK: "conservative",
-  IdqRPd6SUMVh: "religion",
-  vdZgYVyiLE13: "meetMp",
-  UhNb2Z5nqHtb: "meetMpDoubleCheck",
-  ghzBmQTQ2npF: "emailAddress",
-  uLPPjjg5B0Bn: "homeAddress",
-  hgdzZ05GxSAs: "postcode",
-  daZZA6TwyMP5: "name",
+  supportAid: "gil6UCe4dG9T",
+  motivation: "wKGNjgRDml1H",
+  whichCountry: "MRPxTl6j1QAw",
+  countryLinks: "Z4awe4sDljLR",
+  conservative: "EejpFBEzP9wK",
+  religion: "IdqRPd6SUMVh",
+  meetMp: "vdZgYVyiLE13",
+  meetMpDoubleCheck: "UhNb2Z5nqHtb",
+  emailAddress: "ghzBmQTQ2npF",
+  homeAddress: "uLPPjjg5B0Bn",
+  postcode: "hgdzZ05GxSAs",
+  name: "daZZA6TwyMP5",
+  phoneNumber: "lm89BWs2VeY2",
 };
 
-// "choices": [
-//     {
-//       "id": "bxQtiqPordqM",
-//       "label": "COVID -- as long as any people in the world have COVID, all of us are unsafe"
-//     },
-//     {
-//       "id": "P9iJPQMgOAz2",
-//       "label": "COVID -- hundreds of millions of people will be pushed into extreme poverty"
-//     },
-//     {
-//       "id": "sFjiqVGt1Qys",
-//       "label": "The Global Britain agenda and the forthcoming presidencies of the G7 and COP26 make it particularly important that we show moral leadership"
-//     },
-//     {
-//       "id": "03hZJbLCuqUh",
-//       "label": "Foreign aid improves national security and reduces immigration"
-//     },
-//     {
-//       "id": "eyqNtdDrwY38",
-//       "label": "If we can find money for military spending and nuclear weapons we can find money to help the poor"
-//     },
-//     {
-//       "id": "CUydnMGQ0p6p",
-//       "label": "Foreign aid is morally right because it reduces suffering and injustice"
-//     },
-//     {
-//       "id": "CR1RaEx9YifJ",
-//       "label": "Money goes further overseas, so we can do so much more good with our money there"
-//     }
-//   ]
-
-module.exports = { religions, questionKeys };
+module.exports = { religions, questionKeys, questionKeys };
