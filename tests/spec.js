@@ -12,7 +12,6 @@ const nonToryMpCovidResponse = require("./mockTypeformResponses/nonToryMp-covid.
 const allToryYemenResponse = require("./mockTypeformResponses/allTory-yemen.json");
 const nonValidPostcodeBritainSecurityResearchResponse = require("./mockTypeformResponses/nonValidPostcode-britainSecurityResearch.json");
 const phoneNumberResponse = require("./mockTypeformResponses/phoneNumberResponse.json");
-
 const { motivationHandler } = require("../emailGenerator/responseHandlers.js");
 
 const mockTypeformResponses = [];

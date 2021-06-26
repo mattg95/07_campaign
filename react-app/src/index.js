@@ -3,15 +3,17 @@ import ReactDOM from "react-dom";
 import TagManager from "react-gtm-module";
 import { Router } from "@reach/router";
 import HttpsRedirect from "react-https-redirect";
+import { Provider } from "react-redux";
 
-import App from "./App";
-import PrivacyPolicy from "./PrivacyPolicy";
+import { store } from "./redux/store";
+import App from "./pages/App";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 import reportWebVitals from "./reportWebVitals";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./Footer";
-import About from "./About";
+import Footer from "./components/Footer";
+import About from "./pages/About";
 
 const tagManagerArgs = {
   gtmId: "GTM-MWBT83W",
@@ -21,12 +23,14 @@ TagManager.initialize(tagManagerArgs);
 
 ReactDOM.render(
   <HttpsRedirect>
-    <Router>
-      <App path="/" />
-      <PrivacyPolicy path="/privacy-policy" />
-      <About path="/about" />
-    </Router>
-    <Footer />
+    <Provider store={store}>
+      <Router>
+        <App path="/" />
+        <PrivacyPolicy path="/privacy-policy" />
+        <About path="/about" />
+      </Router>
+      <Footer />
+    </Provider>
   </HttpsRedirect>,
   document.getElementById("root")
 );

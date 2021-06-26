@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
-import matt from "./assets/matt.jpg";
-import robert from "./assets/robert.jpg";
-import natasha from "./assets/natasha.jpg";
-import sanjay from "./assets/sanjay.jpg";
-import sean from "./assets/sean.jpg";
-import sahil from "./assets/sahil.jpg";
+import matt from "../assets/matt.jpg";
+import robert from "../assets/robert.jpg";
+import natasha from "../assets/natasha.jpg";
+import sanjay from "../assets/sanjay.jpg";
+import sean from "../assets/sean.jpg";
+import sahil from "../assets/sahil.jpg";
 
 const About = () => {
   return (

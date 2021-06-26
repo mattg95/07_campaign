@@ -1,12 +1,19 @@
 import React from "react";
+import { setEmailSent } from "../redux/actions";
+import { store } from "../redux/store";
 
-const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
+const sendEmail = () => {
+  const {
+    emailSubject,
+    emailWithGreeting,
+    mpData: { mpEmailAddress },
+  } = store.getState();
   const getFullEmailLink = (mpEmailAddress) =>
     mpEmailAddress +
     "?Subject=" +
-    encodeURIComponent(subject) +
+    encodeURIComponent(emailSubject) +
     "&Body=" +
-    encodeURIComponent(body) +
+    encodeURIComponent(emailWithGreeting) +
     "&bcc=campaign@point7percent.org";
 
   return (
@@ -21,7 +28,7 @@ const sendEmail = ({ subject, body, mpEmailAddress, passDataUpstream }) => {
         target="_blank"
         rel="noreferrer"
         onClick={() => {
-          passDataUpstream({ emailSent: true });
+          store.dispatch(setEmailSent());
         }}
       >
         SEND EMAIL

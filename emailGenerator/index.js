@@ -104,7 +104,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       emailMap.set("phoneNumber", phone_number);
     }
   });
-
+  //returns blank data if user does not support aid
   if (!supportsAid) {
     return Promise.resolve({
       supportsAid: false,
@@ -136,7 +136,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
       " " +
       getRandomResponse(main.sentence3);
     emailMap.set("mainContent", mainContent);
-
+    //concatonates the map object into a string
     let emailbodyStr = "";
     for (let [k, v] of emailMap) {
       if (k === "address") {
@@ -146,6 +146,7 @@ const generateEmail = ({ answers, definition: { fields } }) => {
         v.length && (emailbodyStr += v + `\n\n`);
       }
     }
+    //returns the data
     const responseData = {
       supportsAid: true,
       mpData: mp,
