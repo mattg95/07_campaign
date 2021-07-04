@@ -59,6 +59,6 @@ The back-end features tests made using Mocha, Chai, and Puppeteer.
 We have a Heroku pipeline set up, with a staging site (https://point-7-staging.herokuapp.com/) and a production site (https://www.point7percent.org/). Whe you make a pull request, two checks will be run
 
 - Github, checking there are no merge conflicts
-- Heroku, checking the site can be built if the branch is merges. All tests in the ./tests folder will also be run. (This check takes around 5 minutes).
+- Heroku, checking the site can be built if the branch is merges. All tests in the `./tests` folder will also be run. (This check takes around 5 minutes).
 
 Please check with Matt if you have not merged a pull reuqest before, or if either of these checks are failing. Once the branch is merged into master, an updated build will automatically be run in the staging site. Heroku will send a notification to slack when the build is done. To see site statuses, log into the Heroku dashboard (ask Matt for login details). The Heorku dashboard also has the 'promote to production' button, which moves the staging site to production.
