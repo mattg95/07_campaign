@@ -19,7 +19,7 @@ The React features an embeded Typeform. In order for the site to work with the e
 
 Download Ngrok from `https://ngrok.com/download` and create an account. Then, navigate to the folder where Ngrok is located and run:
 
-`ngrok http 3000 -host-header="localhost:3000"`
+`./ngrok http 3000 -host-header="localhost:3000"`
 
 Your terminal should present you with two urls in the form:
 
